@@ -1,0 +1,14 @@
+diff --git a/ai4sci_bench/runner/task_image.py b/ai4sci_bench/runner/task_image.py
+index 30ba344..b96ca2a 100644
+--- a/ai4sci_bench/runner/task_image.py
++++ b/ai4sci_bench/runner/task_image.py
+@@ -276,6 +276,9 @@ class TaskImageBuilder:
+             packages = " ".join(runtime_packages)
+             lines.append(f"RUN uv pip install {packages}\n")
+         lines.append("RUN chown -R agent:agent /opt/venv /home/agent\n")
++        # Agent CLIs installed above (as root, with HOME=/home/agent) leave 0755 state dirs under /home/agent;
++        # re-open them so the container also works with `--user <host_uid>:<host_gid>` (see base image).
++        lines.append("RUN chmod -R a+rwX /home/agent\n")
+         lines.append("USER agent\n")
+         lines.append(
+             f'LABEL ai4sci.task.cache_key="{self.env_manager.compute_cache_key(task_metadata)}"\n'

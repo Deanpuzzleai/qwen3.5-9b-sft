@@ -1,0 +1,2962 @@
+{
+  "slice": "qa",
+  "version": "dev_qa-v2",
+  "frozen": true,
+  "seed": 42,
+  "plan": "docs/DATA_PLAN.md section 10: GPQA Diamond 198 + 30 reasoning-gym items scored (228 x 2), AIME 2025 30 reported only; reduced set = 228 x 1 (sample index 0)",
+  "selection_slices": ["gpqa_diamond", "reasoning_gym"],
+  "report_only_slices": ["aime25"],
+  "counts": {
+    "selection": {"items": 228, "full_samples": 456, "reduced_items": 228, "reduced_samples": 228},
+    "all": {"items": 258, "full_samples": 516, "reduced_items": 228, "reduced_samples": 228},
+    "per_slice": {"gpqa_diamond": 198, "reasoning_gym": 30, "aime25": 30}
+  },
+  "render": {
+    "prompt": "the HLE prompt and judge of the dev evaluation (dev only), 32K budget",
+    "mcq": "stem + 'Answer Choices:' + lettered options in option_order; reference = letter of option 0",
+    "math": "question text as is; reference = the answer string"
+  },
+  "loader": "apex_data.devset.qa.load_dev_items (GPQA and AIME text from the WORK cache, checked against file_sha256)",
+  "slices": {
+    "gpqa_diamond": {
+      "repo": "Idavidrein/gpqa",
+      "revision": "83022cefff930aea54f654c0b282e74b9eeda5c6",
+      "file": "gpqa_diamond.csv",
+      "file_sha256": "41d1213cd7a4998605a26c2798500652572007161b3a92817ba46b35befcd305",
+      "licence": "CC BY 4.0, gated (the HF_TOKEN account must accept the terms); ids only in the repository",
+      "kind": "mcq",
+      "use": "selection",
+      "text_in_manifest": false,
+      "n": 198,
+      "items": [
+        {
+          "dev_id": "gpqa:rec06pnAkLOr2t2mp",
+          "record_id": "rec06pnAkLOr2t2mp",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [3, 0, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 1916938213, "reduced": true},
+            {"index": 1, "seed": 1950021357, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec0Arme2jcXQZnAW",
+          "record_id": "rec0Arme2jcXQZnAW",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 644809756, "reduced": true},
+            {"index": 1, "seed": 1036746987, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec0wZvZgiz320KRs",
+          "record_id": "rec0wZvZgiz320KRs",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 296173694, "reduced": true},
+            {"index": 1, "seed": 1931135039, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec0yTRmO1o1xCA6H",
+          "record_id": "rec0yTRmO1o1xCA6H",
+          "domain": "Physics",
+          "subdomain": "Electromagnetism and Photonics",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 1879109230, "reduced": true},
+            {"index": 1, "seed": 1247091537, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec1zl5LvaatzGhFt",
+          "record_id": "rec1zl5LvaatzGhFt",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 1629521862, "reduced": true},
+            {"index": 1, "seed": 813608119, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec260hNUCEj109Dj",
+          "record_id": "rec260hNUCEj109Dj",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1884712881, "reduced": true},
+            {"index": 1, "seed": 1593196188, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec2UlKqC6RFHdcro",
+          "record_id": "rec2UlKqC6RFHdcro",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 136139500, "reduced": true},
+            {"index": 1, "seed": 1898689455, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec2ZTsqazBZ3LTWZ",
+          "record_id": "rec2ZTsqazBZ3LTWZ",
+          "domain": "Biology",
+          "subdomain": "Genetics",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 561712078, "reduced": true},
+            {"index": 1, "seed": 788697110, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec2fsnzUuvNtUYK8",
+          "record_id": "rec2fsnzUuvNtUYK8",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 618363966, "reduced": true},
+            {"index": 1, "seed": 1472718957, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec4JrWy7Il8ho5vk",
+          "record_id": "rec4JrWy7Il8ho5vk",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1285959940, "reduced": true},
+            {"index": 1, "seed": 312155737, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec4L69T0Y1AS4AFS",
+          "record_id": "rec4L69T0Y1AS4AFS",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [1, 3, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 1288452283, "reduced": true},
+            {"index": 1, "seed": 111893529, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec4UqStf9WUVif1f",
+          "record_id": "rec4UqStf9WUVif1f",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1482226154, "reduced": true},
+            {"index": 1, "seed": 1500085922, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec4r4KWNLrT7g2kR",
+          "record_id": "rec4r4KWNLrT7g2kR",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 206522261, "reduced": true},
+            {"index": 1, "seed": 1470848137, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec527dNeEtWJrYNl",
+          "record_id": "rec527dNeEtWJrYNl",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 1149552232, "reduced": true},
+            {"index": 1, "seed": 1971925584, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec5eA17Qr1ucNLUf",
+          "record_id": "rec5eA17Qr1ucNLUf",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [0, 3, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 1416759605, "reduced": true},
+            {"index": 1, "seed": 1280829383, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec5rjeLsEq5Fg7Oj",
+          "record_id": "rec5rjeLsEq5Fg7Oj",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 430130237, "reduced": true},
+            {"index": 1, "seed": 1573265514, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec7C06XOB2h298ue",
+          "record_id": "rec7C06XOB2h298ue",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 146745148, "reduced": true},
+            {"index": 1, "seed": 2145878797, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec7qmSnbud4FHSqL",
+          "record_id": "rec7qmSnbud4FHSqL",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 436876234, "reduced": true},
+            {"index": 1, "seed": 871555358, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec8nshandHARTkrg",
+          "record_id": "rec8nshandHARTkrg",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 1313077666, "reduced": true},
+            {"index": 1, "seed": 1035369841, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec8y3ZrBOcLgNEkE",
+          "record_id": "rec8y3ZrBOcLgNEkE",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 320323446, "reduced": true},
+            {"index": 1, "seed": 1091570655, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec9GugrngvsQR99A",
+          "record_id": "rec9GugrngvsQR99A",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1329848179, "reduced": true},
+            {"index": 1, "seed": 424120600, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec9ubQihAh6g9bft",
+          "record_id": "rec9ubQihAh6g9bft",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1973339392, "reduced": true},
+            {"index": 1, "seed": 1520115238, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recA1i5ZAh0Uzclxp",
+          "record_id": "recA1i5ZAh0Uzclxp",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1994712200, "reduced": true},
+            {"index": 1, "seed": 1591919468, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recAAJoHMW45Lv5je",
+          "record_id": "recAAJoHMW45Lv5je",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1009616689, "reduced": true},
+            {"index": 1, "seed": 569911609, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recBGxVySx1pkrO1i",
+          "record_id": "recBGxVySx1pkrO1i",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 1491052272, "reduced": true},
+            {"index": 1, "seed": 531279183, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recBXlqrZUCR897It",
+          "record_id": "recBXlqrZUCR897It",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 858366057, "reduced": true},
+            {"index": 1, "seed": 1894177392, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recBtVK8rBVtIlXDq",
+          "record_id": "recBtVK8rBVtIlXDq",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [1, 0, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1240022863, "reduced": true},
+            {"index": 1, "seed": 1883658438, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recCJJOeBGERaHYax",
+          "record_id": "recCJJOeBGERaHYax",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 966713991, "reduced": true},
+            {"index": 1, "seed": 2115003567, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recD8oX1KevFbl7bL",
+          "record_id": "recD8oX1KevFbl7bL",
+          "domain": "Biology",
+          "subdomain": "Genetics",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1933823043, "reduced": true},
+            {"index": 1, "seed": 1356917409, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recDDxpS9s8cwkqfq",
+          "record_id": "recDDxpS9s8cwkqfq",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 210735329, "reduced": true},
+            {"index": 1, "seed": 246483626, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recDj2Y2BbtV02Wv5",
+          "record_id": "recDj2Y2BbtV02Wv5",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1865466457, "reduced": true},
+            {"index": 1, "seed": 2030720614, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recDytVnNYZe2HuUU",
+          "record_id": "recDytVnNYZe2HuUU",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 609064332, "reduced": true},
+            {"index": 1, "seed": 1183952284, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recEmTBhx2hgw6tPQ",
+          "record_id": "recEmTBhx2hgw6tPQ",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1797007538, "reduced": true},
+            {"index": 1, "seed": 2014818335, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recFaL6j8UMhutXrc",
+          "record_id": "recFaL6j8UMhutXrc",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1100533792, "reduced": true},
+            {"index": 1, "seed": 741188025, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recG1ljJQcVy6CbSl",
+          "record_id": "recG1ljJQcVy6CbSl",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 21869182, "reduced": true},
+            {"index": 1, "seed": 1012704292, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recGFKDUd8qgz81Zl",
+          "record_id": "recGFKDUd8qgz81Zl",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [1, 3, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 999760824, "reduced": true},
+            {"index": 1, "seed": 1593704650, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recGFNRVl1qBZGwyU",
+          "record_id": "recGFNRVl1qBZGwyU",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 0, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 1791438791, "reduced": true},
+            {"index": 1, "seed": 1891638106, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recHVUd2DkoKfedJZ",
+          "record_id": "recHVUd2DkoKfedJZ",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 1699863590, "reduced": true},
+            {"index": 1, "seed": 692961483, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recI1ls9OXdxatHQn",
+          "record_id": "recI1ls9OXdxatHQn",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 874232014, "reduced": true},
+            {"index": 1, "seed": 1320871077, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recIDiDKKrN61Auyr",
+          "record_id": "recIDiDKKrN61Auyr",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 0, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 1692216672, "reduced": true},
+            {"index": 1, "seed": 1457275635, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recIIUynGGpsGEYuo",
+          "record_id": "recIIUynGGpsGEYuo",
+          "domain": "Physics",
+          "subdomain": "Relativistic Mechanics",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 2045177634, "reduced": true},
+            {"index": 1, "seed": 172914729, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recIMcQfaQNa6vzsT",
+          "record_id": "recIMcQfaQNa6vzsT",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1875747348, "reduced": true},
+            {"index": 1, "seed": 1605440519, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recINSFEYLCyyd08m",
+          "record_id": "recINSFEYLCyyd08m",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 123558848, "reduced": true},
+            {"index": 1, "seed": 1470309489, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recIOlKBsOeEcgkA1",
+          "record_id": "recIOlKBsOeEcgkA1",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 1764716699, "reduced": true},
+            {"index": 1, "seed": 620566761, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recIj8lR4tuDgrHou",
+          "record_id": "recIj8lR4tuDgrHou",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 978489564, "reduced": true},
+            {"index": 1, "seed": 954891494, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recIlghoOw5VbY4Zh",
+          "record_id": "recIlghoOw5VbY4Zh",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 1, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1240277083, "reduced": true},
+            {"index": 1, "seed": 1924440437, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recJJcOHhFeSaRpl4",
+          "record_id": "recJJcOHhFeSaRpl4",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1216263098, "reduced": true},
+            {"index": 1, "seed": 688296452, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recJZ3QEfRKjYw9a7",
+          "record_id": "recJZ3QEfRKjYw9a7",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1365968424, "reduced": true},
+            {"index": 1, "seed": 1227448677, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recK9F5aqdaybl8bb",
+          "record_id": "recK9F5aqdaybl8bb",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 403247552, "reduced": true},
+            {"index": 1, "seed": 1852008067, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recKcjTwONILZqHAX",
+          "record_id": "recKcjTwONILZqHAX",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1069225099, "reduced": true},
+            {"index": 1, "seed": 1001193418, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recKm6LNWykGapmCr",
+          "record_id": "recKm6LNWykGapmCr",
+          "domain": "Physics",
+          "subdomain": "Electromagnetism and Photonics",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 2145665526, "reduced": true},
+            {"index": 1, "seed": 374518591, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recKv4hFyNpViUXnL",
+          "record_id": "recKv4hFyNpViUXnL",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1744216745, "reduced": true},
+            {"index": 1, "seed": 1333580745, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recL9MFV5zmdlle5T",
+          "record_id": "recL9MFV5zmdlle5T",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [1, 0, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 569503511, "reduced": true},
+            {"index": 1, "seed": 1530003430, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recLAgwx9vbgB5EHk",
+          "record_id": "recLAgwx9vbgB5EHk",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 432311410, "reduced": true},
+            {"index": 1, "seed": 1109460871, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recLSzwBUS3olCjhl",
+          "record_id": "recLSzwBUS3olCjhl",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 352501739, "reduced": true},
+            {"index": 1, "seed": 402650795, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recLrRirj7iXoB0rU",
+          "record_id": "recLrRirj7iXoB0rU",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 1108239248, "reduced": true},
+            {"index": 1, "seed": 347485151, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recN4DY9Q5V03glmQ",
+          "record_id": "recN4DY9Q5V03glmQ",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1095732120, "reduced": true},
+            {"index": 1, "seed": 1186179126, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recNAiPUKOulQbKVP",
+          "record_id": "recNAiPUKOulQbKVP",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [0, 3, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 2024762388, "reduced": true},
+            {"index": 1, "seed": 1450335719, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recNFJjE5PPTqVJGv",
+          "record_id": "recNFJjE5PPTqVJGv",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 879835636, "reduced": true},
+            {"index": 1, "seed": 1598978362, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recNu3MXkvWUzHZr9",
+          "record_id": "recNu3MXkvWUzHZr9",
+          "domain": "Physics",
+          "subdomain": "Relativistic Mechanics",
+          "option_order": [2, 3, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 1564417841, "reduced": true},
+            {"index": 1, "seed": 890881970, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recNuT2oSnO86bxOx",
+          "record_id": "recNuT2oSnO86bxOx",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 67813865, "reduced": true},
+            {"index": 1, "seed": 1699969811, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recO3hvCWRGiG0odN",
+          "record_id": "recO3hvCWRGiG0odN",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 587795642, "reduced": true},
+            {"index": 1, "seed": 792136988, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recOYsaYs6RmtlTDy",
+          "record_id": "recOYsaYs6RmtlTDy",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1261924037, "reduced": true},
+            {"index": 1, "seed": 798968048, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recOkA2zsy4GSMD9R",
+          "record_id": "recOkA2zsy4GSMD9R",
+          "domain": "Chemistry",
+          "subdomain": "Inorganic Chemistry",
+          "option_order": [0, 3, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 457363678, "reduced": true},
+            {"index": 1, "seed": 841839117, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recOvqPKUtyy9ISA1",
+          "record_id": "recOvqPKUtyy9ISA1",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 964396023, "reduced": true},
+            {"index": 1, "seed": 1549304383, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recPL4ZPpVYxgMu57",
+          "record_id": "recPL4ZPpVYxgMu57",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [3, 0, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 48982508, "reduced": true},
+            {"index": 1, "seed": 72149822, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recPSTGXK3P39yNYT",
+          "record_id": "recPSTGXK3P39yNYT",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 203435, "reduced": true},
+            {"index": 1, "seed": 137521891, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recPzW1WqRnPs57D6",
+          "record_id": "recPzW1WqRnPs57D6",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 497747522, "reduced": true},
+            {"index": 1, "seed": 802656417, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recQ8oxSY2aCwFRS8",
+          "record_id": "recQ8oxSY2aCwFRS8",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 1541151583, "reduced": true},
+            {"index": 1, "seed": 1036044477, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recQiWOxhkXRz9NVE",
+          "record_id": "recQiWOxhkXRz9NVE",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [3, 1, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1085282588, "reduced": true},
+            {"index": 1, "seed": 776316135, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recRTiyaRymerDJ4y",
+          "record_id": "recRTiyaRymerDJ4y",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [2, 3, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 1515346822, "reduced": true},
+            {"index": 1, "seed": 2084451191, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recRgabRzMaEoBRcM",
+          "record_id": "recRgabRzMaEoBRcM",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 3, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 1936023473, "reduced": true},
+            {"index": 1, "seed": 709765085, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recS48OsU6kVadBPW",
+          "record_id": "recS48OsU6kVadBPW",
+          "domain": "Physics",
+          "subdomain": "Relativistic Mechanics",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 3288316, "reduced": true},
+            {"index": 1, "seed": 8323440, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recSBcGLPatKb3Ygu",
+          "record_id": "recSBcGLPatKb3Ygu",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 356564423, "reduced": true},
+            {"index": 1, "seed": 1289254760, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recTs7qzfJs6kfLUK",
+          "record_id": "recTs7qzfJs6kfLUK",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1796080050, "reduced": true},
+            {"index": 1, "seed": 866856791, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recUBgVlkKzcRPDdK",
+          "record_id": "recUBgVlkKzcRPDdK",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 292465634, "reduced": true},
+            {"index": 1, "seed": 626605104, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recUOePh79cp4T2Bg",
+          "record_id": "recUOePh79cp4T2Bg",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 0, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1746601839, "reduced": true},
+            {"index": 1, "seed": 1159266246, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recV1nqYQvpII94oC",
+          "record_id": "recV1nqYQvpII94oC",
+          "domain": "Physics",
+          "subdomain": "Electromagnetism and Photonics",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 1902756063, "reduced": true},
+            {"index": 1, "seed": 432796027, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recVEXvhYxAhELVqB",
+          "record_id": "recVEXvhYxAhELVqB",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1737237486, "reduced": true},
+            {"index": 1, "seed": 2083730021, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recVvpD8miVjmmyfe",
+          "record_id": "recVvpD8miVjmmyfe",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 1352987563, "reduced": true},
+            {"index": 1, "seed": 1703719556, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recWPMm91mGDLXONm",
+          "record_id": "recWPMm91mGDLXONm",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 672714377, "reduced": true},
+            {"index": 1, "seed": 505164225, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recWxGU8Q4YReJ1tb",
+          "record_id": "recWxGU8Q4YReJ1tb",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 385634766, "reduced": true},
+            {"index": 1, "seed": 1371654486, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recWzUUYBN0NuXO2k",
+          "record_id": "recWzUUYBN0NuXO2k",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [2, 3, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 2010684239, "reduced": true},
+            {"index": 1, "seed": 51726348, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recXsuOHRBLcyenF2",
+          "record_id": "recXsuOHRBLcyenF2",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 2053115368, "reduced": true},
+            {"index": 1, "seed": 670197914, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recXvQ6gWAmyakrpD",
+          "record_id": "recXvQ6gWAmyakrpD",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 165886175, "reduced": true},
+            {"index": 1, "seed": 1920480048, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recYA3LPsCvF1fTMI",
+          "record_id": "recYA3LPsCvF1fTMI",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1209416166, "reduced": true},
+            {"index": 1, "seed": 1642567183, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recYOzCsevNz61Lyn",
+          "record_id": "recYOzCsevNz61Lyn",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1044319022, "reduced": true},
+            {"index": 1, "seed": 937968050, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recYt8xx80OTyDsL0",
+          "record_id": "recYt8xx80OTyDsL0",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1481535678, "reduced": true},
+            {"index": 1, "seed": 1627138848, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recZ13cwgDQf9jRd9",
+          "record_id": "recZ13cwgDQf9jRd9",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1758359631, "reduced": true},
+            {"index": 1, "seed": 1791828698, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recZSGUkn56v9kEp1",
+          "record_id": "recZSGUkn56v9kEp1",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 2084791216, "reduced": true},
+            {"index": 1, "seed": 636845031, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recZWeueB7lSPR6wN",
+          "record_id": "recZWeueB7lSPR6wN",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 247710255, "reduced": true},
+            {"index": 1, "seed": 2070121764, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recZbxrocrxh9YENH",
+          "record_id": "recZbxrocrxh9YENH",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1124321299, "reduced": true},
+            {"index": 1, "seed": 966227561, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recZdZxsN0AxDx0pB",
+          "record_id": "recZdZxsN0AxDx0pB",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 284160347, "reduced": true},
+            {"index": 1, "seed": 509032720, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recZt4x514UQNnsgy",
+          "record_id": "recZt4x514UQNnsgy",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 443912955, "reduced": true},
+            {"index": 1, "seed": 1022478076, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reca44yABeO2fx7UB",
+          "record_id": "reca44yABeO2fx7UB",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 899941057, "reduced": true},
+            {"index": 1, "seed": 1050765673, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recaXdGn3FAIkxLGM",
+          "record_id": "recaXdGn3FAIkxLGM",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1708827473, "reduced": true},
+            {"index": 1, "seed": 1980424404, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recafnH3RRnMBXEb1",
+          "record_id": "recafnH3RRnMBXEb1",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 1413883561, "reduced": true},
+            {"index": 1, "seed": 1963287694, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recakFKZioXUuldcd",
+          "record_id": "recakFKZioXUuldcd",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 3, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 1199651042, "reduced": true},
+            {"index": 1, "seed": 73683288, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recb2M22zaD3tL6Qc",
+          "record_id": "recb2M22zaD3tL6Qc",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 674990009, "reduced": true},
+            {"index": 1, "seed": 1491797721, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recb4cGsC6BJUCU3V",
+          "record_id": "recb4cGsC6BJUCU3V",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 138458566, "reduced": true},
+            {"index": 1, "seed": 609707171, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reccOKzFNmyqeJ6ry",
+          "record_id": "reccOKzFNmyqeJ6ry",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1176078277, "reduced": true},
+            {"index": 1, "seed": 7974623, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reccVFW11Elovnf8T",
+          "record_id": "reccVFW11Elovnf8T",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 343129469, "reduced": true},
+            {"index": 1, "seed": 1849394661, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recclFbsjbaiVVnnV",
+          "record_id": "recclFbsjbaiVVnnV",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 2024572385, "reduced": true},
+            {"index": 1, "seed": 294460651, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recdya6FuYraBU5Rh",
+          "record_id": "recdya6FuYraBU5Rh",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 513870237, "reduced": true},
+            {"index": 1, "seed": 1790312037, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:receYQxnUBvxPcvbQ",
+          "record_id": "receYQxnUBvxPcvbQ",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 695253058, "reduced": true},
+            {"index": 1, "seed": 622829890, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:receo3UUzRvWCqyfA",
+          "record_id": "receo3UUzRvWCqyfA",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1742605695, "reduced": true},
+            {"index": 1, "seed": 1674563474, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recf6ayQmL1SxKbvW",
+          "record_id": "recf6ayQmL1SxKbvW",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 731132600, "reduced": true},
+            {"index": 1, "seed": 1814106417, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recgI6tUQ7RLJRWGx",
+          "record_id": "recgI6tUQ7RLJRWGx",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1954519080, "reduced": true},
+            {"index": 1, "seed": 1192458149, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recgM7o1tcc7tP778",
+          "record_id": "recgM7o1tcc7tP778",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 1493861177, "reduced": true},
+            {"index": 1, "seed": 1749010135, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recgXxEgllSGEpELP",
+          "record_id": "recgXxEgllSGEpELP",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1309003995, "reduced": true},
+            {"index": 1, "seed": 1993744146, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rechKl68Uc6H7vU0N",
+          "record_id": "rechKl68Uc6H7vU0N",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 677683719, "reduced": true},
+            {"index": 1, "seed": 2092121084, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rechgQucGlrnt8KRV",
+          "record_id": "rechgQucGlrnt8KRV",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 41283360, "reduced": true},
+            {"index": 1, "seed": 459308793, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rechtUKxC6G67H7Pr",
+          "record_id": "rechtUKxC6G67H7Pr",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 463798561, "reduced": true},
+            {"index": 1, "seed": 14763568, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recihePFulRgNKsIn",
+          "record_id": "recihePFulRgNKsIn",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 983284264, "reduced": true},
+            {"index": 1, "seed": 155416983, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reciuppdQde4FGX1z",
+          "record_id": "reciuppdQde4FGX1z",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 1356267065, "reduced": true},
+            {"index": 1, "seed": 757907903, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recjJ54TXc04enRkZ",
+          "record_id": "recjJ54TXc04enRkZ",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 233109530, "reduced": true},
+            {"index": 1, "seed": 111961853, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recjgMJaMxz4ESDF2",
+          "record_id": "recjgMJaMxz4ESDF2",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 0, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 13370522, "reduced": true},
+            {"index": 1, "seed": 2026305717, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reck1zKeCssmN82Ga",
+          "record_id": "reck1zKeCssmN82Ga",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1871638967, "reduced": true},
+            {"index": 1, "seed": 244740169, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reck4G4xxv3YnpbtQ",
+          "record_id": "reck4G4xxv3YnpbtQ",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1762589218, "reduced": true},
+            {"index": 1, "seed": 1154772714, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reckYqR92oJkqJXkE",
+          "record_id": "reckYqR92oJkqJXkE",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1032441421, "reduced": true},
+            {"index": 1, "seed": 1488768782, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reckl6PkaEMWM50yZ",
+          "record_id": "reckl6PkaEMWM50yZ",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 295736551, "reduced": true},
+            {"index": 1, "seed": 1439180475, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recl1UtgTVKishAq4",
+          "record_id": "recl1UtgTVKishAq4",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 598835560, "reduced": true},
+            {"index": 1, "seed": 21529615, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recmI7EiLv72PxmYK",
+          "record_id": "recmI7EiLv72PxmYK",
+          "domain": "Physics",
+          "subdomain": "Relativistic Mechanics",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 882077411, "reduced": true},
+            {"index": 1, "seed": 1288823611, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recmkvk6EFAmqyMxR",
+          "record_id": "recmkvk6EFAmqyMxR",
+          "domain": "Physics",
+          "subdomain": "Relativistic Mechanics",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 2146571019, "reduced": true},
+            {"index": 1, "seed": 88914354, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recmwwQJnx7ll7bqL",
+          "record_id": "recmwwQJnx7ll7bqL",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [2, 0, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 8458639, "reduced": true},
+            {"index": 1, "seed": 1797303391, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recn3NhOhqAPLda16",
+          "record_id": "recn3NhOhqAPLda16",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 2075956555, "reduced": true},
+            {"index": 1, "seed": 1859760870, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recnGEpF1srQpaqWq",
+          "record_id": "recnGEpF1srQpaqWq",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 2027737735, "reduced": true},
+            {"index": 1, "seed": 519206443, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recnTTKdBzfuoZ7w7",
+          "record_id": "recnTTKdBzfuoZ7w7",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 1211546370, "reduced": true},
+            {"index": 1, "seed": 1130818289, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recnawZPumSCLMVgp",
+          "record_id": "recnawZPumSCLMVgp",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 68440695, "reduced": true},
+            {"index": 1, "seed": 838567319, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recnjViFrqlZNL3fY",
+          "record_id": "recnjViFrqlZNL3fY",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1799564713, "reduced": true},
+            {"index": 1, "seed": 379491421, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reco8WSc71p8zAv4q",
+          "record_id": "reco8WSc71p8zAv4q",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 1903242413, "reduced": true},
+            {"index": 1, "seed": 1999046151, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recooG6bivTUJpDBz",
+          "record_id": "recooG6bivTUJpDBz",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [2, 0, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 1342014099, "reduced": true},
+            {"index": 1, "seed": 206643379, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recoy9ZLBsc7HIRBy",
+          "record_id": "recoy9ZLBsc7HIRBy",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 790992381, "reduced": true},
+            {"index": 1, "seed": 949638989, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recpJmTOXx6T48nDJ",
+          "record_id": "recpJmTOXx6T48nDJ",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 1498711949, "reduced": true},
+            {"index": 1, "seed": 523317340, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recpki12iG9RUGrz9",
+          "record_id": "recpki12iG9RUGrz9",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 1499259192, "reduced": true},
+            {"index": 1, "seed": 1355031685, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recqFDvYKKRmbnoUb",
+          "record_id": "recqFDvYKKRmbnoUb",
+          "domain": "Physics",
+          "subdomain": "Electromagnetism and Photonics",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1858833531, "reduced": true},
+            {"index": 1, "seed": 821971450, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recqGD3fxPCI59vPQ",
+          "record_id": "recqGD3fxPCI59vPQ",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 1372590237, "reduced": true},
+            {"index": 1, "seed": 1400750112, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recqLRu4BcJvlSANc",
+          "record_id": "recqLRu4BcJvlSANc",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 236703013, "reduced": true},
+            {"index": 1, "seed": 865093670, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recr3VHM4zYf6dMFY",
+          "record_id": "recr3VHM4zYf6dMFY",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 0, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 1250037859, "reduced": true},
+            {"index": 1, "seed": 862782125, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recrHBEJJoDTV05JR",
+          "record_id": "recrHBEJJoDTV05JR",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 655479971, "reduced": true},
+            {"index": 1, "seed": 810227044, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recrNbtgTNoabJJi6",
+          "record_id": "recrNbtgTNoabJJi6",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1692598216, "reduced": true},
+            {"index": 1, "seed": 1328420073, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recrs0kUo7Ua1xhKO",
+          "record_id": "recrs0kUo7Ua1xhKO",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 597753628, "reduced": true},
+            {"index": 1, "seed": 2000464213, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recs3PLPUEMiqg4P8",
+          "record_id": "recs3PLPUEMiqg4P8",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1612463070, "reduced": true},
+            {"index": 1, "seed": 950953978, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rect4iLrSfUwkNTno",
+          "record_id": "rect4iLrSfUwkNTno",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 429822785, "reduced": true},
+            {"index": 1, "seed": 1358978775, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rectXfsCM1dj4Kv2c",
+          "record_id": "rectXfsCM1dj4Kv2c",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 2142157175, "reduced": true},
+            {"index": 1, "seed": 746853857, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rectlyG9pCAAuWhoB",
+          "record_id": "rectlyG9pCAAuWhoB",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1995611752, "reduced": true},
+            {"index": 1, "seed": 1032667576, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recuYEkVjdVUwA3c0",
+          "record_id": "recuYEkVjdVUwA3c0",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [1, 3, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 2023852996, "reduced": true},
+            {"index": 1, "seed": 1650773319, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recuyeuT5rQ6qDt8F",
+          "record_id": "recuyeuT5rQ6qDt8F",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 1519945817, "reduced": true},
+            {"index": 1, "seed": 2119469921, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recv7GsQg3f0fvB1f",
+          "record_id": "recv7GsQg3f0fvB1f",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [1, 2, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 1054921207, "reduced": true},
+            {"index": 1, "seed": 354058665, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recvZlMbpPz0yLDle",
+          "record_id": "recvZlMbpPz0yLDle",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 871385962, "reduced": true},
+            {"index": 1, "seed": 1033775182, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recvlnu8BuLmXZhSX",
+          "record_id": "recvlnu8BuLmXZhSX",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 1094557801, "reduced": true},
+            {"index": 1, "seed": 1399102926, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recw4rROcnHKNZhtK",
+          "record_id": "recw4rROcnHKNZhtK",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [2, 0, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1517928616, "reduced": true},
+            {"index": 1, "seed": 124968275, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recxTy0x7M6T9ikc0",
+          "record_id": "recxTy0x7M6T9ikc0",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 357946069, "reduced": true},
+            {"index": 1, "seed": 1222601456, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recxsX66ktJ1Lwt4f",
+          "record_id": "recxsX66ktJ1Lwt4f",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 0, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 664637310, "reduced": true},
+            {"index": 1, "seed": 2057329614, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recyPffUDqC2k7ZZO",
+          "record_id": "recyPffUDqC2k7ZZO",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1641535357, "reduced": true},
+            {"index": 1, "seed": 1987879033, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recyl3usDqb7ruXJx",
+          "record_id": "recyl3usDqb7ruXJx",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1610834236, "reduced": true},
+            {"index": 1, "seed": 2139933831, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recypVp2NmPlBKVTp",
+          "record_id": "recypVp2NmPlBKVTp",
+          "domain": "Biology",
+          "subdomain": "Molecular Biology",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 148759669, "reduced": true},
+            {"index": 1, "seed": 754682824, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reczQ4I0VpENdMtIj",
+          "record_id": "reczQ4I0VpENdMtIj",
+          "domain": "Biology",
+          "subdomain": "Genetics",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 1837216950, "reduced": true},
+            {"index": 1, "seed": 145313717, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reczUoM8JsxU6pYxr",
+          "record_id": "reczUoM8JsxU6pYxr",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 100788024, "reduced": true},
+            {"index": 1, "seed": 2124963093, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reczjcMtrB1YGS2fO",
+          "record_id": "reczjcMtrB1YGS2fO",
+          "domain": "Physics",
+          "subdomain": "Optics and Acoustics",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 1841276867, "reduced": true},
+            {"index": 1, "seed": 1166316124, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reczzzihL7btBH7RO",
+          "record_id": "reczzzihL7btBH7RO",
+          "domain": "Physics",
+          "subdomain": "Relativistic Mechanics",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1087680095, "reduced": true},
+            {"index": 1, "seed": 710555811, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec0VuKUjt1SZ7NYv",
+          "record_id": "rec0VuKUjt1SZ7NYv",
+          "domain": "Physics",
+          "subdomain": "Relativistic Mechanics",
+          "option_order": [2, 1, 3, 0],
+          "samples": [
+            {"index": 0, "seed": 979910069, "reduced": true},
+            {"index": 1, "seed": 669052465, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec1oj2DveQWl9Rpw",
+          "record_id": "rec1oj2DveQWl9Rpw",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 2044950272, "reduced": true},
+            {"index": 1, "seed": 1128045737, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec32C1ZEapBnCC0E",
+          "record_id": "rec32C1ZEapBnCC0E",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 861634550, "reduced": true},
+            {"index": 1, "seed": 624951311, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec47oNPXudlTIk4y",
+          "record_id": "rec47oNPXudlTIk4y",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1327516061, "reduced": true},
+            {"index": 1, "seed": 1974182364, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec6sE2CRtD4drtHg",
+          "record_id": "rec6sE2CRtD4drtHg",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [3, 2, 0, 1],
+          "samples": [
+            {"index": 0, "seed": 680653145, "reduced": true},
+            {"index": 1, "seed": 451578215, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:rec9W28HgpEUeUN8k",
+          "record_id": "rec9W28HgpEUeUN8k",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 2, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 1578345098, "reduced": true},
+            {"index": 1, "seed": 1450021701, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recAYkd96NNuNl1Ei",
+          "record_id": "recAYkd96NNuNl1Ei",
+          "domain": "Biology",
+          "subdomain": "Genetics",
+          "option_order": [1, 3, 0, 2],
+          "samples": [
+            {"index": 0, "seed": 333611512, "reduced": true},
+            {"index": 1, "seed": 590697704, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recBhnXrUyTJ6WHIR",
+          "record_id": "recBhnXrUyTJ6WHIR",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 579318872, "reduced": true},
+            {"index": 1, "seed": 1452904898, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recE2ihVfqEK4R9d0",
+          "record_id": "recE2ihVfqEK4R9d0",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 589391862, "reduced": true},
+            {"index": 1, "seed": 1389281077, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recGee5m84dg5FZkc",
+          "record_id": "recGee5m84dg5FZkc",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 108426959, "reduced": true},
+            {"index": 1, "seed": 1348875439, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recINGR1z01Fh1Z3A",
+          "record_id": "recINGR1z01Fh1Z3A",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [3, 1, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 1265681509, "reduced": true},
+            {"index": 1, "seed": 996660747, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recJpyGtGIsxulevT",
+          "record_id": "recJpyGtGIsxulevT",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 284730325, "reduced": true},
+            {"index": 1, "seed": 579988242, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recLB0EkQ54bYVhnd",
+          "record_id": "recLB0EkQ54bYVhnd",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1813367199, "reduced": true},
+            {"index": 1, "seed": 351872955, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recMicVBcqy1xM1jq",
+          "record_id": "recMicVBcqy1xM1jq",
+          "domain": "Physics",
+          "subdomain": "Electromagnetism and Photonics",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 1023545394, "reduced": true},
+            {"index": 1, "seed": 1565869174, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recPIzpnuYpB4yvmp",
+          "record_id": "recPIzpnuYpB4yvmp",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1629448905, "reduced": true},
+            {"index": 1, "seed": 531272428, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recRZjaElf8ft7xTq",
+          "record_id": "recRZjaElf8ft7xTq",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [2, 0, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 756637693, "reduced": true},
+            {"index": 1, "seed": 1983971859, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recReg13iV2HwJTaA",
+          "record_id": "recReg13iV2HwJTaA",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [2, 0, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 1814381443, "reduced": true},
+            {"index": 1, "seed": 384951453, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recRhwQwHijW0gCLo",
+          "record_id": "recRhwQwHijW0gCLo",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [0, 2, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 1896876062, "reduced": true},
+            {"index": 1, "seed": 1940318802, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recUc29lMDBEvurYo",
+          "record_id": "recUc29lMDBEvurYo",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 79883006, "reduced": true},
+            {"index": 1, "seed": 1712545346, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recVE8cUNHpHZIAvL",
+          "record_id": "recVE8cUNHpHZIAvL",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [2, 3, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 875473667, "reduced": true},
+            {"index": 1, "seed": 773462233, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recWXwn9v4IG9ZrM6",
+          "record_id": "recWXwn9v4IG9ZrM6",
+          "domain": "Physics",
+          "subdomain": "Condensed Matter Physics",
+          "option_order": [2, 0, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 25022667, "reduced": true},
+            {"index": 1, "seed": 733859254, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recXsYa3i2UhGF5fe",
+          "record_id": "recXsYa3i2UhGF5fe",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 3, 2, 0],
+          "samples": [
+            {"index": 0, "seed": 951591698, "reduced": true},
+            {"index": 1, "seed": 1664787506, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recYCMJWH7IpcdqwE",
+          "record_id": "recYCMJWH7IpcdqwE",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 1, 3, 2],
+          "samples": [
+            {"index": 0, "seed": 326303348, "reduced": true},
+            {"index": 1, "seed": 627100063, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recatj4YXzbOaq3Ar",
+          "record_id": "recatj4YXzbOaq3Ar",
+          "domain": "Physics",
+          "subdomain": "Quantum Mechanics",
+          "option_order": [3, 0, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1097276528, "reduced": true},
+            {"index": 1, "seed": 581126714, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recb80OwMgNnceA9t",
+          "record_id": "recb80OwMgNnceA9t",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 982277679, "reduced": true},
+            {"index": 1, "seed": 1587042625, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reccVBrYdwsB84fGy",
+          "record_id": "reccVBrYdwsB84fGy",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 1486942083, "reduced": true},
+            {"index": 1, "seed": 1180989632, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recfTlTMjZBuOducT",
+          "record_id": "recfTlTMjZBuOducT",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [0, 3, 2, 1],
+          "samples": [
+            {"index": 0, "seed": 293026569, "reduced": true},
+            {"index": 1, "seed": 1718558455, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recgC4GJ8wUemlUQD",
+          "record_id": "recgC4GJ8wUemlUQD",
+          "domain": "Physics",
+          "subdomain": "High-energy particle physics",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 818044599, "reduced": true},
+            {"index": 1, "seed": 1160028186, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recixxJmdux0d8LZQ",
+          "record_id": "recixxJmdux0d8LZQ",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [0, 3, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 1705755454, "reduced": true},
+            {"index": 1, "seed": 355682822, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reckEnrOPFT9Ru7tW",
+          "record_id": "reckEnrOPFT9Ru7tW",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [1, 2, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1638824198, "reduced": true},
+            {"index": 1, "seed": 973585888, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recoiTJPGUmzAkief",
+          "record_id": "recoiTJPGUmzAkief",
+          "domain": "Physics",
+          "subdomain": "Electromagnetism and Photonics",
+          "option_order": [2, 0, 3, 1],
+          "samples": [
+            {"index": 0, "seed": 2119432839, "reduced": true},
+            {"index": 1, "seed": 101804592, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recwW1A85nfyQpReG",
+          "record_id": "recwW1A85nfyQpReG",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 170788318, "reduced": true},
+            {"index": 1, "seed": 103523650, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recwlwlcPvXVNPmvl",
+          "record_id": "recwlwlcPvXVNPmvl",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [0, 1, 2, 3],
+          "samples": [
+            {"index": 0, "seed": 1925256880, "reduced": true},
+            {"index": 1, "seed": 1464924082, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recyrk6XBVwugG5u8",
+          "record_id": "recyrk6XBVwugG5u8",
+          "domain": "Physics",
+          "subdomain": "Astrophysics",
+          "option_order": [2, 0, 1, 3],
+          "samples": [
+            {"index": 0, "seed": 2134555170, "reduced": true},
+            {"index": 1, "seed": 545340842, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recywRj5a8EEjj2Ib",
+          "record_id": "recywRj5a8EEjj2Ib",
+          "domain": "Physics",
+          "subdomain": "Physics (general)",
+          "option_order": [3, 2, 1, 0],
+          "samples": [
+            {"index": 0, "seed": 699783715, "reduced": true},
+            {"index": 1, "seed": 1180636887, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:recz3MfYHPRhsEQkW",
+          "record_id": "recz3MfYHPRhsEQkW",
+          "domain": "Chemistry",
+          "subdomain": "Organic Chemistry",
+          "option_order": [2, 1, 0, 3],
+          "samples": [
+            {"index": 0, "seed": 1975531890, "reduced": true},
+            {"index": 1, "seed": 1785495084, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "gpqa:reczkBiPPNrNN49Hp",
+          "record_id": "reczkBiPPNrNN49Hp",
+          "domain": "Chemistry",
+          "subdomain": "Chemistry (general)",
+          "option_order": [0, 3, 1, 2],
+          "samples": [
+            {"index": 0, "seed": 1017296576, "reduced": true},
+            {"index": 1, "seed": 406796815, "reduced": false}
+          ]
+        }
+      ]
+    },
+    "reasoning_gym": {
+      "generator": "reasoning-gym",
+      "version": "0.1.19",
+      "families": ["simple_equations", "polynomial_equations", "prime_factorization", "fraction_simplification", "complex_arithmetic", "base_conversion"],
+      "per_family": 5,
+      "family_seed_rule": "seed * 1000 + family index",
+      "licence": "Apache-2.0 (generated here)",
+      "kind": "math",
+      "use": "selection",
+      "text_in_manifest": true,
+      "scorer": "reasoning_gym.<family>.score_answer",
+      "n": 30,
+      "disjointness": "families reserved for the dev set; no training prompt comes from reasoning-gym",
+      "items": [
+        {
+          "dev_id": "rg:simple_equations:42000:0",
+          "family": "simple_equations",
+          "seed": 42000,
+          "index": 0,
+          "question": "Determine the value of n that satisfies: 26*n - 101 = 1485",
+          "answer": "61",
+          "metadata": {"source_dataset": "simple_equations", "source_index": 0, "equation": "26*n - 101 = 1485", "variable": "n"},
+          "samples": [
+            {"index": 0, "seed": 1276115200, "reduced": true},
+            {"index": 1, "seed": 631460047, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:simple_equations:42000:1",
+          "family": "simple_equations",
+          "seed": 42000,
+          "index": 1,
+          "question": "Determine the value of u that satisfies: 16 - 38*u = -3404",
+          "answer": "90",
+          "metadata": {"source_dataset": "simple_equations", "source_index": 1, "equation": "16 - 38*u = -3404", "variable": "u"},
+          "samples": [
+            {"index": 0, "seed": 308836654, "reduced": true},
+            {"index": 1, "seed": 403890528, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:simple_equations:42000:2",
+          "family": "simple_equations",
+          "seed": 42000,
+          "index": 2,
+          "question": "Find the value of z in the equation: 1925 - 2555*z = -630",
+          "answer": "1",
+          "metadata": {"source_dataset": "simple_equations", "source_index": 2, "equation": "1925 - 2555*z = -630", "variable": "z"},
+          "samples": [
+            {"index": 0, "seed": 1837386705, "reduced": true},
+            {"index": 1, "seed": 1313148356, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:simple_equations:42000:3",
+          "family": "simple_equations",
+          "seed": 42000,
+          "index": 3,
+          "question": "Solve for v: 1014*v = 59826",
+          "answer": "59",
+          "metadata": {"source_dataset": "simple_equations", "source_index": 3, "equation": "1014*v = 59826", "variable": "v"},
+          "samples": [
+            {"index": 0, "seed": 2116012487, "reduced": true},
+            {"index": 1, "seed": 542520627, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:simple_equations:42000:4",
+          "family": "simple_equations",
+          "seed": 42000,
+          "index": 4,
+          "question": "Determine the value of a that satisfies: 44*a + 81 = 2545",
+          "answer": "56",
+          "metadata": {"source_dataset": "simple_equations", "source_index": 4, "equation": "44*a + 81 = 2545", "variable": "a"},
+          "samples": [
+            {"index": 0, "seed": 1301064676, "reduced": true},
+            {"index": 1, "seed": 285014511, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:polynomial_equations:42001:0",
+          "family": "polynomial_equations",
+          "seed": 42001,
+          "index": 0,
+          "question": "Determine the real value(s) of w that satisfies: 79*w - 47 = 0\nIn solving equations, please follow these instructions:\n1. Provide all answers as comma-separated decimal values. For example: \"-0.3773, 0.4005\"\n2. For solutions that can be expressed in exact form (like \"u = 2 + sqrt(4560)/172\" and \"u = 2 - sqrt(4560)/172\"), convert them to decimal form in your final answer.\n3. If there are no real values that satisfy the equation, report your answer as an empty string: \"\"\n4. Format your answer based on the number of solutions:\n   - For 1 solution: a single decimal number\n   - For 2 solutions: two comma-separated decimal numbers\n   - For 3 or more solutions: all values as comma-separated decimal numbers\n5. Round all decimal values to 4 decimal places (rounding down when the 5th decimal place is 5 or greater).\n",
+          "answer": "0.5949",
+          "metadata": {"source_dataset": "polynomial_equations", "source_index": 0, "polynomial_expr": "79*w - 47", "variable": "w", "degree": 1, "num_terms": 2},
+          "samples": [
+            {"index": 0, "seed": 540443326, "reduced": true},
+            {"index": 1, "seed": 1090653365, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:polynomial_equations:42001:1",
+          "family": "polynomial_equations",
+          "seed": 42001,
+          "index": 1,
+          "question": "Determine the real value(s) of x that satisfies: -121*x = 0\nIn solving equations, please follow these instructions:\n1. Provide all answers as comma-separated decimal values. For example: \"-0.3773, 0.4005\"\n2. For solutions that can be expressed in exact form (like \"u = 2 + sqrt(4560)/172\" and \"u = 2 - sqrt(4560)/172\"), convert them to decimal form in your final answer.\n3. If there are no real values that satisfy the equation, report your answer as an empty string: \"\"\n4. Format your answer based on the number of solutions:\n   - For 1 solution: a single decimal number\n   - For 2 solutions: two comma-separated decimal numbers\n   - For 3 or more solutions: all values as comma-separated decimal numbers\n5. Round all decimal values to 4 decimal places (rounding down when the 5th decimal place is 5 or greater).\n",
+          "answer": "0.0",
+          "metadata": {"source_dataset": "polynomial_equations", "source_index": 1, "polynomial_expr": "-121*x", "variable": "x", "degree": 1, "num_terms": 2},
+          "samples": [
+            {"index": 0, "seed": 255054385, "reduced": true},
+            {"index": 1, "seed": 602306808, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:polynomial_equations:42001:2",
+          "family": "polynomial_equations",
+          "seed": 42001,
+          "index": 2,
+          "question": "Find the real value(s) of x in the equation: -20*x = 0\nIn solving equations, please follow these instructions:\n1. Provide all answers as comma-separated decimal values. For example: \"-0.3773, 0.4005\"\n2. For solutions that can be expressed in exact form (like \"u = 2 + sqrt(4560)/172\" and \"u = 2 - sqrt(4560)/172\"), convert them to decimal form in your final answer.\n3. If there are no real values that satisfy the equation, report your answer as an empty string: \"\"\n4. Format your answer based on the number of solutions:\n   - For 1 solution: a single decimal number\n   - For 2 solutions: two comma-separated decimal numbers\n   - For 3 or more solutions: all values as comma-separated decimal numbers\n5. Round all decimal values to 4 decimal places (rounding down when the 5th decimal place is 5 or greater).\n",
+          "answer": "0.0",
+          "metadata": {"source_dataset": "polynomial_equations", "source_index": 2, "polynomial_expr": "-20*x", "variable": "x", "degree": 1, "num_terms": 2},
+          "samples": [
+            {"index": 0, "seed": 1297643124, "reduced": true},
+            {"index": 1, "seed": 388583455, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:polynomial_equations:42001:3",
+          "family": "polynomial_equations",
+          "seed": 42001,
+          "index": 3,
+          "question": "Solve for real a: 56 - 33*a = 0\nIn solving equations, please follow these instructions:\n1. Provide all answers as comma-separated decimal values. For example: \"-0.3773, 0.4005\"\n2. For solutions that can be expressed in exact form (like \"u = 2 + sqrt(4560)/172\" and \"u = 2 - sqrt(4560)/172\"), convert them to decimal form in your final answer.\n3. If there are no real values that satisfy the equation, report your answer as an empty string: \"\"\n4. Format your answer based on the number of solutions:\n   - For 1 solution: a single decimal number\n   - For 2 solutions: two comma-separated decimal numbers\n   - For 3 or more solutions: all values as comma-separated decimal numbers\n5. Round all decimal values to 4 decimal places (rounding down when the 5th decimal place is 5 or greater).\n",
+          "answer": "1.697",
+          "metadata": {"source_dataset": "polynomial_equations", "source_index": 3, "polynomial_expr": "56 - 33*a", "variable": "a", "degree": 1, "num_terms": 3},
+          "samples": [
+            {"index": 0, "seed": 1812962117, "reduced": true},
+            {"index": 1, "seed": 249604516, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:polynomial_equations:42001:4",
+          "family": "polynomial_equations",
+          "seed": 42001,
+          "index": 4,
+          "question": "Find the real value(s) of q in the equation: 82*q = 0\nIn solving equations, please follow these instructions:\n1. Provide all answers as comma-separated decimal values. For example: \"-0.3773, 0.4005\"\n2. For solutions that can be expressed in exact form (like \"u = 2 + sqrt(4560)/172\" and \"u = 2 - sqrt(4560)/172\"), convert them to decimal form in your final answer.\n3. If there are no real values that satisfy the equation, report your answer as an empty string: \"\"\n4. Format your answer based on the number of solutions:\n   - For 1 solution: a single decimal number\n   - For 2 solutions: two comma-separated decimal numbers\n   - For 3 or more solutions: all values as comma-separated decimal numbers\n5. Round all decimal values to 4 decimal places (rounding down when the 5th decimal place is 5 or greater).\n",
+          "answer": "0.0",
+          "metadata": {"source_dataset": "polynomial_equations", "source_index": 4, "polynomial_expr": "82*q", "variable": "q", "degree": 1, "num_terms": 4},
+          "samples": [
+            {"index": 0, "seed": 1970533087, "reduced": true},
+            {"index": 1, "seed": 1615360704, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:prime_factorization:42002:0",
+          "family": "prime_factorization",
+          "seed": 42002,
+          "index": 0,
+          "question": "Find the prime factorization of 822. Write the factors separated by × (Example: for 12 the answer would be: 2 × 2 × 3)",
+          "answer": "2 × 3 × 137",
+          "metadata": {"source_dataset": "prime_factorization", "source_index": 0, "number": 822},
+          "samples": [
+            {"index": 0, "seed": 1488665153, "reduced": true},
+            {"index": 1, "seed": 1157586310, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:prime_factorization:42002:1",
+          "family": "prime_factorization",
+          "seed": 42002,
+          "index": 1,
+          "question": "Find the prime factorization of 701. Write the factors separated by × (Example: for 12 the answer would be: 2 × 2 × 3)",
+          "answer": "701",
+          "metadata": {"source_dataset": "prime_factorization", "source_index": 1, "number": 701},
+          "samples": [
+            {"index": 0, "seed": 409667070, "reduced": true},
+            {"index": 1, "seed": 1488581299, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:prime_factorization:42002:2",
+          "family": "prime_factorization",
+          "seed": 42002,
+          "index": 2,
+          "question": "Find the prime factorization of 13. Write the factors separated by × (Example: for 12 the answer would be: 2 × 2 × 3)",
+          "answer": "13",
+          "metadata": {"source_dataset": "prime_factorization", "source_index": 2, "number": 13},
+          "samples": [
+            {"index": 0, "seed": 890737333, "reduced": true},
+            {"index": 1, "seed": 815558230, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:prime_factorization:42002:3",
+          "family": "prime_factorization",
+          "seed": 42002,
+          "index": 3,
+          "question": "Find the prime factorization of 470. Write the factors separated by × (Example: for 12 the answer would be: 2 × 2 × 3)",
+          "answer": "2 × 5 × 47",
+          "metadata": {"source_dataset": "prime_factorization", "source_index": 3, "number": 470},
+          "samples": [
+            {"index": 0, "seed": 777065296, "reduced": true},
+            {"index": 1, "seed": 685376974, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:prime_factorization:42002:4",
+          "family": "prime_factorization",
+          "seed": 42002,
+          "index": 4,
+          "question": "Find the prime factorization of 93. Write the factors separated by × (Example: for 12 the answer would be: 2 × 2 × 3)",
+          "answer": "3 × 31",
+          "metadata": {"source_dataset": "prime_factorization", "source_index": 4, "number": 93},
+          "samples": [
+            {"index": 0, "seed": 1980091884, "reduced": true},
+            {"index": 1, "seed": 1548648946, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:fraction_simplification:42003:0",
+          "family": "fraction_simplification",
+          "seed": 42003,
+          "index": 0,
+          "question": "Simplify the fraction $\\frac{78}{910}$ to its lowest terms. Give only the simplified fraction as your final answer.",
+          "answer": "$\\frac{3}{35}$",
+          "metadata": {
+            "source_dataset": "fraction_simplification",
+            "source_index": 0,
+            "numerator": 78,
+            "denominator": 910,
+            "simplified_numerator": 3,
+            "simplified_denominator": 35,
+            "reduction_factor": 26,
+            "style": "latex_frac",
+            "factor": 26
+          },
+          "samples": [
+            {"index": 0, "seed": 1317834043, "reduced": true},
+            {"index": 1, "seed": 1312111952, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:fraction_simplification:42003:1",
+          "family": "fraction_simplification",
+          "seed": 42003,
+          "index": 1,
+          "question": "Simplify the fraction $756/1953$ to its lowest terms. Give only the simplified fraction as your final answer.",
+          "answer": "$12/31$",
+          "metadata": {
+            "source_dataset": "fraction_simplification",
+            "source_index": 1,
+            "numerator": 756,
+            "denominator": 1953,
+            "simplified_numerator": 12,
+            "simplified_denominator": 31,
+            "reduction_factor": 63,
+            "style": "latex_inline",
+            "factor": 63
+          },
+          "samples": [
+            {"index": 0, "seed": 1644149616, "reduced": true},
+            {"index": 1, "seed": 1630078032, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:fraction_simplification:42003:2",
+          "family": "fraction_simplification",
+          "seed": 42003,
+          "index": 2,
+          "question": "Simplify the fraction $\\dfrac{9416}{41272}$ to its lowest terms. Give only the simplified fraction as your final answer.",
+          "answer": "$\\dfrac{107}{469}$",
+          "metadata": {
+            "source_dataset": "fraction_simplification",
+            "source_index": 2,
+            "numerator": 9416,
+            "denominator": 41272,
+            "simplified_numerator": 107,
+            "simplified_denominator": 469,
+            "reduction_factor": 88,
+            "style": "latex_dfrac",
+            "factor": 88
+          },
+          "samples": [
+            {"index": 0, "seed": 703200624, "reduced": true},
+            {"index": 1, "seed": 1764948612, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:fraction_simplification:42003:3",
+          "family": "fraction_simplification",
+          "seed": 42003,
+          "index": 3,
+          "question": "Simplify the fraction $4508/10486$ to its lowest terms. Give only the simplified fraction as your final answer.",
+          "answer": "$46/107$",
+          "metadata": {
+            "source_dataset": "fraction_simplification",
+            "source_index": 3,
+            "numerator": 4508,
+            "denominator": 10486,
+            "simplified_numerator": 46,
+            "simplified_denominator": 107,
+            "reduction_factor": 98,
+            "style": "latex_inline",
+            "factor": 98
+          },
+          "samples": [
+            {"index": 0, "seed": 547917373, "reduced": true},
+            {"index": 1, "seed": 1255289111, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:fraction_simplification:42003:4",
+          "family": "fraction_simplification",
+          "seed": 42003,
+          "index": 4,
+          "question": "Simplify the fraction $537/601$ to its lowest terms. Give only the simplified fraction as your final answer.",
+          "answer": "$537/601$",
+          "metadata": {
+            "source_dataset": "fraction_simplification",
+            "source_index": 4,
+            "numerator": 537,
+            "denominator": 601,
+            "simplified_numerator": 537,
+            "simplified_denominator": 601,
+            "reduction_factor": 1,
+            "style": "latex_inline",
+            "factor": 1
+          },
+          "samples": [
+            {"index": 0, "seed": 1320717200, "reduced": true},
+            {"index": 1, "seed": 159187912, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:complex_arithmetic:42004:0",
+          "family": "complex_arithmetic",
+          "seed": 42004,
+          "index": 0,
+          "question": "Add the complex numbers: (5.0 + 10.0i) + (-6.00)",
+          "answer": "-1.0 + 10.0i",
+          "metadata": {"source_dataset": "complex_arithmetic", "source_index": 0, "operation": "+"},
+          "samples": [
+            {"index": 0, "seed": 517326312, "reduced": true},
+            {"index": 1, "seed": 566687674, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:complex_arithmetic:42004:1",
+          "family": "complex_arithmetic",
+          "seed": 42004,
+          "index": 1,
+          "question": "Subtract the complex numbers: (7.0 + 5.0i) - (10.0 + 10.0i)",
+          "answer": "-3.0 - 5.0i",
+          "metadata": {"source_dataset": "complex_arithmetic", "source_index": 1, "operation": "-"},
+          "samples": [
+            {"index": 0, "seed": 1613441615, "reduced": true},
+            {"index": 1, "seed": 2001456429, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:complex_arithmetic:42004:2",
+          "family": "complex_arithmetic",
+          "seed": 42004,
+          "index": 2,
+          "question": "Add the complex numbers: (-5.00) + (-1.0 - 7.0i)",
+          "answer": "-6.0 - 7.0i",
+          "metadata": {"source_dataset": "complex_arithmetic", "source_index": 2, "operation": "+"},
+          "samples": [
+            {"index": 0, "seed": 1556788708, "reduced": true},
+            {"index": 1, "seed": 1138945978, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:complex_arithmetic:42004:3",
+          "family": "complex_arithmetic",
+          "seed": 42004,
+          "index": 3,
+          "question": "Subtract the complex numbers: (-10.0 - 5.0i) - (-6.0 + 7.0i)",
+          "answer": "-4.0 - 12.0i",
+          "metadata": {"source_dataset": "complex_arithmetic", "source_index": 3, "operation": "-"},
+          "samples": [
+            {"index": 0, "seed": 1282960610, "reduced": true},
+            {"index": 1, "seed": 436172286, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:complex_arithmetic:42004:4",
+          "family": "complex_arithmetic",
+          "seed": 42004,
+          "index": 4,
+          "question": "Divide the complex numbers: (-36.0 + 76.0i) ÷ (-6.0 + 4.0i)",
+          "answer": "10.0 - 6.0i",
+          "metadata": {"source_dataset": "complex_arithmetic", "source_index": 4, "operation": "/"},
+          "samples": [
+            {"index": 0, "seed": 1907162790, "reduced": true},
+            {"index": 1, "seed": 2134840311, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:base_conversion:42005:0",
+          "family": "base_conversion",
+          "seed": 42005,
+          "index": 0,
+          "question": "Your task is to convert a number between two different bases.\n\nIf the target base is > 10, use lowercase letters a-z for digits above 9.\n\nNow, convert the base-3 number 122100 to base-12\n",
+          "answer": "330",
+          "metadata": {
+            "source_dataset": "base_conversion",
+            "source_index": 0,
+            "decimal_value": 468,
+            "source_base": 3,
+            "target_base": 12,
+            "source_repr": "122100",
+            "target_repr": "330"
+          },
+          "samples": [
+            {"index": 0, "seed": 8325856, "reduced": true},
+            {"index": 1, "seed": 1697553482, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:base_conversion:42005:1",
+          "family": "base_conversion",
+          "seed": 42005,
+          "index": 1,
+          "question": "Your task is to convert a number between two different bases.\n\nIf the target base is > 10, use lowercase letters a-z for digits above 9.\n\nNow, convert the base-5 number 331 to base-14\n",
+          "answer": "67",
+          "metadata": {
+            "source_dataset": "base_conversion",
+            "source_index": 1,
+            "decimal_value": 91,
+            "source_base": 5,
+            "target_base": 14,
+            "source_repr": "331",
+            "target_repr": "67"
+          },
+          "samples": [
+            {"index": 0, "seed": 1205522625, "reduced": true},
+            {"index": 1, "seed": 692920778, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:base_conversion:42005:2",
+          "family": "base_conversion",
+          "seed": 42005,
+          "index": 2,
+          "question": "Your task is to convert a number between two different bases.\n\nIf the target base is > 10, use lowercase letters a-z for digits above 9.\n\nNow, convert the base-10 number 600 to binary\n",
+          "answer": "1001011000",
+          "metadata": {
+            "source_dataset": "base_conversion",
+            "source_index": 2,
+            "decimal_value": 600,
+            "source_base": 10,
+            "target_base": 2,
+            "source_repr": "600",
+            "target_repr": "1001011000"
+          },
+          "samples": [
+            {"index": 0, "seed": 226947019, "reduced": true},
+            {"index": 1, "seed": 232095481, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:base_conversion:42005:3",
+          "family": "base_conversion",
+          "seed": 42005,
+          "index": 3,
+          "question": "Your task is to convert a number between two different bases.\n\nIf the target base is > 10, use lowercase letters a-z for digits above 9.\n\nNow, convert the base-14 number 504 to base-12\n",
+          "answer": "6a0",
+          "metadata": {
+            "source_dataset": "base_conversion",
+            "source_index": 3,
+            "decimal_value": 984,
+            "source_base": 14,
+            "target_base": 12,
+            "source_repr": "504",
+            "target_repr": "6a0"
+          },
+          "samples": [
+            {"index": 0, "seed": 1881081527, "reduced": true},
+            {"index": 1, "seed": 2054225442, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "rg:base_conversion:42005:4",
+          "family": "base_conversion",
+          "seed": 42005,
+          "index": 4,
+          "question": "Your task is to convert a number between two different bases.\n\nIf the target base is > 10, use lowercase letters a-z for digits above 9.\n\nNow, convert the base-10 number 297 to base-12\n",
+          "answer": "209",
+          "metadata": {
+            "source_dataset": "base_conversion",
+            "source_index": 4,
+            "decimal_value": 297,
+            "source_base": 10,
+            "target_base": 12,
+            "source_repr": "297",
+            "target_repr": "209"
+          },
+          "samples": [
+            {"index": 0, "seed": 1990298292, "reduced": true},
+            {"index": 1, "seed": 725734599, "reduced": false}
+          ]
+        }
+      ]
+    },
+    "aime25": {
+      "repo": "math-ai/aime25",
+      "revision": "563bb8404243c5f09de6ec262f2db674fe5bce9b",
+      "file": "test.jsonl",
+      "file_sha256": "b4e273c02d3e7fe1b74b59eae768fc8230bfb0f79539890cb56f4361caac0331",
+      "licence": "HF mirror tagged Apache-2.0; the MAA problems are evaluation-only; ids only in the repository",
+      "kind": "math",
+      "use": "report_only (full set only; not in the reduced set or the selection metric)",
+      "text_in_manifest": false,
+      "n": 30,
+      "items": [
+        {
+          "dev_id": "aime25:0",
+          "upstream_id": "0",
+          "samples": [
+            {"index": 0, "seed": 573775264, "reduced": false},
+            {"index": 1, "seed": 1514421670, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:1",
+          "upstream_id": "1",
+          "samples": [
+            {"index": 0, "seed": 722120018, "reduced": false},
+            {"index": 1, "seed": 1665333821, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:2",
+          "upstream_id": "2",
+          "samples": [
+            {"index": 0, "seed": 176822062, "reduced": false},
+            {"index": 1, "seed": 696141787, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:3",
+          "upstream_id": "3",
+          "samples": [
+            {"index": 0, "seed": 350793207, "reduced": false},
+            {"index": 1, "seed": 10263071, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:4",
+          "upstream_id": "4",
+          "samples": [
+            {"index": 0, "seed": 1717745697, "reduced": false},
+            {"index": 1, "seed": 359292495, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:5",
+          "upstream_id": "5",
+          "samples": [
+            {"index": 0, "seed": 2022231493, "reduced": false},
+            {"index": 1, "seed": 1564773512, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:6",
+          "upstream_id": "6",
+          "samples": [
+            {"index": 0, "seed": 570139445, "reduced": false},
+            {"index": 1, "seed": 942996937, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:7",
+          "upstream_id": "7",
+          "samples": [
+            {"index": 0, "seed": 737552049, "reduced": false},
+            {"index": 1, "seed": 1625000675, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:8",
+          "upstream_id": "8",
+          "samples": [
+            {"index": 0, "seed": 2078506427, "reduced": false},
+            {"index": 1, "seed": 2004396594, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:9",
+          "upstream_id": "9",
+          "samples": [
+            {"index": 0, "seed": 1707843657, "reduced": false},
+            {"index": 1, "seed": 1649539996, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:10",
+          "upstream_id": "10",
+          "samples": [
+            {"index": 0, "seed": 1728684833, "reduced": false},
+            {"index": 1, "seed": 868519449, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:11",
+          "upstream_id": "11",
+          "samples": [
+            {"index": 0, "seed": 1087006496, "reduced": false},
+            {"index": 1, "seed": 777043780, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:12",
+          "upstream_id": "12",
+          "samples": [
+            {"index": 0, "seed": 615378349, "reduced": false},
+            {"index": 1, "seed": 357791082, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:13",
+          "upstream_id": "13",
+          "samples": [
+            {"index": 0, "seed": 296267902, "reduced": false},
+            {"index": 1, "seed": 901054589, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:14",
+          "upstream_id": "14",
+          "samples": [
+            {"index": 0, "seed": 1713064529, "reduced": false},
+            {"index": 1, "seed": 1363731252, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:15",
+          "upstream_id": "15",
+          "samples": [
+            {"index": 0, "seed": 16476974, "reduced": false},
+            {"index": 1, "seed": 1824230834, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:16",
+          "upstream_id": "16",
+          "samples": [
+            {"index": 0, "seed": 796722660, "reduced": false},
+            {"index": 1, "seed": 1268196724, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:17",
+          "upstream_id": "17",
+          "samples": [
+            {"index": 0, "seed": 369473225, "reduced": false},
+            {"index": 1, "seed": 109748596, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:18",
+          "upstream_id": "18",
+          "samples": [
+            {"index": 0, "seed": 1637505014, "reduced": false},
+            {"index": 1, "seed": 1053687182, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:19",
+          "upstream_id": "19",
+          "samples": [
+            {"index": 0, "seed": 1094692097, "reduced": false},
+            {"index": 1, "seed": 573164528, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:20",
+          "upstream_id": "20",
+          "samples": [
+            {"index": 0, "seed": 924942288, "reduced": false},
+            {"index": 1, "seed": 1416739525, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:21",
+          "upstream_id": "21",
+          "samples": [
+            {"index": 0, "seed": 1116450397, "reduced": false},
+            {"index": 1, "seed": 2002324668, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:22",
+          "upstream_id": "22",
+          "samples": [
+            {"index": 0, "seed": 834357511, "reduced": false},
+            {"index": 1, "seed": 870054784, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:23",
+          "upstream_id": "23",
+          "samples": [
+            {"index": 0, "seed": 338529817, "reduced": false},
+            {"index": 1, "seed": 1437390973, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:24",
+          "upstream_id": "24",
+          "samples": [
+            {"index": 0, "seed": 1346829551, "reduced": false},
+            {"index": 1, "seed": 1424808307, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:25",
+          "upstream_id": "25",
+          "samples": [
+            {"index": 0, "seed": 138833397, "reduced": false},
+            {"index": 1, "seed": 977453292, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:26",
+          "upstream_id": "26",
+          "samples": [
+            {"index": 0, "seed": 1509977588, "reduced": false},
+            {"index": 1, "seed": 1592610193, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:27",
+          "upstream_id": "27",
+          "samples": [
+            {"index": 0, "seed": 1957455769, "reduced": false},
+            {"index": 1, "seed": 1171909072, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:28",
+          "upstream_id": "28",
+          "samples": [
+            {"index": 0, "seed": 677720400, "reduced": false},
+            {"index": 1, "seed": 1107171036, "reduced": false}
+          ]
+        },
+        {
+          "dev_id": "aime25:29",
+          "upstream_id": "29",
+          "samples": [
+            {"index": 0, "seed": 1081548061, "reduced": false},
+            {"index": 1, "seed": 1633397202, "reduced": false}
+          ]
+        }
+      ]
+    }
+  }
+}

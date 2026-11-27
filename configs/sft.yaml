@@ -1,0 +1,224 @@
+# LoRA SFT of Qwen/Qwen3.5-9B: the main run and its 10 percent pilot (docs/DATA_PLAN.md sections 4, 9 and 10, revision 4.3).
+# Read by src/apex_train/sft.py through scripts/train_sft.sh. logs/<run_id>/metadata.json records the resolved config, the
+# data version (sha256 and row count per rows file), the row cap, the seed, the planned optimizer steps and the frozen
+# mixture block; this file is snapshotted per run.
+# Resolution order: this file -> `--preset NAME` (presets: below) -> the smoke: overrides under `--smoke` -> `--max-steps N`
+# and `--override section.key=value` (YAML-parsed, applied last). Strings may use ${ENV_VAR:-default}; scripts/train_sft.sh
+# exports the git-ignored .env first.
+# Model facts: configs/eval/model.yaml and configs/eval/model_snapshot/config.json. Memory and throughput of the 9B at the
+# row cap are measured on the B200 by `scripts/gpu_checks.sh caps` (T7 and T8 at 48K and 64K, milestone M4.1).
+# Logs always go to logs/<run_id>/; checkpoints and curves to the directories under run:.
+
+model:
+  repo: Qwen/Qwen3.5-9B                                        # hub id; written into adapter_config.json base_model_name_or_path
+  revision: c202236235762e1c871ad0ccb60c8ee5ba337b9a           # must equal configs/eval/model.yaml (asserted at startup; the lock is never edited here)
+  path: ${APEX_BASE_MODEL_DIR:-/mnt/apex-shared/models/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a}  # local weights (read-only)
+  auto_class: AutoModelForImageTextToText                      # -> Qwen3_5ForConditionalGeneration, the served class (vision wrapper around the
+                                                               #    qwen3_5_text decoder). The text-only Qwen3_5ForCausalLM yields adapter keys under
+                                                               #    model.layers.* and a merge that silently reloads with a random vision tower
+  dtype: bfloat16                                              # base weights bf16 (18.82 GB for the HF class without mtp.*); LoRA parameters stay fp32
+                                                               #    (PEFT autocast_adapter_dtype default)
+  attn_implementation: sdpa                                    # no flash-attn wheel for torch 2.14.1; sdpa for the 8 full-attention layers. The 24
+                                                               #    Gated DeltaNet layers use flash-linear-attention + causal-conv1d on GPU (pure-torch
+                                                               #    fallback on CPU, correct but slow)
+  gradient_checkpointing: true                                 # activations at the row cap are what limits the cap: weights 18.8 GB + LoRA training
+                                                               #    state 1.4 GB leave the rest of the GPU to them (T7/T8 measure the peak)
+  gradient_checkpointing_use_reentrant: false                  # non-reentrant mode (finite and resumable bit for bit on the twin); TRL enables input
+                                                               #    grads for PEFT
+  vision_tower: frozen                                         # 456.0 M parameters (0.91 GB bf16), no adapters, no trainable parameters (asserted after
+                                                               #    PEFT wrapping); text-only batches only (input_ids/attention_mask/labels, never pixel_values)
+
+lora:                                                          # r=32 is sufficient for ~38.5M loss tokens (DATA_PLAN section 4 "Capacity")
+  r: 32                                                        # rank; 86,556,672 trainable parameters = 0.91 % of the 9.50 B of the wrapped model
+                                                               #    (248 lora.Linear modules; counted on the real class on the meta device, 2026-10-11)
+  alpha: 64                                                    # scaling alpha/r = 2
+  dropout: 0.05
+  bias: none
+  init_lora_weights: true                                      # B = 0 at init: step 0 equals the base model
+  target_modules:                                              # the explicit 12-name list (PEFT has no default for qwen3_5; "all-linear" would also
+    - q_proj                                                   #   wrap the vision tower's Linears). Suffix match on module names:
+    - k_proj                                                   #   q/k/v/o_proj  -> gated attention of the 8 full-attention layers (q_proj carries the gate)
+    - v_proj
+    - o_proj
+    - in_proj_qkv                                              #   in_proj_qkv/z/b/a + out_proj -> Gated DeltaNet of the 24 linear-attention layers
+    - in_proj_z
+    - in_proj_b
+    - in_proj_a
+    - out_proj
+    - gate_proj                                                #   dense MLP (intermediate 12288) of all 32 layers: 58 % of the adapter parameters.
+    - up_proj                                                  #   None of the 12 names occurs in the vision tower (qkv, proj, linear_fc1/2, merger)
+    - down_proj
+  never_target: [gate, conv1d, embed_tokens, lm_head]          # documentation; sft.py refuses these names (and PEFT's all-linear)
+  quantization: none                                           # "quantization: none (bf16 LoRA)": 18.8 GB of bf16 weights fit one GPU with room for
+                                                               #   activations, and the training forward stays identical to the served bf16 model
+  expected_trainable_params: 86556672                          # asserted after wrapping (r=32 on the real class); set null when changing r or targets
+
+data:
+  train_rows: ${APEX_SFT_TRAIN_ROWS:-data/processed/v6/sft/train_rows.parquet}   # the frozen SFT rows (v6: written by
+                                                               #   scripts/data/build_mixture_v5.py (v6 layout), frozen by data/manifests/v6/data_frozen_v6.json; v5: data/processed/v5/sft; the first build's
+                                                               #   4.3 rows were data/processed/sft/{train,dev}_rows.parquet):
+                                                               #   `apex_train.data_format` rows (input_ids + assistant_masks + flat metadata);
+                                                               #   a list of files is concatenated in order; data version = sha256 + rows per file
+  dev_rows: ${APEX_SFT_DEV_ROWS:-data/processed/v6/sft/dev_rows.parquet}     # the task-grouped 5 percent validation shard (eval loss only);
+                                                               #   null disables evaluation
+  mixture_manifest: data/manifests/v6/mixture.json             # the frozen mixture (shares, counts, rows sha256): embedded in metadata.json when the
+                                                               #   file exists; a rows file whose sha256 it does not list is flagged in train.log
+                                                               #   (v5: data/manifests/v5/mixture.json; the first build's: data/manifests/mixture.json)
+  max_length: 65536                                            # THE ROW CAP: one context length for every row (DATA_PLAN section 4 "Row cap"). 64K is
+                                                               #   the target; M4.1 (`scripts/gpu_checks.sh caps`: T7 + T8 on the B200) confirms it
+                                                               #   or sets the 48K fallback 49152 here, and the freeze (M2.5) writes the rows prepared
+                                                               #   for that cap. Every row is length-checked at startup: a row above the cap stops the
+                                                               #   run before training (rows are never truncated; TRL's truncation never triggers)
+  packing: false                                               # packing / padding-free are unsafe without FlashAttention (TRL); micro-batch 1 needs neither
+  padding_free: false
+
+optim:
+  learning_rate: 2.0e-5                                        # v6 (v5's 1e-4 and the D2 diagnostic's 5e-5 both
+                                                               #   left SWE reasoning loops); earlier: the LoRA rate, ~10x the 1e-5 to 2e-5 full-fine-tuning rate of the agentic SFT papers
+                                                               #   (LoRA Without Regret; Biderman 2024). Fallback 5.0e-5 when the pilot's loss curve is
+                                                               #   unstable (M4.2: spikes or unbounded gradient norms): main run with
+                                                               #   --override optim.learning_rate=5e-5, the reason recorded in the status board
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03                                           # 3 % of the optimizer steps linear warm-up (passed as transformers 5's float warmup_steps;
+                                                               #   a value in [0, 1) is a ratio of the total steps; must stay < 1)
+  weight_decay: 0.0                                            # no decay on LoRA factors
+  optim: adamw_torch                                           # fp32 Adam states on the 86.6 M LoRA parameters (1.4 GB incl. parameters and grads)
+  max_grad_norm: 1.0
+  loss_normalisation: tokens                                   # how a step combines its 16 rows. tokens: the sum of the token NLL over every trained
+                                                               #   token of the accumulation window / the window's trained tokens, so each loss token
+                                                               #   weighs the same and the gradient follows the mixture, which is designed in loss tokens
+                                                               #   (SWE ~67 / terminal ~18 / retention ~15 percent, DATA_PLAN section 4). rows: each
+                                                               #   row's token mean averaged over the rows (what Qwen3_5ForConditionalGeneration gets by
+                                                               #   default, accepts_loss_kwargs = False): a 3K-token retention row weighs as much as a
+                                                               #   22K-token SWE row, turning the shares into ~23 / 40 / 35 percent of the gradient. The
+                                                               #   switch is apex_train.common.apply_loss_normalisation (num_items_in_batch from the
+                                                               #   Trainer, no division by the accumulation steps); eval_loss stays row-weighted as before
+                                                               #   and the monitor also records a token-weighted eval loss (overall and per slice)
+  per_device_train_batch_size: 1                               # micro-batch 1: one row per forward, no padding
+  gradient_accumulation_steps: 16                              # -> effective batch 16 rows per optimizer step; tokens per step are logged per step
+  effective_batch_size: 16                                     # = micro x accumulation on one GPU (asserted; keeps the record consistent)
+  num_train_epochs: 1                                          # v6: one epoch. Revision 5 (v5) ran two epochs, cosine over both; the
+                                                               #   end of epoch 1 is saved and evaluated too (sft.epoch_end_callback) and quick-checked
+                                                               #   against the final model. The first build trained one epoch (DATA_PLAN section 4
+                                                               #   "One epoch": forgetting grows with epochs)
+  max_steps: null                                              # null = one epoch = ceil(rows / 16) optimizer steps (metadata planned.optimizer_steps);
+                                                               #   `--max-steps N` stops a check run early
+
+eval:
+  strategy: steps                                              # loss-only evaluation on dev_rows every eval_steps optimizer steps and at the last step
+                                                               #   (prediction_loss_only); the dev-set benchmarks (DATA_PLAN section 10) run on saved
+                                                               #   checkpoints, not here
+  eval_steps: 25
+  per_device_eval_batch_size: 1
+
+logging:
+  logging_steps: 1                                             # one metrics.jsonl record and one curves/source row per optimizer step
+  save_strategy: steps                                         # a checkpoint every save_steps optimizer steps and at the last step, each holding the
+  save_steps: 25                                               #   adapter (fp32, 0.35 GB), optimizer + scheduler + RNG states (resumable, bit-exact on
+                                                               #   CPU); the 25-step checkpoints are the candidates of the guard rule (DATA_PLAN section
+                                                               #   10); the final adapter is saved separately under checkpoints/<run_id>/adapter/
+  save_total_limit: null                                       # must stay null: checkpoints are never deleted (~1.0 GB each)
+  seed: 42                                                     # random seed (python / numpy / torch / CUDA via transformers.set_seed; LoRA A init, dropout)
+  data_seed: 42                                                # sampler order
+
+run:
+  name: v6                                                     # run_id = sft_<name>_<UTC timestamp> (dryrun_ prefix with --smoke); v5: sft_v5_20261013_072959; the
+                                                               #   first build's run was sft_main_20261012_154313
+  output_root: checkpoints                                     # git-ignored; checkpoints/<run_id>/{trainer/checkpoint-N, adapter/}; weights go to the Hub
+                                                               #   (models/README.md records URL + revision + run_id + loading command)
+  curves_dir: curves/source                                    # <run_id>_train.csv (step, epoch, loss, learning_rate, grad_norm, entropy,
+                                                               #   mean_token_accuracy, tokens_this_step, tokens_cumulative, tokens_per_s, step_time_s,
+                                                               #   elapsed_s, peak_gpu_mem_allocated_gb, peak_gpu_mem_reserved_gb, rss_gb) and
+                                                               #   <run_id>_eval.csv (step, epoch, eval_loss, eval_entropy, eval_mean_token_accuracy,
+                                                               #   eval_runtime_s, elapsed_s); scripts/plot_curves.py rebuilds the figures from these
+
+monitor:                               # the training monitor (src/apex_train/monitor.py): per-step health fields, per-row and per-slice
+                                       # losses, LoRA health, GPU telemetry, alerts (logs/<run_id>/alerts.jsonl), the status.json
+                                       # heartbeat and a stall watchdog; resolved values are recorded in metadata.json monitor_config;
+                                       # scripts/monitor_training.py reads them, scripts/plot_curves.py plots them
+  enabled: true                        # false: no monitor at all (the Trainer, its collator and the training math are untouched
+                                       #   either way; loss and grad_norm are bit-identical with the monitor on or off)
+  slice_key: task_type                 # row column that names a row's slice: swe_episode | terminal_turn | retention (the render
+                                       #   adapters write the row kind there); per-slice train loss per step, eval loss per slice
+  row_records: true                    # per-row records (rows.jsonl, <run_id>_rows.csv): step, micro-step, sample_id, slice, tokens,
+                                       #   loss tokens, row loss (mean NLL per loss token) and its share of the step loss
+  loss_ema_beta: 0.9                   # bias-corrected EMA of the step loss (status, plots, overfitting check)
+  lora_every_steps: 10                 # LoRA health every N steps (and at the end): norms of lora_A / lora_B per module family,
+                                       #   update ratio |theta_t - theta_(t-N)| / |theta_(t-N)| (a 346 MB host copy of the adapter),
+                                       #   |delta W| relative to the base weights
+  gpu_sample_every_s: 15               # nvidia-smi sampling (util, memory, power, temperature, SM clock, throttle reasons)
+  watchdog_every_s: 30                 # heartbeat: status.json rewritten at least this often; stall and disk checks
+  # --- alert policy (alerts.jsonl; WARN and CRITICAL also in errors.log; docs/GPU_RUNBOOK.md "Monitoring" lists the actions)
+  alert_cooldown_steps: 25             # the same alert is not repeated within 25 steps and 15 minutes (counted as suppressed)
+  alert_cooldown_s: 900
+  health_window_s: 1800                # status health = worst severity of the last 30 minutes (CRITICAL while stalled or stopped)
+  stop_on_nonfinite: true              # CRITICAL non-finite loss / grad norm / weights: save checkpoint-<step> (forensic) and stop
+  stop_on_data_error: true             # CRITICAL data alert (row with zero loss tokens, above max_length, differs from its source)
+  spike_window: 50                     # rolling window of the loss / grad-norm spike detectors
+  spike_min_history: 20                # steps of history before the windowed detectors fire
+  loss_spike_mad_k: 6.0                # WARN loss_spike: loss > median + max(k x 1.4826 MAD, min_delta) over the window
+  loss_spike_min_delta: 0.1            #   (nats; batches of 16 mixed rows vary by slice, so a floor on the margin)
+  loss_spike_repeat_n: 3               # CRITICAL loss_spike_repeated: 3 spikes within 25 steps (the M4.2 instability criterion)
+  loss_spike_repeat_window: 25
+  grad_spike_factor: 5.0               # WARN grad_norm_spike: grad norm > 5 x its rolling median
+  clip_rate_window: 50                 # WARN clip_rate_high: > 50 percent of the last 50 steps clipped at max_grad_norm
+  clip_rate_warn: 0.5
+  lr_rel_tol: 0.01                     # WARN lr_schedule_deviation: logged LR vs the planned schedule (get_scheduler on the planned steps)
+  throughput_window: 20                # WARN throughput_drop: tok/s below 50 percent of its rolling median for 3 consecutive steps
+  throughput_drop_fraction: 0.5
+  throughput_drop_steps: 3
+  stall_minutes: 20                    # CRITICAL stall: no optimizer step for max(20 min, 5 x median step wall time) (stacks dumped to
+  stall_step_factor: 5.0               #   logs/<run_id>/stall_traceback_step<N>.txt); 60 min during eval / saving, 45 min loading
+  eval_stall_minutes: 60
+  loading_stall_minutes: 45
+  gpu_mem_reserved_warn_fraction: 0.92 # WARN gpu_mem_high: reserved (or peak reserved) memory above 92 percent of the GPU
+  mem_leak_window: 50                  # WARN gpu_mem_leak / host_rss_leak: near-monotone growth over 50 steps by more than
+  gpu_mem_leak_min_gb: 1.0             #   1 GB (allocated at step end) / 8 GB (host RSS)
+  rss_leak_min_gb: 8.0
+  gpu_util_low_pct: 50                 # WARN gpu_util_low: GPU utilisation below 50 percent for 5 minutes while training
+  gpu_util_low_minutes: 5
+  gpu_temp_warn_c: 87                  # WARN gpu_temperature_high
+  throttle_warn_mask: 0xE8             # WARN gpu_throttle: hw_slowdown | sw/hw thermal slowdown | hw power brake (power capping alone
+                                       #   is normal at full load and not alerted)
+  overfit_consecutive_evals: 2         # WARN eval_overfit: overall eval loss rising for 2 consecutive evaluations while the train EMA falls
+  forgetting_rel_increase: 0.05        # WARN eval_slice_regression: a slice's eval loss > its first evaluation x 1.05 (e.g. retention)
+  lora_update_ratio_warn: 0.5          # WARN lora_update_ratio_high: the adapter moved > 50 percent of its norm in lora_every_steps steps
+  disk_free_warn_gb: 50                # WARN disk_low: free space under the checkpoint root
+  eval_max_rows_per_slice: null        # dev rows evaluated per slice: null = all (~250 rows, ~4 min per evaluation at 64K, recorded as
+                                       #   eval_wall_s); N = a deterministic subset stratified by task (one row of every task before a
+                                       #   second; recorded in metadata data_version.dev.eval_subset); eval_loss is then over the subset
+  eval_on_start: false                 # true: one dev evaluation before step 1 (the base reference of the forgetting check; one more
+                                       #   evaluation of wall time)
+
+presets:                                                       # `--preset NAME`: dotted overrides applied before --smoke and --override
+  pilot:                                                       # the pilot (M4.2; DATA_PLAN section 9 "Pilot"): the ~520-row task-stratified 10 percent
+                                                               #   draw that the mixture step writes at the freeze, the same recipe and dev shard, its
+                                                               #   own run name (~1 GPU-h). It checks throughput, peak memory, the loss curve and format
+                                                               #   validity (reduced dev smoke on its adapter); it selects nothing
+    data.train_rows: ${APEX_SFT_PILOT_ROWS:-data/processed/sft/pilot_rows.parquet}
+    run.name: pilot
+
+smoke:                                                         # `--smoke`: CPU-runnable dry run of the whole pipeline on the shrunken twin
+  overrides:                                                   #   (same class as the real model, random init, real tokenizer + chat template)
+    model.path: checkpoints/gpu_checks/tiny_cg_twin             # shrunken Qwen3_5ForConditionalGeneration twin; git-ignored, built on demand by
+                                                               #   scripts/dev/gpu_checks/make_tiny_cg_twin.py (the twin's own generation_config.json
+                                                               #   is ours, not the Hub's: the locked revision ships none)
+    model.repo: null                                           # the twin is not on the Hub: adapter_config keeps the local path, revision = config sha
+    model.revision: null
+    lora.expected_trainable_params: null
+    data.train_rows: null                                      # null = rows are produced through the apex_train.data_format CLI from its synthetic samples
+    data.dev_rows: null
+    data.mixture_manifest: null                                # synthetic rows belong to no frozen mixture
+    data.max_length: 1024                                      # the twin's max_position_embeddings is 4096; long synthetic tool outputs get truncated
+                                                               #   by data_format at build time
+    optim.gradient_accumulation_steps: 2                       # 16 rows / (1 x 2) = 8 optimizer steps per epoch
+    optim.effective_batch_size: 2
+    optim.max_steps: 8                                         # 8 steps: checkpoints at 3, 6 and 8 (save_steps 3, last step), evals at 6 and 8; a
+    optim.warmup_ratio: 0.0                                    #   resume from checkpoint-6 trains "2 more steps" that must reproduce steps 7-8 bit for bit
+    eval.eval_steps: 6
+    logging.save_steps: 3
+  synthetic:                                                   # apex_train.data_format --write-synthetic: kinds cycle qa, tool_episode, parallel_calls,
+    n_train_samples: 24                                        #   observation_as_user (dropped in episode mode), long_tool_output, missing_reasoning
+    n_dev_samples: 12                                          #   (dropped as invalid) -> 4 rows per 6 samples: 24 -> 16 train rows, 12 -> 8 dev rows
+    seed_train: 0
+    seed_dev: 1

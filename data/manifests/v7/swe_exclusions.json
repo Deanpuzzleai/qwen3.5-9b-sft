@@ -1,0 +1,32 @@
+{
+ "updated": "2026-10-13T21:43:12Z",
+ "task_ids": [
+  "oswt:compas-dev_compas_pr602",
+  "oswt:magefile__mage-402",
+  "oswt:mido_mido_pr455",
+  "oswt:qmuntal__gltf-92",
+  "oswt:sappelhoff__pyprep-62",
+  "oswt:scikit-hep_uproot3_pr106"
+ ],
+ "by_task": {
+  "oswt:mido_mido_pr455": [
+   "v7_p2_rows:d3_ngram13"
+  ],
+  "oswt:scikit-hep_uproot3_pr106": [
+   "v7_p2_rows:d3_ngram13"
+  ],
+  "oswt:sappelhoff__pyprep-62": [
+   "v7_p2_rows:d3_ngram13"
+  ],
+  "oswt:magefile__mage-402": [
+   "v7_p2_rows:d3_ngram13"
+  ],
+  "oswt:qmuntal__gltf-92": [
+   "v7_p2_rows:d3_ngram13"
+  ],
+  "oswt:compas-dev_compas_pr602": [
+   "v7_p2_rows:d3_ngram13"
+  ]
+ },
+ "source": "v7_p2_rows of the v7 dry-run mixture (terminal v6 stand-in), run data_mixture_v7_20261013_214111"
+}

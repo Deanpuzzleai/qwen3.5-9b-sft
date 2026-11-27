@@ -1,0 +1,601 @@
+{
+ "frozen": true,
+ "frozen_at": "2026-10-12T10:16:59Z",
+ "admitted_sha256": "666a19a96cf974f387a9ef7317ff33ca9bb211067fca66028620ab2f1b5b5559",
+ "rule": "SWE: gold-replay calibration status ok; terminal: env_check passed (build, nop fails, oracle passes, image scan); excluded tasks are recorded with their reason and never replaced; frozen before Base's full dev run",
+ "slices": {
+  "swe": {
+   "n_manifest": 100,
+   "n_admitted": 99,
+   "n_excluded": 1,
+   "admitted": [
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.pr_90",
+     "upstream_id": "life4__textdistance.c3aca916.pr_90"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__ccfbphjk",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__ccfbphjk"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.lm_rewrite__xyp6lbg8",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.lm_rewrite__xyp6lbg8"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__v32hozkt",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__v32hozkt"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.pr_607",
+     "upstream_id": "HIPS__autograd.ac044f0d.pr_607"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__duyg7gtd",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__duyg7gtd"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.lm_rewrite__s1hee5zl",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.lm_rewrite__s1hee5zl"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__oq0ypx1t",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__oq0ypx1t"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__gdhm0ora",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__gdhm0ora"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.pr_311",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.pr_311"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__5mu4gd7j",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__5mu4gd7j"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__4q2une2x",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__4q2une2x"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__192q2nvw",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__192q2nvw"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__2a392hoq",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__2a392hoq"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__sjst1ca7",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__sjst1ca7"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.lm_rewrite__jcs1qo1p",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.lm_rewrite__jcs1qo1p"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__3wnweoqz",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__3wnweoqz"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__wfoezybx",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__wfoezybx"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__cbhvrkk6",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__cbhvrkk6"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__qnys6mse",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__qnys6mse"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.pr_306",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.pr_306"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__gdrh4f70",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__gdrh4f70"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__cvux4a13",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__cvux4a13"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__qw2cqxaf",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__qw2cqxaf"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.lm_rewrite__lkkkvdeo",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.lm_rewrite__lkkkvdeo"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.pr_95",
+     "upstream_id": "life4__textdistance.c3aca916.pr_95"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.pr_313",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.pr_313"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__i5g93gtd",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__i5g93gtd"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__ahkutdgr",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__ahkutdgr"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.lm_rewrite__wwxwq26e",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.lm_rewrite__wwxwq26e"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__g2gklekb",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__g2gklekb"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__2l1df76i",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__2l1df76i"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.pr_314",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.pr_314"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__vfh8mcit",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__vfh8mcit"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__mlgky10r",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__mlgky10r"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.lm_rewrite__i1ndc1qb",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.lm_rewrite__i1ndc1qb"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__346224tb",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__346224tb"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__chzkrlfq",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__chzkrlfq"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.pr_672",
+     "upstream_id": "HIPS__autograd.ac044f0d.pr_672"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__uxj6iv96",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__uxj6iv96"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__g34y316r",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__g34y316r"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__ne5jf2p8",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__ne5jf2p8"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__sgf5ghgr",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__sgf5ghgr"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__1bwnbljz",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__1bwnbljz"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__uvq5ou5h",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__uvq5ou5h"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__1jskg5xc",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__1jskg5xc"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__hbfra4ug",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__hbfra4ug"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__fyf67mz0",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__fyf67mz0"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__n0xwmxe6",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__n0xwmxe6"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__me7wytwn",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__me7wytwn"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__rd3pctkf",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__rd3pctkf"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__k0akpqh3",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__k0akpqh3"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__hrvgzgho",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__hrvgzgho"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__1azob8wx",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__1azob8wx"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__22dqgexs",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__22dqgexs"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__j49bciex",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__j49bciex"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__6ko7vr8l",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__6ko7vr8l"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__cigp4ki9",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__cigp4ki9"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__fso2v3xu",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__fso2v3xu"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__c1n6p3i8",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__c1n6p3i8"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__rtx7s2me",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__rtx7s2me"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__qcdctixw",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__qcdctixw"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__ro67kofm",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__ro67kofm"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__tvlfzlvj",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__tvlfzlvj"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__rsikqztx",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__rsikqztx"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__7ixivtxt",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__7ixivtxt"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.pr_300",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.pr_300"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__9bc7dj8e",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__9bc7dj8e"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.pr_84",
+     "upstream_id": "life4__textdistance.c3aca916.pr_84"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__o7kd5kt4",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__o7kd5kt4"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__lskjy3p4",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__lskjy3p4"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__cy12xl6n",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__cy12xl6n"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.pr_327",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.pr_327"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__hrf7utvj",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__hrf7utvj"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__acqbaxy1",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__acqbaxy1"
+    },
+    {
+     "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.lm_rewrite__j3pnle0p",
+     "upstream_id": "john-kurkowski__tldextract.3d1bf184.lm_rewrite__j3pnle0p"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__sha40osu",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__sha40osu"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__g4kzefby",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__g4kzefby"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__0nczqpak",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__0nczqpak"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__mjvaa7gi",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__mjvaa7gi"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__m18l6eca",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__m18l6eca"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__ha6ddk9p",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__ha6ddk9p"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__4saliiq0",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__4saliiq0"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__94nubpc3",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__94nubpc3"
+    },
+    {
+     "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__9v6u6jmp",
+     "upstream_id": "life4__textdistance.c3aca916.lm_rewrite__9v6u6jmp"
+    },
+    {
+     "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__2slz4zg7",
+     "upstream_id": "bits-and-blooms__bitset.167865a2.lm_rewrite__2slz4zg7"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__gf27q8f0",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__gf27q8f0"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__mwurpdpc",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__mwurpdpc"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__h3vc3nzg",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__h3vc3nzg"
+    },
+    {
+     "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__06lg9v2t",
+     "upstream_id": "hjson__hjson-go.f3219653.lm_rewrite__06lg9v2t"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__kkupfi6r",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__kkupfi6r"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.pr_579",
+     "upstream_id": "HIPS__autograd.ac044f0d.pr_579"
+    },
+    {
+     "task_id": "swesmith:HIPS__autograd.ac044f0d.lm_rewrite__klot35yt",
+     "upstream_id": "HIPS__autograd.ac044f0d.lm_rewrite__klot35yt"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__u1zu8w4p",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__u1zu8w4p"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__wjtksb7p",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__wjtksb7p"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__uixzup9y",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__uixzup9y"
+    },
+    {
+     "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__oi5ji1o3",
+     "upstream_id": "caarlos0__env.56a09d29.lm_rewrite__oi5ji1o3"
+    },
+    {
+     "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__ec5gukgz",
+     "upstream_id": "allegro__bigcache.5aa251c4.lm_rewrite__ec5gukgz"
+    },
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__xuevyv1i",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__xuevyv1i"
+    }
+   ],
+   "excluded": [
+    {
+     "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__3ops4h6j",
+     "upstream_id": "sunpy__sunpy.f8edfd5c.lm_rewrite__3ops4h6j",
+     "reason": "calibration:gold_f2p_failed_15_of_15"
+    }
+   ]
+  },
+  "terminal": {
+   "n_manifest": 40,
+   "n_admitted": 33,
+   "n_excluded": 7,
+   "admitted": [
+    {
+     "task_id": "tgr_env:task_08180_addbb2",
+     "upstream_id": "task_08180_addbb2"
+    },
+    {
+     "task_id": "tgr_env:task_01277_c56285",
+     "upstream_id": "task_01277_c56285"
+    },
+    {
+     "task_id": "tgr_env:task_02651_8cc2df",
+     "upstream_id": "task_02651_8cc2df"
+    },
+    {
+     "task_id": "tgr_env:task_00353_4e176d",
+     "upstream_id": "task_00353_4e176d"
+    },
+    {
+     "task_id": "tgr_env:task_09803_347846",
+     "upstream_id": "task_09803_347846"
+    },
+    {
+     "task_id": "tgr_env:task_01183_496e0c",
+     "upstream_id": "task_01183_496e0c"
+    },
+    {
+     "task_id": "tgr_env:task_11697_967b18",
+     "upstream_id": "task_11697_967b18"
+    },
+    {
+     "task_id": "tgr_env:task_02904_ece596",
+     "upstream_id": "task_02904_ece596"
+    },
+    {
+     "task_id": "tgr_env:task_11324_1db352",
+     "upstream_id": "task_11324_1db352"
+    },
+    {
+     "task_id": "tgr_env:task_01381_c2b2de",
+     "upstream_id": "task_01381_c2b2de"
+    },
+    {
+     "task_id": "tgr_env:task_06964_fa8be2",
+     "upstream_id": "task_06964_fa8be2"
+    },
+    {
+     "task_id": "tgr_env:task_01116_e2b890",
+     "upstream_id": "task_01116_e2b890"
+    },
+    {
+     "task_id": "tgr_env:task_02613_2e0cec",
+     "upstream_id": "task_02613_2e0cec"
+    },
+    {
+     "task_id": "tgr_env:task_00946_ed07b0",
+     "upstream_id": "task_00946_ed07b0"
+    },
+    {
+     "task_id": "tgr_env:task_04866_60340c",
+     "upstream_id": "task_04866_60340c"
+    },
+    {
+     "task_id": "tgr_env:task_09010_2e29ab",
+     "upstream_id": "task_09010_2e29ab"
+    },
+    {
+     "task_id": "tgr_env:task_04860_7cf60f",
+     "upstream_id": "task_04860_7cf60f"
+    },
+    {
+     "task_id": "tgr_env:task_02831_7c5c59",
+     "upstream_id": "task_02831_7c5c59"
+    },
+    {
+     "task_id": "tgr_env:task_12158_6629f4",
+     "upstream_id": "task_12158_6629f4"
+    },
+    {
+     "task_id": "tgr_env:task_00376_dc3706",
+     "upstream_id": "task_00376_dc3706"
+    },
+    {
+     "task_id": "tgr_env:task_06727_5f0784",
+     "upstream_id": "task_06727_5f0784"
+    },
+    {
+     "task_id": "tgr_env:task_01399_e45a05",
+     "upstream_id": "task_01399_e45a05"
+    },
+    {
+     "task_id": "tgr_env:task_12315_34ec9d",
+     "upstream_id": "task_12315_34ec9d"
+    },
+    {
+     "task_id": "tgr_env:task_07001_917aa5",
+     "upstream_id": "task_07001_917aa5"
+    },
+    {
+     "task_id": "tgr_env:task_02419_0c971a",
+     "upstream_id": "task_02419_0c971a"
+    },
+    {
+     "task_id": "tgr_env:task_06462_9023e6",
+     "upstream_id": "task_06462_9023e6"
+    },
+    {
+     "task_id": "tgr_env:task_02424_4c52ee",
+     "upstream_id": "task_02424_4c52ee"
+    },
+    {
+     "task_id": "tgr_env:task_00912_17fe8a",
+     "upstream_id": "task_00912_17fe8a"
+    },
+    {
+     "task_id": "tgr_env:task_02581_1ce959",
+     "upstream_id": "task_02581_1ce959"
+    },
+    {
+     "task_id": "tgr_env:task_14244_3f4886",
+     "upstream_id": "task_14244_3f4886"
+    },
+    {
+     "task_id": "tgr_env:task_00988_683983",
+     "upstream_id": "task_00988_683983"
+    },
+    {
+     "task_id": "tgr_env:task_04879_ed0071",
+     "upstream_id": "task_04879_ed0071"
+    },
+    {
+     "task_id": "tgr_env:task_00762_c8d1e1",
+     "upstream_id": "task_00762_c8d1e1"
+    }
+   ],
+   "excluded": [
+    {
+     "task_id": "tgr_env:task_02636_bbad12",
+     "upstream_id": "task_02636_bbad12",
+     "reason": "env_check: nop_passed"
+    },
+    {
+     "task_id": "tgr_env:task_08067_8dc5e6",
+     "upstream_id": "task_08067_8dc5e6",
+     "reason": "env_check: nop_passed"
+    },
+    {
+     "task_id": "tgr_env:task_07962_15b46a",
+     "upstream_id": "task_07962_15b46a",
+     "reason": "env_check: nop_passed"
+    },
+    {
+     "task_id": "tgr_env:task_06379_1c416b",
+     "upstream_id": "task_06379_1c416b",
+     "reason": "env_check: nop_passed"
+    },
+    {
+     "task_id": "tgr_env:task_04935_39ebbd",
+     "upstream_id": "task_04935_39ebbd",
+     "reason": "env_check: nop_passed"
+    },
+    {
+     "task_id": "tgr_env:task_05496_0f70c5",
+     "upstream_id": "task_05496_0f70c5",
+     "reason": "env_check: nop_passed"
+    },
+    {
+     "task_id": "tgr_env:task_07785_ed4ee3",
+     "upstream_id": "task_07785_ed4ee3",
+     "reason": "env_check: nop_passed"
+    }
+   ]
+  }
+ },
+ "inputs": {
+  "/home/dean/qwen3.5-9b-sft/data/manifests/dev_swe.json": "993739bb7fe291eaa5295aa05149f405b711e4ab145edce3ba8af562993f9585",
+  "/home/dean/qwen3.5-9b-sft/data/manifests/dev_terminal.json": "e253b255e3c6ba38d4f6da4c4dc2ddbec42cb0ca73da7fb0d698a32f328ac07f",
+  "/home/dean/qwen3.5-9b-sft/data/pools/swesmith/tasks.jsonl": "beacd183f922b1c87964091d65e479eae0363079dd0902ac88deddbb9b892c1c",
+  "/home/dean/qwen3.5-9b-sft/data/pools/tgr_env/tasks.jsonl": "d39263c9f762ced34cc28827ffb03a00facfb3ac8b683c7e20e7315d9c12b9d4"
+ },
+ "run_id": "data_dev_admission_20261012_101658"
+}

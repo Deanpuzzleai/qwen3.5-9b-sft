@@ -1,0 +1,81 @@
+# SWE-bench Pro v2 HARD-51 lock. Everything here is fixed before training; open_items lists what the first-GPU pilot must
+# close first. Do not edit without explicit instruction.
+benchmark: SWE-bench Pro
+version: "v2.0.0, HARD-51 subset"
+status: locked
+drafted_on: 2026-10-10
+locked_on: 2026-10-12
+open_items: []
+decision_2026-10-12_lock: "After the Base smoke tests: toolcall config, step_limit 250 and max_tokens_per_turn 16384 locked as tested (smoke: tool calls on every turn, longest turn 9,681 tokens, one task submitted at 53 steps); wall_time_limit_seconds 2940 so mini-swe-agent stops and its patch is graded before harbor's hard 3000 s timeout; the separate 10-task pilot was not run"
+source:
+  repository: https://github.com/scaleapi/SWE-bench_Pro-os
+  commit: 66f92766bba642462d4bbe5479e83f91f9211862   # merge of release/v2.0.0, 2026-09-22
+  tasks_dir: third_party/SWE-bench_Pro-os/v2/tasks   # Harbor task format, 642 tasks
+  checksums: "v2/SHA256SUMS, 6436 files verified 2026-10-10"
+  huggingface_mirror: "ScaleAI/SWE-bench_Pro, config hard, split test; 51 rows, instance_ids identical to v2/hard51_ids.txt"
+split:
+  name: HARD-51
+  basis: "V2 tasks failed by at least two of five frontier model families under the locked protocol, minus three later found ambiguous (v2/README.md)"
+  task_ids_file: configs/eval/swebench_pro_hard51_ids.txt   # sha256 prefix 6e35e84708a26443
+  n_tasks: 51
+  repos:
+    ansible/ansible: 8
+    internetarchive/openlibrary: 8
+    flipt-io/flipt: 7
+    gravitational/teleport: 6
+    protonmail/webclients: 5
+    element-hq/element-web: 4
+    future-architect/vuls: 4
+    qutebrowser/qutebrowser: 4
+    navidrome/navidrome: 3
+    NodeBB/NodeBB: 1
+    tutao/tutanota: 1
+  languages: {python: 20, go: 20, js: 10, ts: 1}
+  contamination_rule: "the 11 repositories above are excluded from all training data (see data/README.md)"
+container_images:
+  registry: "ghcr.io/scaleapi/swe-bench_pro-v2:<instance_id>"   # public, linux/amd64, ~0.7-0.9 GB compressed, ~4 GB on disk each
+  image_digests: configs/eval/swebench_pro_image_digests.tsv   # content digests of the 51 images as pulled; setup script compares after pulling
+  sanity_check: "scripts/validate_harness.sh swebench_pro 16 5: oracle must resolve 51/51, empty agent 0/5; evidence in logs/harness_checks/"
+harness_check_2026-10-10:
+  command: "scripts/validate_harness.sh swebench_pro 16 5, alone on the host, task.toml resource limits"
+  result: "PASS: oracle 51/51 resolved, empty agent 0/5, 0 infrastructure exceptions"
+  evidence: logs/harness_checks/swebench_pro_20261010T040901Z/summary.json
+  repo_in_container: "/app (a few tasks /testbed), checked out at the task base commit with sanitised git history"
+evaluator:
+  framework: "harbor==0.24.0 (configs/eval/requirements-harbor.lock), local docker environment"
+  protocol: locked   # v2/README.md
+  protocol_rules:
+    - "agent phase offline: task.toml [agent] network_mode = no-network"
+    - "verifier never runs in the agent sandbox: captured model.patch is re-applied on a pristine image by v2/tooling/patch_replay.py"
+    - "reported number = the re-graded resolved rate; the in-sandbox number is published alongside"
+  agent_budget_sec: 3000       # task.toml [agent] timeout_sec; in-sandbox timeout so partial patches are still graded
+  verifier_timeout_sec: 3000
+  resources_per_task: {cpus: 1, memory_mb: 4096, storage_mb: 10240}   # from task.toml; same for all three models
+  n_concurrent: 16             # same for all three models
+  host_requirement: "docker default-address-pools enlarged (scripts/setup_eval_env.sh --apply-docker-pools): the built-in pools cap concurrent Harbor environments at 30 per host"
+  infrastructure_retries:      # what counts as an environment failure and how it is retried; identical for all three models
+    harbor_max_retries: 2      # harbor retries a trial whose exception type is in retry_include
+    retry_include: [EnvironmentStartTimeoutError, AgentSetupTimeoutError, SandboxBuildFailedError]
+    rerun_passes: 3            # the runner re-runs tasks with no result or a docker-compose failure in follow-up jobs; what still fails is recorded as missing / environment_failure, never dropped
+agent:
+  framework: mini-swe-agent==2.4.6
+  driver: "v2/tooling/host_mini_swe.py (HostMiniSweAgent): LLM loop on the host, only bash commands enter the sandbox, sandbox has no network"
+  tools: "bash only, one command per step"
+  config_file: third_party/SWE-bench_Pro-os/v2/tooling/configs/mini_toolcall.yaml   # toolcall (decision_2026-10-12_lock)
+  step_limit: 250              # identical for all three models; a stop here is recorded as budget_exhausted and still graded
+  wall_time_limit_seconds: 2940   # decision_2026-10-12_lock; injected into the mini-swe-agent config by the runner
+  token_budget: "no total cap: max_tokens_per_turn per model call, step_limit calls, inside the 3000 s sandbox budget"
+  prompt: "instance_template and system_template from the config file, unchanged"
+  litellm_model: "openai/<served-name>"   # decision 2026-10-10: provider prefix pinned to openai/ (runner passes -m openai/<model-name>); with openai/ litellm replays reasoning_content of earlier assistant turns into the history, hosted_vllm/ strips it (litellm hosted_vllm/chat/transformation.py), which would change what the model sees between turns
+primary_metric: "resolved rate (%) over the 51 tasks, re-graded via patch_replay; per-task reward 0/1 stored under results/<version>/swebench_pro/<run_id>/"
+inference:   # this experiment's settings; identical for Base, LoRA SFT and stage 2
+  server: "configs/eval/model.yaml serving (pinned image and flags, identical for all versions)"
+  thinking: enabled
+  preserve_thinking: "replayed: mini-swe-agent (litellm openai/) sends reasoning_content of prior assistant turns back; the chat template keeps think blocks only for assistant turns after the last non-tool user message; identical for all three versions"
+  sampling: {temperature: 0.6, top_p: 0.95, top_k: 20, min_p: 0.0, presence_penalty: 0.0, repetition_penalty: 1.0}   # model card preset for precise coding
+  max_tokens_per_turn: 16384   # decision_2026-10-12_lock
+  context_window: 262144
+  seed: 1234                   # one run per model; no repeated runs (compute budget)
+official_vs_this_experiment:
+  official: "Modal environment, 50 concurrent, Claude Code / Codex / mini-swe-agent with reasoning_effort=high"
+  here: "local docker on one 128-vCPU box, 16 concurrent, mini-swe-agent host-side; not comparable to the leaderboard"

@@ -1,0 +1,46 @@
+# HLE (Humanity's Last Exam) lock. Do not edit without explicit instruction.
+benchmark: HLE
+status: locked
+locked_on: 2026-10-10
+open_items: []
+decision_2026-10-12_hle_retries: "The official prediction script returns no prediction both for a failed API call and for a response without a final answer, so re-running it re-asked questions whose reasoning ran past max_completion_tokens. From now on a prediction pass is repeated only after a pass that logged API errors (the script prints 'Error: ...'); a question without a final answer is recorded as budget_exhausted and counts as incorrect, matching 'one generation per question'. Applies to every version; Base's run hle_base_20261012_073939 was stopped before any retry pass ran and finished under this rule (--resume)."
+source:
+  dataset: cais/hle   # gated; downloaded with the HF_TOKEN of an account that accepted the dataset terms
+  dataset_sha: 5a81a4c7271a2a2a312b9a690f0c2fde837e4c29   # lastModified 2026-01-20
+  dataset_file: data/test-00000-of-00001.parquet   # sha256 in configs/eval/hle_parquet.sha256; local copy third_party/hle_data (git-ignored)
+  evaluation_code: https://github.com/centerforaisafety/hle
+  evaluation_code_commit: 22ed3074b1e7b134bcbc09028d0ba320839b0655   # 2026-09-23; hle_eval/run_model_predictions.py + run_judge_results.py, called unmodified
+  environment: ".venv/hle from configs/eval/requirements-hle.lock (the official requirements.txt pins + pyarrow 18.1.0 + pyyaml)"
+dataset_facts:   # counts from the pinned parquet; no question or answer text is stored in this repository
+  n_questions: 2500
+  with_image: 342
+  text_only: 2158
+  answer_type: {exactMatch: 1909, multipleChoice: 591}
+  category: {Math: 1021, Biology/Medicine: 280, Computer Science/AI: 241, Other: 233, Physics: 230, Humanities/Social Science: 219, Chemistry: 165, Engineering: 111}
+  canary: "every row carries the HLE canary string; the dataset is never used for training, prompts or checkpoint selection"
+protocol:
+  split: text-only   # decision 2026-10-10, before training: the 2,158 questions without an image (the subset the HLE authors use for text-only models). Rationale: training adapts only the language model on text data, so image questions cannot gain by design and would only add a regression channel; the model card does not disclose which setting its HLE number used. Reported everywhere as "HLE text-only (2,158 of 2,500)", never as plain HLE, never mixed with full-set numbers; identical for all three versions. Limitation stated in the README (section 8): multimodal performance after fine-tuning is not evaluated (vision tower frozen, language layers adapted)
+  reported_name: "HLE text-only (2,158 of 2,500 questions)"
+  text_only_rule: "rows whose `image` field is empty, in dataset order; materialized once from the pinned parquet and row-counted against dataset_facts.text_only"
+  preserve_thinking: "n/a (one assistant turn per question)"
+  tools: none
+  prompt: "the official SYSTEM_PROMPT (Explanation / Answer / Confidence) and message format from run_model_predictions.py, unchanged"
+  attempts: "one generation per question (official script); a further prediction pass (the script resumes and re-asks every question still without a prediction) runs only after a pass that logged API errors; a response with no final answer (reasoning past max_completion_tokens) is not re-asked; questions still missing count as incorrect (decision_2026-10-12_hle_retries)"
+  retry_passes: {prediction: 3, judge: 2}   # maximum re-runs of the official scripts (they resume); prediction re-runs only after API errors; read by the runner
+  max_completion_tokens: 32768   # model card: 32,768 recommended; official README: never below 8,192 for reasoning models
+  num_workers: 32
+  sampling: "the official prediction script sends NO sampling parameters (its --temperature flag is unused in the pinned code), so the server's sampling defaults apply (below; set explicitly by configs/eval/model.yaml serving.flags --override-generation-config, because the revision ships no generation_config.json); identical for all three versions"
+  endpoint_default_sampling:   # the serving defaults passed by model.yaml's --override-generation-config (the revision ships no generation_config.json; the same override also sets min_p 0.0, presence_penalty 1.5, repetition_penalty 1.0); wording corrected 2026-10-11, values unchanged
+    temperature: 1.0
+    top_p: 0.95
+    top_k: 20
+    do_sample: true
+  thinking: "enabled (model default); the response field passed to the judge is the final answer text, with reasoning separated by the serving reasoning parser (verified at bring-up)"
+  judge_model: o3-mini-2025-01-31   # official default in run_judge_results.py; confirmed available on the account 2026-10-10
+  judge: "official JUDGE_PROMPT with structured output (extracted_final_answer, reasoning, correct, confidence), max_completion_tokens 4096, 20 workers"
+  metrics: "accuracy (%) over all 2,158 questions in the split, plus calibration error (RMS, beta=100) as printed by the official script; per-category and per-answer-type breakdowns from the same verdicts; versions compared with exact McNemar in scripts/summarize.py"
+  answer_key_handling: "the official judge output embeds each question's correct answer; the full file is kept git-ignored under third_party/.hle_judge_outputs/<run_id>/ with its sha256 in metadata.json; the committed results carry per-question verdict, confidence, token counts and the model's raw responses only"
+official_vs_this_experiment:
+  official_readme: "temperature 0 is described as the default, but the pinned script does not forward it; max_completion_tokens is left to the user"
+  here: "endpoint defaults as above, 32,768 max completion tokens, text-only split (2,158 questions); the model card reports HLE 21.4 without stating the split, tools or judge, so no official configuration is claimed to be reproduced"
+runner: "src/apex_eval/hle.py via scripts/evaluate.sh hle; dry-run against the mock with --max-samples 3 before any real run"

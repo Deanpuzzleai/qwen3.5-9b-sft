@@ -1,0 +1,191 @@
+# ---------------------------------------------------------------------------------------------------------------------
+# NOTE: stage 2 was designed but NOT trained.
+# Stage 2 (turn-level on-policy DPO on the SFT model's own rollouts; the `dpo:` block below, method `dpo`) was designed
+# and its data pipeline was partly executed (state sampling, pair building with the V and R rules, pair audit and a frozen
+# v5 pair set of 1,379 pairs), but no stage-2 model was trained: the work moved to the v6 and v7 SFT
+# iterations instead. The file below is the repository's configs/stage2.yaml unchanged; the earlier `filtered_sft`
+# design (one rejection-sampling round as continued SFT) is kept in it for reference. results/stage2/ is empty.
+# ---------------------------------------------------------------------------------------------------------------------
+# Stage 2 (revision 5, the default method): turn-level DPO on the SFT model, the `dpo:` block below. The earlier
+# revision-4.3 design (docs/DATA_PLAN.md section 11), kept for reference and selected with --method filtered_sft, is one
+# execution-feedback rejection-sampling round, trained as continued SFT of the SFT adapter. Read by src/apex_train/stage2.py through scripts/train_stage2.sh; logs/<run_id>/
+# metadata.json records the resolved config, the init adapter, the data version (sha256, rows and loss tokens of the arm
+# and the replay), the planned optimizer steps and the stage-2 set manifest. Any value can be overridden with
+# --override key.path=value (YAML-parsed); strings may use ${ENV_VAR:-default} (scripts/train_stage2.sh exports .env).
+# The controlled experiment: two arms continue the same SFT adapter with the same recipe, the same replay rows and the
+# same number of optimizer steps, and differ only in their rollout rows:
+#   (a) positives: verified positives of the SFT policy's rollouts (r_pass = 1, tamper-clean, parse-valid, <= 2 per task);
+#   (b) control:   unfiltered format-valid rollouts of the same round, sampled to arm (a)'s rollout loss tokens.
+# The rows files come from the stage-2 set builder (M6.2) in the apex_train.data_format row format, rendered with the
+# stage-1 modes (SWE episode rows, terminal per-turn rows) at the SFT row cap.
+
+method: dpo                            # dpo (revision 5, the planned stage 2; the dpo: block) | filtered_sft (revision 4.3, kept
+                                       #   for reference; the filtered_sft: block)
+
+run:
+  seed: 42                             # python/numpy/torch, TrainingArguments.seed and data_seed (sampler order); the same for both arms
+  out_root: checkpoints/stage2         # <out_root>/<run_id>/{trainer/checkpoint-N, adapter/} (git-ignored; never deleted)
+  curves_dir: curves/source            # <run_id>_train.csv per step; scripts/plot_curves.py rebuilds the figures
+  logging_steps: 1                     # every optimizer step goes to logs/<run_id>/metrics.jsonl and the curves CSV
+
+model:
+  base: ${APEX_BASE_MODEL_DIR:-/mnt/apex-shared/models/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a}   # the raw base: the
+                                       # weights configs/sft.yaml trains on (read-only), loaded with AutoModelForImageTextToText (the
+                                       # served class Qwen3_5ForConditionalGeneration); never the merged SFT checkpoint
+  repo: Qwen/Qwen3.5-9B                # == configs/eval/model.yaml (asserted); the continued adapter names this base, so the published
+  revision: c202236235762e1c871ad0ccb60c8ee5ba337b9a   # stage-2 checkpoint is one adapter over the base, loadable in one line
+  init_adapter: ${APEX_SFT_ADAPTER_DIR:-checkpoints/sft_main_20261012_154313/adapter}   # the frozen SFT adapter (M5.4: final
+                                       # checkpoint, step 350, revision 4.3.24; adapter_model.safetensors sha256 1ab8642f...; Hub
+                                       # deanoshuang/qwen3.5-9b-agent-sft-lora@9ce398b5), given the lock's revision by
+                                       # `scripts/merge_adapter.sh verify-adapter --fix-adapter-config`.
+                                       # Loaded with PeftModel.from_pretrained(is_trainable=True): the same adapter keeps training (no
+                                       # fresh adapter, no merge before stage 2); its tensors are checked to load unchanged
+  dtype: bfloat16                      # base weights bf16; LoRA parameters fp32 (PEFT autocast_adapter_dtype default); CPU smokes run fp32
+  attn_implementation: sdpa            # the 8 full-attention layers; the 24 Gated DeltaNet layers use flash-linear-attention +
+                                       # causal-conv1d on GPU
+  gradient_checkpointing: true
+  gradient_checkpointing_use_reentrant: false
+
+lora:                                  # filtered_sft: what the SFT adapter must be (its adapter_config.json r / lora_alpha /
+                                       # target_modules are asserted equal; the trainable count must equal the adapter's parameter
+                                       # count and expected_trainable_params). dpo: the fresh adapter's recipe. Same block as configs/sft.yaml
+  r: 32
+  alpha: 64
+  dropout: 0.05                        # dpo's disable_dropout zeroes every nn.Dropout, LoRA dropout included
+  bias: none
+  init_lora_weights: true              # dpo only (fresh adapter: B = 0, policy == reference at step 0)
+  target_modules: [q_proj, k_proj, v_proj, o_proj, in_proj_qkv, in_proj_z, in_proj_b, in_proj_a, out_proj, gate_proj, up_proj, down_proj]
+  expected_trainable_params: 86556672  # 86.6M on the real class; the twin smokes set null
+
+filtered_sft:
+  learning_rate: 5.0e-5                # half the SFT rate: continued training of an adapted model on a small set (DATA_PLAN section 11)
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  loss_normalisation: tokens           # as configs/sft.yaml optim.loss_normalisation: the step loss is the token mean over the
+                                       # accumulation window (arms and replay matched in loss tokens weigh by their loss tokens);
+                                       # rows = the mean of the rows' token means. The same for both arms
+  optim: adamw_torch
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 16
+  effective_batch_size: 16             # rows per optimizer step = micro 1 x accumulation 16 x 1 GPU (checked by the code)
+  num_train_epochs: 1                  # one epoch over the arm's rows + the replay rows; the frozen set is never extended (late-graded
+                                       # episodes are recorded, never added)
+  max_steps: null                      # null = one epoch. The control arm runs arm (a)'s planned steps: --match-steps-of logs/<arm a
+                                       # run_id> (asserts the same init adapter and replay rows; the arms' row counts may differ
+                                       # because they are matched on loss tokens)
+  max_length: 65536                    # = configs/sft.yaml data.max_length, the row cap set by M4.1 (49152 if the 48K fallback was
+                                       # taken). A row above it stops the run before training: never truncated, never dropped (a drop
+                                       # would unbalance the loss-token-matched arms)
+  replay_rows: ${APEX_STAGE2_REPLAY_ROWS:-data/processed/stage2/replay_rows.parquet}   # 20 percent retention replay (of stage-2 loss
+                                       # tokens) from the WP5 replay reserve, disjoint from the SFT rows; the same file for both arms
+  manifest: data/manifests/stage2_mixture.json   # the frozen stage-2 set (arms, replay, sha256 of the rows files; M6.2): embedded in
+                                       # metadata.json when the file exists; rows files whose sha256 it does not list are flagged
+  arms:                                # `--arm NAME`: each arm has its own rows file and run_id prefix (run_id = <prefix>_<UTC ts>)
+    positives:                         # arm (a)
+      rows: ${APEX_STAGE2_POSITIVES_ROWS:-data/processed/stage2/positives_rows.parquet}
+      run_id_prefix: stage2_positives
+    control:                           # arm (b)
+      rows: ${APEX_STAGE2_CONTROL_ROWS:-data/processed/stage2/control_rows.parquet}
+      run_id_prefix: stage2_control
+
+checkpointing:
+  fraction: 0.5                        # save_steps = ceil(0.5 x planned steps): checkpoints at 50 percent and at the last step (100
+                                       # percent). The winner's 50 percent checkpoint is the guard fallback (DATA_PLAN section 10)
+  save_total_limit: null               # must stay null: checkpoints are never deleted
+
+monitor:                               # the training monitor (src/apex_train/monitor.py): per-step health fields, per-row and per-slice
+                                       # losses, LoRA health, GPU telemetry, alerts (logs/<run_id>/alerts.jsonl), the status.json
+                                       # heartbeat and a stall watchdog; resolved values are recorded in metadata.json monitor_config;
+                                       # scripts/monitor_training.py reads them, scripts/plot_curves.py plots them
+  enabled: true                        # false: no monitor at all (the Trainer, its collator and the training math are untouched
+                                       #   either way; loss and grad_norm are bit-identical with the monitor on or off)
+  slice_key: task_type                 # row column that names a row's slice: swe_episode | terminal_turn | retention (the render
+                                       #   adapters write the row kind there); per-slice train loss per step, eval loss per slice
+  row_records: true                    # per-row records (rows.jsonl, <run_id>_rows.csv): step, micro-step, sample_id, slice, tokens,
+                                       #   loss tokens, row loss (mean NLL per loss token) and its share of the step loss
+  loss_ema_beta: 0.9                   # bias-corrected EMA of the step loss (status, plots, overfitting check)
+  lora_every_steps: 10                 # LoRA health every N steps (and at the end): norms of lora_A / lora_B per module family,
+                                       #   update ratio |theta_t - theta_(t-N)| / |theta_(t-N)| (a 346 MB host copy of the adapter),
+                                       #   |delta W| relative to the base weights
+  gpu_sample_every_s: 15               # nvidia-smi sampling (util, memory, power, temperature, SM clock, throttle reasons)
+  watchdog_every_s: 30                 # heartbeat: status.json rewritten at least this often; stall and disk checks
+  # --- alert policy (alerts.jsonl; WARN and CRITICAL also in errors.log; docs/GPU_RUNBOOK.md "Monitoring" lists the actions)
+  alert_cooldown_steps: 25             # the same alert is not repeated within 25 steps and 15 minutes (counted as suppressed)
+  alert_cooldown_s: 900
+  health_window_s: 1800                # status health = worst severity of the last 30 minutes (CRITICAL while stalled or stopped)
+  stop_on_nonfinite: true              # CRITICAL non-finite loss / grad norm / weights: save checkpoint-<step> (forensic) and stop
+  stop_on_data_error: true             # CRITICAL data alert (row with zero loss tokens, above max_length, differs from its source)
+  spike_window: 50                     # rolling window of the loss / grad-norm spike detectors
+  spike_min_history: 20                # steps of history before the windowed detectors fire
+  loss_spike_mad_k: 6.0                # WARN loss_spike: loss > median + max(k x 1.4826 MAD, min_delta) over the window
+  loss_spike_min_delta: 0.1            #   (nats; batches of 16 mixed rows vary by slice, so a floor on the margin)
+  loss_spike_repeat_n: 3               # CRITICAL loss_spike_repeated: 3 spikes within 25 steps (the M4.2 instability criterion)
+  loss_spike_repeat_window: 25
+  grad_spike_factor: 5.0               # WARN grad_norm_spike: grad norm > 5 x its rolling median
+  clip_rate_window: 50                 # WARN clip_rate_high: > 50 percent of the last 50 steps clipped at max_grad_norm
+  clip_rate_warn: 0.5
+  lr_rel_tol: 0.01                     # WARN lr_schedule_deviation: logged LR vs the planned schedule (get_scheduler on the planned steps)
+  throughput_window: 20                # WARN throughput_drop: tok/s below 50 percent of its rolling median for 3 consecutive steps
+  throughput_drop_fraction: 0.5
+  throughput_drop_steps: 3
+  stall_minutes: 20                    # CRITICAL stall: no optimizer step for max(20 min, 5 x median step wall time) (stacks dumped to
+  stall_step_factor: 5.0               #   logs/<run_id>/stall_traceback_step<N>.txt); 60 min during eval / saving, 45 min loading
+  eval_stall_minutes: 60
+  loading_stall_minutes: 45
+  gpu_mem_reserved_warn_fraction: 0.92 # WARN gpu_mem_high: reserved (or peak reserved) memory above 92 percent of the GPU
+  mem_leak_window: 50                  # WARN gpu_mem_leak / host_rss_leak: near-monotone growth over 50 steps by more than
+  gpu_mem_leak_min_gb: 1.0             #   1 GB (allocated at step end) / 8 GB (host RSS)
+  rss_leak_min_gb: 8.0
+  gpu_util_low_pct: 50                 # WARN gpu_util_low: GPU utilisation below 50 percent for 5 minutes while training
+  gpu_util_low_minutes: 5
+  gpu_temp_warn_c: 87                  # WARN gpu_temperature_high
+  throttle_warn_mask: 0xE8             # WARN gpu_throttle: hw_slowdown | sw/hw thermal slowdown | hw power brake (power capping alone
+                                       #   is normal at full load and not alerted)
+  overfit_consecutive_evals: 2         # WARN eval_overfit: overall eval loss rising for 2 consecutive evaluations while the train EMA falls
+  forgetting_rel_increase: 0.05        # WARN eval_slice_regression: a slice's eval loss > its first evaluation x 1.05 (e.g. retention)
+  lora_update_ratio_warn: 0.5          # WARN lora_update_ratio_high: the adapter moved > 50 percent of its norm in lora_every_steps steps
+  disk_free_warn_gb: 50                # WARN disk_low: free space under the checkpoint root
+  eval_rows: null                      # stage 2 has no dev evaluation unless set: a rows file (e.g. data/processed/sft/dev_rows.parquet,
+                                       #   the SFT dev shard) evaluated every eval_every_fraction of the planned steps and at the end,
+                                       #   loss per slice (the forgetting check against the first evaluation); costs eval time per arm
+  eval_every_fraction: 0.25
+  eval_max_rows_per_slice: 20          # with eval_rows: a deterministic task-stratified subset per slice (null = every row)
+  eval_on_start: true                  # with eval_rows: evaluate the init (SFT) adapter before step 1, the reference of the forgetting check
+
+dpo:                                   # Revision 5 stage 2: turn-level DPO.
+                                       # src/apex_train/stage2.py: TRL 1.15.0 DPOTrainer with a fresh adapter
+                                       # (the lora block) on a merged SFT checkpoint and ref_model=None, so the reference is the policy
+                                       # with the adapter disabled = the merged SFT weights. Run it with --method dpo --base <merged SFT
+                                       # dir> --override model.init_adapter=null (an init adapter would make the raw base the reference).
+  run_id_prefix: stage2_dpo
+  beta: 0.1                            # KL strength of the implicit reward
+  loss_type: [sigmoid, sft]            # DPO plus an NLL term on the chosen turn (RPO 2404.19733; Llama 3's 0.2), the replacement for TRL's
+                                       # removed rpo_alpha. Names: sigmoid | ipo | sft, one or a list; [sft] alone = the control arm (SFT on
+                                       # the chosen turns). No label smoothing: TRL 1.15.0's sigmoid and ipo losses ignore it
+  loss_weights: [1.0, 0.2]             # one per loss_type entry; null = equal weights
+  precompute_ref_log_probs: true       # reference log-probs computed once before training (adapter disabled), not per step
+  disable_dropout: true                # deterministic reference pass
+  learning_rate: 5.0e-6
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.05
+  weight_decay: 0.0
+  max_grad_norm: 1.0
+  optim: adamw_torch
+  per_device_train_batch_size: 1       # pairs per micro-step; each pair is two sequences (chosen + rejected) in one forward
+  gradient_accumulation_steps: 16
+  effective_batch_size: 16
+  num_train_epochs: 1
+  max_steps: null
+  max_length: 32768                    # prompt + longer completion per pair; pairs above it are dropped and recorded in
+                                       # logs/<run_id>/data_drops.jsonl (completions are never truncated)
+  max_prompt_length: 28672             # TRL 1.15.0 has no max_prompt_length: enforced here before tokenisation; states are drawn <= 28K
+  on_too_long: truncate_tool_outputs   # prompt above max_prompt_length: truncate_tool_outputs (tool results in the prompt, longest
+                                       # first, head + tail; never user turns, system prompt or completions) | drop
+  min_tool_tokens: 64                  # floor per truncated tool output
+  data:
+    pairs: data/processed/stage2/pairs.jsonl   # one JSON object per line: {"id", "prompt": [messages], "tools": [...] | null,
+                                       # "chosen": {assistant msg}, "rejected": {assistant msg}, "metadata": {flat scalars}}; no builder
+                                       # exists in revision 4.3
+    thinking: true                     # reasoning_content mandatory and non-empty on every assistant turn

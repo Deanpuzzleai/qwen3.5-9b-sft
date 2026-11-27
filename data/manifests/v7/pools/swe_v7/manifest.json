@@ -1,0 +1,931 @@
+{
+  "pool": "swe_v7",
+  "source": "oswt",
+  "run_id": "data_swe_v7_20261013_214312",
+  "built": "2026-10-13T21:46:45Z",
+  "seed": 42,
+  "plan": "logs/coordination/v7/PLAN_v7.md section 4",
+  "code_commit": "792e77d5c0e094c6cf595efdd2613c11f53d27f3",
+  "source_run": "data_swe_v5_20261013_060512",
+  "dataset": {
+    "repo": "nvidia/Open-SWE-Traces",
+    "revision": "e192b26a43b8d09f156eeee781aef8e6bd5108ba",
+    "licence": "CC-BY-4.0",
+    "shards": {
+      "n": 44,
+      "processed": 44,
+      "limited": false
+    }
+  },
+  "generator": {
+    "name": "Qwen3.8-27B",
+    "thinking": true,
+    "label_provenance": "verifier (upstream resolved == 1)"
+  },
+  "templates": {
+    "version": "2.4.6",
+    "config_path": "/home/dean/qwen3.5-9b-sft/.venv/harbor/lib/python3.12/site-packages/minisweagent/config/mini.yaml",
+    "config_sha256": "b539a8965f5bf41dd0f32daafa5d2db22581923d13812fa378fd09569b9d6b0c",
+    "bash_tool": {
+      "type": "function",
+      "function": {
+        "name": "bash",
+        "description": "Execute a bash command",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "The bash command to execute"
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    "teacher_prefix": "<pr_description>\nConsider the following PR description:\n",
+    "teacher_close": "</pr_description>",
+    "teacher_config_path": "/home/dean/qwen3.5-9b-sft/.venv/harbor/lib/python3.12/site-packages/minisweagent/config/benchmarks/swebench.yaml",
+    "template_vars": {
+      "system": "Linux",
+      "node": "apex-cpu",
+      "release": "6.11.0-1016-nvidia",
+      "version": "#16-Ubuntu SMP PREEMPT_DYNAMIC Sun Sep 21 17:06:33 UTC 2025",
+      "machine": "x86_64"
+    },
+    "lock_reference": {
+      "path": "/home/dean/qwen3.5-9b-sft/logs/train_stack_check/harness_request_shapes/captures/mini_swe_agent_config.generated.yaml",
+      "sha256": "f889fbce66d7d2402562e197170c02bc308d5524111d71fa12fa0c1f81553f15",
+      "matched": [
+        "agent.system_template",
+        "agent.instance_template",
+        "model.observation_template"
+      ]
+    },
+    "bash_tool_sha256": "e7d0cb824728a0e677d5d6521845f5b87f5907091a0538310ae964dfdaee437c"
+  },
+  "tokenizer": {
+    "path": "/mnt/apex-shared/models/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+  },
+  "rules": {
+    "masks": {
+      "version": "swe_masks:2",
+      "read_commands": [
+        "cat",
+        "echo",
+        "egrep",
+        "fgrep",
+        "find",
+        "git",
+        "grep",
+        "head",
+        "ls",
+        "nl",
+        "printf",
+        "pwd",
+        "rg",
+        "sed",
+        "tail",
+        "tree",
+        "wc"
+      ],
+      "git_read": [
+        "diff",
+        "log",
+        "show",
+        "status"
+      ],
+      "read_keep_first": 3,
+      "submit_lookback": 3,
+      "error_pattern": "Traceback|Error|FAILED|panic",
+      "v7_failure_pattern": "Traceback \\(most recent call last\\)|FAILED|FAIL:|panic:|\\b[1-9]\\d* failed\\b|timed out|command not found|SyntaxError|No such file|undefined:|error TS\\d*|[Cc]annot find|npm ERR!",
+      "rule": "v7",
+      "routine_max": 1000,
+      "decision_max": 8192
+    },
+    "draw_settings": {
+      "band_shares": {
+        "hard": 0.268,
+        "medium": 0.277,
+        "easy": 0.455
+      },
+      "language_shares": {
+        "go": 0.283,
+        "py": 0.461,
+        "ts": 0.162,
+        "js": 0.05,
+        "other": 0.044
+      },
+      "repo_caps": {
+        "go": 5,
+        "ts": 5
+      },
+      "max_per_repository": 3,
+      "target_loss_tokens": 3700000,
+      "recovery_share": 0.35,
+      "attempt": "one random passing attempt per task (a random recovery attempt for the recovery-first tasks)",
+      "lower_half": false
+    },
+    "tail_cap": 0.1,
+    "tail_min_share": 0.01,
+    "easy_max_share": 0.45,
+    "presample_factor": {
+      "hard": 10.0,
+      "medium": 10.0,
+      "easy": 4.0
+    },
+    "row_cap": 65536,
+    "loss_cap_per_row": 32768
+  },
+  "funnel": {
+    "pool_attempts": 47874,
+    "presample_tasks": 1321,
+    "render_pass": 660,
+    "render_fail_by_stage": {
+      "repo_root_ambiguous": 320,
+      "band_row_cap": 631,
+      "reference_patch_leak": 142,
+      "gate_tamper": 5,
+      "d2_text": 1,
+      "gate_language": 10,
+      "rebuild": 11
+    },
+    "candidates": 654,
+    "loss_cap_drops": 0,
+    "excluded_task_ids": 6,
+    "exclusions_file": "data/manifests/v7/swe_exclusions.json"
+  },
+  "draw": {
+    "mode": "shares",
+    "keep_all": [],
+    "repo_caps": {
+      "go": 5,
+      "ts": 5
+    },
+    "total_target": 3700000,
+    "loss_tokens": 3670971,
+    "seq_tokens": 14139798,
+    "episodes": 322,
+    "instances": 322,
+    "second_attempts": 0,
+    "second_attempt_share": 0.0,
+    "max_second_share": 0.0,
+    "seed": 42,
+    "switches": {
+      "category_round_robin": true,
+      "recovery_preference": true,
+      "lower_half": false
+    },
+    "dropped_nice_to_haves": [
+      "lower_half"
+    ],
+    "band_loss_shares": {
+      "hard": 0.2714,
+      "medium": 0.2809,
+      "easy": 0.4477
+    },
+    "group_shares": {
+      "go": 0.295,
+      "py": 0.4565,
+      "ts": 0.1584,
+      "js": 0.0497,
+      "other": 0.0404
+    },
+    "language_counts": {
+      "py": 147,
+      "go": 95,
+      "ts": 51,
+      "js": 16,
+      "rust": 7,
+      "php": 2,
+      "java": 4
+    },
+    "category_shares": {
+      "bug-fix": 0.4037,
+      "feature-request": 0.3354,
+      "enhancement": 0.1832,
+      "other": 0.0776
+    },
+    "recovery_share": 0.3851,
+    "max_rows_per_repository": 5,
+    "max_instances_per_repository": 5,
+    "repositories": 269,
+    "skipped": {
+      "repo_cap": 40
+    },
+    "bands": {
+      "hard": {
+        "target_loss_tokens": 991600,
+        "carry_in": 0,
+        "loss_tokens": 996365,
+        "seq_tokens": 4034595,
+        "episodes": 88,
+        "instances": 88,
+        "second_attempts": 0,
+        "repositories": 78,
+        "shortfall": 0,
+        "supply_exhausted": false,
+        "keep_all": false,
+        "groups": {
+          "go": 28,
+          "py": 40,
+          "ts": 13,
+          "js": 4,
+          "other": 3
+        },
+        "group_shares": {
+          "go": 0.3182,
+          "py": 0.4545,
+          "ts": 0.1477,
+          "js": 0.0455,
+          "other": 0.0341
+        },
+        "categories": {
+          "feature-request": 31,
+          "bug-fix": 35,
+          "other": 7,
+          "enhancement": 15
+        },
+        "max_category_share": 0.3977,
+        "recovery": 34,
+        "recovery_share": 0.3864,
+        "recovery_preferred_picks": 26,
+        "recovery_supply_short_picks": 3,
+        "upper_half_picks": 57,
+        "exhausted_groups": [
+          "other"
+        ],
+        "share_moves": [
+          {
+            "from": "other",
+            "to": "go",
+            "share": 0.044,
+            "after_picks": 78
+          }
+        ]
+      },
+      "medium": {
+        "target_loss_tokens": 1020135,
+        "carry_in": -4765,
+        "loss_tokens": 1031023,
+        "seq_tokens": 3639828,
+        "episodes": 73,
+        "instances": 73,
+        "second_attempts": 0,
+        "repositories": 71,
+        "shortfall": 0,
+        "supply_exhausted": false,
+        "keep_all": false,
+        "groups": {
+          "go": 21,
+          "py": 33,
+          "ts": 12,
+          "js": 4,
+          "other": 3
+        },
+        "group_shares": {
+          "go": 0.2877,
+          "py": 0.4521,
+          "ts": 0.1644,
+          "js": 0.0548,
+          "other": 0.0411
+        },
+        "categories": {
+          "feature-request": 20,
+          "bug-fix": 31,
+          "enhancement": 16,
+          "other": 6
+        },
+        "max_category_share": 0.4247,
+        "recovery": 31,
+        "recovery_share": 0.4247,
+        "recovery_preferred_picks": 18,
+        "recovery_supply_short_picks": 0,
+        "upper_half_picks": 22,
+        "exhausted_groups": [],
+        "share_moves": []
+      },
+      "easy": {
+        "target_loss_tokens": 1672612,
+        "carry_in": -10888,
+        "loss_tokens": 1643583,
+        "seq_tokens": 6465375,
+        "episodes": 161,
+        "instances": 161,
+        "second_attempts": 0,
+        "repositories": 145,
+        "shortfall": 29029,
+        "supply_exhausted": false,
+        "keep_all": false,
+        "groups": {
+          "go": 46,
+          "py": 74,
+          "ts": 26,
+          "js": 8,
+          "other": 7
+        },
+        "group_shares": {
+          "go": 0.2857,
+          "py": 0.4596,
+          "ts": 0.1615,
+          "js": 0.0497,
+          "other": 0.0435
+        },
+        "categories": {
+          "bug-fix": 64,
+          "enhancement": 28,
+          "feature-request": 57,
+          "other": 12
+        },
+        "max_category_share": 0.3975,
+        "recovery": 59,
+        "recovery_share": 0.3665,
+        "recovery_preferred_picks": 46,
+        "recovery_supply_short_picks": 0,
+        "upper_half_picks": 121,
+        "exhausted_groups": [],
+        "share_moves": []
+      }
+    },
+    "easy_cap": {
+      "max_share": 0.45,
+      "episodes_removed": 3
+    }
+  },
+  "supply": {
+    "by_group_band": {
+      "go/hard": {
+        "instances": 52,
+        "loss_tokens": 502195,
+        "seq_tokens": 2221344,
+        "recovery": 11,
+        "repositories": 39,
+        "categories": {
+          "bug-fix": 20,
+          "feature-request": 26,
+          "other": 4,
+          "enhancement": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "go/medium": {
+        "instances": 64,
+        "loss_tokens": 668249,
+        "seq_tokens": 2953757,
+        "recovery": 16,
+        "repositories": 51,
+        "categories": {
+          "feature-request": 16,
+          "bug-fix": 30,
+          "other": 6,
+          "enhancement": 12
+        },
+        "thinking_mean_median": 0.0
+      },
+      "go/easy": {
+        "instances": 88,
+        "loss_tokens": 817369,
+        "seq_tokens": 3325277,
+        "recovery": 26,
+        "repositories": 59,
+        "categories": {
+          "feature-request": 28,
+          "bug-fix": 39,
+          "enhancement": 8,
+          "other": 13
+        },
+        "thinking_mean_median": 0.0
+      },
+      "py/hard": {
+        "instances": 63,
+        "loss_tokens": 743947,
+        "seq_tokens": 2714565,
+        "recovery": 17,
+        "repositories": 56,
+        "categories": {
+          "other": 3,
+          "bug-fix": 33,
+          "feature-request": 17,
+          "enhancement": 10
+        },
+        "thinking_mean_median": 0.0
+      },
+      "py/medium": {
+        "instances": 94,
+        "loss_tokens": 1210838,
+        "seq_tokens": 4046808,
+        "recovery": 29,
+        "repositories": 78,
+        "categories": {
+          "bug-fix": 48,
+          "feature-request": 26,
+          "enhancement": 17,
+          "other": 3
+        },
+        "thinking_mean_median": 0.0
+      },
+      "py/easy": {
+        "instances": 138,
+        "loss_tokens": 1416381,
+        "seq_tokens": 5026718,
+        "recovery": 33,
+        "repositories": 122,
+        "categories": {
+          "feature-request": 30,
+          "bug-fix": 90,
+          "other": 5,
+          "enhancement": 13
+        },
+        "thinking_mean_median": 0.0
+      },
+      "ts/hard": {
+        "instances": 27,
+        "loss_tokens": 264323,
+        "seq_tokens": 1254413,
+        "recovery": 9,
+        "repositories": 23,
+        "categories": {
+          "bug-fix": 19,
+          "feature-request": 6,
+          "enhancement": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "ts/medium": {
+        "instances": 28,
+        "loss_tokens": 315984,
+        "seq_tokens": 1324607,
+        "recovery": 9,
+        "repositories": 26,
+        "categories": {
+          "bug-fix": 18,
+          "feature-request": 9,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "ts/easy": {
+        "instances": 46,
+        "loss_tokens": 422620,
+        "seq_tokens": 1899132,
+        "recovery": 16,
+        "repositories": 33,
+        "categories": {
+          "bug-fix": 28,
+          "enhancement": 6,
+          "feature-request": 10,
+          "other": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "js/hard": {
+        "instances": 7,
+        "loss_tokens": 79964,
+        "seq_tokens": 365476,
+        "recovery": 4,
+        "repositories": 6,
+        "categories": {
+          "bug-fix": 5,
+          "enhancement": 1,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "js/medium": {
+        "instances": 11,
+        "loss_tokens": 107486,
+        "seq_tokens": 543349,
+        "recovery": 4,
+        "repositories": 10,
+        "categories": {
+          "feature-request": 2,
+          "enhancement": 2,
+          "other": 1,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 0.0
+      },
+      "js/easy": {
+        "instances": 19,
+        "loss_tokens": 167855,
+        "seq_tokens": 763406,
+        "recovery": 5,
+        "repositories": 19,
+        "categories": {
+          "feature-request": 6,
+          "bug-fix": 11,
+          "other": 1,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "other/hard": {
+        "instances": 3,
+        "loss_tokens": 24339,
+        "seq_tokens": 153214,
+        "recovery": 0,
+        "repositories": 3,
+        "categories": {
+          "feature-request": 1,
+          "bug-fix": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "other/medium": {
+        "instances": 6,
+        "loss_tokens": 74184,
+        "seq_tokens": 297972,
+        "recovery": 2,
+        "repositories": 6,
+        "categories": {
+          "bug-fix": 3,
+          "feature-request": 1,
+          "enhancement": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "other/easy": {
+        "instances": 8,
+        "loss_tokens": 85006,
+        "seq_tokens": 382466,
+        "recovery": 3,
+        "repositories": 8,
+        "categories": {
+          "bug-fix": 7,
+          "other": 1
+        },
+        "thinking_mean_median": 0.0
+      }
+    },
+    "by_language_band": {
+      "go/easy": {
+        "instances": 88,
+        "loss_tokens": 817369,
+        "seq_tokens": 3325277,
+        "recovery": 26,
+        "repositories": 59,
+        "categories": {
+          "feature-request": 28,
+          "bug-fix": 39,
+          "enhancement": 8,
+          "other": 13
+        },
+        "thinking_mean_median": 0.0
+      },
+      "go/hard": {
+        "instances": 52,
+        "loss_tokens": 502195,
+        "seq_tokens": 2221344,
+        "recovery": 11,
+        "repositories": 39,
+        "categories": {
+          "bug-fix": 20,
+          "feature-request": 26,
+          "other": 4,
+          "enhancement": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "go/medium": {
+        "instances": 64,
+        "loss_tokens": 668249,
+        "seq_tokens": 2953757,
+        "recovery": 16,
+        "repositories": 51,
+        "categories": {
+          "feature-request": 16,
+          "bug-fix": 30,
+          "other": 6,
+          "enhancement": 12
+        },
+        "thinking_mean_median": 0.0
+      },
+      "java/easy": {
+        "instances": 4,
+        "loss_tokens": 40472,
+        "seq_tokens": 183394,
+        "recovery": 1,
+        "repositories": 4,
+        "categories": {
+          "bug-fix": 3,
+          "other": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "java/medium": {
+        "instances": 3,
+        "loss_tokens": 38993,
+        "seq_tokens": 142509,
+        "recovery": 1,
+        "repositories": 3,
+        "categories": {
+          "bug-fix": 2,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "js/easy": {
+        "instances": 19,
+        "loss_tokens": 167855,
+        "seq_tokens": 763406,
+        "recovery": 5,
+        "repositories": 19,
+        "categories": {
+          "feature-request": 6,
+          "bug-fix": 11,
+          "other": 1,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "js/hard": {
+        "instances": 7,
+        "loss_tokens": 79964,
+        "seq_tokens": 365476,
+        "recovery": 4,
+        "repositories": 6,
+        "categories": {
+          "bug-fix": 5,
+          "enhancement": 1,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "js/medium": {
+        "instances": 11,
+        "loss_tokens": 107486,
+        "seq_tokens": 543349,
+        "recovery": 4,
+        "repositories": 10,
+        "categories": {
+          "feature-request": 2,
+          "enhancement": 2,
+          "other": 1,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 0.0
+      },
+      "php/easy": {
+        "instances": 1,
+        "loss_tokens": 14651,
+        "seq_tokens": 55062,
+        "recovery": 0,
+        "repositories": 1,
+        "categories": {
+          "bug-fix": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "php/hard": {
+        "instances": 1,
+        "loss_tokens": 7803,
+        "seq_tokens": 56144,
+        "recovery": 0,
+        "repositories": 1,
+        "categories": {
+          "bug-fix": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "py/easy": {
+        "instances": 138,
+        "loss_tokens": 1416381,
+        "seq_tokens": 5026718,
+        "recovery": 33,
+        "repositories": 122,
+        "categories": {
+          "feature-request": 30,
+          "bug-fix": 90,
+          "other": 5,
+          "enhancement": 13
+        },
+        "thinking_mean_median": 0.0
+      },
+      "py/hard": {
+        "instances": 63,
+        "loss_tokens": 743947,
+        "seq_tokens": 2714565,
+        "recovery": 17,
+        "repositories": 56,
+        "categories": {
+          "other": 3,
+          "bug-fix": 33,
+          "feature-request": 17,
+          "enhancement": 10
+        },
+        "thinking_mean_median": 0.0
+      },
+      "py/medium": {
+        "instances": 94,
+        "loss_tokens": 1210838,
+        "seq_tokens": 4046808,
+        "recovery": 29,
+        "repositories": 78,
+        "categories": {
+          "bug-fix": 48,
+          "feature-request": 26,
+          "enhancement": 17,
+          "other": 3
+        },
+        "thinking_mean_median": 0.0
+      },
+      "rust/easy": {
+        "instances": 3,
+        "loss_tokens": 29883,
+        "seq_tokens": 144010,
+        "recovery": 2,
+        "repositories": 3,
+        "categories": {
+          "bug-fix": 3
+        },
+        "thinking_mean_median": 0.0
+      },
+      "rust/hard": {
+        "instances": 2,
+        "loss_tokens": 16536,
+        "seq_tokens": 97070,
+        "recovery": 0,
+        "repositories": 2,
+        "categories": {
+          "feature-request": 1,
+          "bug-fix": 1
+        },
+        "thinking_mean_median": 0.0
+      },
+      "rust/medium": {
+        "instances": 3,
+        "loss_tokens": 35191,
+        "seq_tokens": 155463,
+        "recovery": 1,
+        "repositories": 3,
+        "categories": {
+          "bug-fix": 1,
+          "enhancement": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "ts/easy": {
+        "instances": 46,
+        "loss_tokens": 422620,
+        "seq_tokens": 1899132,
+        "recovery": 16,
+        "repositories": 33,
+        "categories": {
+          "bug-fix": 28,
+          "enhancement": 6,
+          "feature-request": 10,
+          "other": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "ts/hard": {
+        "instances": 27,
+        "loss_tokens": 264323,
+        "seq_tokens": 1254413,
+        "recovery": 9,
+        "repositories": 23,
+        "categories": {
+          "bug-fix": 19,
+          "feature-request": 6,
+          "enhancement": 2
+        },
+        "thinking_mean_median": 0.0
+      },
+      "ts/medium": {
+        "instances": 28,
+        "loss_tokens": 315984,
+        "seq_tokens": 1324607,
+        "recovery": 9,
+        "repositories": 26,
+        "categories": {
+          "bug-fix": 18,
+          "feature-request": 9,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 0.0
+      }
+    },
+    "by_band": {
+      "hard": {
+        "instances": 152,
+        "loss_tokens": 1614768,
+        "seq_tokens": 6709012,
+        "recovery": 41,
+        "repositories": 127,
+        "categories": {
+          "other": 7,
+          "bug-fix": 79,
+          "feature-request": 51,
+          "enhancement": 15
+        },
+        "thinking_mean_median": 0.0
+      },
+      "medium": {
+        "instances": 203,
+        "loss_tokens": 2376741,
+        "seq_tokens": 9166493,
+        "recovery": 60,
+        "repositories": 171,
+        "categories": {
+          "bug-fix": 105,
+          "feature-request": 54,
+          "enhancement": 34,
+          "other": 10
+        },
+        "thinking_mean_median": 0.0
+      },
+      "easy": {
+        "instances": 299,
+        "loss_tokens": 2909231,
+        "seq_tokens": 11396999,
+        "recovery": 83,
+        "repositories": 241,
+        "categories": {
+          "feature-request": 74,
+          "bug-fix": 175,
+          "other": 22,
+          "enhancement": 28
+        },
+        "thinking_mean_median": 0.0
+      }
+    }
+  },
+  "tail_cap": {
+    "before": [
+      426132,
+      3670971
+    ],
+    "after": [
+      357310,
+      3602149
+    ],
+    "untrained_by_band": {
+      "easy": 20
+    }
+  },
+  "trained_turns": {
+    "trained_turns": 8205,
+    "p50": 99.0,
+    "p90": 515.0,
+    "p99": 2212.0,
+    "max": 7452,
+    "routine_p90": 437.0,
+    "decision_p90": 1050.0,
+    "share_turns_over_2k": 0.0118,
+    "loss_tokens": 3602149,
+    "share_loss_over_2k": 0.0992,
+    "share_episodes_with_trained_over_2k": 0.2671
+  },
+  "mask_reasons": {
+    "read_first_turns": 923,
+    "read_masked": 1984,
+    "read_after_error": 1107,
+    "decision_trained": 1282,
+    "read_before_edit": 379,
+    "routine_over_1000": 589,
+    "submit_after_run": 256,
+    "submit_unverified": 66,
+    "decision_repetitive": 62,
+    "thinking_over_8k": 22,
+    "tail_cap": 20
+  },
+  "episodes_by_band": {
+    "hard": 88,
+    "medium": 73,
+    "easy": 161
+  },
+  "long_turns_by_reason": {
+    "read_after_error|before_first_edit": 5,
+    "read_first_turns|after_failure": 1,
+    "decision_trained|before_first_edit": 17,
+    "decision_trained|after_failure": 37,
+    "read_after_error|after_failure": 18,
+    "read_before_edit|before_first_edit": 19
+  },
+  "tail_preference": {
+    "share_first_draw": 0.0075,
+    "applied": true,
+    "share_after": 0.0141,
+    "candidates_with_tail": 121
+  },
+  "selected_thinking_per_turn": {
+    "mean": 224.7,
+    "p90": 515.0,
+    "max": 7452
+  },
+  "checks": {
+    "problems": [],
+    "rows": 322,
+    "tail_cap_ok": true,
+    "max_instances_per_repository": 5,
+    "pass": true
+  },
+  "outputs": {
+    "rows": "/home/dean/qwen3.5-9b-sft/data/pools/swe_v7/rows.parquet",
+    "rows_sha256": "4b3cf3f639c794fd436ab9722681730fac6df20a0831b8d15bba61bd6450e302",
+    "n_rows": 322
+  }
+}

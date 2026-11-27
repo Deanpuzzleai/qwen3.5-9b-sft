@@ -1,0 +1,16 @@
+{
+  "producer": "N-DATA-SWE (v5 data: SWE slice and freeze)",
+  "utc": "2026-10-13T07:29:11Z",
+  "artifacts": {
+    "data/processed/v5/sft/train_rows.parquet": "a2a88b1d574569222df41b7dd0b564ae82ff5afbba2f7ba4cc4a6da9bcdcf80b",
+    "data/processed/v5/sft/train_provenance.parquet": "76a4ebf7867d394b092fa67a67d074b64deb4fb0e44a7c755918e3a583d1299f",
+    "data/processed/v5/sft/dev_rows.parquet": "1d2bd5f1eaf0f2b9e56c501cb476e2955c1b69cf6abe49762766b62caa8d2ffa",
+    "data/processed/v5/sft/dev_provenance.parquet": "7a61627d947a0e5093cc5fa96cbbb49737227d4e5c06a028414f9942f5274843",
+    "data/manifests/v5/mixture.json": "62058b00dd19adafb69069afb5c46ffe8085a948dea3c57633a267e0fab9e7cd",
+    "data/manifests/v5/selection.json": "66adcd684a3e0af14083fc94a1abd20847ee03da5ab1a8fceaae9cd0aac33982",
+    "data/manifests/v5/split.json": "a0cdc3c5f436316c0c09824db0350bf6eb3b578847680accc2b3651b8df23a41",
+    "data/manifests/v5/gate_report.json": "dcf49ec3e7857672000af6a2f496267ee2e97d9879a1e88e1cd3f26495725e68",
+    "data/README_v5.md": "d04e4da413f8902a9ee348f04ed62289cd10d8ce06f5a5559dad30d248c16c89"
+  },
+  "notes": "frozen v5 SFT mixture, run data_mixture_v5_20261013_072550: train 3822 rows, dev 206 rows, 12,992,083 loss / 39,344,540 sequence tokens; loss shares SWE 56.27 / terminal 18.72 / retention 25.01 %. For configs/sft.yaml: APEX_SFT_TRAIN_ROWS=data/processed/v5/sft/train_rows.parquet APEX_SFT_DEV_ROWS=data/processed/v5/sft/dev_rows.parquet, data.mixture_manifest=data/manifests/v5/mixture.json. Gate report: data/manifests/v5/gate_report.json (all pass)."
+}

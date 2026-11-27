@@ -1,0 +1,5 @@
+# Stage-2 episodes left out of both arms (data plan 4.3.17 procedure: build_stage2_set.py --exclude-episodes).
+# Source: scripts/data/run_screens.py pass p2_stage2_rows_candidate on the candidate set cand_20261012_234827
+# (2026-10-13 00:02 UTC): the sealed D3 13-gram rule flagged these episodes' rows (positives and control).
+swesmith:RoaringBitmap__roaring.09c46a0a.func_pm_flip_operators__jrm7blyo#stage2#sft#0
+swesmith:hypermodeinc__ristretto.da570116.func_pm_remove_cond__sjrof8vf#stage2#sft#0

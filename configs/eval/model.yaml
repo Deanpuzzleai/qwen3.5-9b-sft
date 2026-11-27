@@ -1,0 +1,57 @@
+# Model lock. Do not edit without explicit instruction.
+status: locked
+locked_on: 2026-10-11   # the 9B dense model, locked before any training run
+open_items: []
+decision_2026-10-12_serving: "After the Base smoke tests: flags_fixed_after_pilot set to the values the smoke tests ran with (max_num_seqs 64, max_num_batched_tokens 8192), identical for every version; the runbook S4 sweep was not run"
+model:
+  repo: Qwen/Qwen3.5-9B
+  revision: c202236235762e1c871ad0ccb60c8ee5ba337b9a   # HF commit sha; lastModified 2026-03-02
+  license: Apache-2.0   # copy in configs/eval/model_snapshot/LICENSE
+  snapshot_dir: configs/eval/model_snapshot   # config.json, chat_template.jinja, tokenizer_config.json, preprocessor configs (the revision ships no generation_config.json)
+  file_hashes: configs/eval/model_snapshot/FILES.sha256.txt   # every file at the revision: 16 files, 19.3 GB
+  local_dir: /mnt/apex-shared/models/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a   # scripts/fetch_base_model.sh verifies it (.VERIFIED)
+architecture:   # decision-relevant facts; everything else is in configs/eval/model_snapshot/config.json
+  model_type: qwen3_5   # vision-language wrapper (Qwen3_5ForConditionalGeneration) around the qwen3_5_text decoder; the vision tower stays frozen and loaded
+  layers: "32 = 8 x (3 linear_attention (Gated DeltaNet) + 1 full_attention); dense MLP (intermediate 12288), no experts"
+  params: "~9B total, all active; bf16 weights 19.3 GB on disk incl. the vision tower and the unused MTP head"
+  max_position_embeddings: 262144
+tokenizer_and_chat_template:
+  files: "tokenizer.json, vocab.json, merges.txt at the same revision (hashes in FILES.sha256.txt); chat_template.jinja snapshotted (sha256 a4aee8af...)"
+  thinking: enabled   # chat-template default; never disabled in this experiment
+  preserve_thinking: template_default   # this template has no preserve_thinking variable: think blocks are kept only for assistant turns after the last query turn (same behaviour as the previous lock's default)
+  template_differences_from_previous_lock: "no `preserve_thinking` variable; tool-call arguments are serialised with tojson for mappings and sequences and `string` otherwise"
+serving:
+  engine: vLLM
+  min_version: "0.19.0"   # model card minimum
+  pinned_version: "0.31.0"   # the exact version used for every evaluation; source audited at tag v0.31.0 (logs/train_stack_check/vllm_serving_compat/)
+  image: vllm/vllm-openai:v0.31.0
+  image_digest_amd64: sha256:a4a4c0437bf7240089da5f08aa370c4aee17ae5290f7a3b468825ee26c4c3a6b   # docker manifest inspect on 2026-10-10; 9.04 GB compressed
+  dtype: bfloat16
+  quantization: none
+  api: openai_compatible
+  speculative_decoding: none   # the checkpoint's multi-token-prediction head is not used; merged SFT/stage-2 checkpoints do not carry it, so enabling MTP would make Base serving differ from the fine-tuned versions
+  flags:   # the full server flag set, identical for Base, LoRA SFT and stage 2; scripts/serve_vllm.sh must pass exactly these plus --model, --served-model-name and --port
+    - "--dtype bfloat16"
+    - "--max-model-len 262144"
+    - "--enable-prefix-caching"
+    - "--reasoning-parser qwen3"              # splits <think> content into message.reasoning / reasoning_content
+    - "--enable-auto-tool-choice"
+    - "--tool-call-parser qwen3_coder"        # Qwen XML tool-call format of the chat template (alias qwen3_xml in vLLM 0.31.0)
+    - "--override-generation-config {\"temperature\": 1.0, \"top_p\": 0.95, \"top_k\": 20, \"min_p\": 0.0, \"presence_penalty\": 1.5, \"repetition_penalty\": 1.0}"   # the revision ships no generation_config.json; these are the model card's thinking-mode defaults for general tasks, applied to requests that omit sampling parameters (the HLE protocol relies on this); agent harnesses send their own sampling parameters per benchmark lock
+    - "--gpu-memory-utilization 0.90"
+    - "--kv-cache-dtype auto"                # bf16 KV cache for the 8 full-attention layers; the SSM state dtype is read from config.json (mamba_ssm_dtype float32)
+  flags_fixed_after_pilot:   # throughput knobs; chosen once in the first-GPU check (runbook S4), recorded here, then identical for all versions
+    max_num_seqs: 64
+    max_num_batched_tokens: 8192
+  flags_not_used:
+    - "--speculative-config: see speculative_decoding"
+    - "--language-model-only: not used; the vision tower stays loaded (the model card's default serving) so the servers are robust to any client sending an image part; HLE is text-only (configs/eval/hle.yaml), so no benchmark depends on it; same for all versions"
+    - "--seed: no server-level seed; seeds are per request, as recorded in each benchmark lock"
+  container_env: {HF_HUB_OFFLINE: "1"}   # weights are mounted from local disk; no network fetch at serve time
+  served_model_names: {base: qwen35-base, sft: qwen35-sft, stage2: qwen35-stage2}   # names avoid the substrings gpt, o1, o3, gemini, claude, kimi, trinity, which trigger model-specific client behaviour in opencode and the HLE script
+  model_card_differences: "the model card suggests MTP speculative decoding and --language-model-only; both are omitted here for the reasons above; sampling defaults are passed explicitly because the revision has no generation_config.json; everything else matches the card's vLLM command"
+  identical_for: [base, sft, stage2]   # same container image, same flags
+versions_under_test:
+  base: "the revision above, unmodified"
+  sft: "LoRA adapter trained on the revision above; HF repo + revision recorded in models/README.md once uploaded"
+  stage2: "continued training from the SFT adapter; HF repo + revision recorded in models/README.md once uploaded"

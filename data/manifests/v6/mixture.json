@@ -1,0 +1,1978 @@
+{
+  "status": "FROZEN",
+  "frozen": true,
+  "run_id": "data_mixture_v6_20261013_174437",
+  "created": "2026-10-13T17:44:40Z",
+  "plan": "logs/coordination/v6/PLAN_v6.md section 2 (on docs/DATA_PLAN_v5.md)",
+  "seed": 42,
+  "code": {
+    "commit": "ef6a2a8d4241452c7a9559cab04b51aad313a4c1",
+    "branch": "main",
+    "dirty": true
+  },
+  "max_length": 65536,
+  "slices": {
+    "files": {
+      "data/pools/swe_v6/rows.parquet": "195d56901da34e278aece16f012d6ef60d336627d2dfb57c6495131b7eb44e78",
+      "data/pools/swe_v6/manifest.json": "37f90ef015f62f9c0bd659530b4ce4dedfa9ac5e35920c4739b832b8df94485d",
+      "data/pools/swe_v6/selection.json": "97ed2c6183fc2fbd91ab9f262135fc31a9e8925d35336ffa7143e56c96663406",
+      "data/processed/v6/terminal/rows.parquet": "9c4d07d81d1cc311c3de6fe4bfc76f767e4caf0e3d9f03d08fff36cc7e934774",
+      "data/processed/v6/terminal/episodes.jsonl": "3b4a90cda804e8df32bf72edc198a12aae934355831e26f7a8c4db79ed92a7b0",
+      "data/processed/v6/terminal/tasks.jsonl": "50f7063eeaa300327f75ba3793ea9ee19b7d9ce66d784c13f8d702902a8295f0",
+      "data/processed/v6/terminal/manifest.json": "56d640586a3c353c1d2d8c512691b19beca90572a1f660b0d60c31b4a039ad46",
+      "data/pools/retention_v5/rows.parquet": "7ec26eaeb3fbe2694d0281e2cce392e3e554579d47f98f601656b9650d947e8e",
+      "data/pools/retention_v5/manifest.json": "2a0577a7e524660b1d2a916775777a960379e46988f9ff6e0168a4c3a3920829"
+    },
+    "markers": {
+      "swe_slice_v6.ready": {
+        "producer": "N-DATA-SWE",
+        "utc": "2026-10-13T15:39:18Z",
+        "artifacts": {
+          "data/pools/swe_v6/rows.parquet": "195d56901da34e278aece16f012d6ef60d336627d2dfb57c6495131b7eb44e78",
+          "data/pools/swe_v6/mask_report.json": "4f5169d492143b5f39984986a412819eef634d3a4727f9c6e18622eebe1068c8",
+          "data/pools/swe_v6/manifest.json": "37f90ef015f62f9c0bd659530b4ce4dedfa9ac5e35920c4739b832b8df94485d",
+          "data/pools/swe_v6/selection.json": "97ed2c6183fc2fbd91ab9f262135fc31a9e8925d35336ffa7143e56c96663406",
+          "data/pools/swe_v6/supply.json": "d946c5fc6fdfa1df5a139abd0ecb6d723b76c571fe7f43763ffeb4ebb57234b7"
+        },
+        "run_id": "data_swe_masks_v6_20261013_153821",
+        "slice": {
+          "episodes": 820,
+          "loss_tokens_before": 7310592,
+          "loss_tokens_after": 6231266,
+          "reads_trained": [
+            9023,
+            5371
+          ],
+          "submits_masked": 157,
+          "train_rows": {
+            "reads_trained": [
+              8519,
+              5076
+            ],
+            "submits_masked": 150
+          },
+          "dev_rows": {
+            "reads_trained": [
+              504,
+              295
+            ],
+            "submits_masked": 7
+          },
+          "thinking_per_trained_turn": {
+            "n": 16818,
+            "mean": 180.5,
+            "p50": 85.0,
+            "p90": 430.0,
+            "max": 2997
+          },
+          "slice_mean_by_band": {
+            "easy": 131.4,
+            "hard": 286.4,
+            "medium": 201.5
+          },
+          "slice_windows": {
+            "easy": [
+              0,
+              270
+            ],
+            "medium": [
+              0,
+              360
+            ],
+            "hard": [
+              180,
+              450
+            ]
+          }
+        },
+        "notes": "v6 SWE = the frozen v5 SWE episodes (820) with S1 read masking and S2 unverified-submit masking (src/apex_data/render/swe_masks.py; read = the plan's list plus echo/printf separators; inline code counts as running the program; accepted by the orchestrator). Token ids unchanged; checks pass. Band limits per the v6 rule: every trained turn within its ceiling, slice means by band inside their windows; the 28 episodes whose own means moved are kept (orchestrator decision). Revision 2 (orchestrator's review): a turn's kind now looks at every tool call (23% of SWE turns make 2-4 calls); revision 1 classified by the first call only.",
+        "revision": 2,
+        "rules_version": "swe_masks:2"
+      },
+      "terminal_slice_v6.ready": {
+        "producer": "N-DATA-TERM",
+        "utc": "2026-10-13T15:18:18Z",
+        "plan": "logs/coordination/v6/PLAN_v6.md section 2 (Terminal)",
+        "commit": "4d9bc88",
+        "run_id": "data_terminal_slice_v6_20261013_151121",
+        "artifacts": {
+          "data/processed/v6/terminal/rows.parquet": "9c4d07d81d1cc311c3de6fe4bfc76f767e4caf0e3d9f03d08fff36cc7e934774",
+          "data/processed/v6/terminal/episodes.jsonl": "3b4a90cda804e8df32bf72edc198a12aae934355831e26f7a8c4db79ed92a7b0",
+          "data/processed/v6/terminal/tasks.jsonl": "50f7063eeaa300327f75ba3793ea9ee19b7d9ce66d784c13f8d702902a8295f0",
+          "data/processed/v6/terminal/supply.json": "d4dd73f861c6c6ce3e9b476a9cbe9e88906b0b956c8e51a168511bccec6ed38b",
+          "data/processed/v6/terminal/manifest.json": "56d640586a3c353c1d2d8c512691b19beca90572a1f660b0d60c31b4a039ad46",
+          "logs/data_terminal_slice_v6_20261013_151121/metadata.json": "2c2e41768a366b19541bffdc40b523d4a8d3de21b92f4fc272b04a575e9da72f",
+          "scripts/data/build_terminal_slice_v6.py": "1688ce233026b017be191304e3c697f11d864f9c852944cfea047dcdec45786c",
+          "src/apex_data/terminal/select_v5.py": "29572f6aa1ed10fee832a63c5dd9826b843e29a8a7cb7dd27f2b8f45f194f831",
+          "src/apex_data/efficiency.py": "04560eb4fcfe952da84e0a8a1686f3fb668e6e643cd5da976cd386d75ef64be7",
+          "logs/coordination/v6/handoff_v6_terminal.md": "d85f2ffa42445f87283f98828d01d79140c94ef917023ae56c8e95700b937a62"
+        },
+        "report": {
+          "rows": 4122,
+          "episodes": 1120,
+          "tasks": 890,
+          "second_trials": 230,
+          "loss_tokens": 3498743,
+          "sequence_tokens": 31613656,
+          "steps_p50": 5,
+          "steps_distribution": {
+            "3": 73,
+            "4": 265,
+            "5": 265,
+            "6": 239,
+            "7": 124,
+            "8": 63,
+            "9": 34,
+            "10": 20,
+            "11": 9,
+            "12": 6,
+            "13": 3,
+            "14": 6,
+            "15": 6,
+            "16": 1,
+            "17": 2,
+            "18": 3,
+            "19": 1
+          },
+          "trained_turns_per_episode": {
+            "1": 14,
+            "2": 213,
+            "3": 335,
+            "4": 265,
+            "5": 141,
+            "6": 152
+          },
+          "done_turn_share": 0.2717,
+          "after_error_turn_share": 0.1361,
+          "rows_by_selection": {
+            "hand_in": 1120,
+            "verify_before_complete": 1066,
+            "random": 1036,
+            "long_job": 454,
+            "after_error": 424,
+            "recovery": 22
+          },
+          "over_ceiling_turns_skipped": 1119,
+          "by_band": {
+            "hard": {
+              "tasks": 148,
+              "episodes": 148,
+              "rows": 563,
+              "loss_tokens": 660579
+            },
+            "medium": {
+              "tasks": 229,
+              "episodes": 401,
+              "rows": 1658,
+              "loss_tokens": 1565240
+            },
+            "easy": {
+              "tasks": 513,
+              "episodes": 571,
+              "rows": 1901,
+              "loss_tokens": 1272924
+            }
+          },
+          "by_teacher": {
+            "deepseek": {
+              "tasks": 8,
+              "episodes": 8,
+              "loss_tokens": 50573,
+              "episodes_by_band": {
+                "hard": 3,
+                "medium": 3,
+                "easy": 2
+              }
+            },
+            "gemma_think": {
+              "tasks": 19,
+              "episodes": 21,
+              "loss_tokens": 123030,
+              "episodes_by_band": {
+                "hard": 8,
+                "medium": 13,
+                "easy": 0
+              }
+            },
+            "glm": {
+              "tasks": 7,
+              "episodes": 7,
+              "loss_tokens": 12451,
+              "episodes_by_band": {
+                "hard": 4,
+                "medium": 2,
+                "easy": 1
+              }
+            },
+            "kimi": {
+              "tasks": 795,
+              "episodes": 929,
+              "loss_tokens": 2346461,
+              "episodes_by_band": {
+                "hard": 86,
+                "medium": 295,
+                "easy": 548
+              }
+            },
+            "qwen": {
+              "tasks": 148,
+              "episodes": 155,
+              "loss_tokens": 966228,
+              "episodes_by_band": {
+                "hard": 47,
+                "medium": 88,
+                "easy": 20
+              }
+            }
+          }
+        },
+        "thinking_per_trained_turn": {
+          "all": {
+            "turns": 4122,
+            "mean": 291.2,
+            "p50": 142,
+            "p90": 791,
+            "p99": 1745,
+            "max": 2494
+          },
+          "hard": {
+            "turns": 563,
+            "mean": 481.8,
+            "p50": 226,
+            "p90": 1423,
+            "p99": 2379,
+            "max": 2494
+          },
+          "medium": {
+            "turns": 1658,
+            "mean": 340.8,
+            "p50": 173,
+            "p90": 940,
+            "p99": 1694,
+            "max": 1797
+          },
+          "easy": {
+            "turns": 1901,
+            "mean": 191.5,
+            "p50": 109,
+            "p90": 496,
+            "p99": 1082,
+            "max": 1197
+          }
+        },
+        "acceptance": {
+          "hard": {
+            "mean": 481.8,
+            "max": 1000,
+            "pass": true
+          },
+          "medium": {
+            "mean": 340.8,
+            "max": 750,
+            "pass": true
+          },
+          "easy": {
+            "mean": 191.5,
+            "max": 450,
+            "pass": true
+          },
+          "all": {
+            "mean": 291.2,
+            "max": 400,
+            "pass": true
+          },
+          "pass": true,
+          "ceiling_scale": 1.0,
+          "ceilings": {
+            "easy": 1200,
+            "medium": 1800,
+            "hard": 2500
+          }
+        },
+        "trial_skips": {
+          "second_trial_under_6_steps": 3659,
+          "hand_in_over_ceiling": 115,
+          "hand_in_not_trainable": 21
+        },
+        "checks": "all pass: 4,122/4,122 rows clean (render + Harbor round trip); D1 0; confirmation rows 0; one hand-in row per episode; <= 6 trained turns; rows over ceiling 0; band row caps (32K/48K/64K) and 32K loss cap held; dev tasks absent; <= 2 trials per task, seconds >= 6 steps, 20.5% of episodes; loss <= 3.5M",
+        "notes": "verify_slices.py on these rows: ceilings hold; it flags 20 rows > 32K (max 50,057, medium/hard, within the plan's band caps) and episode mean windows, which PLAN_v6 drops. Handoff: handoff_v6_terminal.md."
+      }
+    }
+  },
+  "screens": {
+    "v6_p1_pools": {
+      "present": true,
+      "current": true,
+      "items_manifest": "/mnt/apex-shared/apex_data/work/data_mixture_v6_items_20261013_153924/screen_items/items_manifest.json",
+      "run_id": "data_screens_20261013_153938",
+      "reason": "ok",
+      "manifest": "data/manifests/screens_v6_p1_pools.json",
+      "sha256": "70e772ea5e416ec423e66aaff3a98e176285702dbd6f40b942ea5682cfdf8645",
+      "dropped_ids": 1
+    },
+    "v6_p2_rows": {
+      "manifest": "data/manifests/screens_v6_p2_rows.json",
+      "run_id": "data_screens_20261013_154314",
+      "current_dropped_units": 0,
+      "stale_row_ids": []
+    }
+  },
+  "files": {
+    "train_rows": {
+      "path": "data/processed/v6/sft/train_rows.parquet",
+      "sha256": "a758e4132a3cb826c0424a27b98e0880a84d9176951cf9321e0fbcb04001a21c",
+      "bytes": 35618552,
+      "rows": 5159,
+      "sequence_tokens": 43602941,
+      "loss_tokens": 9482440
+    },
+    "train_provenance": {
+      "path": "data/processed/v6/sft/train_provenance.parquet",
+      "sha256": "3acff855fa3234474aad19f008e9ac961c60648052e177a4c673c7ce5bdd1d7c",
+      "bytes": 312164,
+      "rows": 5159,
+      "columns": [
+        "row_key",
+        "row_kind",
+        "task_id",
+        "episode_id",
+        "hf_repo",
+        "hf_revision",
+        "repo",
+        "repo_license",
+        "dataset_license",
+        "generator",
+        "label_provenance",
+        "oswt_subsource",
+        "size_stratum",
+        "patch_files",
+        "patch_added_lines",
+        "category",
+        "category_group",
+        "retention_part",
+        "fits_48k",
+        "dup_group",
+        "decontam_flags"
+      ],
+      "aligned_with": "train_rows"
+    },
+    "dev_rows": {
+      "path": "data/processed/v6/sft/dev_rows.parquet",
+      "sha256": "56a8478161da4a21ed2e9afcdcfc25087e18ef5fdf2715267d95a8f017f6b3a4",
+      "bytes": 3136840,
+      "rows": 279,
+      "sequence_tokens": 2304904,
+      "loss_tokens": 480004
+    },
+    "dev_provenance": {
+      "path": "data/processed/v6/sft/dev_provenance.parquet",
+      "sha256": "95c61f8be585f5c576cc08ea7551dc4bdb9a4cf94155a704e2dc796feb85dc19",
+      "bytes": 24299,
+      "rows": 279,
+      "columns": [
+        "row_key",
+        "row_kind",
+        "task_id",
+        "episode_id",
+        "hf_repo",
+        "hf_revision",
+        "repo",
+        "repo_license",
+        "dataset_license",
+        "generator",
+        "label_provenance",
+        "oswt_subsource",
+        "size_stratum",
+        "patch_files",
+        "patch_added_lines",
+        "category",
+        "category_group",
+        "retention_part",
+        "fits_48k",
+        "dup_group",
+        "decontam_flags"
+      ],
+      "aligned_with": "dev_rows"
+    }
+  },
+  "mixture": {
+    "slices": {
+      "swe": {
+        "rows": 505,
+        "units": 505,
+        "tasks": 494,
+        "sequence_tokens": 12064297,
+        "loss_tokens": 3732718,
+        "loss_share": 0.3747,
+        "sequence_share": 0.2628,
+        "loss_tokens_per_row": 7391.5,
+        "sequence_tokens_per_row": 23889.7,
+        "cells": {
+          "easy/go": {
+            "units": 115,
+            "rows": 115,
+            "sequence_tokens": 2217773,
+            "loss_tokens": 630375
+          },
+          "easy/js": {
+            "units": 20,
+            "rows": 20,
+            "sequence_tokens": 469065,
+            "loss_tokens": 118282
+          },
+          "easy/other": {
+            "units": 10,
+            "rows": 10,
+            "sequence_tokens": 199438,
+            "loss_tokens": 53726
+          },
+          "easy/py": {
+            "units": 115,
+            "rows": 115,
+            "sequence_tokens": 2143587,
+            "loss_tokens": 652003
+          },
+          "easy/ts": {
+            "units": 45,
+            "rows": 45,
+            "sequence_tokens": 932250,
+            "loss_tokens": 243496
+          },
+          "hard/go": {
+            "units": 12,
+            "rows": 12,
+            "sequence_tokens": 422554,
+            "loss_tokens": 146086
+          },
+          "hard/js": {
+            "units": 2,
+            "rows": 2,
+            "sequence_tokens": 98350,
+            "loss_tokens": 24983
+          },
+          "hard/other": {
+            "units": 1,
+            "rows": 1,
+            "sequence_tokens": 35197,
+            "loss_tokens": 9337
+          },
+          "hard/py": {
+            "units": 55,
+            "rows": 55,
+            "sequence_tokens": 1933214,
+            "loss_tokens": 699588
+          },
+          "hard/ts": {
+            "units": 9,
+            "rows": 9,
+            "sequence_tokens": 398380,
+            "loss_tokens": 121878
+          },
+          "medium/go": {
+            "units": 16,
+            "rows": 16,
+            "sequence_tokens": 447571,
+            "loss_tokens": 151951
+          },
+          "medium/js": {
+            "units": 3,
+            "rows": 3,
+            "sequence_tokens": 93776,
+            "loss_tokens": 17993
+          },
+          "medium/other": {
+            "units": 11,
+            "rows": 11,
+            "sequence_tokens": 334518,
+            "loss_tokens": 89807
+          },
+          "medium/py": {
+            "units": 63,
+            "rows": 63,
+            "sequence_tokens": 1551149,
+            "loss_tokens": 570732
+          },
+          "medium/ts": {
+            "units": 28,
+            "rows": 28,
+            "sequence_tokens": 787475,
+            "loss_tokens": 202481
+          }
+        }
+      },
+      "terminal": {
+        "rows": 4072,
+        "units": 1109,
+        "tasks": 881,
+        "sequence_tokens": 30913758,
+        "loss_tokens": 3435312,
+        "loss_share": 0.3448,
+        "sequence_share": 0.6734,
+        "loss_tokens_per_row": 843.6,
+        "sequence_tokens_per_row": 7591.8,
+        "cells": {
+          "easy": {
+            "units": 568,
+            "rows": 1892,
+            "sequence_tokens": 11670310,
+            "loss_tokens": 1265984
+          },
+          "hard": {
+            "units": 144,
+            "rows": 543,
+            "sequence_tokens": 5285132,
+            "loss_tokens": 629248
+          },
+          "medium": {
+            "units": 397,
+            "rows": 1637,
+            "sequence_tokens": 13958316,
+            "loss_tokens": 1540080
+          }
+        }
+      },
+      "retention": {
+        "rows": 861,
+        "units": 861,
+        "tasks": 861,
+        "sequence_tokens": 2929790,
+        "loss_tokens": 2794414,
+        "loss_share": 0.2805,
+        "sequence_share": 0.0638,
+        "loss_tokens_per_row": 3245.5,
+        "sequence_tokens_per_row": 3402.8,
+        "cells": {
+          "chat": {
+            "units": 139,
+            "rows": 139,
+            "sequence_tokens": 335013,
+            "loss_tokens": 318578
+          },
+          "hard_math": {
+            "units": 64,
+            "rows": 64,
+            "sequence_tokens": 755985,
+            "loss_tokens": 749769
+          },
+          "if": {
+            "units": 304,
+            "rows": 304,
+            "sequence_tokens": 680708,
+            "loss_tokens": 660834
+          },
+          "math": {
+            "units": 137,
+            "rows": 137,
+            "sequence_tokens": 676581,
+            "loss_tokens": 665681
+          },
+          "science": {
+            "units": 217,
+            "rows": 217,
+            "sequence_tokens": 481503,
+            "loss_tokens": 399552
+          }
+        }
+      }
+    },
+    "totals": {
+      "rows": 5438,
+      "units": 2475,
+      "tasks": 2236,
+      "sequence_tokens": 45907845,
+      "loss_tokens": 9962444
+    },
+    "shares_by_loss_tokens": {
+      "swe": 0.3747,
+      "terminal": 0.3448,
+      "retention": 0.2805
+    },
+    "shares_by_sequence_tokens": {
+      "swe": 0.2628,
+      "terminal": 0.6734,
+      "retention": 0.0638
+    },
+    "targets": {
+      "swe": 0.45,
+      "terminal": 0.3,
+      "retention": 0.25
+    },
+    "tolerance_pp": 2.0,
+    "deviation_pp": {
+      "swe": -7.53,
+      "terminal": 4.48,
+      "retention": 3.05
+    },
+    "within_tolerance": false,
+    "per_provenance": {
+      "hf_repo": {
+        "ai-and/termgrade-trajectories": {
+          "rows": 4072,
+          "loss_tokens": 3435312,
+          "row_share": 0.7488,
+          "loss_share": 0.3448
+        },
+        "nvidia/Nemotron-SFT-Instruction-Following-Chat-v3": {
+          "rows": 443,
+          "loss_tokens": 979412,
+          "row_share": 0.0815,
+          "loss_share": 0.0983
+        },
+        "nvidia/Nemotron-SFT-Math-v4": {
+          "rows": 201,
+          "loss_tokens": 1415450,
+          "row_share": 0.037,
+          "loss_share": 0.1421
+        },
+        "nvidia/Nemotron-Science-v1": {
+          "rows": 217,
+          "loss_tokens": 399552,
+          "row_share": 0.0399,
+          "loss_share": 0.0401
+        },
+        "nvidia/Open-SWE-Traces": {
+          "rows": 505,
+          "loss_tokens": 3732718,
+          "row_share": 0.0929,
+          "loss_share": 0.3747
+        }
+      },
+      "generator": {
+        "Qwen/Qwen3.6-27B": {
+          "rows": 689,
+          "loss_tokens": 928668,
+          "row_share": 0.1267,
+          "loss_share": 0.0932
+        },
+        "Qwen3.8-27B": {
+          "rows": 505,
+          "loss_tokens": 3732718,
+          "row_share": 0.0929,
+          "loss_share": 0.3747
+        },
+        "deepseek-ai/DeepSeek-V4-Pro": {
+          "rows": 42,
+          "loss_tokens": 42443,
+          "row_share": 0.0077,
+          "loss_share": 0.0043
+        },
+        "deepseek-ai/DeepSeek-V4-Pro (High)": {
+          "rows": 201,
+          "loss_tokens": 1415450,
+          "row_share": 0.037,
+          "loss_share": 0.1421
+        },
+        "google/gemma-4-31B-it (reasoning enabled)": {
+          "rows": 79,
+          "loss_tokens": 119026,
+          "row_share": 0.0145,
+          "loss_share": 0.0119
+        },
+        "moonshotai/Kimi-K3": {
+          "rows": 3249,
+          "loss_tokens": 2332724,
+          "row_share": 0.5975,
+          "loss_share": 0.2342
+        },
+        "openai/GPT-OSS-120B": {
+          "rows": 521,
+          "loss_tokens": 1060386,
+          "row_share": 0.0958,
+          "loss_share": 0.1064
+        },
+        "zai-org/GLM-5": {
+          "rows": 139,
+          "loss_tokens": 318578,
+          "row_share": 0.0256,
+          "loss_share": 0.032
+        },
+        "zai-org/GLM-5.2-FP8": {
+          "rows": 13,
+          "loss_tokens": 12451,
+          "row_share": 0.0024,
+          "loss_share": 0.0012
+        }
+      },
+      "label_provenance": {
+        "format": {
+          "rows": 356,
+          "loss_tokens": 718130,
+          "row_share": 0.0655,
+          "loss_share": 0.0721
+        },
+        "reference": {
+          "rows": 505,
+          "loss_tokens": 2076284,
+          "row_share": 0.0929,
+          "loss_share": 0.2084
+        },
+        "verifier": {
+          "rows": 4577,
+          "loss_tokens": 7168030,
+          "row_share": 0.8417,
+          "loss_share": 0.7195
+        }
+      },
+      "dataset_license": {
+        "CC-BY-4.0": {
+          "rows": 923,
+          "loss_tokens": 5547720,
+          "row_share": 0.1697,
+          "loss_share": 0.5569
+        },
+        "CC-BY-4.0 AND ODC-BY-1.0": {
+          "rows": 443,
+          "loss_tokens": 979412,
+          "row_share": 0.0815,
+          "loss_share": 0.0983
+        },
+        "apache-2.0": {
+          "rows": 4072,
+          "loss_tokens": 3435312,
+          "row_share": 0.7488,
+          "loss_share": 0.3448
+        }
+      },
+      "oswt_subsource": {
+        "none": {
+          "rows": 4933,
+          "loss_tokens": 6229726,
+          "row_share": 0.9071,
+          "loss_share": 0.6253
+        },
+        "scale-swe": {
+          "rows": 207,
+          "loss_tokens": 1659554,
+          "row_share": 0.0381,
+          "loss_share": 0.1666
+        },
+        "swe-rebench-v2": {
+          "rows": 298,
+          "loss_tokens": 2073164,
+          "row_share": 0.0548,
+          "loss_share": 0.2081
+        }
+      },
+      "size_stratum": {
+        "big": {
+          "rows": 12,
+          "loss_tokens": 126792,
+          "row_share": 0.0022,
+          "loss_share": 0.0127
+        },
+        "feature": {
+          "rows": 127,
+          "loss_tokens": 993011,
+          "row_share": 0.0234,
+          "loss_share": 0.0997
+        },
+        "none": {
+          "rows": 4933,
+          "loss_tokens": 6229726,
+          "row_share": 0.9071,
+          "loss_share": 0.6253
+        },
+        "random": {
+          "rows": 366,
+          "loss_tokens": 2612915,
+          "row_share": 0.0673,
+          "loss_share": 0.2623
+        }
+      },
+      "language": {
+        "bash": {
+          "rows": 4072,
+          "loss_tokens": 3435312,
+          "row_share": 0.7488,
+          "loss_share": 0.3448
+        },
+        "go": {
+          "rows": 143,
+          "loss_tokens": 928412,
+          "row_share": 0.0263,
+          "loss_share": 0.0932
+        },
+        "java": {
+          "rows": 8,
+          "loss_tokens": 52848,
+          "row_share": 0.0015,
+          "loss_share": 0.0053
+        },
+        "js": {
+          "rows": 25,
+          "loss_tokens": 161258,
+          "row_share": 0.0046,
+          "loss_share": 0.0162
+        },
+        "none": {
+          "rows": 861,
+          "loss_tokens": 2794414,
+          "row_share": 0.1583,
+          "loss_share": 0.2805
+        },
+        "php": {
+          "rows": 4,
+          "loss_tokens": 19991,
+          "row_share": 0.0007,
+          "loss_share": 0.002
+        },
+        "py": {
+          "rows": 233,
+          "loss_tokens": 1922323,
+          "row_share": 0.0428,
+          "loss_share": 0.193
+        },
+        "rust": {
+          "rows": 10,
+          "loss_tokens": 80031,
+          "row_share": 0.0018,
+          "loss_share": 0.008
+        },
+        "ts": {
+          "rows": 82,
+          "loss_tokens": 567855,
+          "row_share": 0.0151,
+          "loss_share": 0.057
+        }
+      },
+      "repo_license": {
+        "Apache-2.0": {
+          "rows": 164,
+          "loss_tokens": 1256496,
+          "row_share": 0.0302,
+          "loss_share": 0.1261
+        },
+        "BSD-2-Clause": {
+          "rows": 12,
+          "loss_tokens": 89219,
+          "row_share": 0.0022,
+          "loss_share": 0.009
+        },
+        "BSD-3-Clause": {
+          "rows": 53,
+          "loss_tokens": 445004,
+          "row_share": 0.0097,
+          "loss_share": 0.0447
+        },
+        "MIT": {
+          "rows": 276,
+          "loss_tokens": 1941999,
+          "row_share": 0.0508,
+          "loss_share": 0.1949
+        },
+        "none": {
+          "rows": 4933,
+          "loss_tokens": 6229726,
+          "row_share": 0.9071,
+          "loss_share": 0.6253
+        }
+      },
+      "retention_part": {
+        "chat": {
+          "rows": 139,
+          "loss_tokens": 318578,
+          "row_share": 0.0256,
+          "loss_share": 0.032
+        },
+        "if": {
+          "rows": 304,
+          "loss_tokens": 660834,
+          "row_share": 0.0559,
+          "loss_share": 0.0663
+        },
+        "math": {
+          "rows": 201,
+          "loss_tokens": 1415450,
+          "row_share": 0.037,
+          "loss_share": 0.1421
+        },
+        "none": {
+          "rows": 4577,
+          "loss_tokens": 7168030,
+          "row_share": 0.8417,
+          "loss_share": 0.7195
+        },
+        "sci_mcq": {
+          "rows": 149,
+          "loss_tokens": 218930,
+          "row_share": 0.0274,
+          "loss_share": 0.022
+        },
+        "sci_rqa": {
+          "rows": 68,
+          "loss_tokens": 180622,
+          "row_share": 0.0125,
+          "loss_share": 0.0181
+        }
+      },
+      "category_group": {
+        "none": {
+          "rows": 5438,
+          "loss_tokens": 9962444,
+          "row_share": 1.0,
+          "loss_share": 1.0
+        }
+      },
+      "source": {
+        "nm_ifchat": {
+          "rows": 443,
+          "loss_tokens": 979412,
+          "row_share": 0.0815,
+          "loss_share": 0.0983
+        },
+        "nm_math": {
+          "rows": 201,
+          "loss_tokens": 1415450,
+          "row_share": 0.037,
+          "loss_share": 0.1421
+        },
+        "nm_sci": {
+          "rows": 217,
+          "loss_tokens": 399552,
+          "row_share": 0.0399,
+          "loss_share": 0.0401
+        },
+        "oswt": {
+          "rows": 505,
+          "loss_tokens": 3732718,
+          "row_share": 0.0929,
+          "loss_share": 0.3747
+        },
+        "tgr": {
+          "rows": 4072,
+          "loss_tokens": 3435312,
+          "row_share": 0.7488,
+          "loss_share": 0.3448
+        }
+      }
+    },
+    "sequence_length_histogram": {
+      "swe": {
+        "<=2048": 0,
+        "<=4096": 0,
+        "<=8192": 5,
+        "<=16384": 115,
+        "<=32768": 307,
+        "<=49152": 64,
+        "<=65536": 14,
+        ">65536": 0
+      },
+      "terminal": {
+        "<=2048": 149,
+        "<=4096": 592,
+        "<=8192": 2092,
+        "<=16384": 1025,
+        "<=32768": 194,
+        "<=49152": 19,
+        "<=65536": 1,
+        ">65536": 0
+      },
+      "retention": {
+        "<=2048": 378,
+        "<=4096": 266,
+        "<=8192": 123,
+        "<=16384": 94,
+        "<=32768": 0,
+        "<=49152": 0,
+        "<=65536": 0,
+        ">65536": 0
+      }
+    }
+  },
+  "train": {
+    "slices": {
+      "swe": {
+        "rows": 480,
+        "units": 480,
+        "tasks": 469,
+        "sequence_tokens": 11488829,
+        "loss_tokens": 3557464,
+        "loss_share": 0.3752,
+        "sequence_share": 0.2635,
+        "loss_tokens_per_row": 7411.4,
+        "sequence_tokens_per_row": 23935.1,
+        "cells": {
+          "easy/go": {
+            "units": 109,
+            "rows": 109,
+            "sequence_tokens": 2112989,
+            "loss_tokens": 602605
+          },
+          "easy/js": {
+            "units": 19,
+            "rows": 19,
+            "sequence_tokens": 451164,
+            "loss_tokens": 113607
+          },
+          "easy/other": {
+            "units": 10,
+            "rows": 10,
+            "sequence_tokens": 199438,
+            "loss_tokens": 53726
+          },
+          "easy/py": {
+            "units": 109,
+            "rows": 109,
+            "sequence_tokens": 2037955,
+            "loss_tokens": 618175
+          },
+          "easy/ts": {
+            "units": 43,
+            "rows": 43,
+            "sequence_tokens": 892865,
+            "loss_tokens": 230906
+          },
+          "hard/go": {
+            "units": 11,
+            "rows": 11,
+            "sequence_tokens": 379506,
+            "loss_tokens": 133621
+          },
+          "hard/js": {
+            "units": 2,
+            "rows": 2,
+            "sequence_tokens": 98350,
+            "loss_tokens": 24983
+          },
+          "hard/other": {
+            "units": 1,
+            "rows": 1,
+            "sequence_tokens": 35197,
+            "loss_tokens": 9337
+          },
+          "hard/py": {
+            "units": 52,
+            "rows": 52,
+            "sequence_tokens": 1837914,
+            "loss_tokens": 666803
+          },
+          "hard/ts": {
+            "units": 9,
+            "rows": 9,
+            "sequence_tokens": 398380,
+            "loss_tokens": 121878
+          },
+          "medium/go": {
+            "units": 15,
+            "rows": 15,
+            "sequence_tokens": 410532,
+            "loss_tokens": 140436
+          },
+          "medium/js": {
+            "units": 3,
+            "rows": 3,
+            "sequence_tokens": 93776,
+            "loss_tokens": 17993
+          },
+          "medium/other": {
+            "units": 10,
+            "rows": 10,
+            "sequence_tokens": 297293,
+            "loss_tokens": 83037
+          },
+          "medium/py": {
+            "units": 60,
+            "rows": 60,
+            "sequence_tokens": 1480111,
+            "loss_tokens": 546159
+          },
+          "medium/ts": {
+            "units": 27,
+            "rows": 27,
+            "sequence_tokens": 763359,
+            "loss_tokens": 194198
+          }
+        }
+      },
+      "terminal": {
+        "rows": 3861,
+        "units": 1053,
+        "tasks": 839,
+        "sequence_tokens": 29317924,
+        "loss_tokens": 3257729,
+        "loss_share": 0.3436,
+        "sequence_share": 0.6724,
+        "loss_tokens_per_row": 843.8,
+        "sequence_tokens_per_row": 7593.3,
+        "cells": {
+          "easy": {
+            "units": 541,
+            "rows": 1796,
+            "sequence_tokens": 10981733,
+            "loss_tokens": 1196806
+          },
+          "hard": {
+            "units": 135,
+            "rows": 512,
+            "sequence_tokens": 4943960,
+            "loss_tokens": 596762
+          },
+          "medium": {
+            "units": 377,
+            "rows": 1553,
+            "sequence_tokens": 13392231,
+            "loss_tokens": 1464161
+          }
+        }
+      },
+      "retention": {
+        "rows": 818,
+        "units": 818,
+        "tasks": 818,
+        "sequence_tokens": 2796188,
+        "loss_tokens": 2667247,
+        "loss_share": 0.2813,
+        "sequence_share": 0.0641,
+        "loss_tokens_per_row": 3260.7,
+        "sequence_tokens_per_row": 3418.3,
+        "cells": {
+          "chat": {
+            "units": 132,
+            "rows": 132,
+            "sequence_tokens": 319049,
+            "loss_tokens": 303640
+          },
+          "hard_math": {
+            "units": 61,
+            "rows": 61,
+            "sequence_tokens": 719202,
+            "loss_tokens": 713224
+          },
+          "if": {
+            "units": 289,
+            "rows": 289,
+            "sequence_tokens": 653672,
+            "loss_tokens": 634672
+          },
+          "math": {
+            "units": 130,
+            "rows": 130,
+            "sequence_tokens": 643717,
+            "loss_tokens": 633397
+          },
+          "science": {
+            "units": 206,
+            "rows": 206,
+            "sequence_tokens": 460548,
+            "loss_tokens": 382314
+          }
+        }
+      }
+    },
+    "totals": {
+      "rows": 5159,
+      "units": 2351,
+      "tasks": 2126,
+      "sequence_tokens": 43602941,
+      "loss_tokens": 9482440
+    },
+    "shares_by_loss_tokens": {
+      "swe": 0.3752,
+      "terminal": 0.3436,
+      "retention": 0.2813
+    },
+    "shares_by_sequence_tokens": {
+      "swe": 0.2635,
+      "terminal": 0.6724,
+      "retention": 0.0641
+    },
+    "targets": {
+      "swe": 0.45,
+      "terminal": 0.3,
+      "retention": 0.25
+    },
+    "tolerance_pp": 2.0,
+    "deviation_pp": {
+      "swe": -7.48,
+      "terminal": 4.36,
+      "retention": 3.13
+    },
+    "within_tolerance": false
+  },
+  "dev": {
+    "slices": {
+      "swe": {
+        "rows": 25,
+        "units": 25,
+        "tasks": 25,
+        "sequence_tokens": 575468,
+        "loss_tokens": 175254,
+        "loss_share": 0.3651,
+        "sequence_share": 0.2497,
+        "loss_tokens_per_row": 7010.2,
+        "sequence_tokens_per_row": 23018.7,
+        "cells": {
+          "easy/go": {
+            "units": 6,
+            "rows": 6,
+            "sequence_tokens": 104784,
+            "loss_tokens": 27770
+          },
+          "easy/js": {
+            "units": 1,
+            "rows": 1,
+            "sequence_tokens": 17901,
+            "loss_tokens": 4675
+          },
+          "easy/py": {
+            "units": 6,
+            "rows": 6,
+            "sequence_tokens": 105632,
+            "loss_tokens": 33828
+          },
+          "easy/ts": {
+            "units": 2,
+            "rows": 2,
+            "sequence_tokens": 39385,
+            "loss_tokens": 12590
+          },
+          "hard/go": {
+            "units": 1,
+            "rows": 1,
+            "sequence_tokens": 43048,
+            "loss_tokens": 12465
+          },
+          "hard/py": {
+            "units": 3,
+            "rows": 3,
+            "sequence_tokens": 95300,
+            "loss_tokens": 32785
+          },
+          "medium/go": {
+            "units": 1,
+            "rows": 1,
+            "sequence_tokens": 37039,
+            "loss_tokens": 11515
+          },
+          "medium/other": {
+            "units": 1,
+            "rows": 1,
+            "sequence_tokens": 37225,
+            "loss_tokens": 6770
+          },
+          "medium/py": {
+            "units": 3,
+            "rows": 3,
+            "sequence_tokens": 71038,
+            "loss_tokens": 24573
+          },
+          "medium/ts": {
+            "units": 1,
+            "rows": 1,
+            "sequence_tokens": 24116,
+            "loss_tokens": 8283
+          }
+        }
+      },
+      "terminal": {
+        "rows": 211,
+        "units": 56,
+        "tasks": 42,
+        "sequence_tokens": 1595834,
+        "loss_tokens": 177583,
+        "loss_share": 0.37,
+        "sequence_share": 0.6924,
+        "loss_tokens_per_row": 841.6,
+        "sequence_tokens_per_row": 7563.2,
+        "cells": {
+          "easy": {
+            "units": 27,
+            "rows": 96,
+            "sequence_tokens": 688577,
+            "loss_tokens": 69178
+          },
+          "hard": {
+            "units": 9,
+            "rows": 31,
+            "sequence_tokens": 341172,
+            "loss_tokens": 32486
+          },
+          "medium": {
+            "units": 20,
+            "rows": 84,
+            "sequence_tokens": 566085,
+            "loss_tokens": 75919
+          }
+        }
+      },
+      "retention": {
+        "rows": 43,
+        "units": 43,
+        "tasks": 43,
+        "sequence_tokens": 133602,
+        "loss_tokens": 127167,
+        "loss_share": 0.2649,
+        "sequence_share": 0.058,
+        "loss_tokens_per_row": 2957.4,
+        "sequence_tokens_per_row": 3107.0,
+        "cells": {
+          "chat": {
+            "units": 7,
+            "rows": 7,
+            "sequence_tokens": 15964,
+            "loss_tokens": 14938
+          },
+          "hard_math": {
+            "units": 3,
+            "rows": 3,
+            "sequence_tokens": 36783,
+            "loss_tokens": 36545
+          },
+          "if": {
+            "units": 15,
+            "rows": 15,
+            "sequence_tokens": 27036,
+            "loss_tokens": 26162
+          },
+          "math": {
+            "units": 7,
+            "rows": 7,
+            "sequence_tokens": 32864,
+            "loss_tokens": 32284
+          },
+          "science": {
+            "units": 11,
+            "rows": 11,
+            "sequence_tokens": 20955,
+            "loss_tokens": 17238
+          }
+        }
+      }
+    },
+    "totals": {
+      "rows": 279,
+      "units": 124,
+      "tasks": 110,
+      "sequence_tokens": 2304904,
+      "loss_tokens": 480004
+    },
+    "shares_by_loss_tokens": {
+      "swe": 0.3651,
+      "terminal": 0.37,
+      "retention": 0.2649
+    },
+    "shares_by_sequence_tokens": {
+      "swe": 0.2497,
+      "terminal": 0.6924,
+      "retention": 0.058
+    },
+    "targets": {
+      "swe": 0.45,
+      "terminal": 0.3,
+      "retention": 0.25
+    },
+    "tolerance_pp": 2.0,
+    "deviation_pp": {
+      "swe": -8.49,
+      "terminal": 7.0,
+      "retention": 1.49
+    },
+    "within_tolerance": false
+  },
+  "targets": {
+    "loss_shares": {
+      "swe": 0.45,
+      "terminal": 0.3,
+      "retention": 0.25
+    },
+    "tolerance_pp": 2.0,
+    "retention_share": 0.28
+  },
+  "retention_prefix": {
+    "target_loss_tokens": 2787567,
+    "rows": 861,
+    "loss_tokens": 2794414,
+    "last_rank": 1040,
+    "part_shares": {
+      "chat": 0.114,
+      "hard_math": 0.2683,
+      "if": 0.2365,
+      "math": 0.2382,
+      "science": 0.143
+    }
+  },
+  "drops": {
+    "swe": 0,
+    "terminal": 11,
+    "retention": 1
+  },
+  "swe_cap": null,
+  "swe_trim": {
+    "keep_fraction": 0.6,
+    "lang_tolerance_pp": 1.0,
+    "rule": "Dean's v6r2 targeted trim: per band the same fraction; unverified-submit episodes first, then the end of the band's draw order with the language shares protected (orchestrator, 2026-10-13 ~13:45 ET)",
+    "episodes_removed": 315,
+    "loss_tokens_removed": 2498548,
+    "unverified_submit_episodes": 157,
+    "language_skips": {
+      "py": 6,
+      "other": 11,
+      "ts": 26,
+      "go": 11
+    },
+    "per_band": {
+      "hard": {
+        "loss_before": 1672871,
+        "target": 1003723,
+        "loss_after": 1001872,
+        "removed_unverified_submit": 16,
+        "removed_draw_order": 35,
+        "reached": true
+      },
+      "medium": {
+        "loss_before": 1722676,
+        "target": 1033606,
+        "loss_after": 1032964,
+        "removed_unverified_submit": 47,
+        "removed_draw_order": 29,
+        "reached": true
+      },
+      "easy": {
+        "loss_before": 2835719,
+        "target": 1701431,
+        "loss_after": 1697882,
+        "removed_unverified_submit": 94,
+        "removed_draw_order": 94,
+        "reached": true
+      }
+    },
+    "units": [
+      "0020e652-c423-46c3-af38-c5b2cb707cc9",
+      "00dd2731-ad94-4684-8165-d9ce9638c2ad",
+      "02fa14a4-0075-4c1f-9b2c-d72b2b74506e",
+      "03a8bb6d-ed21-43e0-944e-0498380aef3b",
+      "0415865a-3c38-44ab-ac45-2b183312170f",
+      "076e836c-0613-43b0-b0e9-c18b189fafad",
+      "076e8c9d-76be-4ef2-84a6-c6de55b299ef",
+      "0887acf3-cc78-4db7-a572-2ada4d38f40e",
+      "0889b949-821d-46e8-af43-78c42f89e77f",
+      "0b1ad82d-cdee-4fae-b9e6-083e63494bfd",
+      "0b81704a-271b-4a4a-bc13-e9ad46d2a997",
+      "0bea8238-924a-4caf-b2b7-184adbd7a144",
+      "0c1ff30d-9dae-4db5-b5ea-6c533f39cea2",
+      "0cacf73e-6c16-4fad-b3e8-9c83a13a66bb",
+      "0dffead4-f5dc-498b-9942-21e7acdf3cd3",
+      "0e724f98-0c30-4384-9ef8-2a6805273c0c",
+      "0e8d479d-7932-4cd4-94a1-87fee45fdb22",
+      "1122e1bb-c921-48df-9def-bd35278af7e0",
+      "116b8ea7-94b1-4a39-a974-68e9ce7233f9",
+      "118f5188-d523-405b-9eab-378649697729",
+      "119cf03c-82ff-47a1-9f7e-d8af2a077ea1",
+      "11d82279-a860-4a75-b54e-d3bba1d49bf6",
+      "12330e00-6cfb-4bae-ad49-cb76cf56d6e5",
+      "12ced393-cafa-4ddb-a1b9-96a2490e427f",
+      "13ec1cfe-5c1f-4c35-9203-c260c480d3ce",
+      "16e74f04-5eeb-4392-912e-f6cae2b01754",
+      "17b45ecb-25f8-4419-a9a8-54ca08702594",
+      "17f4c312-ede6-4be5-94e1-c8e07223d487",
+      "18cf3c03-0f0a-4ba4-81a9-da608f7c3bcb",
+      "199fbfe7-0a49-4d22-ae9b-2283a68a3279",
+      "19f1dee6-de46-4cca-a521-ca6780cbb24e",
+      "1b9f335a-a99b-412e-ae40-4ffa05e25736",
+      "1ba3ea55-f317-431a-a23c-2b986d669a5e",
+      "1bd711cb-7d41-4a4d-9d02-6e76bc22464b",
+      "1c2cef13-f03f-4752-a202-61a354291afb",
+      "1c53c40e-39fb-4c62-8050-fb459cddd252",
+      "1cbe95b4-59c4-480a-8d98-935d28f35402",
+      "1ec2e906-491f-412e-84a2-bfc4ddde2505",
+      "1ee7ba96-62de-4a91-9325-721b88c6d393",
+      "1f16a33d-dfb9-4090-8334-a6445e7478b7",
+      "1f86aac2-6829-4b03-a41d-48a52dca972b",
+      "22006fd0-4110-4881-be1a-2e12dbc4f1d3",
+      "238f97ad-772e-467d-bb2f-4151fa3aae12",
+      "23b41058-42ee-4c59-b407-9bc16655cdb1",
+      "247e4ab0-8edc-401d-8e75-c59f7ec28308",
+      "24cb3ca0-3c44-4287-af0a-436a1159a1fa",
+      "24eb2e7e-427a-4165-ba11-fc978bc6e66d",
+      "25c8c845-f5b7-4f74-b9dd-f4ed8d846572",
+      "262b29fd-6047-4c46-af4f-c84e10f77734",
+      "26ddb2ee-79ef-4173-8a7f-99e3e2aeba89",
+      "2709d58e-f22e-4cbd-8d38-f362d2a6393c",
+      "280445a0-90e7-4897-8ec2-a6201b8562ec",
+      "2a997850-e34b-4f48-bcde-8e7767379269",
+      "2b2e1a77-9918-484f-9a4b-2838c42cc132",
+      "2bc0a001-70bb-4659-b0bf-bac2fa4da499",
+      "2c85c68c-ee48-4bcc-a815-9b7d59aade3c",
+      "2d6076bd-a333-4c2e-aa1b-a2b0c3f61b1a",
+      "2dd094ad-1863-4c62-bee8-7bdef1c952f4",
+      "2e2b740f-1757-404f-b281-9f9025e8c47e",
+      "2e95cac5-c600-42c0-8830-161f4eeabf89",
+      "2f3821e2-d3c8-41d8-9186-3fd4469de5b1",
+      "2fe5d306-404c-4077-bb46-1e178e63b7f9",
+      "2ff36918-8045-4ab5-9032-eb0351a8acc0",
+      "30d332d0-3539-41ff-89e0-ad96b525196d",
+      "316c5794-173d-4c08-a6c6-9b9f1201f5a2",
+      "32a01ce3-182c-4875-8df9-b28e03b82616",
+      "33692fbf-da10-4dd4-986b-52a9c974ee6e",
+      "33f33bbb-e70e-4468-970f-455a320033c5",
+      "345d4eea-c688-46de-919e-a6758d0404d7",
+      "3515a6d7-f013-4c2d-9c9c-7d5794d41cb9",
+      "35876a09-fc27-4776-aeca-7f9eb17a1c0e",
+      "358a8f84-7020-46fc-9852-cdd4902d7059",
+      "360d0eac-477e-4e75-976f-313a3cff0cba",
+      "36fbed9d-2842-41d7-b22f-74c01a99f947",
+      "37755de0-0c6a-44c6-b708-95c8d810f036",
+      "3973a1cc-be6e-48f9-a5c6-43b6ff1fffbc",
+      "3ac0cc06-e942-46ee-8294-8f63e330bd58",
+      "3ae8b6f9-1da8-4ef5-a094-49abda85313b",
+      "3c8a1295-f7ef-4541-9385-24b86ad2c327",
+      "3d6845a3-7edc-4130-beb9-934af983c7c1",
+      "3dce8b6c-b000-4535-aa0d-1895790ff1f1",
+      "3e95482f-11a0-4dd0-94ad-5c5abe659343",
+      "3eced365-3081-4718-a7cf-99b6e494fe4d",
+      "3ee72a39-4f73-47bb-8e4b-de84642d268c",
+      "405dd791-7eb6-4ebb-bc0a-9c27e81263e2",
+      "41bd37a8-0761-4a73-8322-f0addbf5df74",
+      "42cf8dc4-e0a0-4c92-bed5-51fa3543da0a",
+      "430a5ea0-650a-441f-9227-ad1566106a6d",
+      "4335510a-41a3-4138-abd2-481e5f7dde3d",
+      "448b2f86-0ee7-4bd9-af36-be0edab12af8",
+      "45780dc2-9d43-4dfb-9914-401775ef0ca1",
+      "469dbd3b-9d9a-4fbc-b75a-9658f4651402",
+      "4ae122e5-4069-4853-a5c6-cc285ff48b9e",
+      "4ae4d1a8-0dde-4d97-860b-6ad0fc3bded2",
+      "4bd61702-6c14-4ec4-a224-3c8c7abbb5a3",
+      "4c64ac3f-406b-4912-842a-56a267b69422",
+      "4d31471d-2929-4434-a9c4-0a51438c0634",
+      "4d419b68-1637-4352-bdb4-16e8ca9151bd",
+      "4dfd3c35-1cb5-4847-b913-ba612359e99d",
+      "4f226d4c-03a9-4baf-96af-11a5388b29ab",
+      "507693d0-1124-46b8-b113-10ac645e046a",
+      "5076e43c-09c6-42ee-ba7b-d388ca6a3be3",
+      "50996077-bb3f-427b-873b-29b5eb13cfbc",
+      "5171ec71-1f19-464b-a68c-1cbe18e420f0",
+      "5200f1d6-f787-4c80-aa69-7b60afe65eca",
+      "5215097c-79a9-4097-b458-7f9696745150",
+      "52689193-eaf4-4dc3-ad44-cc0b0a238a1c",
+      "53900c9c-eea4-4e00-89bb-a3f47aaba3a2",
+      "55048318-f55a-4668-9ac1-91bb51d1c37f",
+      "5598639e-61d0-4a76-a693-2b3225428172",
+      "57147a7e-a707-40a4-bd1e-1da65d2490a3",
+      "57babc78-7e6b-4c9d-8d69-e5e9526990a1",
+      "5820c71f-9069-42f9-89d7-a2911226aa1e",
+      "59083f5f-9b2b-459b-aa4f-cc7fd0873e84",
+      "596430f1-4c2d-4696-b41b-06f2c6552cb7",
+      "5a083704-da3e-4469-8aab-6460d5e3ae38",
+      "5a178bc5-71cc-4bdf-8cde-11cec6f0711c",
+      "5b072358-cb85-46e5-83b9-bfa55f1b4ff4",
+      "5c0842bb-ba4e-4996-aca0-fc9df130ace6",
+      "5d289e06-4af3-42b5-8515-ce6369c5814c",
+      "5e23d105-27c7-4362-a1f9-75b8328176ea",
+      "5e285cb0-927c-4372-b564-74c83416edfe",
+      "5eff26c6-0b8a-4098-8212-435c4f0a9df3",
+      "607e40cd-32de-4ba5-ba5a-506b30eb87fe",
+      "617a1a28-48bb-48e1-b469-26d6acc0a79f",
+      "626a8e82-f30c-4b8c-9b08-16a207071ee5",
+      "62762ece-e5f1-449f-a066-c2679910528d",
+      "66376d27-e875-430c-bc5e-d7aa0bdd69df",
+      "66df624a-23c0-4e88-9266-ecfa1e74e51f",
+      "678dbb2e-4593-4b06-9832-280c809dcf2a",
+      "67ae6257-3877-4edc-8dba-29ce80e22bec",
+      "67fe8e47-6d34-477b-99da-4de48f6a3703",
+      "688f4a58-fd06-4bd8-a738-e280ba83cb6b",
+      "68ec2705-ecc0-4c08-8ebc-85714211abae",
+      "69a0b5a5-ce4f-4315-a7b4-e44f05e4ec33",
+      "6a07511f-6be9-4ac5-bbc5-8b0cccf888d9",
+      "6b3db987-8d8c-4655-8a62-d3e1ae9074d1",
+      "6b8c1b7d-2bec-4b8f-aeb3-5a362c33115f",
+      "6d83096e-fd8c-4f14-b550-ae6ed73cb126",
+      "6fb90267-3c1b-4b4b-a302-6f0327bb862e",
+      "707928f7-fec6-4fe9-93cf-8fa04bc1299b",
+      "710c31eb-b266-4abf-9544-a56fec2fafe0",
+      "732b4ba0-7372-4692-b4bf-b037ff642a6c",
+      "73413bdb-32a0-42d9-a461-3bbc12d2dc90",
+      "75f38af2-5b04-4dd7-9333-4c1a49c0d047",
+      "763a3766-adb2-40de-b8b9-cb86cb5a488b",
+      "76b4d45f-c11f-49b1-bae0-659666a8b6e1",
+      "77f1d9a5-0041-4261-9bcf-b40d38299600",
+      "78c7594b-fb0c-4fdd-8261-ece787368915",
+      "7b63f279-c3f5-4b09-88f9-a59932f77c29",
+      "7c455226-6f54-4602-a14f-dd0e551ce738",
+      "7cd22a6b-e9bb-4678-83c2-89a28f98c899",
+      "7d51b7b2-5d38-491a-b386-ae4b3a5654c4",
+      "7f1861ce-61a1-4cc7-8ac3-fd01c4943145",
+      "7f9a0eb2-28a1-40eb-90fc-76598dc902a7",
+      "8029dff5-e274-4c09-998a-e3c43f6d86bd",
+      "804706e9-264e-4690-9790-8b816545757f",
+      "805a55a2-2688-435f-8c75-3cdb586e7163",
+      "80bde269-abc3-49ad-b3cc-1ecc302ff6c3",
+      "81b21de7-6c0a-446e-aff7-5e470387a760",
+      "81fa9089-415b-412e-b465-5c087ffa798e",
+      "828eb274-f9f3-42d6-8356-6bf7428e62d1",
+      "829f25f7-faff-4faf-92a2-9327b57c799e",
+      "8480b82d-c5b1-437d-b93e-e4d118d43b5b",
+      "851b2335-b4e7-4d30-888e-74e42dcb8560",
+      "854c92ef-da4c-4625-ae2b-fa00d57efaab",
+      "859d56ac-e64b-4225-849a-bb245bdaf028",
+      "85b80089-efa1-41f1-8450-faeb8173e053",
+      "87863582-4e5a-4b6f-ab42-cc99db4e0fc6",
+      "880e3d9f-3475-4cda-91d4-9f51c1ece7cf",
+      "8904e366-def0-44c9-b5b5-184432c604bc",
+      "891ead4f-5f7e-4f7d-9a3c-b30e3e4aaabc",
+      "8928b88a-d164-48f4-8bc3-332c52e7713b",
+      "8a10e4db-1dc7-4458-987d-97bcdaa7c2c2",
+      "8b3dea8e-ef49-4444-a924-17b21f4eb548",
+      "8bee4b71-4666-4d47-9a7b-c4c0b0e02be5",
+      "8caff8b5-4251-4137-8514-6a15484e9e6d",
+      "8fc59910-760b-42d4-b4b4-3614df8b1bf1",
+      "944b02cb-1618-4743-b6ad-cd7e48ba5431",
+      "95599e2c-28c3-418c-8614-2f35f87fd940",
+      "95987e2e-1e83-445f-bc7a-5a80038553ab",
+      "964e1736-5b65-4c57-870c-a343b3820bef",
+      "96adf033-64f9-4578-8575-bf2475ee904d",
+      "96e82512-b6c4-47c3-9efa-e42aa1786a00",
+      "9755adfd-9238-43cb-8daf-faf97f00d40a",
+      "975e720d-0d20-49ad-9d03-0512479a0f76",
+      "97b12428-f519-41e6-ab7a-221caedf0d9c",
+      "988bc4ca-33cc-4d8f-840b-bb46d0671532",
+      "9a8ae96b-86c7-4823-97fb-215c5fca7fec",
+      "9b36c257-f37c-479a-a889-0953f1920473",
+      "9bd7bfc2-4f3a-4333-a8ce-6aeddc1facd9",
+      "9c52e5ce-cced-40f4-ae53-54aec417307e",
+      "9c8e70c2-f892-4175-8538-18c446934fbf",
+      "9cf9ba7e-0497-4734-b143-39484ebabec3",
+      "9e9a81cd-39f9-41d2-8ba2-5bef5809fe34",
+      "a10a5d9a-ea0d-40d7-b0be-5ad0b039e887",
+      "a11c5b46-9110-48df-aa8b-1e21bf0e9ae9",
+      "a15a0cde-330b-427c-8523-228c1182fafa",
+      "a38aeb0a-3d78-4178-9565-a962e341ca9b",
+      "a3c570c5-40bc-4d42-bee8-f89171ee53ef",
+      "a59e4685-34a3-4aa0-bd6f-ca6ea9aa5c2e",
+      "a8c9be38-a530-4430-8c03-b003fd31ae45",
+      "a92b10f2-9dc3-43d8-8260-6598e43285ec",
+      "a9626853-691e-43be-a2ca-62076c9bb880",
+      "a9815bf6-fd07-4b17-82f0-8dbc9416770f",
+      "a9b52cb3-6083-4fad-bb3d-d3c1e242fbbe",
+      "a9c51257-0d10-4cfd-aa49-f1408afb972e",
+      "aaf0f2c1-8e1c-4d45-bc13-5bf37c353573",
+      "ab10bfaf-7334-4576-a4ae-ed144e125ba8",
+      "ab77f344-4e18-457f-aeae-ae6824fe3ee5",
+      "ab8c4a22-6e71-48d2-b67b-d9bd05789d0b",
+      "ac9a169d-1fc5-4ce2-8d0e-3bc96422f08f",
+      "acd59e24-61a9-4279-b869-4c862e974f82",
+      "adad7012-bf9e-48f8-8389-416fcc23092d",
+      "aed81da4-a9be-432a-a40e-e56d433658fd",
+      "aee0f14f-d885-4245-b389-faab83f3d2ba",
+      "af712069-1b0c-4fa3-8b66-d6879aa18dd5",
+      "afaa3e9f-88f8-44a6-b73e-d8463fe18f4d",
+      "afc1b150-e136-461b-86d4-070202af2dd4",
+      "b1587ec7-0a7b-430f-a90a-9cf170e3b14e",
+      "b43d78a5-be78-4143-8520-b2c419b0afb2",
+      "b5b2be5b-3c67-49a2-a326-d25548a1d1cb",
+      "b5bcf204-6ed6-478d-b08d-a4fa160182f9",
+      "b5e3c448-2fed-4df8-95a3-66dc5559a825",
+      "b68820f0-5d42-474f-95b8-4cb8129d2623",
+      "b71d5c0e-0fa1-488d-9b89-e048af94b036",
+      "b7a8d997-5ff6-4d37-b700-469ae6de3456",
+      "bc41b939-043f-440c-bdab-7d9ed74e1e7a",
+      "bce41f89-a626-434d-80df-457020473955",
+      "bdb97929-0687-46ff-bca9-519660d3b1ec",
+      "bdff9ee1-f17e-429c-a667-b5adf79b4b5f",
+      "bec7dbd3-53d8-4f29-9433-ac5319c78689",
+      "c077198f-3f4e-41d5-8802-74883e8bc832",
+      "c19b0d90-6478-405b-be6c-9c735d119116",
+      "c28cd60a-251a-4418-98ce-2a2b8b1334d0",
+      "c3815c81-2e0c-4c0f-9e2c-acc66f1c2a54",
+      "c41e6195-b6a6-4ab9-acd0-a2a1e3d3f015",
+      "c50488e4-480e-4219-88da-5b209fb231e4",
+      "c7c2749a-94eb-4c9f-be79-fdc20dec1351",
+      "c8ca0562-bbbe-4c6a-b05c-0e0f062367a6",
+      "c92723af-ed0b-45fe-834b-04c427f4ea81",
+      "c94f7eae-0c34-4c59-9359-711a7c574094",
+      "c9c74284-4721-40a7-b999-34df2428fafe",
+      "ca17652e-788d-4b14-baa4-140d7262efed",
+      "cb138a4e-1202-4276-aede-cddf7d6e2133",
+      "cc044e51-67c3-42ac-af27-76eb411396d9",
+      "cd00a524-04a1-4e55-9e4b-5c6015add469",
+      "cd6a45e9-0e6c-4c0a-bb5e-8076b1d97abf",
+      "ce9e7f9f-d3c4-4ead-aec0-270448452bbf",
+      "d016dc0c-ccc7-4e0a-8bfb-1a464fba3fb6",
+      "d1976f2e-a7eb-4c00-b031-0703b067cfb5",
+      "d2b1c993-0b29-468f-b176-030189518081",
+      "d4dbee8a-be70-4619-adae-7c123422f8d2",
+      "d5c79e66-c39e-4ec9-aaa7-61689563e4b9",
+      "d630911f-65cf-4b07-a721-3d5e5d9ac122",
+      "d6e834c8-d498-4588-a501-e687cb5ad92e",
+      "d77d2a21-a61d-4ada-b312-7dc41526bb33",
+      "d787a2d2-0b95-403b-8b4c-4f89caf40656",
+      "d7cb4350-994c-4416-87b6-b8d0daacc9ea",
+      "d915871a-ac4e-43c6-be1a-c4537bd4a3d7",
+      "d947b231-5044-49a8-a342-677dee996860",
+      "d967b26f-d173-49b2-a3a8-7a34d67cbefd",
+      "da7446a3-743c-43db-bac9-13500044c8c0",
+      "dc95d8d1-56e7-4747-8674-a3b8a8c3fabc",
+      "dc9920b7-6661-4ec1-8712-ff55ce302cae",
+      "de5e7419-9a29-43f0-b83d-23c035d71341",
+      "e00cd643-c648-4c0e-ad00-a973abd15ca7",
+      "e0ed9d7f-4237-4c4f-a2bc-1ed91eef8700",
+      "e1858e47-54a0-48a8-a172-bc3fbe6ab1af",
+      "e1c933d8-50bb-42dd-a5b3-4b1a17e0466d",
+      "e3fcb028-cc68-4c05-9bb4-0561cf08741f",
+      "e6a8c384-0fc9-46d7-bcf9-398306e610fe",
+      "e7017437-e78b-45dd-b4f1-11e7bf00cf84",
+      "e783f7cf-6947-4a03-b075-f2efbcba922e",
+      "e7b35c94-2f57-40b9-932b-f5e17b52d703",
+      "e7d5d2a3-20ff-42a8-be2c-1de1bf8caaaf",
+      "e9aa8b2b-5b50-4df6-b4b0-3512761b72e3",
+      "e9ce855b-3974-4da7-ad7f-5ffb0fb559d2",
+      "e9f92520-78ca-4a5e-9a26-c3333a959330",
+      "ea757f8f-6a69-4de5-ae9c-ef212bf51672",
+      "ebfb3112-6233-442d-a1f6-8712a5d325aa",
+      "ec587457-ec06-40f9-af01-7ce904f3dbe9",
+      "ed0e4e3f-8313-468e-8a1f-9118b118aec4",
+      "ed2376b0-7c8f-4508-bd35-eaec4ae1e2a7",
+      "ee491ab3-3615-4b1b-9658-db21ebcdbe4b",
+      "eea27810-48f0-400e-b006-83964a773c9f",
+      "ef85d10b-0d9f-4959-a2f7-70c7c8a1c42e",
+      "efd904de-b9b1-44f3-8002-72fe4f452c8e",
+      "f0201dfe-3ec3-49bf-bec9-c731b92f55c6",
+      "f0593d4c-4c4b-4b15-aae3-33ef22610137",
+      "f0700ee0-a701-420e-8bf4-17524e77ca9e",
+      "f0f21e08-bbb9-4667-930c-a1382b52edba",
+      "f0fd4627-675e-41b2-afc6-ca61e6a6ed4d",
+      "f1459c13-4b1c-409f-9eb3-61b041b19486",
+      "f25758a4-864f-4d38-9fc6-a1994c28037e",
+      "f37c9d08-c988-4dd2-be7e-11eadd2b5a83",
+      "f38f7330-7ea2-4b6b-aa17-46bf0713a434",
+      "f466263b-008e-4024-a15f-9be034530d95",
+      "f4a0ec4a-2c0d-4652-be27-251bcc3b1a7a",
+      "f55dfef5-bde5-46ef-8889-472d9925c183",
+      "f575cef1-48bf-49e3-9adb-3a2c41b7e9af",
+      "f59ca74f-e49f-45f1-ab88-a5036c21a0a8",
+      "f7abbeeb-f990-4240-af2a-81621562567c",
+      "f7be1dc9-8d85-470b-8fd2-dcf073cc0680",
+      "f8116eb8-1992-4f8f-a23e-0f31e3c33bec",
+      "f89d18d7-ca15-4d13-a88f-034b26eaf548",
+      "f8d5035f-480a-4f30-ad2d-1688a1559e09",
+      "f935e8ae-5ce5-4cb3-bd3c-e1ddd94a8767",
+      "fadcff32-9d9a-4755-bc55-9c1a858b1524",
+      "fb3a67e9-4411-44e9-822f-c03c44ec19ec",
+      "fb78061f-38f3-4baf-b576-956a12cc7c9a",
+      "fc1bdae5-6a70-41a1-a0d8-59c720ee7f53",
+      "fcaa8259-8ab4-4545-b1ab-769c1cbd4010",
+      "fd49d1f1-f88e-444e-b8e9-f70aec2ca9a7",
+      "fe27a619-ad09-42d9-9633-842ce02e6d6a"
+    ]
+  },
+  "retention_trim": {
+    "target_loss_tokens": 2787567,
+    "loss_tokens": 2794414,
+    "rows": 861,
+    "keep_whole": [
+      "hard_math"
+    ],
+    "parts": {
+      "chat": {
+        "reference_loss": 386578,
+        "target": 317329,
+        "loss": 318578,
+        "rows": 139,
+        "reference_rows": 170,
+        "share": 0.114,
+        "reference_share": 0.1196
+      },
+      "hard_math": {
+        "reference_loss": 749769,
+        "target": 749769,
+        "loss": 749769,
+        "rows": 64,
+        "reference_rows": 64,
+        "share": 0.2683,
+        "reference_share": 0.232
+      },
+      "if": {
+        "reference_loss": 803799,
+        "target": 659812,
+        "loss": 660834,
+        "rows": 304,
+        "reference_rows": 374,
+        "share": 0.2365,
+        "reference_share": 0.2487
+      },
+      "math": {
+        "reference_loss": 807448,
+        "target": 662807,
+        "loss": 665681,
+        "rows": 137,
+        "reference_rows": 167,
+        "share": 0.2382,
+        "reference_share": 0.2498
+      },
+      "science": {
+        "reference_loss": 484671,
+        "target": 397850,
+        "loss": 399552,
+        "rows": 217,
+        "reference_rows": 266,
+        "share": 0.143,
+        "reference_share": 0.1499
+      }
+    }
+  },
+  "revision": "v6r2",
+  "sources": [
+    {
+      "slice": "retention",
+      "hf_repo": "nvidia/Nemotron-SFT-Instruction-Following-Chat-v3",
+      "hf_revision": "be3b3e04ef605ac9d3f8f35b9d5a632f4a3a3402",
+      "dataset_license": "CC-BY-4.0 AND ODC-BY-1.0",
+      "generator": "openai/GPT-OSS-120B",
+      "label_provenance": "reference",
+      "part": "if",
+      "rows": 304,
+      "sequence_tokens": 680708,
+      "loss_tokens": 660834
+    },
+    {
+      "slice": "retention",
+      "hf_repo": "nvidia/Nemotron-SFT-Instruction-Following-Chat-v3",
+      "hf_revision": "be3b3e04ef605ac9d3f8f35b9d5a632f4a3a3402",
+      "dataset_license": "CC-BY-4.0 AND ODC-BY-1.0",
+      "generator": "zai-org/GLM-5",
+      "label_provenance": "format",
+      "part": "chat",
+      "rows": 139,
+      "sequence_tokens": 335013,
+      "loss_tokens": 318578
+    },
+    {
+      "slice": "retention",
+      "hf_repo": "nvidia/Nemotron-SFT-Math-v4",
+      "hf_revision": "84d42ad0cb960f07f951b9baa9ed2b46a5a18c66",
+      "dataset_license": "CC-BY-4.0",
+      "generator": "deepseek-ai/DeepSeek-V4-Pro (High)",
+      "label_provenance": "reference",
+      "part": "math",
+      "rows": 201,
+      "sequence_tokens": 1432566,
+      "loss_tokens": 1415450
+    },
+    {
+      "slice": "retention",
+      "hf_repo": "nvidia/Nemotron-Science-v1",
+      "hf_revision": "82e1af468197076b4f0f392c239274eac032adc7",
+      "dataset_license": "CC-BY-4.0",
+      "generator": "openai/GPT-OSS-120B",
+      "label_provenance": "format",
+      "part": "sci_mcq",
+      "rows": 149,
+      "sequence_tokens": 261407,
+      "loss_tokens": 218930
+    },
+    {
+      "slice": "retention",
+      "hf_repo": "nvidia/Nemotron-Science-v1",
+      "hf_revision": "82e1af468197076b4f0f392c239274eac032adc7",
+      "dataset_license": "CC-BY-4.0",
+      "generator": "openai/GPT-OSS-120B",
+      "label_provenance": "format",
+      "part": "sci_rqa",
+      "rows": 68,
+      "sequence_tokens": 220096,
+      "loss_tokens": 180622
+    },
+    {
+      "slice": "swe",
+      "hf_repo": "nvidia/Open-SWE-Traces",
+      "hf_revision": "e192b26a43b8d09f156eeee781aef8e6bd5108ba",
+      "dataset_license": "CC-BY-4.0",
+      "generator": "Qwen3.8-27B",
+      "label_provenance": "verifier",
+      "part": "scale-swe",
+      "rows": 207,
+      "sequence_tokens": 4893873,
+      "loss_tokens": 1659554
+    },
+    {
+      "slice": "swe",
+      "hf_repo": "nvidia/Open-SWE-Traces",
+      "hf_revision": "e192b26a43b8d09f156eeee781aef8e6bd5108ba",
+      "dataset_license": "CC-BY-4.0",
+      "generator": "Qwen3.8-27B",
+      "label_provenance": "verifier",
+      "part": "swe-rebench-v2",
+      "rows": 298,
+      "sequence_tokens": 7170424,
+      "loss_tokens": 2073164
+    },
+    {
+      "slice": "terminal",
+      "hf_repo": "ai-and/termgrade-trajectories",
+      "hf_revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+      "dataset_license": "apache-2.0",
+      "generator": "Qwen/Qwen3.6-27B",
+      "label_provenance": "verifier",
+      "part": "tgr",
+      "rows": 689,
+      "sequence_tokens": 8063056,
+      "loss_tokens": 928668
+    },
+    {
+      "slice": "terminal",
+      "hf_repo": "ai-and/termgrade-trajectories",
+      "hf_revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+      "dataset_license": "apache-2.0",
+      "generator": "deepseek-ai/DeepSeek-V4-Pro",
+      "label_provenance": "verifier",
+      "part": "tgr",
+      "rows": 42,
+      "sequence_tokens": 472216,
+      "loss_tokens": 42443
+    },
+    {
+      "slice": "terminal",
+      "hf_repo": "ai-and/termgrade-trajectories",
+      "hf_revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+      "dataset_license": "apache-2.0",
+      "generator": "google/gemma-4-31B-it (reasoning enabled)",
+      "label_provenance": "verifier",
+      "part": "tgr",
+      "rows": 79,
+      "sequence_tokens": 537489,
+      "loss_tokens": 119026
+    },
+    {
+      "slice": "terminal",
+      "hf_repo": "ai-and/termgrade-trajectories",
+      "hf_revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+      "dataset_license": "apache-2.0",
+      "generator": "moonshotai/Kimi-K3",
+      "label_provenance": "verifier",
+      "part": "tgr",
+      "rows": 3249,
+      "sequence_tokens": 21747030,
+      "loss_tokens": 2332724
+    },
+    {
+      "slice": "terminal",
+      "hf_repo": "ai-and/termgrade-trajectories",
+      "hf_revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+      "dataset_license": "apache-2.0",
+      "generator": "zai-org/GLM-5.2-FP8",
+      "label_provenance": "verifier",
+      "part": "tgr",
+      "rows": 13,
+      "sequence_tokens": 93967,
+      "loss_tokens": 12451
+    }
+  ],
+  "normalisation": "The trainer's loss is token-weighted: the sum of token losses divided by the trained (assistant-mask) tokens of the accumulation window, so a slice's gradient share equals its loss-token share; sequence-token shares set the training time. Both are recorded.",
+  "split": {
+    "manifest": "data/manifests/v6/split.json",
+    "validation_rows": 279,
+    "validation_tasks": 110,
+    "train_rows": 5159
+  },
+  "selection": "data/manifests/v6/selection.json",
+  "freeze": {
+    "command": "PYTHONPATH=src .venv/train/bin/python scripts/data/build_mixture_v5.py freeze --version v6",
+    "requires": "v6_p1_pools current, v6_p2_rows over exactly these train/dev files with zero drops, the gate report passing",
+    "run_id": "data_mixture_v6_freeze_20261013_174609",
+    "frozen_at": "2026-10-13T17:46:13Z",
+    "gate_report_sha256": "2e4232fbbec98fd8b9cd1e4071972480324702c14cca97422c7a05e41287c446",
+    "v6_p2_rows": {
+      "run_id": "data_screens_20261013_174447",
+      "sha256": "e203450f348720bd9ea674eb23b70e70dab61b7b623609b5f5d6518e29d16763"
+    }
+  }
+}

@@ -1,0 +1,417 @@
+{
+ "slice": "terminal_v7",
+ "decision": "half DeepSeek-V4-Pro / half Kimi body (Dean, 2026-10-13 ~21:45 UTC); replaces PLAN_v7 section 4's 2% / 10% long-turn cap",
+ "run_id": "data_terminal_slice_v7_20261013_213909",
+ "created": "2026-10-13T21:44:59Z",
+ "code_commit": "84f86ba3ae6570a8a59e8955ab000926f5685114",
+ "seed": 42,
+ "final": true,
+ "rules": {
+  "think_max": 4000,
+  "kimi_routine_max": 1000,
+  "deepseek_row_max": 65536,
+  "kimi_arc_share_max": 0.4,
+  "trained_turns": 6,
+  "repetition": "no 30-word run twice; distinct / all lines >= 20 chars >= 0.8",
+  "failure_detector": "strong",
+  "kimi_teachers": [
+   "kimi",
+   "qwen",
+   "gemma_think"
+  ],
+  "deepseek_admission": "graded pass + render gates (no v6 correctness gates)"
+ },
+ "inputs": {
+  "messages_kimi": {
+   "path": "/mnt/apex-shared/apex_data/raw/tgr/data/messages/kimi.parquet",
+   "sha256": "8979ae1bddf2d7580a9f4f879100cf719c32211db0c3b48e85106daef8004cd5",
+   "source": "tgr",
+   "revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+   "pinned_sha256": "8979ae1bddf2d7580a9f4f879100cf719c32211db0c3b48e85106daef8004cd5",
+   "matches": true
+  },
+  "messages_qwen": {
+   "path": "/mnt/apex-shared/apex_data/raw/tgr/data/messages/qwen.parquet",
+   "sha256": "2ef54aa6eeb2ea876cfa5aa6582b931a3d2482fadeb77da8de3ff4c61e8a620f",
+   "source": "tgr",
+   "revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+   "pinned_sha256": "2ef54aa6eeb2ea876cfa5aa6582b931a3d2482fadeb77da8de3ff4c61e8a620f",
+   "matches": true
+  },
+  "messages_gemma_think": {
+   "path": "/mnt/apex-shared/apex_data/raw/tgr/data/messages/gemma_think.parquet",
+   "sha256": "c0316a73ee4fed073b8c57114c0909fdf8fccb33ea73a803fa0d84c53d9b7b45",
+   "source": "tgr",
+   "revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+   "pinned_sha256": "c0316a73ee4fed073b8c57114c0909fdf8fccb33ea73a803fa0d84c53d9b7b45",
+   "matches": true
+  },
+  "messages_deepseek": {
+   "path": "/mnt/apex-shared/apex_data/raw/tgr/data/messages/deepseek.parquet",
+   "sha256": "24a9817177f79f1847f897ef7ddc6516db4d0c03bd9048bdb0919e20c3c39d44",
+   "source": "tgr",
+   "revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+   "pinned_sha256": "24a9817177f79f1847f897ef7ddc6516db4d0c03bd9048bdb0919e20c3c39d44",
+   "matches": true
+  },
+  "trials": {
+   "path": "/mnt/apex-shared/apex_data/raw/tgr/data/trials.parquet",
+   "sha256": "79829719196b3736cfd3ff5c0514d77f76936ad5550a90a119ab9bd9fb6a74fb",
+   "source": "tgr",
+   "revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+   "pinned_sha256": "79829719196b3736cfd3ff5c0514d77f76936ad5550a90a119ab9bd9fb6a74fb",
+   "matches": true
+  },
+  "labels": {
+   "path": "/mnt/apex-shared/apex_data/raw/tgr_env/labels.jsonl",
+   "sha256": "bbbd9c529f723e6dec866d4a61d672b5d8e35e6682d6ce2e858ae3d25c82512b",
+   "source": "tgr_env",
+   "revision": "3a34ba29ddcd4cbbcbf8840c64f67e853f9b8b0d",
+   "pinned_sha256": "bbbd9c529f723e6dec866d4a61d672b5d8e35e6682d6ce2e858ae3d25c82512b",
+   "matches": true
+  }
+ },
+ "dedup": {
+  "method": "screens.dedup.terminal_task_clusters (exact normalised task text + MinHash-LSH, Jaccard >= 0.8 on word 5-grams), one item per task",
+  "tasks": 1004,
+  "dev_tasks": 40,
+  "clusters": 1004,
+  "tasks_dropped": {},
+  "minhash_n_items": 1004,
+  "minhash_n_exact_groups": 0,
+  "minhash_near_n_hashed": 1004,
+  "minhash_near_n_candidates": 0,
+  "minhash_near_n_verified_pairs": 0,
+  "minhash_near_n_groups": 0,
+  "minhash_near_n_dropped": 0,
+  "minhash_near_n_oversized_buckets": 0,
+  "minhash_n_clusters": 0,
+  "minhash_n_clustered": 0,
+  "minhash_n_dropped": 0
+ },
+ "d1_whole_file": {
+  "kimi": {
+   "files_scanned": 1,
+   "records_scanned": 8032,
+   "bytes_scanned": 344719279,
+   "n_hits": 0,
+   "files_or_records_with_hits": 0,
+   "by_rule": {},
+   "by_level": {}
+  },
+  "qwen": {
+   "files_scanned": 1,
+   "records_scanned": 8032,
+   "bytes_scanned": 673028737,
+   "n_hits": 0,
+   "files_or_records_with_hits": 0,
+   "by_rule": {},
+   "by_level": {}
+  },
+  "gemma_think": {
+   "files_scanned": 1,
+   "records_scanned": 8032,
+   "bytes_scanned": 483746733,
+   "n_hits": 0,
+   "files_or_records_with_hits": 0,
+   "by_rule": {},
+   "by_level": {}
+  },
+  "deepseek": {
+   "files_scanned": 1,
+   "records_scanned": 2008,
+   "bytes_scanned": 993690940,
+   "n_hits": 0,
+   "files_or_records_with_hits": 0,
+   "by_rule": {},
+   "by_level": {}
+  }
+ },
+ "screens": {
+  "episodes": 15271,
+  "d1": 0,
+  "d4": 0,
+  "tb_name_mention_soft_flag": 0,
+  "identity": 0,
+  "credentials": 0,
+  "episodes_with_emails": 219,
+  "identity_names": {},
+  "credential_patterns": {}
+ },
+ "files": {
+  "rows.parquet": {
+   "sha256": "6d3a25675ea8774749065ddbeea118c1580c6028572eb1e323bab11887720825",
+   "rows": 2647
+  },
+  "episodes.jsonl": {
+   "sha256": "c4a833c88fbafb074f1550c7c39eb83b43e51f7db8167f660ce3f3fe6450bc66",
+   "rows": 596
+  },
+  "tasks.jsonl": {
+   "sha256": "60f36cc424fcb55ab1b5c314c55375cdb395a0ad6479d179932fc76d84c21fa6",
+   "rows": 517
+  },
+  "supply.json": {
+   "sha256": "8131ef82849e54ae66fe4fb2037a0c1d99d5acd5630bb16a96343d5d1a00ff80"
+  }
+ },
+ "report": {
+  "rows": 2647,
+  "episodes": 596,
+  "tasks": 517,
+  "loss_tokens": 3294917,
+  "sequence_tokens": 39638326,
+  "tasks_in_both_halves": 79,
+  "halves": {
+   "kimi": {
+    "episodes": 436,
+    "tasks": 436,
+    "rows": 1688,
+    "loss_tokens": 1649504,
+    "second_trials": 0,
+    "thinking_per_trained_turn": {
+     "n": 1688,
+     "mean": 327.0,
+     "p50": 154,
+     "p90": 760,
+     "p99": 3240,
+     "max": 3940
+    },
+    "routine_thinking": {
+     "n": 1132,
+     "mean": 191.5,
+     "p50": 112,
+     "p90": 499,
+     "p99": 931,
+     "max": 997
+    },
+    "share_over_2k": {
+     "turns": 0.0273,
+     "loss": 0.1262
+    },
+    "context_tokens_of_trained_rows": {
+     "n": 1688,
+     "mean": 8333.2,
+     "p50": 6572,
+     "p90": 15458,
+     "p99": 35883,
+     "max": 50057
+    },
+    "late_turns": {
+     "rows_at_index_15_plus": 2,
+     "episodes_with_one": 1
+    },
+    "debugging_arc_share": 0.3876,
+    "ctrl_c_turns_trained": 11,
+    "after_failure_turns": 288,
+    "done_turn_share": 0.2583,
+    "steps": {
+     "n": 436,
+     "mean": 6.0,
+     "p50": 5,
+     "p90": 9,
+     "p99": 15,
+     "max": 18
+    },
+    "by_band": {
+     "hard": {
+      "episodes": 136,
+      "loss_tokens": 621290
+     },
+     "medium": {
+      "episodes": 135,
+      "loss_tokens": 567884
+     },
+     "easy": {
+      "episodes": 165,
+      "loss_tokens": 460330
+     }
+    },
+    "by_teacher": {
+     "gemma_think": {
+      "tasks": 4,
+      "episodes": 4,
+      "loss_tokens": 22443
+     },
+     "kimi": {
+      "tasks": 340,
+      "episodes": 340,
+      "loss_tokens": 1080816
+     },
+     "qwen": {
+      "tasks": 92,
+      "episodes": 92,
+      "loss_tokens": 546245
+     }
+    }
+   },
+   "deepseek": {
+    "episodes": 160,
+    "tasks": 160,
+    "rows": 959,
+    "loss_tokens": 1645413,
+    "second_trials": 0,
+    "thinking_per_trained_turn": {
+     "n": 959,
+     "mean": 1121.9,
+     "p50": 829,
+     "p90": 2797,
+     "p99": 3860,
+     "max": 3944
+    },
+    "routine_thinking": {
+     "n": 739,
+     "mean": 1085.9,
+     "p50": 777,
+     "p90": 2765,
+     "p99": 3860,
+     "max": 3944
+    },
+    "share_over_2k": {
+     "turns": 0.1981,
+     "loss": 0.4088
+    },
+    "context_tokens_of_trained_rows": {
+     "n": 959,
+     "mean": 26665.1,
+     "p50": 24684,
+     "p90": 51927,
+     "p99": 63608,
+     "max": 65290
+    },
+    "late_turns": {
+     "rows_at_index_15_plus": 514,
+     "episodes_with_one": 145
+    },
+    "debugging_arc_share": 0.7188,
+    "ctrl_c_turns_trained": 7,
+    "after_failure_turns": 186,
+    "done_turn_share": 0.1668,
+    "steps": {
+     "n": 160,
+     "mean": 29.2,
+     "p50": 28,
+     "p90": 42,
+     "p99": 55,
+     "max": 70
+    },
+    "by_band": {
+     "hard": {
+      "episodes": 41,
+      "loss_tokens": 493054
+     },
+     "medium": {
+      "episodes": 62,
+      "loss_tokens": 643392
+     },
+     "easy": {
+      "episodes": 57,
+      "loss_tokens": 508967
+     }
+    },
+    "by_teacher": {
+     "deepseek": {
+      "tasks": 160,
+      "episodes": 160,
+      "loss_tokens": 1645413
+     }
+    }
+   }
+  },
+  "choice": {
+   "kimi": {
+    "tasks": 874,
+    "arc_first_trials": 349,
+    "arc_share_first": 0.3993,
+    "switched_to_arc": 144,
+    "tasks_with_an_arc_trial": 586,
+    "trial_skips": {
+     "hand_in_not_trainable": 1190
+    }
+   },
+   "deepseek": {
+    "tasks": 472,
+    "arc_first_trials": 329,
+    "arc_share_first": 0.697,
+    "switched_to_arc": 0,
+    "tasks_with_an_arc_trial": 329,
+    "trial_skips": {
+     "hand_in_not_trainable": 429
+    }
+   }
+  },
+  "untrainable_turns_by_reason": {
+   "kimi": {
+    "over_4000": 3950,
+    "routine_over_1000": 4999,
+    "repetitive": 318,
+    "confirmation": 1054,
+    "row_loss_cap": 16,
+    "empty_keys_at_continuation": 21
+   },
+   "deepseek": {
+    "over_4000": 7862,
+    "repetitive": 792,
+    "confirmation": 154,
+    "row_loss_cap": 2,
+    "empty_keys_at_continuation": 25
+   }
+  },
+  "empty_keys_at_continuation_dropped": {
+   "kimi": 21,
+   "deepseek": 25
+  },
+  "ctrl_c_turns_trainable": {
+   "kimi": 159,
+   "deepseek": 52
+  }
+ },
+ "checks": {
+  "row_checks": {
+   "harbor_parser": "/home/dean/qwen3.5-9b-sft/.venv/harbor/lib/python3.12/site-packages/harbor/agents/terminus_2/terminus_json_plain_parser.py",
+   "rows_checked": 2647,
+   "rows_clean": 2647,
+   "problems": {},
+   "examples": []
+  },
+  "render_check_20": {
+   "rows": 20,
+   "history_think_blocks_total": 0,
+   "rows_with_history": 19,
+   "trained_turn_with_reasoning": 20,
+   "rows_with_problems": 0,
+   "file": "/home/dean/qwen3.5-9b-sft/logs/data_terminal_slice_v7_20261013_213909/render_check.jsonl"
+  },
+  "d1_drawn": {
+   "files_scanned": 0,
+   "records_scanned": 596,
+   "bytes_scanned": 92299306,
+   "n_hits": 0,
+   "files_or_records_with_hits": 0,
+   "by_rule": {},
+   "by_level": {}
+  },
+  "guard_rerun_failures": 0,
+  "thinking_reread_mismatch": 0,
+  "turns_over_4000": 0,
+  "kimi_routine_over_1000": 0,
+  "empty_keys_at_continuation_trained": 0,
+  "repetitive_trained": 0,
+  "confirmation_rows": 0,
+  "hand_in_rows_per_episode": {
+   "1": 596
+  },
+  "rows_over_cap": 0,
+  "rows_over_max_length": 0,
+  "rows_over_loss_cap": 0,
+  "dev_tasks": [],
+  "trials_per_task_per_half_max": 1,
+  "budget": {
+   "loss_tokens": 3294917,
+   "max": 3300000
+  },
+  "rows_match_records": true,
+  "all_pass": true
+ },
+ "quality_read": "/home/dean/qwen3.5-9b-sft/logs/data_terminal_slice_v7_20261013_213909/quality_read.jsonl"
+}

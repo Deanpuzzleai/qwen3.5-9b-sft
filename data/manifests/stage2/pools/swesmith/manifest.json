@@ -1,0 +1,5120 @@
+{
+ "pool": "swesmith",
+ "source": "swesmith",
+ "built_at": "2026-10-12T19:45:32Z",
+ "seed": 42,
+ "inputs": {
+  "swesmith_py": {
+   "hf_repo": "SWE-bench/SWE-smith-py",
+   "revision": "77cab9055d42ab4a5c25c89a8f937096db13558e",
+   "rows": 50908,
+   "files": [
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00000-of-00011.parquet",
+     "bytes": 16852671,
+     "sha256": "302a383bb9229c42063ff2364b2ea637e9e7a20d82e0d566614d3aba9234833d"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00001-of-00011.parquet",
+     "bytes": 5574116,
+     "sha256": "f15e5b8ab49866e93245a736056fab680d6dde8fb5c2ba89c06241cf12a32afe"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00002-of-00011.parquet",
+     "bytes": 6006895,
+     "sha256": "67512898124c03132ae5bbf78866610571a565724dcb6a2064009db8a6825613"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00003-of-00011.parquet",
+     "bytes": 117625772,
+     "sha256": "cc4c9812480faac2bc2de49e78a271d17cc8dcd89a8af2268246c3c8632fd27d"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00004-of-00011.parquet",
+     "bytes": 9822409,
+     "sha256": "6110c76e568c0ee03eb1c86d208887154c6406237f532436cf72ed2c265073ca"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00005-of-00011.parquet",
+     "bytes": 7434902,
+     "sha256": "517420b48132eda3c073e6b9bc5fecbaf34c3dea7f3fec49a46f8615584f8200"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00006-of-00011.parquet",
+     "bytes": 12282590,
+     "sha256": "8e55de0daa541c031779f17d6ef04ebc3a4e2caad708d3137edb4587d89e60f3"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00007-of-00011.parquet",
+     "bytes": 6665621,
+     "sha256": "c558fc3b6507f36ae520a8b23ac0cd71be7d7c8bb15c0b09060fe18d83d21045"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00008-of-00011.parquet",
+     "bytes": 21661282,
+     "sha256": "b861958c450293ee717c00659958d2f334a697edf804f33c10c75bd05b8787e7"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00009-of-00011.parquet",
+     "bytes": 7641038,
+     "sha256": "20923272dab2706c1e07e9e11a19373c5c642efbb594a3b1c104440cf8cfc132"
+    },
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_py/data/train-00010-of-00011.parquet",
+     "bytes": 9078471,
+     "sha256": "3b7c09dfa07209f550f210344caac267c2ac5ea9c6eefa84c67845ecdff0b6df"
+    }
+   ]
+  },
+  "swesmith_go": {
+   "hf_repo": "SWE-bench/SWE-smith-go",
+   "revision": "d2f6ecc2cf8ae1af00fc790801bbacfa2913e015",
+   "rows": 8212,
+   "files": [
+    {
+     "path": "/mnt/apex-shared/apex_data/raw/swesmith_go/data/train-00000-of-00001.parquet",
+     "bytes": 6489675,
+     "sha256": "6e5f18fc1e7c31af8f52923da81017dc6d63c96c1247dcf7129962aa93edd2e3"
+    }
+   ]
+  },
+  "dev_swe": {
+   "path": "/home/dean/qwen3.5-9b-sft/data/manifests/dev_swe.json",
+   "bytes": 119712,
+   "sha256": "993739bb7fe291eaa5295aa05149f405b711e4ab145edce3ba8af562993f9585",
+   "n_task_ids": 100,
+   "frozen": true
+  },
+  "dev_exclusions": {
+   "path": "/home/dean/qwen3.5-9b-sft/data/manifests/dev_exclusions.json",
+   "bytes": 15239,
+   "sha256": "43df9a7714673766b2c293b4a71063f68dfd3f9606b99083657581875be81ea7"
+  },
+  "n_dev_repositories": 8
+ },
+ "dataset_licence": "MIT",
+ "funnel": {
+  "task_level": {
+   "n_loaded": 59120,
+   "rules": [
+    {
+     "rule": "bug_patch_present",
+     "n_in": 59120,
+     "n_dropped": 0,
+     "n_out": 59120
+    },
+    {
+     "rule": "issue_text_present",
+     "n_in": 59120,
+     "n_dropped": 18020,
+     "n_out": 41100
+    },
+    {
+     "rule": "f2p_ge_1",
+     "n_in": 41100,
+     "n_dropped": 0,
+     "n_out": 41100
+    },
+    {
+     "rule": "p2p_ge_1",
+     "n_in": 41100,
+     "n_dropped": 457,
+     "n_out": 40643
+    },
+    {
+     "rule": "patch_le_400_lines",
+     "n_in": 40643,
+     "n_dropped": 42,
+     "n_out": 40601
+    },
+    {
+     "rule": "f2p_le_50",
+     "n_in": 40601,
+     "n_dropped": 6231,
+     "n_out": 34370
+    },
+    {
+     "rule": "fix_on_source_paths_only",
+     "n_in": 34370,
+     "n_dropped": 316,
+     "n_out": 34054
+    },
+    {
+     "rule": "toolkit_profile",
+     "n_in": 34054,
+     "n_dropped": 0,
+     "n_out": 34054
+    },
+    {
+     "rule": "d2_repository",
+     "n_in": 34054,
+     "n_dropped": 328,
+     "n_out": 33726,
+     "top_reasons": {
+      "excluded_repo": 328
+     }
+    },
+    {
+     "rule": "licence_allowlist",
+     "n_in": 33726,
+     "n_dropped": 8468,
+     "n_out": 25258,
+     "top_reasons": {
+      "github_api": 8468
+     }
+    }
+   ],
+   "n_out": 25258
+  },
+  "stage2_frame": {
+   "n_loaded": 25258,
+   "rules": [
+    {
+     "rule": "not_dev_task",
+     "n_in": 25258,
+     "n_dropped": 100,
+     "n_out": 25158
+    },
+    {
+     "rule": "not_dev_repository",
+     "n_in": 25158,
+     "n_dropped": 1277,
+     "n_out": 23881
+    }
+   ],
+   "n_out": 23881
+  }
+ },
+ "screens": {
+  "lookup": {
+   "requested": 150,
+   "from_cache": 150,
+   "fetched": 0,
+   "found": 0,
+   "not_found": 0,
+   "errors": 0,
+   "rate_limited": 0,
+   "unresolved": 0,
+   "token_present": true,
+   "api_enabled": true,
+   "cache_dir": "/mnt/apex-shared/apex_data/work/licence_cache"
+  },
+  "d2_locked_sha256": "09eb7572d4d6e218",
+  "d2_fork_graph": {
+   "clear": 34054
+  },
+  "licence_allowlist": [
+   "Apache-2.0",
+   "BSD-2-Clause",
+   "BSD-3-Clause",
+   "CC0-1.0",
+   "ISC",
+   "MIT",
+   "MIT-0",
+   "MPL-2.0",
+   "Unlicense"
+  ],
+  "licence_status": {
+   "ok": 25258,
+   "excluded": 8468
+  },
+  "spdx_counts_after_d2": {
+   "MIT": 14025,
+   "NOASSERTION": 6241,
+   "BSD-3-Clause": 5139,
+   "Apache-2.0": 3757,
+   "BSD-2-Clause": 2305,
+   "LGPL-2.1": 1472,
+   "None": 414,
+   "GPL-3.0": 279,
+   "LGPL-3.0": 39,
+   "ISC": 32,
+   "0BSD": 23
+  }
+ },
+ "dev": {
+  "n": 100,
+  "repositories": {
+   "allegro/bigcache": 13,
+   "bits-and-blooms/bitset": 13,
+   "hips/autograd": 13,
+   "john-kurkowski/tldextract": 13,
+   "caarlos0/env": 12,
+   "hjson/hjson-go": 12,
+   "life4/textdistance": 12,
+   "sunpy/sunpy": 12
+  },
+  "languages": {
+   "go": 50,
+   "py": 50
+  },
+  "failing_task_level_filters": []
+ },
+ "draw": {
+  "method": "uniform over the screened frame; frame sorted by task_id, shuffled with random.Random('<seed>:swesmith:stage2'), first n",
+  "frame_size": 23881,
+  "n_requested": 520,
+  "n_drawn": 740,
+  "frame_languages": {
+   "py": 22874,
+   "go": 1007
+  },
+  "frame_repositories": 105,
+  "topup": {
+   "method": "the next n tasks of language 'go' in the same draw order after its first n_stage2",
+   "language": "go",
+   "after_rank": 520,
+   "n_requested": 220,
+   "n_drawn": 220,
+   "draw_ranks": [
+    544,
+    5811
+   ],
+   "repositories": {
+    "roaringbitmap/roaring": 54,
+    "blevesearch/bleve": 44,
+    "hypermodeinc/ristretto": 25,
+    "go-chi/chi": 21,
+    "go-critic/go-critic": 16,
+    "bytedance/sonic": 15,
+    "c-bata/go-prompt": 14,
+    "caddyserver/caddy": 8,
+    "gookit/color": 8,
+    "gosuri/uiprogress": 8,
+    "ariga/atlas": 6,
+    "workiva/go-datastructures": 1
+   }
+  }
+ },
+ "stage2": {
+  "n": 740,
+  "languages": {
+   "py": 496,
+   "go": 244
+  },
+  "repositories": {
+   "roaringbitmap/roaring": 59,
+   "blevesearch/bleve": 54,
+   "scanny/python-pptx": 39,
+   "cantools/cantools": 30,
+   "pandas-dev/pandas": 30,
+   "hypermodeinc/ristretto": 26,
+   "sqlfluff/sqlfluff": 25,
+   "pygments/pygments": 23,
+   "go-chi/chi": 21,
+   "python-openxml/python-docx": 19,
+   "go-critic/go-critic": 18,
+   "tobymao/sqlglot": 18,
+   "bytedance/sonic": 17,
+   "stanfordnlp/dspy": 17,
+   "conan-io/conan": 16,
+   "c-bata/go-prompt": 15,
+   "encode/starlette": 13,
+   "getmoto/moto": 13,
+   "lepture/mistune": 13,
+   "pdfminer/pdfminer.six": 12,
+   "iterative/dvc": 10,
+   "caddyserver/caddy": 9,
+   "suor/funcy": 9,
+   "ariga/atlas": 8,
+   "getnikola/nikola": 8,
+   "gookit/color": 8,
+   "gosuri/uiprogress": 8,
+   "oauthlib/oauthlib": 8,
+   "python-hyper/h11": 8,
+   "tkrajina/gpxpy": 8,
+   "dask/dask": 7,
+   "marshmallow-code/marshmallow": 7,
+   "pydantic/pydantic": 7,
+   "tornadoweb/tornado": 7,
+   "arrow-py/arrow": 6,
+   "marshmallow-code/webargs": 6,
+   "pallets/jinja": 6,
+   "pyasn1/pyasn1": 6,
+   "tox-dev/pipdeptree": 6,
+   "andialbrecht/sqlparse": 5,
+   "jawah/charset_normalizer": 5,
+   "kayak/pypika": 5,
+   "pallets/click": 5,
+   "rsalmei/alive-progress": 5,
+   "alecthomas/voluptuous": 4,
+   "cknd/stackprinter": 4,
+   "facelessuser/soupsieve": 4,
+   "jsvine/pdfplumber": 4,
+   "mido/mido": 4,
+   "msiemens/tinydb": 4,
+   "python-jsonschema/jsonschema": 4,
+   "stanfordnlp/string2string": 4,
+   "theskumar/python-dotenv": 4,
+   "amueller/word_cloud": 3,
+   "facebookresearch/fvcore": 3,
+   "graphql-python/graphene": 3,
+   "pyca/pyopenssl": 3,
+   "rubik/radon": 3,
+   "rustedpy/result": 3,
+   "scrapy/scrapy": 3,
+   "datamade/usaddress": 2,
+   "dbader/schedule": 2,
+   "google/textfsm": 2,
+   "gweis/isodate": 2,
+   "hukkin/tomli": 2,
+   "jd/tenacity": 2,
+   "joke2k/faker": 2,
+   "keleshev/schema": 2,
+   "marshmallow-code/apispec": 2,
+   "project-monai/monai": 2,
+   "tweepy/tweepy": 2,
+   "alanjds/drf-nested-routers": 1,
+   "buriy/python-readability": 1,
+   "burnash/gspread": 1,
+   "cookiecutter/cookiecutter": 1,
+   "django/channels": 1,
+   "django/daphne": 1,
+   "erikrose/parsimonious": 1,
+   "facebookresearch/hydra": 1,
+   "gruns/icecream": 1,
+   "kennethreitz/records": 1,
+   "luozhouyang/python-string-similarity": 1,
+   "r1chardj0n3s/parse": 1,
+   "seatgeek/thefuzz": 1,
+   "sloria/environs": 1,
+   "un33k/python-slugify": 1,
+   "workiva/go-datastructures": 1
+  },
+  "n_repositories": 87,
+  "bug_types": {
+   "func_basic": 161,
+   "lm_rewrite": 71,
+   "func_pm_flip_operators": 64,
+   "func_pm_op_change": 55,
+   "combine_file": 54,
+   "func_pm_ctrl_invert_if": 48,
+   "pr": 39,
+   "combine_module": 38,
+   "func_pm_ctrl_shuffle": 37,
+   "lm_modify": 37,
+   "func_pm_remove_cond": 31,
+   "func_pm_remove_assign": 29,
+   "func_pm_op_swap": 26,
+   "func_pm_op_change_const": 14,
+   "func_pm_remove_loop": 14,
+   "func_pm_class_rm_funcs": 11,
+   "func_pm_op_break_chains": 5,
+   "func_pm_remove_wrapper": 5,
+   "func_pm_class_rm_base": 1
+  }
+ },
+ "images": {
+  "n_distinct": 95,
+  "dev": 8,
+  "stage2": 87
+ },
+ "carried_calibrations": 620,
+ "seconds": 18.5,
+ "outputs": {
+  "tasks": {
+   "path": "/home/dean/qwen3.5-9b-sft/data/pools/swesmith/tasks.jsonl",
+   "bytes": 69699854,
+   "sha256": "27a8ae401fcfc732341d35badba6c47d2e44ec0bd50db920760b59e43cef96ec",
+   "n_records": 840,
+   "splits": {
+    "stage2": 707,
+    "dev": 99,
+    "excluded": 34
+   }
+  },
+  "candidates": {
+   "path": "/mnt/apex-shared/apex_data/work/data_swesmith_pool_gotopup_20261012_1912/candidates.jsonl",
+   "bytes": 2952039,
+   "sha256": "6c248863249fb123cf49d8f1a2ea3efaad926a5864b4235201efa05a08e1b04f",
+   "n_records": 23881
+  }
+ },
+ "calibration_before_rebuild": {
+  "run_id": "data_calibrate_swesmith_stage2_20261012",
+  "images": {
+   "distinct": 91,
+   "present": 91,
+   "missing": 0
+  },
+  "generated_at": "2026-10-12T11:02:00Z",
+  "pool_sha256": "09fc373e7d48a1fd47a9a76b23b79a2c640394e4b018cd1696ad4e3a81f81b98",
+  "verifier_version": "swesmith:3;swesmith==0.0.9;swebench==4.1.0",
+  "conditions": {
+   "network": "none",
+   "cpus": 2.0,
+   "memory": "8g",
+   "timeout": "max(2 x profile timeout, 300 s)"
+  },
+  "per_split": {
+   "dev": {
+    "admitted": 99,
+    "excluded": 1
+   },
+   "stage2": {
+    "admitted": 487,
+    "excluded": 33
+   }
+  },
+  "exclusion_reasons": {
+   "dev": {
+    "calibration:gold_f2p_failed_15_of_15": 1
+   },
+   "stage2": {
+    "calibration:parser_no_match": 26,
+    "calibration:gold_run_timeout_300s": 4,
+    "calibration:gold_f2p_failed_1_of_1": 1,
+    "calibration:gold_f2p_failed_1_of_13": 1,
+    "calibration:gold_f2p_failed_2_of_25": 1
+   }
+  },
+  "env_failures_this_run": {},
+  "by_language": {
+   "dev:go": {
+    "admitted": 50
+   },
+   "dev:py": {
+    "admitted": 49,
+    "excluded": 1
+   },
+   "stage2:go": {
+    "admitted": 23,
+    "excluded": 1
+   },
+   "stage2:py": {
+    "admitted": 464,
+    "excluded": 32
+   }
+  },
+  "reporters_admitted": {
+   "json:go": 73,
+   "junit:pytest": 502,
+   "text": 11
+  },
+  "p2p_exclusions": {
+   "tasks_with_exclusions": 18,
+   "ids_excluded": 49,
+   "ids_total_admitted": 537634
+  },
+  "gold_replay_seconds": {
+   "n": 620,
+   "median": 8.6,
+   "p90": 69.5,
+   "max": 308.3,
+   "sum_container_minutes": 293.5
+  }
+ },
+ "smoke": {
+  "run_at": "2026-10-12T19:47:34Z",
+  "repositories": 95,
+  "status_counts": {
+   "pass": 92,
+   "no_admitted_task": 3
+  },
+  "attempt_status_counts": {
+   "pass": 92
+  },
+  "tasks_excluded_by_attempt": 0,
+  "tasks_excluded_by_repository_failure": 0,
+  "tamper_kinds": {
+   "remove_f2p_test_file": 92
+  },
+  "per_repository": {
+   "alanjds/drf-nested-routers": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:alanjds__drf-nested-routers.6144169d.combine_file__839yzecb",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 3,
+       "f2p_n": 3,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.1
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_viewsets.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.2
+       ]
+      },
+      "seconds": 10.3
+     }
+    ]
+   },
+   "alecthomas/voluptuous": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:alecthomas__voluptuous.a7a55f83.func_basic__wn72aox5",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 8,
+       "f2p_n": 8,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "voluptuous/tests/tests.md",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.9
+       ]
+      },
+      "seconds": 9.0
+     }
+    ]
+   },
+   "allegro/bigcache": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:allegro__bigcache.5aa251c4.lm_rewrite__cbhvrkk6",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        22.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 23.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "bigcache_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        23.7
+       ]
+      },
+      "seconds": 70.1
+     }
+    ]
+   },
+   "amueller/word_cloud": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:amueller__word_cloud.ec24191c.combine_file__9bx7cdni",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        6.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 30,
+       "f2p_n": 30,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test/test_wordcloud.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        7.1
+       ]
+      },
+      "seconds": 22.0
+     }
+    ]
+   },
+   "andialbrecht/sqlparse": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:andialbrecht__sqlparse.e57923b3.combine_module__zqrr80g2",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.4
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 43,
+       "f2p_n": 43,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_cli.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.3
+       ]
+      },
+      "seconds": 10.7
+     }
+    ]
+   },
+   "ariga/atlas": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:ariga__atlas.1afaaba2.func_pm_remove_loop__hk2uun4z",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        9.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 13.1
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "sql/postgres/diff_oss_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        9.6
+       ]
+      },
+      "seconds": 36.2
+     }
+    ]
+   },
+   "arrow-py/arrow": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:arrow-py__arrow.1d70d009.func_pm_remove_assign__3yciraja",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        12.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 46,
+       "f2p_n": 46,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 10.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_arrow.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        11.7
+       ]
+      },
+      "seconds": 38.7
+     }
+    ]
+   },
+   "bits-and-blooms/bitset": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:bits-and-blooms__bitset.167865a2.lm_rewrite__n0xwmxe6",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.7
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "bitset_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.3
+       ]
+      },
+      "seconds": 11.2
+     }
+    ]
+   },
+   "blevesearch/bleve": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:blevesearch__bleve.f2876b5e.func_pm_flip_operators__b5y7hxzl",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        74.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 74.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "index_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        81.9
+       ]
+      },
+      "seconds": 234.6
+     }
+    ]
+   },
+   "buriy/python-readability": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:buriy__python-readability.40256f40.func_pm_op_change__b1q3e0b7",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 4,
+       "f2p_n": 4,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_article_only.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.6
+       ]
+      },
+      "seconds": 8.9
+     }
+    ]
+   },
+   "burnash/gspread": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:burnash__gspread.a8be3b96.func_pm_remove_wrapper__8fiiuog5",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 10,
+       "f2p_n": 10,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/cell_test.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.7
+       ]
+      },
+      "seconds": 15.9
+     }
+    ]
+   },
+   "bytedance/sonic": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:bytedance__sonic.de4f017f.func_pm_op_swap__284scvmq",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        28.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 5,
+       "f2p_n": 5,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 26.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "api_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        42.8
+       ]
+      },
+      "seconds": 101.2
+     }
+    ]
+   },
+   "c-bata/go-prompt": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:c-bata__go-prompt.82a91227.lm_modify__g2ne7oak",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "buffer_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.1
+       ]
+      },
+      "seconds": 17.0
+     }
+    ]
+   },
+   "caarlos0/env": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:caarlos0__env.56a09d29.lm_rewrite__wfoezybx",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 3,
+       "f2p_n": 3,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "env_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.1
+       ]
+      },
+      "seconds": 11.6
+     }
+    ]
+   },
+   "caddyserver/caddy": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:caddyserver__caddy.77dd12cc.func_pm_ctrl_invert_if__lpadqguo",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        32.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 32.7
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "modules/caddyhttp/push/link_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        28.6
+       ]
+      },
+      "seconds": 97.1
+     }
+    ]
+   },
+   "cantools/cantools": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:cantools__cantools.0c6a7871.func_basic__yqkq3b45",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        10.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 9,
+       "f2p_n": 9,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 9.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_command_line.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        10.2
+       ]
+      },
+      "seconds": 34.1
+     }
+    ]
+   },
+   "cknd/stackprinter": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:cknd__stackprinter.219fcc52.func_basic__1cwksd8q",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_formatting.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.3
+       ]
+      },
+      "seconds": 9.7
+     }
+    ]
+   },
+   "conan-io/conan": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:conan-io__conan.86f29e13.pr_17068",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        20.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 15,
+       "f2p_n": 15,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 25.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test/integration/command/info/test_info_build_order.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        27.1
+       ]
+      },
+      "seconds": 77.0
+     }
+    ]
+   },
+   "cookiecutter/cookiecutter": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:cookiecutter__cookiecutter.b4451231.lm_rewrite__l63dcmhn",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        9.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 9.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_read_user_variable.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        15.9
+       ]
+      },
+      "seconds": 38.7
+     }
+    ]
+   },
+   "dask/dask": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:dask__dask.5f61e423.combine_module__hbh8ki6b",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        35.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 7,
+       "f2p_n": 7,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 32.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "dask/array/tests/test_creation.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        30.3
+       ]
+      },
+      "seconds": 98.1
+     }
+    ]
+   },
+   "datamade/usaddress": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:datamade__usaddress.a42a8f0c.lm_rewrite__qrc0sw5h",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        6.3
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 5,
+       "f2p_n": 5,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 9.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_tagging.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        11.5
+       ]
+      },
+      "seconds": 30.4
+     }
+    ]
+   },
+   "dbader/schedule": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:dbader__schedule.82a43db1.func_basic__y6056eud",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test_schedule.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.8
+       ]
+      },
+      "seconds": 9.2
+     }
+    ]
+   },
+   "django/channels": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:django__channels.a144b4b8.func_basic__30xfp610",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        16.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 13.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_generic_websocket.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        11.9
+       ]
+      },
+      "seconds": 45.6
+     }
+    ]
+   },
+   "django/daphne": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:django__daphne.32ac73e1.combine_file__rsm4pkd0",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        19.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 9,
+       "f2p_n": 9,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 18.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_cli.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        18.1
+       ]
+      },
+      "seconds": 59.4
+     }
+    ]
+   },
+   "encode/starlette": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:encode__starlette.db5063c2.func_basic__cyjx999t",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        8.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 18,
+       "f2p_n": 18,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 8.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_formparsers.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        8.4
+       ]
+      },
+      "seconds": 29.7
+     }
+    ]
+   },
+   "erikrose/parsimonious": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:erikrose__parsimonious.0d3f5f93.lm_rewrite__h472yrs3",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 7,
+       "f2p_n": 7,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.7
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "parsimonious/tests/test_grammar.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.9
+       ]
+      },
+      "seconds": 9.0
+     }
+    ]
+   },
+   "facebookresearch/fvcore": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:facebookresearch__fvcore.a491d5b9.combine_file__fjezb8sp",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        222.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 127.1
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_layers_squeeze_excitation.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        249.5
+       ]
+      },
+      "seconds": 603.1
+     }
+    ]
+   },
+   "facebookresearch/hydra": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:facebookresearch__hydra.0f03eb60.lm_rewrite__n8cqra9c",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        88.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 80.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_basic_sweeper.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        82.5
+       ]
+      },
+      "seconds": 254.3
+     }
+    ]
+   },
+   "facelessuser/soupsieve": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:facelessuser__soupsieve.a8080d97.func_pm_remove_assign__5dhk1okx",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.0
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.9
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_level4/test_is.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.7
+       ]
+      },
+      "seconds": 13.3
+     }
+    ]
+   },
+   "getmoto/moto": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:getmoto__moto.694ce1f4.pr_6021",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 27,
+       "f2p_n": 27,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 5.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_firehose/test_firehose.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        7.0
+       ]
+      },
+      "seconds": 20.2
+     }
+    ]
+   },
+   "getnikola/nikola": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:getnikola__nikola.0f4c230e.func_pm_ctrl_invert_if__l64jxmo9",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        64.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 37,
+       "f2p_n": 38,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 51.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/integration/test_archive_full.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        61.5
+       ]
+      },
+      "seconds": 180.9
+     }
+    ]
+   },
+   "go-chi/chi": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:go-chi__chi.23c395f8.func_pm_flip_operators__qfyxmht7",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        32.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 7.7
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "middleware/compress_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        31.5
+       ]
+      },
+      "seconds": 74.4
+     }
+    ]
+   },
+   "go-critic/go-critic": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:go-critic__go-critic.db2ec6f4.func_pm_op_change__7b1ngnci",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        85.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 21.9
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "checkers/checkers_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        85.6
+       ]
+      },
+      "seconds": 196.8
+     }
+    ]
+   },
+   "google/textfsm": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:google__textfsm.c31b6007.func_basic__1a3251hk",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 14,
+       "f2p_n": 14,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/clitable_test.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.7
+       ]
+      },
+      "seconds": 8.7
+     }
+    ]
+   },
+   "gookit/color": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:gookit__color.5a495618.lm_modify__vhkg0zan",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        7.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 5.9
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "color_rgb_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        5.4
+       ]
+      },
+      "seconds": 21.4
+     }
+    ]
+   },
+   "gosuri/uiprogress": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:gosuri__uiprogress.484b9f69.lm_modify__1qqe7mmn",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "util/strutil/strutil_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.1
+       ]
+      },
+      "seconds": 16.2
+     }
+    ]
+   },
+   "graphql-python/graphene": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:graphql-python__graphene.82903263.func_basic__2zofomdw",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        9.3
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 9.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "examples/starwars_relay/tests/test_connections.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        10.4
+       ]
+      },
+      "seconds": 32.6
+     }
+    ]
+   },
+   "gruns/icecream": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:gruns__icecream.f76fef56.func_pm_ctrl_shuffle__0559gjlc",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 34,
+       "f2p_n": 34,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_icecream.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.4
+       ]
+      },
+      "seconds": 10.0
+     }
+    ]
+   },
+   "gweis/isodate": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:gweis__isodate.17cb25eb.func_basic__8z7497j9",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_duration.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.1
+       ]
+      },
+      "seconds": 9.3
+     }
+    ]
+   },
+   "hips/autograd": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:HIPS__autograd.ac044f0d.pr_579",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        13.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 11,
+       "f2p_n": 11,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 13.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_linalg.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        13.3
+       ]
+      },
+      "seconds": 40.5
+     }
+    ]
+   },
+   "hjson/hjson-go": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:hjson__hjson-go.f3219653.lm_rewrite__qnys6mse",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "hjson_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.7
+       ]
+      },
+      "seconds": 10.6
+     }
+    ]
+   },
+   "hukkin/tomli": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:hukkin__tomli.443a0c1b.func_basic__gmh96j96",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.0
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.1
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_error.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.9
+       ]
+      },
+      "seconds": 9.7
+     }
+    ]
+   },
+   "hypermodeinc/ristretto": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:hypermodeinc__ristretto.da570116.lm_rewrite__8p24rm4f",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        74.3
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 74.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "z/allocator_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        73.7
+       ]
+      },
+      "seconds": 225.6
+     }
+    ]
+   },
+   "iterative/dvc": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:iterative__dvc.1d6ea681.func_pm_remove_cond__ktgde2mw",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        15.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 15.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/unit/repo/experiments/queue/test_remove.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        15.8
+       ]
+      },
+      "seconds": 50.5
+     }
+    ]
+   },
+   "jawah/charset_normalizer": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:jawah__charset_normalizer.1fdd6463.func_basic__hyy71p89",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        5.4
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 44,
+       "f2p_n": 44,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_base_detection.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        5.3
+       ]
+      },
+      "seconds": 18.9
+     }
+    ]
+   },
+   "jd/tenacity": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:jd__tenacity.0d40e76f.func_basic__aavzza2x",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_tenacity.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.8
+       ]
+      },
+      "seconds": 15.7
+     }
+    ]
+   },
+   "john-kurkowski/tldextract": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:john-kurkowski__tldextract.3d1bf184.pr_314",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_cache.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.1
+       ]
+      },
+      "seconds": 9.4
+     }
+    ]
+   },
+   "joke2k/faker": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:joke2k__faker.8b401a7d.lm_rewrite__8bb0pic6",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        28.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 28.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/providers/test_address.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        28.8
+       ]
+      },
+      "seconds": 89.6
+     }
+    ]
+   },
+   "jsvine/pdfplumber": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:jsvine__pdfplumber.02ff4313.func_pm_remove_assign__khuqld35",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        38.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 16,
+       "f2p_n": 16,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 35.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_convert.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        39.7
+       ]
+      },
+      "seconds": 117.0
+     }
+    ]
+   },
+   "kayak/pypika": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:kayak__pypika.1c9646f0.func_basic__973m2j3q",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 7,
+       "f2p_n": 7,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "pypika/tests/test_analytic_queries.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.7
+       ]
+      },
+      "seconds": 11.4
+     }
+    ]
+   },
+   "keleshev/schema": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:keleshev__schema.24a30457.func_basic__bv8ooprw",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 6,
+       "f2p_n": 6,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test_schema.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.7
+       ]
+      },
+      "seconds": 8.5
+     }
+    ]
+   },
+   "kennethreitz/records": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:kennethreitz__records.5941ab27.func_basic__v42eqev7",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_69.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.6
+       ]
+      },
+      "seconds": 8.6
+     }
+    ]
+   },
+   "lepture/mistune": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:lepture__mistune.bf54ef67.combine_file__s27voi0k",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.3
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 23,
+       "f2p_n": 23,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_directives.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.3
+       ]
+      },
+      "seconds": 10.5
+     }
+    ]
+   },
+   "life4/textdistance": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:life4__textdistance.c3aca916.lm_rewrite__6ko7vr8l",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        14.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 7,
+       "f2p_n": 7,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 14.9
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_sequence/test_lcsseq.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        14.8
+       ]
+      },
+      "seconds": 44.7
+     }
+    ]
+   },
+   "luozhouyang/python-string-similarity": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:luozhouyang__python-string-similarity.115acaac.func_pm_ctrl_shuffle__jhaaq9av",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        1.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 1.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "strsimpy/cosine_test.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.4
+       ]
+      },
+      "seconds": 8.0
+     }
+    ]
+   },
+   "marshmallow-code/apispec": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:marshmallow-code__apispec.8b421526.combine_module__jn7aevur",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 32,
+       "f2p_n": 32,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_ext_marshmallow_field.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.5
+       ]
+      },
+      "seconds": 11.3
+     }
+    ]
+   },
+   "marshmallow-code/marshmallow": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:marshmallow-code__marshmallow.9716fc62.combine_module__zv4fhthn",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 6,
+       "f2p_n": 6,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_decorators.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.2
+       ]
+      },
+      "seconds": 13.5
+     }
+    ]
+   },
+   "marshmallow-code/webargs": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:marshmallow-code__webargs.dbde72fe.func_basic__6vz96qsa",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.3
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 14,
+       "f2p_n": 14,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_falconparser.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.4
+       ]
+      },
+      "seconds": 13.6
+     }
+    ]
+   },
+   "mido/mido": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:mido__mido.a0158ff9.combine_file__mlmasre0",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        6.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 4,
+       "f2p_n": 4,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 6.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/midifiles/test_units.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        6.4
+       ]
+      },
+      "seconds": 22.4
+     }
+    ]
+   },
+   "msiemens/tinydb": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:msiemens__tinydb.10644a0e.func_basic__yo2my06z",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 27,
+       "f2p_n": 27,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_storages.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.8
+       ]
+      },
+      "seconds": 12.2
+     }
+    ]
+   },
+   "oauthlib/oauthlib": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:oauthlib__oauthlib.1fd52536.combine_file__97c1wz0l",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 13,
+       "f2p_n": 13,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/oauth2/rfc8628/endpoints/test_error_responses.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.4
+       ]
+      },
+      "seconds": 16.8
+     }
+    ]
+   },
+   "pallets/click": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:pallets__click.fde47b4b.lm_rewrite__u3092xw9",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 3,
+       "f2p_n": 3,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.7
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_formatting.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.5
+       ]
+      },
+      "seconds": 11.5
+     }
+    ]
+   },
+   "pallets/jinja": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:pallets__jinja.ada0a9a6.func_basic__qarfhf50",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_filters.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.7
+       ]
+      },
+      "seconds": 14.6
+     }
+    ]
+   },
+   "pandas-dev/pandas": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:pandas-dev__pandas.95280573.func_pm_remove_assign__7wbjhs9z",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        246.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 5,
+       "f2p_n": 5,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 245.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "pandas/tests/io/test_stata.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        243.2
+       ]
+      },
+      "seconds": 735.2
+     }
+    ]
+   },
+   "pdfminer/pdfminer.six": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:pdfminer__pdfminer.six.1a8bd2f7.func_basic__qvrclr2w",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        5.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 5.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_tools_dumppdf.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        5.2
+       ]
+      },
+      "seconds": 19.2
+     }
+    ]
+   },
+   "project-monai/monai": {
+    "status": "no_admitted_task",
+    "attempts": []
+   },
+   "pyasn1/pyasn1": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:pyasn1__pyasn1.0f07d724.combine_file__6flj4195",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 7,
+       "f2p_n": 7,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/codec/ber/test_decoder.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.6
+       ]
+      },
+      "seconds": 16.0
+     }
+    ]
+   },
+   "pyca/pyopenssl": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:pyca__pyopenssl.04766a49.combine_module__u0wanj4d",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        7.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 5,
+       "f2p_n": 5,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 7.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_ssl.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        7.0
+       ]
+      },
+      "seconds": 25.7
+     }
+    ]
+   },
+   "pydantic/pydantic": {
+    "status": "no_admitted_task",
+    "attempts": []
+   },
+   "pygments/pygments": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:pygments__pygments.27649ebb.func_pm_remove_assign__mkmf6heb",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        20.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 4,
+       "f2p_n": 4,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 20.1
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/examplefiles/gap-repl/euclidean.tst",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        19.7
+       ]
+      },
+      "seconds": 63.6
+     }
+    ]
+   },
+   "python-hyper/h11": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:python-hyper__h11.bed0dd4a.combine_file__x6zkm6x0",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.3
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 17,
+       "f2p_n": 17,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "h11/tests/test_against_stdlib_http.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.8
+       ]
+      },
+      "seconds": 11.2
+     }
+    ]
+   },
+   "python-jsonschema/jsonschema": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:python-jsonschema__jsonschema.93e0caa5.func_pm_ctrl_shuffle__zza1rofz",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        12.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 50,
+       "f2p_n": 50,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 12.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "jsonschema/tests/test_cli.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        13.2
+       ]
+      },
+      "seconds": 42.1
+     }
+    ]
+   },
+   "python-openxml/python-docx": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:python-openxml__python-docx.0cf6d71f.func_basic__cwkpwcs2",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        7.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 8,
+       "f2p_n": 8,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 7.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_table.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        7.5
+       ]
+      },
+      "seconds": 25.6
+     }
+    ]
+   },
+   "r1chardj0n3s/parse": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:r1chardj0n3s__parse.30da9e4f.func_basic__u30gcrhh",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.0
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_parse.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        1.9
+       ]
+      },
+      "seconds": 10.0
+     }
+    ]
+   },
+   "roaringbitmap/roaring": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:RoaringBitmap__roaring.09c46a0a.func_pm_op_change__kmt5s97p",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        78.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 52.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "roaring64/roaring64_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        80.9
+       ]
+      },
+      "seconds": 215.6
+     }
+    ]
+   },
+   "rsalmei/alive-progress": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:rsalmei__alive-progress.35853799.combine_module__f3jr8qpt",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        3.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 44,
+       "f2p_n": 44,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.2
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/core/test_hook_manager.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.6
+       ]
+      },
+      "seconds": 14.0
+     }
+    ]
+   },
+   "rubik/radon": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:rubik__radon.54b88e58.func_basic__0u25baz7",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.3
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "radon/tests/test_complexity_utils.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        3.2
+       ]
+      },
+      "seconds": 12.6
+     }
+    ]
+   },
+   "rustedpy/result": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:rustedpy__result.0b855e1e.func_basic__d5ol6zma",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.4
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 7,
+       "f2p_n": 7,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.6
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_result.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.3
+       ]
+      },
+      "seconds": 17.0
+     }
+    ]
+   },
+   "scanny/python-pptx": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:scanny__python-pptx.278b47b1.func_pm_ctrl_shuffle__uvx4qiaa",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        13.0
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 3,
+       "f2p_n": 3,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 11.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/chart/test_axis.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        10.9
+       ]
+      },
+      "seconds": 39.0
+     }
+    ]
+   },
+   "scrapy/scrapy": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:scrapy__scrapy.35212ec5.func_pm_ctrl_shuffle__rv9g5vwe",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        96.4
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 17,
+       "f2p_n": 17,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 87.7
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_commands.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        102.3
+       ]
+      },
+      "seconds": 286.5
+     }
+    ]
+   },
+   "seatgeek/thefuzz": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:seatgeek__thefuzz.8a05a3ee.pr_71",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 3.9
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test_thefuzz.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.2
+       ]
+      },
+      "seconds": 15.9
+     }
+    ]
+   },
+   "sloria/environs": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:sloria__environs.73c372df.func_basic__psy77r99",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        2.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 2.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_environs.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        2.5
+       ]
+      },
+      "seconds": 11.3
+     }
+    ]
+   },
+   "sqlfluff/sqlfluff": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:sqlfluff__sqlfluff.50a1c4b6.combine_file__ncuqqca1",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.0
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 3,
+       "f2p_n": 3,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test/core/rules/functional/segments_test.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.0
+       ]
+      },
+      "seconds": 16.0
+     }
+    ]
+   },
+   "stanfordnlp/dspy": {
+    "status": "no_admitted_task",
+    "attempts": []
+   },
+   "stanfordnlp/string2string": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:stanfordnlp__string2string.c4a72f59.func_pm_remove_assign__tommce5q",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        8.5
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 9.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_sacrebleu.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        9.4
+       ]
+      },
+      "seconds": 30.5
+     }
+    ]
+   },
+   "sunpy/sunpy": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:sunpy__sunpy.f8edfd5c.lm_rewrite__xuevyv1i",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        5.6
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 5.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "sunpy/image/tests/test_resample.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        5.4
+       ]
+      },
+      "seconds": 16.6
+     }
+    ]
+   },
+   "suor/funcy": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:Suor__funcy.207a7810.combine_file__kf50a2ph",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 5.5
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_strings.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.5
+       ]
+      },
+      "seconds": 18.0
+     }
+    ]
+   },
+   "theskumar/python-dotenv": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:theskumar__python-dotenv.2b8635b7.combine_module__pc659uc0",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        5.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 24,
+       "f2p_n": 24,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 6.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_main.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        6.6
+       ]
+      },
+      "seconds": 22.2
+     }
+    ]
+   },
+   "tkrajina/gpxpy": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:tkrajina__gpxpy.09fc46b3.func_pm_remove_loop__0h1unrru",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        4.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 4.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        4.8
+       ]
+      },
+      "seconds": 17.6
+     }
+    ]
+   },
+   "tobymao/sqlglot": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:tobymao__sqlglot.036601ba.func_pm_op_swap__0j2w0c48",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        187.2
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 177.4
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/dialects/test_bigquery.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        188.7
+       ]
+      },
+      "seconds": 557.1
+     }
+    ]
+   },
+   "tornadoweb/tornado": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:tornadoweb__tornado.d5ac65c1.func_pm_op_break_chains__cpjy955b",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        22.8
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 22.0
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tornado/test/locale_test.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        24.7
+       ]
+      },
+      "seconds": 73.2
+     }
+    ]
+   },
+   "tox-dev/pipdeptree": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:tox-dev__pipdeptree.c31b6418.func_pm_ctrl_invert_if__zxdv4kz3",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        7.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 2,
+       "f2p_n": 2,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 13.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/render/test_mermaid.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        10.0
+       ]
+      },
+      "seconds": 34.8
+     }
+    ]
+   },
+   "tweepy/tweepy": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:tweepy__tweepy.91a41c6e.func_basic__07zgqqg5",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        6.7
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 1,
+       "f2p_n": 1,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 7.8
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "tests/test_client.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        8.6
+       ]
+      },
+      "seconds": 26.9
+     }
+    ]
+   },
+   "un33k/python-slugify": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:un33k__python-slugify.872b3750.lm_rewrite__10gtvo7v",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        7.1
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 7,
+       "f2p_n": 7,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 7.3
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "test.py",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        8.9
+       ]
+      },
+      "seconds": 27.0
+     }
+    ]
+   },
+   "workiva/go-datastructures": {
+    "status": "pass",
+    "attempts": [
+     {
+      "task_id": "swesmith:Workiva__go-datastructures.18d77378.lm_rewrite__846511ju",
+      "status": "pass",
+      "gold": {
+       "r_pass": 1,
+       "n_runs": 1,
+       "flags": [],
+       "seconds": [
+        9.9
+       ]
+      },
+      "empty": {
+       "tests_pass": false,
+       "f2p_failure": 6,
+       "f2p_n": 6,
+       "error": null,
+       "r_pass": 0,
+       "flags": [
+        "empty_diff"
+       ],
+       "seconds": 9.9
+      },
+      "tampered": {
+       "kind": "remove_f2p_test_file",
+       "r_pass": 0,
+       "flags": [
+        "tests_touched"
+       ],
+       "n_runs": 1,
+       "first_run_tests_pass": true,
+       "excluded_paths": [
+        {
+         "path": "sort/sort_test.go",
+         "reasons": [
+          "test"
+         ]
+        }
+       ],
+       "seconds": [
+        13.1
+       ]
+      },
+      "seconds": 36.0
+     }
+    ]
+   }
+  }
+ },
+ "calibration": {
+  "run_id": "data_calibrate_swesmith_gotopup_smoke_20261012_1912",
+  "images": {
+   "distinct": 95,
+   "present": 95,
+   "missing": 0
+  },
+  "generated_at": "2026-10-12T19:47:39Z",
+  "pool_sha256": "30712330d8422e36f499520641a340d3507e8363687f47513742b70fe4389f44",
+  "verifier_version": "swesmith:4;swesmith==0.0.9;swebench==4.1.0",
+  "conditions": {
+   "network": "none",
+   "cpus": 2.0,
+   "memory": "8g",
+   "timeout": "max(2 x profile timeout, 300 s)"
+  },
+  "per_split": {
+   "dev": {
+    "admitted": 99,
+    "excluded": 1
+   },
+   "stage2": {
+    "admitted": 705,
+    "excluded": 35
+   }
+  },
+  "exclusion_reasons": {
+   "dev": {
+    "calibration:gold_f2p_failed_15_of_15": 1
+   },
+   "stage2": {
+    "calibration:parser_no_match": 26,
+    "calibration:gold_run_timeout_300s": 4,
+    "calibration:gold_f2p_failed_1_of_1": 2,
+    "calibration:gold_f2p_failed_1_of_13": 1,
+    "calibration:gold_f2p_failed_1_of_4": 1,
+    "calibration:gold_f2p_failed_2_of_25": 1
+   }
+  },
+  "env_failures_this_run": {},
+  "by_language": {
+   "dev:go": {
+    "admitted": 50
+   },
+   "dev:py": {
+    "admitted": 49,
+    "excluded": 1
+   },
+   "stage2:go": {
+    "admitted": 241,
+    "excluded": 3
+   },
+   "stage2:py": {
+    "admitted": 464,
+    "excluded": 32
+   }
+  },
+  "reporters_admitted": {
+   "json:go": 291,
+   "junit:pytest": 502,
+   "text": 11
+  },
+  "p2p_exclusions": {
+   "tasks_with_exclusions": 18,
+   "ids_excluded": 49,
+   "ids_total_admitted": 647079
+  },
+  "gold_replay_seconds": {
+   "n": 840,
+   "median": 10.3,
+   "p90": 81.2,
+   "max": 308.3,
+   "sum_container_minutes": 507.3
+  }
+ }
+}

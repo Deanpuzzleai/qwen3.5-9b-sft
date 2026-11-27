@@ -1,0 +1,156 @@
+# Resolved SFT config of run sft_pilot_lr5e5_20261012_090858 (verbatim `config` of logs/sft_pilot_lr5e5_20261012_090858/metadata.json).
+# Role: pilot B (data v1 pilot rows, LR 5e-5)
+# Status: finished; 2026-10-12T09:08:59Z -> 2026-10-12T09:39:07Z; planned optimizer steps: 29
+# Base file: configs/sft.yaml at commit cea63effd19c47db15ddeeeb0ceeb70bce51546b (dirty=True), sha256 d60f16c8c6b47bccc3a3c956c4ae4a978fdf9673c1d7a0d7b720006e5371b7dc; copy in logs/sft_pilot_lr5e5_20261012_090858/config_snapshot/sft.yaml
+# Preset: pilot; smoke: False
+# Overrides applied on top of the base file (in order; source cli = `--override`/`--max-steps` on the command line):
+#   data.train_rows: "data/processed/sft/train_rows.parquet" -> "data/processed/sft/pilot_rows.parquet"  [preset:pilot]
+#   run.name: "main" -> "pilot"  [preset:pilot]
+#   monitor.eval_on_start: false -> true  [cli]
+#   run.name: "pilot" -> "pilot_lr5e5"  [cli]
+#   optim.learning_rate: 0.0001 -> 5e-05  [cli]
+# Command (as recorded; the trainer is launched by scripts/train_sft.sh):
+#   /home/apex-cpu/qwen3.5-9b-sft/src/apex_train/sft.py --preset pilot --override monitor.eval_on_start=true --override run.name=pilot_lr5e5 --override optim.learning_rate=5.0e-5
+# Data train: pilot_rows.parquet (459 rows, 3434518 loss tokens), sha256 5627780636d8741efb67a6c3a53d01d3b9d5e9b61459a83e2ddadad24000b744
+# Data dev: dev_rows.parquet (242 rows, 1955480 loss tokens), sha256 abd6dad0916115538c4857dbca144b653265f1a31210ed1870589c0db55283ba
+
+model:
+  repo: Qwen/Qwen3.5-9B
+  revision: c202236235762e1c871ad0ccb60c8ee5ba337b9a
+  path: /mnt/models/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a
+  auto_class: AutoModelForImageTextToText
+  dtype: bfloat16
+  attn_implementation: sdpa
+  gradient_checkpointing: true
+  gradient_checkpointing_use_reentrant: false
+  vision_tower: frozen
+lora:
+  r: 32
+  alpha: 64
+  dropout: 0.05
+  bias: none
+  init_lora_weights: true
+  target_modules:
+  - q_proj
+  - k_proj
+  - v_proj
+  - o_proj
+  - in_proj_qkv
+  - in_proj_z
+  - in_proj_b
+  - in_proj_a
+  - out_proj
+  - gate_proj
+  - up_proj
+  - down_proj
+  never_target:
+  - gate
+  - conv1d
+  - embed_tokens
+  - lm_head
+  quantization: none
+  expected_trainable_params: 86556672
+data:
+  train_rows: data/processed/sft/pilot_rows.parquet
+  dev_rows: data/processed/sft/dev_rows.parquet
+  mixture_manifest: data/manifests/mixture.json
+  max_length: 65536
+  packing: false
+  padding_free: false
+optim:
+  learning_rate: 5.0e-05
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.0
+  optim: adamw_torch
+  max_grad_norm: 1.0
+  loss_normalisation: tokens
+  per_device_train_batch_size: 1
+  gradient_accumulation_steps: 16
+  effective_batch_size: 16
+  num_train_epochs: 1
+  max_steps: null
+eval:
+  strategy: steps
+  eval_steps: 25
+  per_device_eval_batch_size: 1
+logging:
+  logging_steps: 1
+  save_strategy: steps
+  save_steps: 25
+  save_total_limit: null
+  seed: 42
+  data_seed: 42
+run:
+  name: pilot_lr5e5
+  output_root: checkpoints
+  curves_dir: curves/source
+monitor:
+  enabled: true
+  slice_key: task_type
+  row_records: true
+  loss_ema_beta: 0.9
+  lora_every_steps: 10
+  gpu_sample_every_s: 15
+  watchdog_every_s: 30
+  alert_cooldown_steps: 25
+  alert_cooldown_s: 900
+  health_window_s: 1800
+  stop_on_nonfinite: true
+  stop_on_data_error: true
+  spike_window: 50
+  spike_min_history: 20
+  loss_spike_mad_k: 6.0
+  loss_spike_min_delta: 0.1
+  loss_spike_repeat_n: 3
+  loss_spike_repeat_window: 25
+  grad_spike_factor: 5.0
+  clip_rate_window: 50
+  clip_rate_warn: 0.5
+  lr_rel_tol: 0.01
+  throughput_window: 20
+  throughput_drop_fraction: 0.5
+  throughput_drop_steps: 3
+  stall_minutes: 20
+  stall_step_factor: 5.0
+  eval_stall_minutes: 60
+  loading_stall_minutes: 45
+  gpu_mem_reserved_warn_fraction: 0.92
+  mem_leak_window: 50
+  gpu_mem_leak_min_gb: 1.0
+  rss_leak_min_gb: 8.0
+  gpu_util_low_pct: 50
+  gpu_util_low_minutes: 5
+  gpu_temp_warn_c: 87
+  throttle_warn_mask: 232
+  overfit_consecutive_evals: 2
+  forgetting_rel_increase: 0.05
+  lora_update_ratio_warn: 0.5
+  disk_free_warn_gb: 50
+  eval_max_rows_per_slice: null
+  eval_on_start: true
+presets:
+  pilot:
+    data.train_rows: data/processed/sft/pilot_rows.parquet
+    run.name: pilot
+smoke:
+  overrides:
+    model.path: checkpoints/gpu_checks/tiny_cg_twin
+    model.repo: null
+    model.revision: null
+    lora.expected_trainable_params: null
+    data.train_rows: null
+    data.dev_rows: null
+    data.mixture_manifest: null
+    data.max_length: 1024
+    optim.gradient_accumulation_steps: 2
+    optim.effective_batch_size: 2
+    optim.max_steps: 8
+    optim.warmup_ratio: 0.0
+    eval.eval_steps: 6
+    logging.save_steps: 3
+  synthetic:
+    n_train_samples: 24
+    n_dev_samples: 12
+    seed_train: 0
+    seed_dev: 1

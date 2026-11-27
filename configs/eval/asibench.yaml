@@ -1,0 +1,66 @@
+# ASI-Bench lock: seed42 (official, Portal-scored; confirmed 2026-10-10) is the only result of this
+# experiment; the seed31415 local companion runs for stage 2 only, as an unofficial fallback (decision_2026-10-12_companion).
+# Everything here is fixed before training; open_items lists what the first-GPU pilot must close first. Do not edit without
+# explicit instruction.
+benchmark: ASI-Bench
+status: locked
+drafted_on: 2026-10-10
+locked_on: 2026-10-12
+open_items: []
+decision_2026-10-12_lock: "After the Base smoke tests: run_mode.parallel 16 locked as tested (smoke: 2 B1 instances completed in 7 and 23 min with the opencode sandbox reaching the endpoint through the docker0 tunnel address); Base's bundle is uploaded to the Portal as a draft on completion (runner --submit) and confirmed by the submitter"
+source:
+  repository: https://github.com/apexin-ai/ASI-Bench
+  commit: f13175a89dc9b4873f6306a3d31e46927c38f1a9   # 2026-10-09; tasks/ (scoring contracts + scorers) and CLI source
+  package: "asibench, editable install of the pinned checkout above (pyproject version 0.1.6); NOT the PyPI 0.1.6 wheel"
+  why_checkout_not_pypi: "the PyPI 0.1.6 release (tag v0.1.6, 2026-09-18) predates scorer and local-scoring fixes on main and 15 changed files under tasks/; installing the CLI from the same commit as tasks/ keeps scorer code and scoring contracts consistent"
+  local_patch: configs/eval/patches/asibench-overlay-home-perms.patch
+  local_patch_scope: "infrastructure only: the generated agent-overlay Dockerfile gets `chmod -R a+rwX /home/agent` so the sandbox container works when launched with the host uid (the harness's own `--user <host_uid>` mode); no change to prompts, tools, scoring, timeouts or the agent"
+  primary_split: seed42
+  seed42_dataset: Apexintelligence-AI/ASI-Bench-seed42
+  seed42_revision: 4533397770a85ef79afe31e0361cbd9c42d5b50d   # 2026-10-07; prompts b1-b4 + data/ only, references private
+  seed42_instances_dir: third_party/asibench_instances/seed42
+  seed42_scoring: "official: produce-only run; `asibench submit` builds submission_<timestamp>.tar.gz (manifest with per-file sha256, per-instance result.json + outputs/) and uploads a private draft that the submitter confirms in the Portal (Draft -> Confirmed -> Scored -> Published; asynchronous, no SLA); self-reported scores are never used"
+  seed42_portal: "https://asibench.apexin.ai; CLI credential via `asibench login` (device flow) or ASIBENCH_SUBMIT_TOKEN in .env; the CLI's default upload endpoint"
+  companion_split: seed31415   # stage 2 only, unofficial and never the reported ASI-Bench cell (decision_2026-10-12_companion)
+  dataset: Apexintelligence-AI/ASI-Bench-seed31415
+  dataset_revision: 0fa14219cafdbab634d8b3cfbce238a8735a214f   # 2026-10-07
+  instances_dir: third_party/asibench_instances/seed31415   # 60 instances: prompts b1-b4, data/, public reference/ (used only by the official scorer)
+  reference_isolation: "the os sandbox runs the agent in a per-level workspace prepared from the instance's prompt and data only; reference/ never enters it (ai4sci_bench/runner/orchestrator.py: workspace isolated from instance_dir)"
+  instances_pin: "scripts/setup_eval_env.sh pulls each split at its revision and writes <instances_dir>/.revision; the runner records it"
+task_set:
+  n_tasks: 60
+  domains: {math: 12, computer_science: 9, physics: 8, robotics: 7, biology: 6, chemistry: 6, earth_science: 4, astronomy: 3, electrical_engineering: 2, materials: 2, biostat: 1}
+  prompt_levels: [b1]   # compute-budget simplification (decision_2026-10-12_level): one level, B1 (full method); 60 (instance, level) results per model; was b1-b4 (240)
+  instances_per_task: 1
+run_mode:   # read by src/apex_eval/asibench.py (scripts/evaluate.sh asibench): run -> (score) -> report -> (submit)
+  sandbox: os                       # Docker sandbox per instance
+  agent: opencode_cli
+  agent_config: {api_base_env: EVAL_API_BASE, api_key_env: EVAL_API_KEY, api_protocol: openai}   # + model = the served name; endpoint and key come from env vars, never the command line
+  why_opencode: "--agent-cmd supports only the none/linux_ns sandboxes and unprivileged user namespaces are blocked by AppArmor here; opencode_cli supports the Docker os sandbox and an explicit OpenAI-compatible endpoint"
+  agent_version: "opencode 1.17.15: installed into the task image by asibench (ai4sci_bench/runner/task_image.py); the same version is on the host PATH because the CLI's preflight requires the binary there"
+  timeout_sec_per_instance: 10800   # asibench default; uniform
+  parallel: 16                      # identical for all three models (decision_2026-10-12_lock)
+  tool_mode: restricted             # web tools disabled; file/shell tools only
+  sandbox_resources: "asibench OSSandbox defaults; per-container cpu/memory limits recorded from run provenance"
+inference:   # this experiment's settings, as sent by opencode 1.17.15 (request capture: logs/train_stack_check/harness_request_shapes/); identical for Base, LoRA SFT and stage 2
+  server: "vLLM as pinned in configs/eval/model.yaml; OpenAI-compatible chat completions, streaming"
+  thinking: enabled
+  preserve_thinking: "replayed: opencode sends reasoning_content of earlier assistant turns back on every turn; the chat template keeps think blocks only for assistant turns after the last non-tool user message; identical for all three versions"
+  sampling: "temperature and top_k are not sent by opencode, so the server's generation_config defaults apply (temperature 1.0, top_k 20); top_p 1.0 is forced by opencode"
+  max_tokens_per_turn: 32000   # set by opencode; not configurable through the adapter
+  context_window: 262144       # no automatic compaction for a config-defined model: an episode that exceeds it fails and is recorded as a run failure
+  tools: "opencode built-in function-calling tools: bash, edit, glob, grep, read, skill, task, todowrite, write (tool_choice auto); web tools disabled by tool_mode restricted; no MCP servers"
+primary_metric:
+  name: "seed42 Portal score on prompt level B1 (official primary metric and sub-scores as reported by the Portal for the submitted B1 results)"   # 0-100
+  aggregation: "unweighted mean of final_score over all scored (instance, prompt_level) results; NOT SCORED / evaluation_invalid results are excluded from the denominator and reported separately as run failures"
+  sub_scores: "as reported by the Portal (by prompt level b1..b4, by domain, and per task where the Portal provides it); the runner keeps every per-(task, level) produce-only output, status, time and token count under results/"
+scoring:
+  official: "seed42 is scored by the Portal against private references, including the 13 task contracts that call an LLM judge (openai/gpt-5.5, reasoning_effort medium); no local scoring in this experiment"
+  local_scoring: "the stage-2 seed31415 run only (decision_2026-10-12_companion): `asibench score --repo seed31415` through the judge forwarding proxy (src/apex_eval/judge_proxy.py, written because the pinned local scorer sends a temperature that gpt-5.5 rejects); a 2-task smoke (one judge-scored contract) precedes the full run"
+official_vs_this_experiment:
+  official: "seed42 private references, Portal scoring, built-in frontier-CLI adapters"
+  here: "seed42: produce-only run with opencode 1.17.15 against the self-hosted vLLM endpoint, submitted to and scored by the Portal (official result); one run of all 60 tasks at prompt level B1 (60 results) per model version, a compute-budget simplification of the official four-level run; not comparable to leaderboard rows that average all four levels or three runs"
+
+decision_2026-10-12: "No seed31415 local companion run. ASI-Bench is reported only from the Portal's seed42 scores (primary metric and sub-scores). A Portal score that arrives after the deadline is reported as pending with its submission id; per-(task, level) outputs, run status, time and tokens are kept under results/ for every version either way."
+decision_2026-10-12_level: "To reduce compute, ASI-Bench is evaluated on one prompt level instead of four. Level B1 (full method) on all 60 tasks for Base, SFT and stage 2. Reason: B1 states the method, so the score measures implementing and running a specified scientific method; under the goal-only levels (B3, B4) a 9B is likely near the floor for every version, which would hide differences between versions."
+decision_2026-10-12_companion: "Stage 2 also gets one local seed31415 run at prompt level B1 (all 60 tasks, same agent, sandbox and limits as seed42), scored here by the official local scorer, as an unofficial fallback in case the Portal's seed42 score is not back by the deadline; it runs only after stage 2 is trained. Base and SFT are not run on seed31415 (this narrows the decision from SFT and stage 2), so the number has no cross-version comparison; it is reported separately and labelled non-official, is never the ASI-Bench cell of the results table (the runner marks seed31415 runs not reportable), and is never used for training, prompts or checkpoint selection. Amends decision_2026-10-12 for stage 2 only."

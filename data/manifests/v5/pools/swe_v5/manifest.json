@@ -1,0 +1,2264 @@
+{
+  "pool": "swe_v5",
+  "source": "oswt",
+  "run_id": "data_swe_v5_20261013_060512",
+  "built": "2026-10-13T07:22:31Z",
+  "seed": 42,
+  "plan": "docs/DATA_PLAN_v5.md 1.3, 3.1, 3.4, 5.1",
+  "code_commit": "ffd6ba776199551e1a99ef2894a1d52f5cbd60fd",
+  "record_version": "swe_v5:1|efficiency:1",
+  "dataset": {
+    "repo": "nvidia/Open-SWE-Traces",
+    "revision": "e192b26a43b8d09f156eeee781aef8e6bd5108ba",
+    "licence": "CC-BY-4.0",
+    "shards": {
+      "n": 44,
+      "processed": 44,
+      "limited": false
+    }
+  },
+  "generator": {
+    "name": "Qwen3.8-27B",
+    "thinking": true,
+    "label_provenance": "verifier (upstream resolved == 1)"
+  },
+  "templates": {
+    "version": "2.4.6",
+    "config_path": "/home/dean/qwen3.5-9b-sft/.venv/harbor/lib/python3.12/site-packages/minisweagent/config/mini.yaml",
+    "config_sha256": "b539a8965f5bf41dd0f32daafa5d2db22581923d13812fa378fd09569b9d6b0c",
+    "bash_tool": {
+      "type": "function",
+      "function": {
+        "name": "bash",
+        "description": "Execute a bash command",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "The bash command to execute"
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    "teacher_prefix": "<pr_description>\nConsider the following PR description:\n",
+    "teacher_close": "</pr_description>",
+    "teacher_config_path": "/home/dean/qwen3.5-9b-sft/.venv/harbor/lib/python3.12/site-packages/minisweagent/config/benchmarks/swebench.yaml",
+    "template_vars": {
+      "system": "Linux",
+      "node": "apex-cpu",
+      "release": "6.11.0-1016-nvidia",
+      "version": "#16-Ubuntu SMP PREEMPT_DYNAMIC Sun Sep 21 17:06:33 UTC 2025",
+      "machine": "x86_64"
+    },
+    "lock_reference": {
+      "path": "/home/dean/qwen3.5-9b-sft/logs/train_stack_check/harness_request_shapes/captures/mini_swe_agent_config.generated.yaml",
+      "sha256": "f889fbce66d7d2402562e197170c02bc308d5524111d71fa12fa0c1f81553f15",
+      "matched": [
+        "agent.system_template",
+        "agent.instance_template",
+        "model.observation_template"
+      ]
+    },
+    "bash_tool_sha256": "e7d0cb824728a0e677d5d6521845f5b87f5907091a0538310ae964dfdaee437c"
+  },
+  "tokenizer": {
+    "path": "/mnt/apex-shared/models/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+  },
+  "rules": {
+    "bands": "efficiency.swe_band over every attempt with a known outcome; < 2 known = not used",
+    "limits": {
+      "easy": {
+        "turn_ceiling": 1000,
+        "mean_max": 270,
+        "mean_min": 0,
+        "steps_max": 50,
+        "row_max": 32768,
+        "output_max": null
+      },
+      "medium": {
+        "turn_ceiling": 1500,
+        "mean_max": 360,
+        "mean_min": 0,
+        "steps_max": 65,
+        "row_max": 49152,
+        "output_max": null
+      },
+      "hard": {
+        "turn_ceiling": 3000,
+        "mean_max": 450,
+        "mean_min": 180,
+        "steps_max": 80,
+        "row_max": 65536,
+        "output_max": null
+      }
+    },
+    "loss_cap_per_row": 32768,
+    "raw_prefilter_slack": 0.05,
+    "skip_gates": [
+      "thrashing"
+    ],
+    "draw_settings": {
+      "keep_all_bands": [
+        "hard",
+        "medium"
+      ],
+      "band_shares": {
+        "hard": 0.2,
+        "medium": 0.5,
+        "easy": 0.45
+      },
+      "repo_caps": {
+        "go": 5,
+        "ts": 5
+      },
+      "max_per_repository": 3,
+      "target_loss_tokens": null,
+      "second_attempt_bands": [
+        "medium"
+      ],
+      "max_second_share": 0.3,
+      "note": "Revision 3. Dean, 2026-10-13 ~06:20 (relayed): every admitted hard and medium instance kept, easy capped at 45 percent of SWE loss tokens, repository cap 5 for Go and TypeScript (3 for the rest). Orchestrator, ~06:50 (after Dean asked for more scale): medium instances may add their second gate-passing attempt (at most 30 percent of episodes); hard has none, easy stays first attempts only. Gates, lowest-thinking choice, recovery preference and category round-robin unchanged"
+    },
+    "language_shares": {
+      "go": 0.36,
+      "py": 0.34,
+      "ts": 0.18,
+      "js": 0.06,
+      "other": 0.06
+    },
+    "language_groups": {
+      "go": "go",
+      "py": "py",
+      "ts": "ts",
+      "js": "js",
+      "rust": "other",
+      "java": "other",
+      "php": "other"
+    },
+    "gap_order": [
+      "go",
+      "py"
+    ],
+    "recovery_min": 0.2,
+    "category_cap": 0.5,
+    "lineage": "one instance per (repository, PR)",
+    "repo_root": "/app",
+    "attempt_choice": "per instance the gate-passing attempt with the lowest rendered thinking_mean; in second_attempt_bands also the next one (attempt 2)"
+  },
+  "funnel": {
+    "row_filters": [
+      {
+        "filter": "0_rows_in_shards",
+        "n_in": 107267,
+        "n_dropped": 0,
+        "n_out": 107267,
+        "note": "teacher identity, thinking mode and upstream dataset asserted per row"
+      },
+      {
+        "filter": "1_resolved",
+        "n_in": 107267,
+        "n_dropped": 57342,
+        "n_out": 49925
+      },
+      {
+        "filter": "1_language",
+        "n_in": 49925,
+        "n_dropped": 75,
+        "n_out": 49850
+      },
+      {
+        "filter": "1_licence",
+        "n_in": 49850,
+        "n_dropped": 0,
+        "n_out": 49850
+      },
+      {
+        "filter": "1_scale_swe_verified",
+        "n_in": 49850,
+        "n_dropped": 0,
+        "n_out": 49850
+      },
+      {
+        "filter": "2_d2_and_decontam_exclusions",
+        "n_in": 49850,
+        "n_dropped": 37,
+        "n_out": 49813
+      },
+      {
+        "filter": "3_tool_schema",
+        "n_in": 49813,
+        "n_dropped": 0,
+        "n_out": 49813
+      },
+      {
+        "filter": "3_model_patch_clean",
+        "n_in": 49813,
+        "n_dropped": 837,
+        "n_out": 48976
+      },
+      {
+        "filter": "4_reasoning_every_turn",
+        "n_in": 48976,
+        "n_dropped": 7,
+        "n_out": 48969
+      },
+      {
+        "filter": "6_dev_exclusions",
+        "n_in": 48969,
+        "n_dropped": 13,
+        "n_out": 48956
+      },
+      {
+        "filter": "7_banded",
+        "n_in": 48956,
+        "n_dropped": 1082,
+        "n_out": 47874
+      }
+    ],
+    "raw_profile": {
+      "n_in": 47874,
+      "n_out": 5208,
+      "reasons": {
+        "turn_ceiling": 41736,
+        "mean_above": 32525,
+        "steps": 11585,
+        "unverified_completion": 4415,
+        "wasted_actions": 3364,
+        "tamper": 463,
+        "mean_below": 23
+      }
+    },
+    "rendered": {
+      "n_in": 5208,
+      "n_out": 3523,
+      "by_stage": {
+        "repo_root_ambiguous": 671,
+        "band_row_cap": 461,
+        "reference_patch_leak": 267,
+        "profile": 253,
+        "rebuild": 8,
+        "gate_language": 24,
+        "d2_text": 1
+      },
+      "profile_reasons": {
+        "turn_ceiling": 214,
+        "mean_above": 33,
+        "mean_below": 6,
+        "loss_cap": 1,
+        "wasted_actions": 6
+      }
+    },
+    "instances_admitted": 2418,
+    "excluded_task_ids": 9
+  },
+  "rendered_funnel": [
+    {
+      "filter": "raw_profile",
+      "n_in": 47874,
+      "n_dropped": 42666,
+      "n_out": 5208,
+      "reasons": {
+        "null": 42666
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 3214,
+          "n_dropped": 0,
+          "n_out": 3214
+        },
+        "scale-swe/python": {
+          "n_in": 23168,
+          "n_dropped": 23168,
+          "n_out": 0
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 6079,
+          "n_dropped": 5475,
+          "n_out": 604
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 1061,
+          "n_dropped": 969,
+          "n_out": 92
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 3367,
+          "n_dropped": 3045,
+          "n_out": 322
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 1039,
+          "n_dropped": 971,
+          "n_out": 68
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 575,
+          "n_dropped": 0,
+          "n_out": 575
+        },
+        "swe-rebench-v2/python": {
+          "n_in": 6226,
+          "n_dropped": 6226,
+          "n_out": 0
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 536,
+          "n_dropped": 492,
+          "n_out": 44
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 2609,
+          "n_dropped": 2320,
+          "n_out": 289
+        }
+      }
+    },
+    {
+      "filter": "rebuild",
+      "n_in": 5208,
+      "n_dropped": 8,
+      "n_out": 5200,
+      "reasons": {
+        "format_error_turn": 6,
+        "no_submit": 2
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 3214,
+          "n_dropped": 0,
+          "n_out": 3214
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 604,
+          "n_dropped": 3,
+          "n_out": 601
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 92,
+          "n_dropped": 0,
+          "n_out": 92
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 322,
+          "n_dropped": 1,
+          "n_out": 321
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 68,
+          "n_dropped": 0,
+          "n_out": 68
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 575,
+          "n_dropped": 2,
+          "n_out": 573
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 44,
+          "n_dropped": 0,
+          "n_out": 44
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 289,
+          "n_dropped": 2,
+          "n_out": 287
+        }
+      }
+    },
+    {
+      "filter": "repo_root_ambiguous",
+      "n_in": 5200,
+      "n_dropped": 671,
+      "n_out": 4529,
+      "reasons": {
+        "repo_root_ambiguous": 671
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 3214,
+          "n_dropped": 475,
+          "n_out": 2739
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 601,
+          "n_dropped": 9,
+          "n_out": 592
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 92,
+          "n_dropped": 4,
+          "n_out": 88
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 321,
+          "n_dropped": 10,
+          "n_out": 311
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 68,
+          "n_dropped": 1,
+          "n_out": 67
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 573,
+          "n_dropped": 146,
+          "n_out": 427
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 44,
+          "n_dropped": 3,
+          "n_out": 41
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 287,
+          "n_dropped": 23,
+          "n_out": 264
+        }
+      }
+    },
+    {
+      "filter": "reference_patch_leak",
+      "n_in": 4529,
+      "n_dropped": 267,
+      "n_out": 4262,
+      "reasons": {
+        "reference_patch_line_in_prompt": 267
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2739,
+          "n_dropped": 139,
+          "n_out": 2600
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 592,
+          "n_dropped": 37,
+          "n_out": 555
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 88,
+          "n_dropped": 5,
+          "n_out": 83
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 311,
+          "n_dropped": 22,
+          "n_out": 289
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 67,
+          "n_dropped": 3,
+          "n_out": 64
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 427,
+          "n_dropped": 47,
+          "n_out": 380
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 41,
+          "n_dropped": 1,
+          "n_out": 40
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 264,
+          "n_dropped": 13,
+          "n_out": 251
+        }
+      }
+    },
+    {
+      "filter": "d2_text",
+      "n_in": 4262,
+      "n_dropped": 1,
+      "n_out": 4261,
+      "reasons": {
+        "d2_locked_repository": 1
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2600,
+          "n_dropped": 1,
+          "n_out": 2599
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 555,
+          "n_dropped": 0,
+          "n_out": 555
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 83,
+          "n_dropped": 0,
+          "n_out": 83
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 289,
+          "n_dropped": 0,
+          "n_out": 289
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 64,
+          "n_dropped": 0,
+          "n_out": 64
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 380,
+          "n_dropped": 0,
+          "n_out": 380
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 40,
+          "n_dropped": 0,
+          "n_out": 40
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 251,
+          "n_dropped": 0,
+          "n_out": 251
+        }
+      }
+    },
+    {
+      "filter": "band_row_cap",
+      "n_in": 4261,
+      "n_dropped": 461,
+      "n_out": 3800,
+      "reasons": {
+        "too_long": 461
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2599,
+          "n_dropped": 229,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 555,
+          "n_dropped": 50,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 83,
+          "n_dropped": 23,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 289,
+          "n_dropped": 43,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 64,
+          "n_dropped": 22,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 380,
+          "n_dropped": 56,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 40,
+          "n_dropped": 7,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 251,
+          "n_dropped": 31,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_verdict",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_tamper",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_adapt",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_exit",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_format_error_turn",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_steps",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_finish_length",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_reasoning",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_think_length",
+      "n_in": 3800,
+      "n_dropped": 0,
+      "n_out": 3800,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 0,
+          "n_out": 2370
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 0,
+          "n_out": 505
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 0,
+          "n_out": 324
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 0,
+          "n_out": 220
+        }
+      }
+    },
+    {
+      "filter": "gate_language",
+      "n_in": 3800,
+      "n_dropped": 24,
+      "n_out": 3776,
+      "reasons": {
+        "cjk_in_reasoning": 24
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2370,
+          "n_dropped": 18,
+          "n_out": 2352
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 505,
+          "n_dropped": 2,
+          "n_out": 503
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 324,
+          "n_dropped": 3,
+          "n_out": 321
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 220,
+          "n_dropped": 1,
+          "n_out": 219
+        }
+      }
+    },
+    {
+      "filter": "gate_parse",
+      "n_in": 3776,
+      "n_dropped": 0,
+      "n_out": 3776,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2352,
+          "n_dropped": 0,
+          "n_out": 2352
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 503,
+          "n_dropped": 0,
+          "n_out": 503
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 321,
+          "n_dropped": 0,
+          "n_out": 321
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 219,
+          "n_dropped": 0,
+          "n_out": 219
+        }
+      }
+    },
+    {
+      "filter": "gate_repetition",
+      "n_in": 3776,
+      "n_dropped": 0,
+      "n_out": 3776,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2352,
+          "n_dropped": 0,
+          "n_out": 2352
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 503,
+          "n_dropped": 0,
+          "n_out": 503
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 321,
+          "n_dropped": 0,
+          "n_out": 321
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 219,
+          "n_dropped": 0,
+          "n_out": 219
+        }
+      }
+    },
+    {
+      "filter": "gate_constraints",
+      "n_in": 3776,
+      "n_dropped": 0,
+      "n_out": 3776,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2352,
+          "n_dropped": 0,
+          "n_out": 2352
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 503,
+          "n_dropped": 0,
+          "n_out": 503
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 321,
+          "n_dropped": 0,
+          "n_out": 321
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 219,
+          "n_dropped": 0,
+          "n_out": 219
+        }
+      }
+    },
+    {
+      "filter": "gate_render",
+      "n_in": 3776,
+      "n_dropped": 0,
+      "n_out": 3776,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2352,
+          "n_dropped": 0,
+          "n_out": 2352
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 503,
+          "n_dropped": 0,
+          "n_out": 503
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 321,
+          "n_dropped": 0,
+          "n_out": 321
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 219,
+          "n_dropped": 0,
+          "n_out": 219
+        }
+      }
+    },
+    {
+      "filter": "gate_row_length",
+      "n_in": 3776,
+      "n_dropped": 0,
+      "n_out": 3776,
+      "reasons": {},
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2352,
+          "n_dropped": 0,
+          "n_out": 2352
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 503,
+          "n_dropped": 0,
+          "n_out": 503
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 0,
+          "n_out": 60
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 0,
+          "n_out": 246
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 0,
+          "n_out": 42
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 321,
+          "n_dropped": 0,
+          "n_out": 321
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 0,
+          "n_out": 33
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 219,
+          "n_dropped": 0,
+          "n_out": 219
+        }
+      }
+    },
+    {
+      "filter": "profile",
+      "n_in": 3776,
+      "n_dropped": 253,
+      "n_out": 3523,
+      "reasons": {
+        "turn_ceiling": 207,
+        "turn_ceiling,mean_above": 7,
+        "mean_above": 26,
+        "mean_below": 6,
+        "loss_cap": 1,
+        "wasted_actions": 6
+      },
+      "by_cell": {
+        "scale-swe/py": {
+          "n_in": 2352,
+          "n_dropped": 151,
+          "n_out": 2201
+        },
+        "swe-rebench-v2/go": {
+          "n_in": 503,
+          "n_dropped": 41,
+          "n_out": 462
+        },
+        "swe-rebench-v2/java": {
+          "n_in": 60,
+          "n_dropped": 8,
+          "n_out": 52
+        },
+        "swe-rebench-v2/js": {
+          "n_in": 246,
+          "n_dropped": 18,
+          "n_out": 228
+        },
+        "swe-rebench-v2/php": {
+          "n_in": 42,
+          "n_dropped": 1,
+          "n_out": 41
+        },
+        "swe-rebench-v2/py": {
+          "n_in": 321,
+          "n_dropped": 19,
+          "n_out": 302
+        },
+        "swe-rebench-v2/rust": {
+          "n_in": 33,
+          "n_dropped": 3,
+          "n_out": 30
+        },
+        "swe-rebench-v2/ts": {
+          "n_in": 219,
+          "n_dropped": 12,
+          "n_out": 207
+        }
+      }
+    }
+  ],
+  "band_counts_all_instances": {
+    "easy": 15745,
+    "medium": 2359,
+    "None": 7323,
+    "unsolved": 14776,
+    "hard": 1202
+  },
+  "draw": {
+    "mode": "keep_all",
+    "keep_all": [
+      "hard",
+      "medium"
+    ],
+    "repo_caps": {
+      "go": 5,
+      "ts": 5
+    },
+    "total_target": null,
+    "loss_tokens": 7310592,
+    "seq_tokens": 20171944,
+    "episodes": 820,
+    "instances": 793,
+    "second_attempts": 27,
+    "second_attempt_share": 0.0329,
+    "max_second_share": 0.3,
+    "seed": 42,
+    "switches": {
+      "category_round_robin": true,
+      "recovery_preference": true,
+      "lower_half": true
+    },
+    "dropped_nice_to_haves": [],
+    "band_loss_shares": {
+      "hard": 0.2708,
+      "medium": 0.2788,
+      "easy": 0.4504
+    },
+    "group_shares": {
+      "go": 0.2915,
+      "py": 0.4146,
+      "ts": 0.1695,
+      "js": 0.0512,
+      "other": 0.0732
+    },
+    "language_counts": {
+      "go": 239,
+      "py": 340,
+      "ts": 139,
+      "js": 42,
+      "rust": 22,
+      "php": 13,
+      "java": 25
+    },
+    "category_shares": {
+      "bug-fix": 0.5012,
+      "feature-request": 0.2866,
+      "enhancement": 0.1476,
+      "other": 0.0646
+    },
+    "recovery_share": 0.0939,
+    "max_rows_per_repository": 7,
+    "max_instances_per_repository": 5,
+    "repositories": 553,
+    "skipped": {
+      "repo_cap": 382
+    },
+    "bands": {
+      "hard": {
+        "target_loss_tokens": null,
+        "carry_in": 0,
+        "loss_tokens": 1979577,
+        "seq_tokens": 4738667,
+        "episodes": 130,
+        "instances": 130,
+        "second_attempts": 0,
+        "repositories": 111,
+        "shortfall": 0,
+        "supply_exhausted": true,
+        "keep_all": true,
+        "groups": {
+          "go": 14,
+          "py": 83,
+          "ts": 17,
+          "js": 7,
+          "other": 9
+        },
+        "group_shares": {
+          "go": 0.1077,
+          "py": 0.6385,
+          "ts": 0.1308,
+          "js": 0.0538,
+          "other": 0.0692
+        },
+        "categories": {
+          "bug-fix": 71,
+          "feature-request": 42,
+          "enhancement": 12,
+          "other": 5
+        },
+        "max_category_share": 0.5462,
+        "recovery": 19,
+        "recovery_share": 0.1462,
+        "recovery_preferred_picks": 15,
+        "recovery_supply_short_picks": 41,
+        "upper_half_picks": 62,
+        "exhausted_groups": [
+          "go",
+          "ts",
+          "py",
+          "js",
+          "other"
+        ],
+        "share_moves": [
+          {
+            "from": "go",
+            "to": "py",
+            "share": 0.36,
+            "after_picks": 40
+          },
+          {
+            "from": "ts",
+            "to": "py",
+            "share": 0.18,
+            "after_picks": 116
+          },
+          {
+            "from": "py",
+            "to": "remaining",
+            "share": 0.88,
+            "after_picks": 121
+          },
+          {
+            "from": "js",
+            "to": "remaining",
+            "share": 0.5,
+            "after_picks": 128
+          }
+        ]
+      },
+      "medium": {
+        "target_loss_tokens": null,
+        "carry_in": 0,
+        "loss_tokens": 2038200,
+        "seq_tokens": 5427138,
+        "episodes": 197,
+        "instances": 170,
+        "second_attempts": 27,
+        "repositories": 152,
+        "shortfall": 0,
+        "supply_exhausted": true,
+        "keep_all": true,
+        "groups": {
+          "go": 20,
+          "py": 94,
+          "ts": 47,
+          "js": 10,
+          "other": 26
+        },
+        "group_shares": {
+          "go": 0.1015,
+          "py": 0.4772,
+          "ts": 0.2386,
+          "js": 0.0508,
+          "other": 0.132
+        },
+        "categories": {
+          "bug-fix": 101,
+          "enhancement": 27,
+          "feature-request": 56,
+          "other": 13
+        },
+        "max_category_share": 0.5127,
+        "recovery": 15,
+        "recovery_share": 0.0761,
+        "recovery_preferred_picks": 14,
+        "recovery_supply_short_picks": 122,
+        "upper_half_picks": 98,
+        "exhausted_groups": [
+          "go",
+          "py",
+          "ts",
+          "js",
+          "other"
+        ],
+        "share_moves": [
+          {
+            "from": "go",
+            "to": "py",
+            "share": 0.36,
+            "after_picks": 56
+          },
+          {
+            "from": "py",
+            "to": "remaining",
+            "share": 0.7,
+            "after_picks": 142
+          },
+          {
+            "from": "ts",
+            "to": "remaining",
+            "share": 0.6,
+            "after_picks": 168
+          },
+          {
+            "from": "js",
+            "to": "remaining",
+            "share": 0.5,
+            "after_picks": 181
+          }
+        ]
+      },
+      "easy": {
+        "target_loss_tokens": 3287272,
+        "carry_in": 0,
+        "loss_tokens": 3292815,
+        "seq_tokens": 10006139,
+        "episodes": 493,
+        "instances": 493,
+        "second_attempts": 0,
+        "repositories": 379,
+        "shortfall": 0,
+        "supply_exhausted": false,
+        "keep_all": false,
+        "groups": {
+          "go": 205,
+          "py": 163,
+          "ts": 75,
+          "js": 25,
+          "other": 25
+        },
+        "group_shares": {
+          "go": 0.4158,
+          "py": 0.3306,
+          "ts": 0.1521,
+          "js": 0.0507,
+          "other": 0.0507
+        },
+        "categories": {
+          "bug-fix": 239,
+          "enhancement": 82,
+          "feature-request": 137,
+          "other": 35
+        },
+        "max_category_share": 0.4848,
+        "recovery": 43,
+        "recovery_share": 0.0872,
+        "recovery_preferred_picks": 43,
+        "recovery_supply_short_picks": 280,
+        "upper_half_picks": 118,
+        "exhausted_groups": [
+          "ts",
+          "go"
+        ],
+        "share_moves": [
+          {
+            "from": "ts",
+            "to": "go",
+            "share": 0.18,
+            "after_picks": 419
+          },
+          {
+            "from": "go",
+            "to": "py",
+            "share": 0.54,
+            "after_picks": 473
+          }
+        ]
+      }
+    }
+  },
+  "supply": {
+    "by_group_band": {
+      "go/hard": {
+        "instances": 14,
+        "loss_tokens": 210255,
+        "seq_tokens": 506054,
+        "recovery": 0,
+        "repositories": 12,
+        "categories": {
+          "feature-request": 8,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 296.3
+      },
+      "go/medium": {
+        "instances": 18,
+        "loss_tokens": 187902,
+        "seq_tokens": 501666,
+        "recovery": 1,
+        "repositories": 16,
+        "categories": {
+          "bug-fix": 10,
+          "other": 4,
+          "feature-request": 4
+        },
+        "thinking_mean_median": 187.3
+      },
+      "go/easy": {
+        "instances": 266,
+        "loss_tokens": 1717493,
+        "seq_tokens": 5190654,
+        "recovery": 8,
+        "repositories": 144,
+        "categories": {
+          "bug-fix": 130,
+          "enhancement": 15,
+          "feature-request": 97,
+          "other": 24
+        },
+        "thinking_mean_median": 150.9
+      },
+      "py/hard": {
+        "instances": 85,
+        "loss_tokens": 1288485,
+        "seq_tokens": 2994724,
+        "recovery": 13,
+        "repositories": 70,
+        "categories": {
+          "bug-fix": 44,
+          "feature-request": 29,
+          "enhancement": 8,
+          "other": 4
+        },
+        "thinking_mean_median": 282.7
+      },
+      "py/medium": {
+        "instances": 88,
+        "loss_tokens": 939354,
+        "seq_tokens": 2320231,
+        "recovery": 11,
+        "repositories": 78,
+        "categories": {
+          "bug-fix": 42,
+          "feature-request": 25,
+          "other": 6,
+          "enhancement": 15
+        },
+        "thinking_mean_median": 214.3
+      },
+      "py/easy": {
+        "instances": 1536,
+        "loss_tokens": 10846499,
+        "seq_tokens": 29941820,
+        "recovery": 78,
+        "repositories": 569,
+        "categories": {
+          "enhancement": 244,
+          "other": 94,
+          "bug-fix": 861,
+          "feature-request": 337
+        },
+        "thinking_mean_median": 148.1
+      },
+      "ts/hard": {
+        "instances": 17,
+        "loss_tokens": 264700,
+        "seq_tokens": 697075,
+        "recovery": 4,
+        "repositories": 15,
+        "categories": {
+          "bug-fix": 13,
+          "feature-request": 3,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 279.9
+      },
+      "ts/medium": {
+        "instances": 40,
+        "loss_tokens": 391500,
+        "seq_tokens": 1161784,
+        "recovery": 3,
+        "repositories": 32,
+        "categories": {
+          "feature-request": 10,
+          "bug-fix": 26,
+          "enhancement": 3,
+          "other": 1
+        },
+        "thinking_mean_median": 185.5
+      },
+      "ts/easy": {
+        "instances": 84,
+        "loss_tokens": 567965,
+        "seq_tokens": 1826431,
+        "recovery": 2,
+        "repositories": 56,
+        "categories": {
+          "bug-fix": 56,
+          "feature-request": 12,
+          "other": 3,
+          "enhancement": 13
+        },
+        "thinking_mean_median": 132.3
+      },
+      "js/hard": {
+        "instances": 7,
+        "loss_tokens": 120502,
+        "seq_tokens": 303237,
+        "recovery": 2,
+        "repositories": 5,
+        "categories": {
+          "bug-fix": 4,
+          "feature-request": 2,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 278.2
+      },
+      "js/medium": {
+        "instances": 8,
+        "loss_tokens": 68995,
+        "seq_tokens": 204380,
+        "recovery": 0,
+        "repositories": 8,
+        "categories": {
+          "bug-fix": 6,
+          "feature-request": 2
+        },
+        "thinking_mean_median": 192.4
+      },
+      "js/easy": {
+        "instances": 136,
+        "loss_tokens": 937465,
+        "seq_tokens": 2940554,
+        "recovery": 5,
+        "repositories": 83,
+        "categories": {
+          "bug-fix": 88,
+          "feature-request": 26,
+          "enhancement": 19,
+          "other": 3
+        },
+        "thinking_mean_median": 136.9
+      },
+      "other/hard": {
+        "instances": 9,
+        "loss_tokens": 126866,
+        "seq_tokens": 305593,
+        "recovery": 0,
+        "repositories": 9,
+        "categories": {
+          "enhancement": 2,
+          "bug-fix": 5,
+          "other": 1,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 331.4
+      },
+      "other/medium": {
+        "instances": 22,
+        "loss_tokens": 263976,
+        "seq_tokens": 720769,
+        "recovery": 0,
+        "repositories": 20,
+        "categories": {
+          "feature-request": 5,
+          "enhancement": 7,
+          "bug-fix": 10
+        },
+        "thinking_mean_median": 192.4
+      },
+      "other/easy": {
+        "instances": 61,
+        "loss_tokens": 442988,
+        "seq_tokens": 1300155,
+        "recovery": 0,
+        "repositories": 50,
+        "categories": {
+          "other": 3,
+          "enhancement": 3,
+          "bug-fix": 40,
+          "feature-request": 15
+        },
+        "thinking_mean_median": 124.1
+      }
+    },
+    "by_language_band": {
+      "go/easy": {
+        "instances": 266,
+        "loss_tokens": 1717493,
+        "seq_tokens": 5190654,
+        "recovery": 8,
+        "repositories": 144,
+        "categories": {
+          "bug-fix": 130,
+          "enhancement": 15,
+          "feature-request": 97,
+          "other": 24
+        },
+        "thinking_mean_median": 150.9
+      },
+      "go/hard": {
+        "instances": 14,
+        "loss_tokens": 210255,
+        "seq_tokens": 506054,
+        "recovery": 0,
+        "repositories": 12,
+        "categories": {
+          "feature-request": 8,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 296.3
+      },
+      "go/medium": {
+        "instances": 18,
+        "loss_tokens": 187902,
+        "seq_tokens": 501666,
+        "recovery": 1,
+        "repositories": 16,
+        "categories": {
+          "bug-fix": 10,
+          "other": 4,
+          "feature-request": 4
+        },
+        "thinking_mean_median": 187.3
+      },
+      "java/easy": {
+        "instances": 26,
+        "loss_tokens": 200168,
+        "seq_tokens": 543436,
+        "recovery": 0,
+        "repositories": 22,
+        "categories": {
+          "enhancement": 2,
+          "bug-fix": 14,
+          "feature-request": 9,
+          "other": 1
+        },
+        "thinking_mean_median": 124.1
+      },
+      "java/hard": {
+        "instances": 2,
+        "loss_tokens": 33290,
+        "seq_tokens": 79379,
+        "recovery": 0,
+        "repositories": 2,
+        "categories": {
+          "bug-fix": 1,
+          "other": 1
+        },
+        "thinking_mean_median": 370.2
+      },
+      "java/medium": {
+        "instances": 9,
+        "loss_tokens": 119739,
+        "seq_tokens": 313809,
+        "recovery": 0,
+        "repositories": 9,
+        "categories": {
+          "bug-fix": 3,
+          "feature-request": 3,
+          "enhancement": 3
+        },
+        "thinking_mean_median": 197.6
+      },
+      "js/easy": {
+        "instances": 136,
+        "loss_tokens": 937465,
+        "seq_tokens": 2940554,
+        "recovery": 5,
+        "repositories": 83,
+        "categories": {
+          "bug-fix": 88,
+          "feature-request": 26,
+          "enhancement": 19,
+          "other": 3
+        },
+        "thinking_mean_median": 136.9
+      },
+      "js/hard": {
+        "instances": 7,
+        "loss_tokens": 120502,
+        "seq_tokens": 303237,
+        "recovery": 2,
+        "repositories": 5,
+        "categories": {
+          "bug-fix": 4,
+          "feature-request": 2,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 278.2
+      },
+      "js/medium": {
+        "instances": 8,
+        "loss_tokens": 68995,
+        "seq_tokens": 204380,
+        "recovery": 0,
+        "repositories": 8,
+        "categories": {
+          "bug-fix": 6,
+          "feature-request": 2
+        },
+        "thinking_mean_median": 192.4
+      },
+      "php/easy": {
+        "instances": 28,
+        "loss_tokens": 185799,
+        "seq_tokens": 598079,
+        "recovery": 0,
+        "repositories": 21,
+        "categories": {
+          "bug-fix": 22,
+          "feature-request": 5,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 123.9
+      },
+      "php/hard": {
+        "instances": 1,
+        "loss_tokens": 14015,
+        "seq_tokens": 30559,
+        "recovery": 0,
+        "repositories": 1,
+        "categories": {
+          "bug-fix": 1
+        },
+        "thinking_mean_median": 286.2
+      },
+      "php/medium": {
+        "instances": 1,
+        "loss_tokens": 17230,
+        "seq_tokens": 47641,
+        "recovery": 0,
+        "repositories": 1,
+        "categories": {
+          "bug-fix": 1
+        },
+        "thinking_mean_median": 175.1
+      },
+      "py/easy": {
+        "instances": 1536,
+        "loss_tokens": 10846499,
+        "seq_tokens": 29941820,
+        "recovery": 78,
+        "repositories": 569,
+        "categories": {
+          "enhancement": 244,
+          "other": 94,
+          "bug-fix": 861,
+          "feature-request": 337
+        },
+        "thinking_mean_median": 148.1
+      },
+      "py/hard": {
+        "instances": 85,
+        "loss_tokens": 1288485,
+        "seq_tokens": 2994724,
+        "recovery": 13,
+        "repositories": 70,
+        "categories": {
+          "bug-fix": 44,
+          "feature-request": 29,
+          "enhancement": 8,
+          "other": 4
+        },
+        "thinking_mean_median": 282.7
+      },
+      "py/medium": {
+        "instances": 88,
+        "loss_tokens": 939354,
+        "seq_tokens": 2320231,
+        "recovery": 11,
+        "repositories": 78,
+        "categories": {
+          "bug-fix": 42,
+          "feature-request": 25,
+          "other": 6,
+          "enhancement": 15
+        },
+        "thinking_mean_median": 214.3
+      },
+      "rust/easy": {
+        "instances": 7,
+        "loss_tokens": 57021,
+        "seq_tokens": 158640,
+        "recovery": 0,
+        "repositories": 7,
+        "categories": {
+          "other": 2,
+          "bug-fix": 4,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 148.7
+      },
+      "rust/hard": {
+        "instances": 6,
+        "loss_tokens": 79561,
+        "seq_tokens": 195655,
+        "recovery": 0,
+        "repositories": 6,
+        "categories": {
+          "enhancement": 2,
+          "bug-fix": 3,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 331.4
+      },
+      "rust/medium": {
+        "instances": 12,
+        "loss_tokens": 127007,
+        "seq_tokens": 359319,
+        "recovery": 0,
+        "repositories": 10,
+        "categories": {
+          "feature-request": 2,
+          "enhancement": 4,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 190.8
+      },
+      "ts/easy": {
+        "instances": 84,
+        "loss_tokens": 567965,
+        "seq_tokens": 1826431,
+        "recovery": 2,
+        "repositories": 56,
+        "categories": {
+          "bug-fix": 56,
+          "feature-request": 12,
+          "other": 3,
+          "enhancement": 13
+        },
+        "thinking_mean_median": 132.3
+      },
+      "ts/hard": {
+        "instances": 17,
+        "loss_tokens": 264700,
+        "seq_tokens": 697075,
+        "recovery": 4,
+        "repositories": 15,
+        "categories": {
+          "bug-fix": 13,
+          "feature-request": 3,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 279.9
+      },
+      "ts/medium": {
+        "instances": 40,
+        "loss_tokens": 391500,
+        "seq_tokens": 1161784,
+        "recovery": 3,
+        "repositories": 32,
+        "categories": {
+          "feature-request": 10,
+          "bug-fix": 26,
+          "enhancement": 3,
+          "other": 1
+        },
+        "thinking_mean_median": 185.5
+      }
+    },
+    "by_band": {
+      "hard": {
+        "instances": 132,
+        "loss_tokens": 2010808,
+        "seq_tokens": 4806683,
+        "recovery": 19,
+        "repositories": 111,
+        "categories": {
+          "bug-fix": 72,
+          "feature-request": 43,
+          "enhancement": 12,
+          "other": 5
+        },
+        "thinking_mean_median": 285.4
+      },
+      "medium": {
+        "instances": 176,
+        "loss_tokens": 1851727,
+        "seq_tokens": 4908830,
+        "recovery": 15,
+        "repositories": 154,
+        "categories": {
+          "bug-fix": 94,
+          "feature-request": 46,
+          "other": 11,
+          "enhancement": 25
+        },
+        "thinking_mean_median": 194.8
+      },
+      "easy": {
+        "instances": 2083,
+        "loss_tokens": 14512410,
+        "seq_tokens": 41199614,
+        "recovery": 93,
+        "repositories": 902,
+        "categories": {
+          "enhancement": 294,
+          "other": 127,
+          "bug-fix": 1175,
+          "feature-request": 487
+        },
+        "thinking_mean_median": 145.6
+      }
+    },
+    "second_attempts_by_band": {
+      "medium": 27
+    }
+  },
+  "selected_thinking_per_turn": {
+    "mean": 180.9,
+    "p90": 435.0,
+    "max": 2997
+  },
+  "selected_length_histogram": {
+    "<=512": 0,
+    "<=1024": 0,
+    "<=2048": 0,
+    "<=4096": 0,
+    "<=8192": 7,
+    "<=16384": 157,
+    "<=32768": 524,
+    "<=65536": 132,
+    "<=131072": 0,
+    ">131072": 0
+  },
+  "d2": {
+    "n_records": 20385,
+    "n_locked_hit": 12,
+    "n_excluded_hit": 6,
+    "n_dropped": 18,
+    "records_by_mechanism": {
+      "excluded_identifier": 6,
+      "excluded_repo": 6,
+      "identifier": 12
+    },
+    "fork_graph": {
+      "clear": 20364,
+      "not_found": 21
+    },
+    "trajectories_dropped_locked": 21,
+    "trajectories_dropped_excluded": 16,
+    "excluded_repositories": {
+      "bottlepy/bottle": {
+        "trajectories": 16,
+        "instances": 6
+      }
+    },
+    "fork_graph_lookup": {
+      "requested": 2945,
+      "from_cache": 2945,
+      "fetched": 0,
+      "found": 0,
+      "not_found": 0,
+      "errors": 0,
+      "rate_limited": 0,
+      "unresolved": 0,
+      "token_present": true,
+      "api_enabled": true,
+      "cache_dir": "/mnt/apex-shared/apex_data/work/licence_cache"
+    },
+    "selected_rows_rescreened": {
+      "locked_hit": 0,
+      "excluded_hit": 0
+    },
+    "locked_list_sha256": "09eb7572d4d6e2188765f820fc0838361c3644f12b60e0d51b84690583af920f"
+  },
+  "dev_exclusions": {
+    "status": "applied",
+    "source": "data/manifests/dev_exclusions.json",
+    "sha256": "43df9a7714673766b2c293b4a71063f68dfd3f9606b99083657581875be81ea7"
+  },
+  "checks": {
+    "roundtrip": {
+      "rows_checked": 20,
+      "assistant_turns_checked": 554,
+      "failures": [],
+      "pass": true
+    },
+    "band_limits_all_rows": true,
+    "zero_wasted_actions": true,
+    "verified_completion": true,
+    "attempts_per_instance": true,
+    "max_rows_per_repository": 7,
+    "repositories_over_cap": [],
+    "one_row_per_repo_pr": true,
+    "d2_hits_selected_rows": 0,
+    "decontam_excluded_repository_rows": 0,
+    "repo_root_tokens_left": 0,
+    "dev_exclusions": "applied",
+    "pass": true
+  },
+  "outputs": {
+    "rows_parquet": "data/pools/swe_v5/rows.parquet",
+    "rows_sha256": "c784fc4372a320a37dc29db8712829ef52835252746203a6ecf0c2580cc0b73f",
+    "n_rows": 820,
+    "selection_sha256": "97ed2c6183fc2fbd91ab9f262135fc31a9e8925d35336ffa7143e56c96663406",
+    "supply_sha256": "d946c5fc6fdfa1df5a139abd0ecb6d723b76c571fe7f43763ffeb4ebb57234b7",
+    "candidates_sha256": "4e821c05b5bb03078d9f9cc279b3bbf01ee9279710ccaa45e7d227c768d49b03",
+    "dropped_sha256": "0ea13133b7724287ae4bb01ef671bc97a1168082afe426e6ab6a7bda7d4e737d",
+    "work_dir": "/mnt/apex-shared/apex_data/work/data_swe_v5_20261013_060512"
+  }
+}

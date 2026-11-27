@@ -1,0 +1,51 @@
+# Secrets: never commit (scripts read HF_TOKEN, GITHUB_TOKEN and OPENAI_API_KEY from the environment or a local .env)
+.env
+*.env
+.env.*
+secrets/
+*.pem
+*.key
+id_*
+
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.cache/
+.pytest_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+wandb/
+
+# Model weights and checkpoints (published on Hugging Face, see models/README.md)
+checkpoints/
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+*.onnx
+
+# Data rows (rebuilt by scripts/prepare_data.sh; counts and sha256 are in data/manifests/)
+data/raw/
+data/processed/
+data/pools/
+*.parquet
+*.arrow
+
+# Third-party harness checkouts, benchmark task sets and pulled images (recreated by scripts/setup_eval_env.sh)
+third_party/
+
+# Run records, benchmark outputs and summaries (written by the training, evaluation and summary scripts; not published here)
+/logs/
+/results/
+/analysis/
+/curves/source/
+
+# Editors and OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp

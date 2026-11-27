@@ -1,0 +1,639 @@
+{
+  "run_id": "data_swe_v5_20261013_060512",
+  "record_version": "swe_v5:1|efficiency:1",
+  "admitted": {
+    "by_group_band": {
+      "go/hard": {
+        "instances": 14,
+        "loss_tokens": 210255,
+        "seq_tokens": 506054,
+        "recovery": 0,
+        "repositories": 12,
+        "categories": {
+          "feature-request": 8,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 296.3
+      },
+      "go/medium": {
+        "instances": 18,
+        "loss_tokens": 187902,
+        "seq_tokens": 501666,
+        "recovery": 1,
+        "repositories": 16,
+        "categories": {
+          "bug-fix": 10,
+          "other": 4,
+          "feature-request": 4
+        },
+        "thinking_mean_median": 187.3
+      },
+      "go/easy": {
+        "instances": 266,
+        "loss_tokens": 1717493,
+        "seq_tokens": 5190654,
+        "recovery": 8,
+        "repositories": 144,
+        "categories": {
+          "bug-fix": 130,
+          "enhancement": 15,
+          "feature-request": 97,
+          "other": 24
+        },
+        "thinking_mean_median": 150.9
+      },
+      "py/hard": {
+        "instances": 85,
+        "loss_tokens": 1288485,
+        "seq_tokens": 2994724,
+        "recovery": 13,
+        "repositories": 70,
+        "categories": {
+          "bug-fix": 44,
+          "feature-request": 29,
+          "enhancement": 8,
+          "other": 4
+        },
+        "thinking_mean_median": 282.7
+      },
+      "py/medium": {
+        "instances": 88,
+        "loss_tokens": 939354,
+        "seq_tokens": 2320231,
+        "recovery": 11,
+        "repositories": 78,
+        "categories": {
+          "bug-fix": 42,
+          "feature-request": 25,
+          "other": 6,
+          "enhancement": 15
+        },
+        "thinking_mean_median": 214.3
+      },
+      "py/easy": {
+        "instances": 1536,
+        "loss_tokens": 10846499,
+        "seq_tokens": 29941820,
+        "recovery": 78,
+        "repositories": 569,
+        "categories": {
+          "enhancement": 244,
+          "other": 94,
+          "bug-fix": 861,
+          "feature-request": 337
+        },
+        "thinking_mean_median": 148.1
+      },
+      "ts/hard": {
+        "instances": 17,
+        "loss_tokens": 264700,
+        "seq_tokens": 697075,
+        "recovery": 4,
+        "repositories": 15,
+        "categories": {
+          "bug-fix": 13,
+          "feature-request": 3,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 279.9
+      },
+      "ts/medium": {
+        "instances": 40,
+        "loss_tokens": 391500,
+        "seq_tokens": 1161784,
+        "recovery": 3,
+        "repositories": 32,
+        "categories": {
+          "feature-request": 10,
+          "bug-fix": 26,
+          "enhancement": 3,
+          "other": 1
+        },
+        "thinking_mean_median": 185.5
+      },
+      "ts/easy": {
+        "instances": 84,
+        "loss_tokens": 567965,
+        "seq_tokens": 1826431,
+        "recovery": 2,
+        "repositories": 56,
+        "categories": {
+          "bug-fix": 56,
+          "feature-request": 12,
+          "other": 3,
+          "enhancement": 13
+        },
+        "thinking_mean_median": 132.3
+      },
+      "js/hard": {
+        "instances": 7,
+        "loss_tokens": 120502,
+        "seq_tokens": 303237,
+        "recovery": 2,
+        "repositories": 5,
+        "categories": {
+          "bug-fix": 4,
+          "feature-request": 2,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 278.2
+      },
+      "js/medium": {
+        "instances": 8,
+        "loss_tokens": 68995,
+        "seq_tokens": 204380,
+        "recovery": 0,
+        "repositories": 8,
+        "categories": {
+          "bug-fix": 6,
+          "feature-request": 2
+        },
+        "thinking_mean_median": 192.4
+      },
+      "js/easy": {
+        "instances": 136,
+        "loss_tokens": 937465,
+        "seq_tokens": 2940554,
+        "recovery": 5,
+        "repositories": 83,
+        "categories": {
+          "bug-fix": 88,
+          "feature-request": 26,
+          "enhancement": 19,
+          "other": 3
+        },
+        "thinking_mean_median": 136.9
+      },
+      "other/hard": {
+        "instances": 9,
+        "loss_tokens": 126866,
+        "seq_tokens": 305593,
+        "recovery": 0,
+        "repositories": 9,
+        "categories": {
+          "enhancement": 2,
+          "bug-fix": 5,
+          "other": 1,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 331.4
+      },
+      "other/medium": {
+        "instances": 22,
+        "loss_tokens": 263976,
+        "seq_tokens": 720769,
+        "recovery": 0,
+        "repositories": 20,
+        "categories": {
+          "feature-request": 5,
+          "enhancement": 7,
+          "bug-fix": 10
+        },
+        "thinking_mean_median": 192.4
+      },
+      "other/easy": {
+        "instances": 61,
+        "loss_tokens": 442988,
+        "seq_tokens": 1300155,
+        "recovery": 0,
+        "repositories": 50,
+        "categories": {
+          "other": 3,
+          "enhancement": 3,
+          "bug-fix": 40,
+          "feature-request": 15
+        },
+        "thinking_mean_median": 124.1
+      }
+    },
+    "by_language_band": {
+      "go/easy": {
+        "instances": 266,
+        "loss_tokens": 1717493,
+        "seq_tokens": 5190654,
+        "recovery": 8,
+        "repositories": 144,
+        "categories": {
+          "bug-fix": 130,
+          "enhancement": 15,
+          "feature-request": 97,
+          "other": 24
+        },
+        "thinking_mean_median": 150.9
+      },
+      "go/hard": {
+        "instances": 14,
+        "loss_tokens": 210255,
+        "seq_tokens": 506054,
+        "recovery": 0,
+        "repositories": 12,
+        "categories": {
+          "feature-request": 8,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 296.3
+      },
+      "go/medium": {
+        "instances": 18,
+        "loss_tokens": 187902,
+        "seq_tokens": 501666,
+        "recovery": 1,
+        "repositories": 16,
+        "categories": {
+          "bug-fix": 10,
+          "other": 4,
+          "feature-request": 4
+        },
+        "thinking_mean_median": 187.3
+      },
+      "java/easy": {
+        "instances": 26,
+        "loss_tokens": 200168,
+        "seq_tokens": 543436,
+        "recovery": 0,
+        "repositories": 22,
+        "categories": {
+          "enhancement": 2,
+          "bug-fix": 14,
+          "feature-request": 9,
+          "other": 1
+        },
+        "thinking_mean_median": 124.1
+      },
+      "java/hard": {
+        "instances": 2,
+        "loss_tokens": 33290,
+        "seq_tokens": 79379,
+        "recovery": 0,
+        "repositories": 2,
+        "categories": {
+          "bug-fix": 1,
+          "other": 1
+        },
+        "thinking_mean_median": 370.2
+      },
+      "java/medium": {
+        "instances": 9,
+        "loss_tokens": 119739,
+        "seq_tokens": 313809,
+        "recovery": 0,
+        "repositories": 9,
+        "categories": {
+          "bug-fix": 3,
+          "feature-request": 3,
+          "enhancement": 3
+        },
+        "thinking_mean_median": 197.6
+      },
+      "js/easy": {
+        "instances": 136,
+        "loss_tokens": 937465,
+        "seq_tokens": 2940554,
+        "recovery": 5,
+        "repositories": 83,
+        "categories": {
+          "bug-fix": 88,
+          "feature-request": 26,
+          "enhancement": 19,
+          "other": 3
+        },
+        "thinking_mean_median": 136.9
+      },
+      "js/hard": {
+        "instances": 7,
+        "loss_tokens": 120502,
+        "seq_tokens": 303237,
+        "recovery": 2,
+        "repositories": 5,
+        "categories": {
+          "bug-fix": 4,
+          "feature-request": 2,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 278.2
+      },
+      "js/medium": {
+        "instances": 8,
+        "loss_tokens": 68995,
+        "seq_tokens": 204380,
+        "recovery": 0,
+        "repositories": 8,
+        "categories": {
+          "bug-fix": 6,
+          "feature-request": 2
+        },
+        "thinking_mean_median": 192.4
+      },
+      "php/easy": {
+        "instances": 28,
+        "loss_tokens": 185799,
+        "seq_tokens": 598079,
+        "recovery": 0,
+        "repositories": 21,
+        "categories": {
+          "bug-fix": 22,
+          "feature-request": 5,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 123.9
+      },
+      "php/hard": {
+        "instances": 1,
+        "loss_tokens": 14015,
+        "seq_tokens": 30559,
+        "recovery": 0,
+        "repositories": 1,
+        "categories": {
+          "bug-fix": 1
+        },
+        "thinking_mean_median": 286.2
+      },
+      "php/medium": {
+        "instances": 1,
+        "loss_tokens": 17230,
+        "seq_tokens": 47641,
+        "recovery": 0,
+        "repositories": 1,
+        "categories": {
+          "bug-fix": 1
+        },
+        "thinking_mean_median": 175.1
+      },
+      "py/easy": {
+        "instances": 1536,
+        "loss_tokens": 10846499,
+        "seq_tokens": 29941820,
+        "recovery": 78,
+        "repositories": 569,
+        "categories": {
+          "enhancement": 244,
+          "other": 94,
+          "bug-fix": 861,
+          "feature-request": 337
+        },
+        "thinking_mean_median": 148.1
+      },
+      "py/hard": {
+        "instances": 85,
+        "loss_tokens": 1288485,
+        "seq_tokens": 2994724,
+        "recovery": 13,
+        "repositories": 70,
+        "categories": {
+          "bug-fix": 44,
+          "feature-request": 29,
+          "enhancement": 8,
+          "other": 4
+        },
+        "thinking_mean_median": 282.7
+      },
+      "py/medium": {
+        "instances": 88,
+        "loss_tokens": 939354,
+        "seq_tokens": 2320231,
+        "recovery": 11,
+        "repositories": 78,
+        "categories": {
+          "bug-fix": 42,
+          "feature-request": 25,
+          "other": 6,
+          "enhancement": 15
+        },
+        "thinking_mean_median": 214.3
+      },
+      "rust/easy": {
+        "instances": 7,
+        "loss_tokens": 57021,
+        "seq_tokens": 158640,
+        "recovery": 0,
+        "repositories": 7,
+        "categories": {
+          "other": 2,
+          "bug-fix": 4,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 148.7
+      },
+      "rust/hard": {
+        "instances": 6,
+        "loss_tokens": 79561,
+        "seq_tokens": 195655,
+        "recovery": 0,
+        "repositories": 6,
+        "categories": {
+          "enhancement": 2,
+          "bug-fix": 3,
+          "feature-request": 1
+        },
+        "thinking_mean_median": 331.4
+      },
+      "rust/medium": {
+        "instances": 12,
+        "loss_tokens": 127007,
+        "seq_tokens": 359319,
+        "recovery": 0,
+        "repositories": 10,
+        "categories": {
+          "feature-request": 2,
+          "enhancement": 4,
+          "bug-fix": 6
+        },
+        "thinking_mean_median": 190.8
+      },
+      "ts/easy": {
+        "instances": 84,
+        "loss_tokens": 567965,
+        "seq_tokens": 1826431,
+        "recovery": 2,
+        "repositories": 56,
+        "categories": {
+          "bug-fix": 56,
+          "feature-request": 12,
+          "other": 3,
+          "enhancement": 13
+        },
+        "thinking_mean_median": 132.3
+      },
+      "ts/hard": {
+        "instances": 17,
+        "loss_tokens": 264700,
+        "seq_tokens": 697075,
+        "recovery": 4,
+        "repositories": 15,
+        "categories": {
+          "bug-fix": 13,
+          "feature-request": 3,
+          "enhancement": 1
+        },
+        "thinking_mean_median": 279.9
+      },
+      "ts/medium": {
+        "instances": 40,
+        "loss_tokens": 391500,
+        "seq_tokens": 1161784,
+        "recovery": 3,
+        "repositories": 32,
+        "categories": {
+          "feature-request": 10,
+          "bug-fix": 26,
+          "enhancement": 3,
+          "other": 1
+        },
+        "thinking_mean_median": 185.5
+      }
+    },
+    "by_band": {
+      "hard": {
+        "instances": 132,
+        "loss_tokens": 2010808,
+        "seq_tokens": 4806683,
+        "recovery": 19,
+        "repositories": 111,
+        "categories": {
+          "bug-fix": 72,
+          "feature-request": 43,
+          "enhancement": 12,
+          "other": 5
+        },
+        "thinking_mean_median": 285.4
+      },
+      "medium": {
+        "instances": 176,
+        "loss_tokens": 1851727,
+        "seq_tokens": 4908830,
+        "recovery": 15,
+        "repositories": 154,
+        "categories": {
+          "bug-fix": 94,
+          "feature-request": 46,
+          "other": 11,
+          "enhancement": 25
+        },
+        "thinking_mean_median": 194.8
+      },
+      "easy": {
+        "instances": 2083,
+        "loss_tokens": 14512410,
+        "seq_tokens": 41199614,
+        "recovery": 93,
+        "repositories": 902,
+        "categories": {
+          "enhancement": 294,
+          "other": 127,
+          "bug-fix": 1175,
+          "feature-request": 487
+        },
+        "thinking_mean_median": 145.6
+      }
+    },
+    "second_attempts_by_band": {
+      "medium": 27
+    }
+  },
+  "funnel": {
+    "row_filters": [
+      {
+        "filter": "0_rows_in_shards",
+        "n_in": 107267,
+        "n_dropped": 0,
+        "n_out": 107267,
+        "note": "teacher identity, thinking mode and upstream dataset asserted per row"
+      },
+      {
+        "filter": "1_resolved",
+        "n_in": 107267,
+        "n_dropped": 57342,
+        "n_out": 49925
+      },
+      {
+        "filter": "1_language",
+        "n_in": 49925,
+        "n_dropped": 75,
+        "n_out": 49850
+      },
+      {
+        "filter": "1_licence",
+        "n_in": 49850,
+        "n_dropped": 0,
+        "n_out": 49850
+      },
+      {
+        "filter": "1_scale_swe_verified",
+        "n_in": 49850,
+        "n_dropped": 0,
+        "n_out": 49850
+      },
+      {
+        "filter": "2_d2_and_decontam_exclusions",
+        "n_in": 49850,
+        "n_dropped": 37,
+        "n_out": 49813
+      },
+      {
+        "filter": "3_tool_schema",
+        "n_in": 49813,
+        "n_dropped": 0,
+        "n_out": 49813
+      },
+      {
+        "filter": "3_model_patch_clean",
+        "n_in": 49813,
+        "n_dropped": 837,
+        "n_out": 48976
+      },
+      {
+        "filter": "4_reasoning_every_turn",
+        "n_in": 48976,
+        "n_dropped": 7,
+        "n_out": 48969
+      },
+      {
+        "filter": "6_dev_exclusions",
+        "n_in": 48969,
+        "n_dropped": 13,
+        "n_out": 48956
+      },
+      {
+        "filter": "7_banded",
+        "n_in": 48956,
+        "n_dropped": 1082,
+        "n_out": 47874
+      }
+    ],
+    "raw_profile": {
+      "n_in": 47874,
+      "n_out": 5208,
+      "reasons": {
+        "turn_ceiling": 41736,
+        "mean_above": 32525,
+        "steps": 11585,
+        "unverified_completion": 4415,
+        "wasted_actions": 3364,
+        "tamper": 463,
+        "mean_below": 23
+      }
+    },
+    "rendered": {
+      "n_in": 5208,
+      "n_out": 3523,
+      "by_stage": {
+        "repo_root_ambiguous": 671,
+        "band_row_cap": 461,
+        "reference_patch_leak": 267,
+        "profile": 253,
+        "rebuild": 8,
+        "gate_language": 24,
+        "d2_text": 1
+      },
+      "profile_reasons": {
+        "turn_ceiling": 214,
+        "mean_above": 33,
+        "mean_below": 6,
+        "loss_cap": 1,
+        "wasted_actions": 6
+      }
+    },
+    "instances_admitted": 2418,
+    "excluded_task_ids": 9
+  }
+}

@@ -1,0 +1,23 @@
+{
+ "note": "Training-data exclusions by id or repository (reasons in docs/DATA_PLAN.md sections 3.2, 3.3 and 7)",
+ "exclude": {
+  "th3k_episode_index": [
+   2481
+  ],
+  "repositories": [
+   "bottlepy/bottle"
+  ]
+ },
+ "applies_to": {
+  "th3k_episode_index": "stage-1 terminal selection (WP4)",
+  "repositories": "every SWE training row (OSWT both sources) and the SWE-smith stage-2 and dev pools (WP3, WP6, WP8)"
+ },
+ "reasons": {
+  "repositories": {
+   "bottlepy/bottle": "codebase of a Terminal-Bench 2.0 task (fix-code-vulnerability)"
+  },
+  "th3k_episode_index": {
+   "2481": "topic (PyTorch tensor and pipeline parallelism) matches the public names of two Terminal-Bench 2.0 tasks; conservative drop"
+  }
+ }
+}

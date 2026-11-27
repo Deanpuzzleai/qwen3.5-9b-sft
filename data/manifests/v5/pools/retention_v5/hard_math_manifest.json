@@ -1,0 +1,679 @@
+{
+ "pool": "retention",
+ "kind": "convergence_replay",
+ "profile": "hard_math_v5",
+ "version": "retention-hard-math-v5",
+ "run_id": "data_retention_hard_math_v5_20261013_055350",
+ "created": "2026-10-13T05:57:40Z",
+ "seed": 42,
+ "code": {
+  "commit": "889794eef2ccd553ab69c263557ccc98e3eb1ab3",
+  "branch": "main",
+  "dirty": true
+ },
+ "plan": "docs/DATA_PLAN_v5.md section 3.3 (hard math in the revision-5 retention slice; decisions D1, D6)",
+ "rationale": "harder math than anything in the pool (reasoning above its 10,240-token cap) that still asks for no more thinking than Base spends on solved dev QA items (median output 12.1K): long reasoning, then one committed answer in a short final section",
+ "reproduce": "scripts/data/build_retention_slice.py --convergence-replay 1210000 --convergence-profile hard_math_v5 --out-dir data/pools/retention_v5 --workers 16 --run-id data_retention_hard_math_v5_20261013_055350",
+ "sources": {
+  "nm_math": {
+   "hf_repo": "nvidia/Nemotron-SFT-Math-v4",
+   "split": "train (source AoPS, subset cot)",
+   "revision": "84d42ad0cb960f07f951b9baa9ed2b46a5a18c66",
+   "licence": "CC-BY-4.0",
+   "generator": "deepseek-ai/DeepSeek-V4-Pro (High)"
+  }
+ },
+ "filters": {
+  "math": {
+   "loader": "apex_data.retention.math at the 12K think cap (character pre-filter 12,288 x 6)",
+   "ref_match": [
+    "exact",
+    "numeric"
+   ],
+   "single_committed_answer": "every \\boxed{} states the same normalised answer",
+   "ends_with_answer": "<= 80 characters after the last \\boxed{}",
+   "bands": {
+    "math_hard": [
+     10240,
+     12288
+    ]
+   }
+  },
+  "final_section_tokens_max": 600,
+  "row_cap_tokens": 65536,
+  "gates": "render.filters.filter_episodes (closed reasoning, think cap of the part, repetition, render, row cap)",
+  "screens": "D1 canary, D4 task names, prompt dedup (exact + MinHash, the prior rows win), D5' vs dev QA, sealed p1/p2 screens (scripts/data/run_screens.py)"
+ },
+ "disjoint_from": {
+  "rows": {
+   "path": "data/pools/retention/rows.parquet",
+   "sha256": "d6e11a7a07b8d7f73cbbf7c95546a091ad1affb5abb9d7ef479fbc66d4fb28ab",
+   "n": 2830
+  },
+  "replay_reserve": {
+   "path": "data/pools/retention/replay_reserve.parquet",
+   "sha256": "642b3f08e6d9c2b8955d7f19bfbf7fd38c7504ea3830c1a77531bbc5c0a4a404",
+   "n": 600
+  },
+  "topup_rows": {
+   "run_id": "data_retention_topup_20261012_130247",
+   "sha256": "13f16d32f9bceaea0b8943f26c04f3ab8408eddda5145a194f80a36eac3c851a",
+   "n": 1800
+  }
+ },
+ "targets": {
+  "convergence_loss_tokens": 1210000,
+  "by_part": {
+   "math_hard": 1210000
+  }
+ },
+ "counts": {
+  "rows": 104,
+  "by_part": {
+   "math_hard": 104
+  }
+ },
+ "tokens": {
+  "rows": 104,
+  "sequence_tokens": 1223349,
+  "loss_tokens": 1213209,
+  "mean_sequence_tokens": 11763.0,
+  "median_reasoning_tokens": 11293.5,
+  "max_reasoning_tokens": 12268,
+  "max_row_tokens": 13165,
+  "loss_tokens_from_masks": 1213209,
+  "mean_loss_tokens": 11665.5,
+  "reasoning_tokens": {
+   "n": 104,
+   "median": 11293.5,
+   "p90": 12097.5,
+   "max": 12268
+  },
+  "loss_token_shares": {
+   "math_hard": 1.0
+  }
+ },
+ "order": "rows sorted by replay_rank: the survivors in walk order (one cell, math_hard)",
+ "prefix": {
+  "max_deviation_by_cell": {
+   "math_hard": 0.0
+  },
+  "max_deviation_by_part": {
+   "math_hard": 0.0
+  },
+  "loss_token_shares_by_part": [
+   {
+    "k": 104,
+    "loss_tokens": 1213209,
+    "shares": {
+     "math_hard": 1.0
+    }
+   },
+   {
+    "k": 25,
+    "loss_tokens": 297845,
+    "shares": {
+     "math_hard": 1.0
+    }
+   },
+   {
+    "k": 50,
+    "loss_tokens": 589762,
+    "shares": {
+     "math_hard": 1.0
+    }
+   },
+   {
+    "k": 100,
+    "loss_tokens": 1166161,
+    "shares": {
+     "math_hard": 1.0
+    }
+   }
+  ]
+ },
+ "load": {
+  "math": {
+   "funnel": [
+    {
+     "stage": "aops_cot",
+     "n_in": 89241,
+     "n_dropped": 37280,
+     "n_out": 51961
+    },
+    {
+     "stage": "license_cc_by",
+     "n_in": 51961,
+     "n_dropped": 0,
+     "n_out": 51961
+    },
+    {
+     "stage": "shape",
+     "n_in": 51961,
+     "n_dropped": 0,
+     "n_out": 51961
+    },
+    {
+     "stage": "reasoning_present",
+     "n_in": 51961,
+     "n_dropped": 0,
+     "n_out": 51961
+    },
+    {
+     "stage": "think_closed",
+     "n_in": 51961,
+     "n_dropped": 0,
+     "n_out": 51961
+    },
+    {
+     "stage": "boxed_answer",
+     "n_in": 51961,
+     "n_dropped": 0,
+     "n_out": 51961
+    },
+    {
+     "stage": "reasoning_chars",
+     "n_in": 51961,
+     "n_dropped": 17448,
+     "n_out": 34513
+    }
+   ],
+   "n_candidates": 34513,
+   "side": {
+    "ref_match": {
+     "unmatched": 27110,
+     "exact": 7366,
+     "numeric": 37
+    }
+   }
+  }
+ },
+ "prefilter": {
+  "math": [
+   {
+    "stage": "not_in_pool_rows",
+    "n_in": 34513,
+    "n_dropped": 1494,
+    "n_out": 33019
+   },
+   {
+    "stage": "ref_match",
+    "n_in": 33019,
+    "n_dropped": 25894,
+    "n_out": 7125
+   },
+   {
+    "stage": "single_committed_answer",
+    "n_in": 7125,
+    "n_dropped": 5,
+    "n_out": 7120
+   },
+   {
+    "stage": "ends_with_answer",
+    "n_in": 7120,
+    "n_dropped": 64,
+    "n_out": 7056
+   },
+   {
+    "stage": "final_section_chars",
+    "n_in": 7056,
+    "n_dropped": 8,
+    "n_out": 7048
+   }
+  ]
+ },
+ "walk": {
+  "math": {
+   "n_candidates": 7048,
+   "n_measured": 6000,
+   "dropped_or_unused": {
+    "beyond_target:math_hard": 44,
+    "final_section_tokens": 147,
+    "reasoning_out_of_band": 5601
+   },
+   "oversample": 2.0,
+   "estimated_loss_tokens_unfilled": {},
+   "n_drawn": {
+    "math_hard": 208
+   }
+  }
+ },
+ "screens": {
+  "d1": {
+   "files_scanned": 0,
+   "records_scanned": 208,
+   "bytes_scanned": 7910995,
+   "n_hits": 0,
+   "files_or_records_with_hits": 0,
+   "by_rule": {},
+   "by_level": {},
+   "n_dropped": 0
+  },
+  "d4_task_names": {
+   "n_names": 89,
+   "n_scanned": 208,
+   "n_dropped": 0,
+   "dropped_by_part": {}
+  },
+  "d5_prime": {
+   "version": "d5_prime-bge-small-en-v1.5-5c38ec7c-mean",
+   "model": "BAAI/bge-small-en-v1.5",
+   "model_revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+   "pooling": "mean",
+   "threshold": 0.85,
+   "embedding_weights_sha256": "3c9f31665447c8911517620762200d2245a2518d6e7208acc78cd9db317e21ad",
+   "n_train_screened": 183,
+   "n_dev_items": 258,
+   "dev_slices": {
+    "gpqa_diamond": 198,
+    "reasoning_gym": 30,
+    "aime25": 30
+   },
+   "n_hits": 0,
+   "n_dropped_from_train": 0,
+   "hits_by_dev_slice": {},
+   "max_cosine_quantiles": {
+    "0.5": 0.6822,
+    "0.9": 0.749,
+    "0.99": 0.7949,
+    "1.0": 0.8228
+   },
+   "dropped_by_part": {},
+   "dev_items_check": {
+    "gpqa_diamond": {
+     "n": 198,
+     "answers_resolved": 198,
+     "file_sha256_ok": true
+    },
+    "aime25": {
+     "n": 30,
+     "answers_resolved": 30,
+     "file_sha256_ok": true
+    },
+    "reasoning_gym": {
+     "n": 30,
+     "answers_resolved": 30,
+     "regenerated_identically": true,
+     "version": "0.1.19"
+    },
+    "n_items": 258,
+    "n_selection_items": 228
+   }
+  },
+  "dedup": {
+   "n_items": 4358,
+   "n_exact_groups": 25,
+   "near_n_hashed": 3917,
+   "near_n_candidates": 35,
+   "near_n_verified_pairs": 25,
+   "near_n_groups": 25,
+   "near_n_dropped": 25,
+   "near_n_oversized_buckets": 0,
+   "n_clusters": 25,
+   "n_clustered": 50,
+   "n_dropped": 25,
+   "ngram": 5,
+   "threshold": 0.8,
+   "exact_only_under_words": 20,
+   "cross_part_clusters": 0,
+   "dropped_by_part": {
+    "math": 25
+   },
+   "n_prior_items": 4150,
+   "n_new_items": 208,
+   "n_dropped_into_prior_clusters": 11,
+   "note": "n_dropped counts new rows only (prior rows are never dropped here)"
+  }
+ },
+ "sealed_screens": {
+  "n_screened": 135,
+  "n_dropped": 0,
+  "by_rule": {},
+  "by_part": {}
+ },
+ "parts": {
+  "math_hard": {
+   "retention_part": "math",
+   "reasoning_band_tokens": [
+    10240,
+    12288
+   ],
+   "loss_token_share_target": 1.0,
+   "loss_token_target": 1210000,
+   "funnel": [
+    {
+     "stage": "walk_drawn",
+     "n_in": 208,
+     "n_dropped": 0,
+     "n_out": 208
+    },
+    {
+     "stage": "screens_d1_d4_dedup_d5",
+     "n_in": 208,
+     "n_dropped": 25,
+     "n_out": 183,
+     "by_reason": {
+      "dedup": 25
+     }
+    },
+    {
+     "stage": "gates",
+     "n_in": 183,
+     "n_dropped": 48,
+     "n_out": 135,
+     "by_reason": {
+      "cjk_in_reasoning": 2,
+      "repetition_loop": 46
+     }
+    },
+    {
+     "stage": "sealed_screens",
+     "n_in": 135,
+     "n_dropped": 0,
+     "n_out": 135
+    },
+    {
+     "stage": "token_target_selection",
+     "n_in": 135,
+     "n_dropped": 31,
+     "n_out": 104,
+     "note": "survivors in walk order until the part's loss-token target"
+    }
+   ],
+   "gates": {
+    "gates": [
+     {
+      "gate": "verdict",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "tamper",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "adapt",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "exit",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "format_error_turn",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "steps",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "finish_length",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "reasoning",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "think_length",
+      "n_in": 183,
+      "n_dropped": 0,
+      "n_out": 183
+     },
+     {
+      "gate": "language",
+      "n_in": 183,
+      "n_dropped": 2,
+      "n_out": 181
+     },
+     {
+      "gate": "parse",
+      "n_in": 181,
+      "n_dropped": 0,
+      "n_out": 181
+     },
+     {
+      "gate": "thrashing",
+      "n_in": 181,
+      "n_dropped": 0,
+      "n_out": 181
+     },
+     {
+      "gate": "repetition",
+      "n_in": 181,
+      "n_dropped": 46,
+      "n_out": 135
+     },
+     {
+      "gate": "constraints",
+      "n_in": 135,
+      "n_dropped": 0,
+      "n_out": 135
+     },
+     {
+      "gate": "render",
+      "n_in": 135,
+      "n_dropped": 0,
+      "n_out": 135
+     },
+     {
+      "gate": "row_length",
+      "n_in": 135,
+      "n_dropped": 0,
+      "n_out": 135
+     }
+    ],
+    "reasons": {
+     "cjk_in_reasoning": 2,
+     "repetition_loop": 46
+    },
+    "stats": {
+     "rows_kept": 135,
+     "think_tokens_total": 2070384,
+     "think_turns": 183
+    }
+   },
+   "tokens": {
+    "rows": 104,
+    "sequence_tokens": 1223349,
+    "loss_tokens": 1213209,
+    "mean_sequence_tokens": 11763.0,
+    "median_reasoning_tokens": 11293.5,
+    "max_reasoning_tokens": 12268,
+    "max_row_tokens": 13165,
+    "loss_tokens_from_masks": 1213209,
+    "mean_loss_tokens": 11665.5,
+    "reasoning_tokens": {
+     "n": 104,
+     "median": 11293.5,
+     "p90": 12097.5,
+     "max": 12268
+    }
+   },
+   "reasoning_tokens": {
+    "n": 104,
+    "median": 11293.5,
+    "p90": 12097.5,
+    "max": 12268
+   },
+   "final_section_tokens": {
+    "n": 104,
+    "median": 407.0,
+    "p90": 549.5,
+    "max": 600
+   },
+   "ref_match": {
+    "exact": 103,
+    "numeric": 1
+   }
+  }
+ },
+ "files": {
+  "hard_math": {
+   "path": "data/pools/retention_v5/hard_math.parquet",
+   "rows": 104,
+   "bytes": 1599799,
+   "sha256": "7f054b6a51a605bcc1751000c642994e1ffef1b6d87dd26a104ebdca3adc7518",
+   "git_ignored_over_10mb": false
+  }
+ },
+ "checks": [
+  {
+   "check": "token_targets_met",
+   "pass": true,
+   "detail": {
+    "math_hard": {
+     "target": 1210000,
+     "loss_tokens": 1213209,
+     "rows": 104
+    }
+   }
+  },
+  {
+   "check": "reasoning_bands",
+   "pass": true,
+   "detail": {
+    "bands": {
+     "math_hard": [
+      10240,
+      12288
+     ]
+    },
+    "violations": []
+   }
+  },
+  {
+   "check": "final_section_cap",
+   "pass": true,
+   "detail": {
+    "cap": 600,
+    "violations": []
+   }
+  },
+  {
+   "check": "committed_answer_checks",
+   "pass": true,
+   "detail": {
+    "violations": []
+   }
+  },
+  {
+   "check": "row_cap_64k",
+   "pass": true,
+   "detail": {
+    "max": 13165
+   }
+  },
+  {
+   "check": "disjoint_from_pool_reserve_topup",
+   "pass": true,
+   "detail": {
+    "shared_task_id": 0,
+    "duplicate_task_id": 0,
+    "shared_row_key": 0,
+    "duplicate_row_key": 0,
+    "shared_prompt_sha256": 0,
+    "duplicate_prompt_sha256": 0,
+    "dedup_clusters_joining": 0,
+    "pass": true
+   }
+  },
+  {
+   "check": "sealed_screen_drops_applied",
+   "pass": true,
+   "detail": {
+    "n_screened": 135,
+    "n_dropped": 0,
+    "by_rule": {},
+    "by_part": {}
+   }
+  },
+  {
+   "check": "d1_canary_selected_rows",
+   "pass": true,
+   "detail": {
+    "files_scanned": 0,
+    "records_scanned": 104,
+    "bytes_scanned": 3843758,
+    "n_hits": 0,
+    "files_or_records_with_hits": 0,
+    "by_rule": {},
+    "by_level": {}
+   }
+  },
+  {
+   "check": "d5_prime_screen_applied",
+   "pass": true,
+   "detail": {
+    "n_dev_items": 258,
+    "n_hits": 0,
+    "n_dropped_from_train": 0
+   }
+  },
+  {
+   "check": "prefix_proportional",
+   "pass": true,
+   "detail": {
+    "tolerance_rows": 2.0,
+    "max_deviation_by_cell": {
+     "math_hard": 0.0
+    },
+    "max_deviation_by_part": {
+     "math_hard": 0.0
+    }
+   }
+  },
+  {
+   "check": "loss_tokens_equal_mask_sums",
+   "pass": true,
+   "detail": {}
+  },
+  {
+   "check": "trained_span_has_reasoning",
+   "pass": true,
+   "detail": {
+    "sampled": 104,
+    "violations": []
+   }
+  },
+  {
+   "check": "provenance_valid",
+   "pass": true,
+   "detail": {}
+  },
+  {
+   "check": "pool_files_unchanged",
+   "pass": true,
+   "detail": {
+    "before": {
+     "rows": "d6e11a7a07b8d7f73cbbf7c95546a091ad1affb5abb9d7ef479fbc66d4fb28ab",
+     "replay_reserve": "642b3f08e6d9c2b8955d7f19bfbf7fd38c7504ea3830c1a77531bbc5c0a4a404",
+     "manifest": "38e3186c21264b8313bd453638f18983aba2d148c82d3b05f8b4eb23effa98ec",
+     "topup_rows": "13f16d32f9bceaea0b8943f26c04f3ab8408eddda5145a194f80a36eac3c851a"
+    },
+    "after": {
+     "rows": "d6e11a7a07b8d7f73cbbf7c95546a091ad1affb5abb9d7ef479fbc66d4fb28ab",
+     "replay_reserve": "642b3f08e6d9c2b8955d7f19bfbf7fd38c7504ea3830c1a77531bbc5c0a4a404",
+     "manifest": "38e3186c21264b8313bd453638f18983aba2d148c82d3b05f8b4eb23effa98ec",
+     "topup_rows": "13f16d32f9bceaea0b8943f26c04f3ab8408eddda5145a194f80a36eac3c851a"
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,157 @@
+{
+ "plan": "docs/DATA_PLAN.md 3.3 (admission pilot) and 6",
+ "run_id": "data_terminal_slice_turncap8k_20261012_141625",
+ "created": "2026-10-12T14:23:20Z",
+ "thresholds": {
+  "parse_clean_share_min": 0.9,
+  "d1_hits_after_review": 0,
+  "d3_hits_after_review": 0,
+  "task_families_min": 30
+ },
+ "sources": {
+  "th3k": {
+   "episodes": 2852,
+   "parse_clean": 2433,
+   "parse_clean_share": 0.8531,
+   "handshake": 2812,
+   "every_assistant_turn_has_reasoning": 2734,
+   "assistant_turns": 150634,
+   "assistant_turns_failing_strict_parser": 602,
+   "parse_error_user_turns": 458,
+   "upstream_unparsed_turns": 0,
+   "d1_whole_file": {
+    "files_scanned": 1,
+    "records_scanned": 2852,
+    "bytes_scanned": 1754720383,
+    "n_hits": 0,
+    "files_or_records_with_hits": 0,
+    "by_rule": {},
+    "by_level": {}
+   },
+   "screens": {
+    "episodes": 2829,
+    "d1": 0,
+    "d4": 0,
+    "tb_name_mention_soft_flag": 0,
+    "identity": 705,
+    "credentials": 13,
+    "episodes_with_emails": 397,
+    "identity_names": {
+     "chatgpt": 684,
+     "openai": 40,
+     "llama": 2,
+     "gpt-5": 2,
+     "claude": 1
+    },
+    "credential_patterns": {
+     "private_key_block": 13
+    }
+   },
+   "d3": "pending (sealed screen at M2.4 on the pool and the rows)",
+   "eligible_episodes": 1836,
+   "families": 431,
+   "decision": {
+    "source": "th3k",
+    "checks": {
+     "parse_clean_share": {
+      "value": 0.8531,
+      "threshold": ">= 0.9",
+      "pass": false
+     },
+     "d1_hits_after_review": {
+      "value": 0,
+      "threshold": "== 0",
+      "pass": true
+     },
+     "d3_hits_after_review": {
+      "value": "pending",
+      "threshold": "== 0",
+      "pass": null
+     },
+     "task_families_kept": {
+      "value": 431,
+      "threshold": ">= 30",
+      "pass": true,
+      "definition": "distinct TerminalHorizon environment subcategories among the eligible episodes"
+     }
+    },
+    "thresholds_met": false,
+    "handshake_share": 0.986,
+    "gated": true,
+    "decision": "fail (conditional on D3 at M2.4)",
+    "admitted": false
+   }
+  },
+  "tgr": {
+   "episodes": 1376,
+   "parse_clean": 1144,
+   "parse_clean_share": 0.8314,
+   "handshake": 1362,
+   "every_assistant_turn_has_reasoning": 1376,
+   "assistant_turns": 41772,
+   "assistant_turns_failing_strict_parser": 309,
+   "parse_error_user_turns": 298,
+   "upstream_unparsed_turns": 309,
+   "d1_whole_file": {
+    "files_scanned": 1,
+    "records_scanned": 2008,
+    "bytes_scanned": 993690940,
+    "n_hits": 0,
+    "files_or_records_with_hits": 0,
+    "by_rule": {},
+    "by_level": {}
+   },
+   "screens": {
+    "episodes": 1144,
+    "d1": 0,
+    "d4": 0,
+    "tb_name_mention_soft_flag": 0,
+    "identity": 0,
+    "credentials": 0,
+    "episodes_with_emails": 29,
+    "identity_names": {},
+    "credential_patterns": {}
+   },
+   "d3": "pending (sealed screen at M2.4 on the pool and the rows)",
+   "eligible_episodes": 1054,
+   "families": 668,
+   "decision": {
+    "source": "tgr",
+    "checks": {
+     "parse_clean_share": {
+      "value": 0.8314,
+      "threshold": ">= 0.9",
+      "pass": false
+     },
+     "d1_hits_after_review": {
+      "value": 0,
+      "threshold": "== 0",
+      "pass": true
+     },
+     "d3_hits_after_review": {
+      "value": "pending",
+      "threshold": "== 0",
+      "pass": null
+     },
+     "task_families_kept": {
+      "value": 668,
+      "threshold": ">= 30",
+      "pass": true,
+      "definition": "distinct task clusters (screens.dedup terminal task text) among the eligible episodes"
+     }
+    },
+    "thresholds_met": false,
+    "handshake_share": 0.9898,
+    "gated": false,
+    "decision": "not gated (verified source; thresholds fail (conditional on D3 at M2.4); episodes failing a check are dropped one by one)",
+    "admitted": true
+   }
+  }
+ },
+ "th3k_admission_mode": "auto",
+ "fallback_applied": "TerminalHorizon not admitted: TermGrade supplies all 1,000 episodes (plan 3.3); the all-six-solve tasks are re-admitted only as far as the supply after the dev exclusion falls short, and counted",
+ "review_notes": {
+  "d1": "every D1 hit (whole-file and task text) is listed in logs/<run_id>/dropped.jsonl with stage screens; zero hits means nothing to review",
+  "d3": "pending until M2.4 (sealed screen on the pool and the rows, WP7)"
+ }
+}

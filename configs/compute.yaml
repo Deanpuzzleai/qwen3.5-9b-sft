@@ -1,0 +1,6 @@
+# Cost assumptions used by every run's resources.csv (estimates; the provider invoice is the truth).
+# Read by src/apex_eval/common.py (compute_rates; the training side records the same rates through apex_train.common),
+# scripts/serve_vllm.sh, scripts/gpu_setup_train_env.sh and scripts/dev/gpu_checks/runlog.py.
+gpu_vm_usd_per_hour: 8.26      # Nebius single-B200 VM rate of the rented VMs
+cpu_vm_usd_per_hour: 6.75      # apex-cpu (192 vCPU / 755 GB since 2026-10-11); always on, not charged to runs: reported costs are GPU only
+default_serving_gpus: 1        # GPUs serving the model during one evaluation run (one 19.3 GB bf16 copy per GPU)

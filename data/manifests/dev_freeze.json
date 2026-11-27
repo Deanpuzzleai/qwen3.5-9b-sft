@@ -1,0 +1,36 @@
+{
+  "frozen": true,
+  "frozen_at": "2026-10-12T06:36:51Z",
+  "run_id": "data_build_dev_set_20261012_063642",
+  "code": {"commit": "eb4fe8380a2eddad04083d3a77127576807fd3eb", "branch": "main", "dirty": true},
+  "seed": 42,
+  "files": {
+    "dev_swe.json": {"sha256": "993739bb7fe291eaa5295aa05149f405b711e4ab145edce3ba8af562993f9585", "bytes": 119712},
+    "dev_terminal.json": {"sha256": "e253b255e3c6ba38d4f6da4c4dc2ddbec42cb0ca73da7fb0d698a32f328ac07f", "bytes": 28859},
+    "dev_qa.json": {"sha256": "2d7d586770f9d1bbf2b410f9aa858bad21fed3631a3e6a64ee41d00c00ae3a79", "bytes": 110796},
+    "dev_exclusions.json": {"sha256": "43df9a7714673766b2c293b4a71063f68dfd3f9606b99083657581875be81ea7", "bytes": 15239}
+  },
+  "counts": {
+    "swe": {
+      "items": 100,
+      "full_samples": 400,
+      "reduced_items": 100,
+      "reduced_samples": 200,
+      "languages": {"go": 50, "py": 50},
+      "repositories": 8
+    },
+    "terminal": {"items": 40, "full_samples": 120, "reduced_items": 40, "reduced_samples": 80},
+    "qa": {
+      "selection": {"items": 228, "full_samples": 456, "reduced_items": 228, "reduced_samples": 228},
+      "all": {"items": 258, "full_samples": 516, "reduced_items": 228, "reduced_samples": 228},
+      "per_slice": {"gpqa_diamond": 198, "reasoning_gym": 30, "aime25": 30}
+    }
+  },
+  "sample_plan": {
+    "full_k": {"swe": 4, "terminal": 3, "qa": 2},
+    "reduced_k": {"swe": 2, "terminal": 2, "qa": 1},
+    "reduced_rule": "the reduced set is the first reduced_k samples (index < reduced_k) of every scored item, with the full set's seeds; AIME is not in it"
+  },
+  "verify": "PYTHONPATH=src .venv/train/bin/python scripts/data/build_dev_set.py  (rebuilds and checks byte identity; never rewrites a frozen file)",
+  "note": "Frozen before any training row is drawn (docs/DATA_PLAN.md section 10). Frozen files are never edited; a change needs a new dev-set version recorded in docs/DATA_PLAN_CHANGELOG.md."
+}

@@ -1,0 +1,99 @@
+# Terminal-Bench 2.0 lock. Everything here is fixed before training; open_items lists what the first-GPU pilot must close
+# first. Do not edit without explicit instruction.
+benchmark: Terminal-Bench
+version: "2.0"
+status: locked
+drafted_on: 2026-10-10
+locked_on: 2026-10-12
+open_items: []
+source:
+  registry: "Harbor legacy registry https://raw.githubusercontent.com/laude-institute/harbor/main/registry.json, dataset terminal-bench@2.0"
+  git_url: https://github.com/laude-institute/terminal-bench-2.git
+  git_commit: 69671fbaac6d67a7ef0dfec016cc38a64ef7a77c   # every one of the 89 registry entries points at this commit
+  local_path: third_party/terminal-bench/terminal-bench   # harbor download terminal-bench@2.0 --export (scripts/setup_eval_env.sh)
+  task_ids_file: configs/eval/terminal_bench_task_ids.txt
+  manifest: configs/eval/terminal_bench_manifest.tsv   # per task: docker image, sha256 of task.toml and instruction.md, declared timeout/cpus/memory
+  image_digests: configs/eval/terminal_bench_image_digests.tsv   # content digests of the 89 images as pulled; setup script compares after pulling
+  n_tasks: 89
+  difficulty: {medium: 55, hard: 30, easy: 4}
+container_images:
+  source: "prebuilt per-task images on Docker Hub (environment.docker_image in each task.toml, tags dated 20251031); ~30 GB total"
+  declared_resources: "cpus 1 (84 tasks) / 2 (3) / 4 (2); memory 2G (71) / 4G (16) / 8G (2); storage 10G; sum over all 89 tasks = 98 cpus, 222 GB"
+evaluator:
+  framework: "harbor==0.24.0 (configs/eval/requirements-harbor.lock), local docker environment, task verifiers from the pinned dataset"
+  verifier_timeout: "per task, from task.toml (6 to 200 min); not overridden"
+  resources_per_task:         # no overrides (leaderboard rule, decision_2026-10-12): each task's task.toml cpus / memory / storage apply; read by the runner; identical for all versions
+    override_cpus: null
+    override_memory_mb: null
+  n_concurrent: 16            # decision_2026-10-12_concurrency (was 32): faster turns per trial under the task timeouts; identical for all three models
+  host_requirement: "docker default-address-pools enlarged (scripts/setup_eval_env.sh --apply-docker-pools): the built-in pools cap concurrent Harbor environments at 30 per host"
+  infrastructure_retries:     # what counts as an environment failure and how it is retried; identical for all three models
+    harbor_max_retries: 2     # harbor retries a trial whose exception type is in retry_include
+    retry_include: [EnvironmentStartTimeoutError, AgentSetupTimeoutError, SandboxBuildFailedError]
+    rerun_passes: 3           # the runner re-runs tasks with no result or a docker-compose failure in follow-up jobs; what still fails is recorded as missing / environment_failure, never dropped
+agent:
+  name: terminus-2            # Harbor built-in; LLM loop on the host, commands via tmux inside the task container
+  agent_timeout_sec: null     # no override (leaderboard rule, decision_2026-10-12): each task's task.toml agent timeout (10 to 200 min, p50 15 min) with timeout_multiplier 1.0
+  parser: json                # Terminus-2 default
+  max_turns: null             # not part of the model-card setting; Terminus-2 default (no practical limit); the timeout is the budget
+  context_summarization: true # Terminus-2 default (enable_summarize)
+  model_info:                 # decision 2026-10-10: declared to Terminus-2 (LiteLLM custom-model registration) so its context accounting and summarization use the real window; for an unknown openai/<name> LiteLLM otherwise falls back to a 1,000,000-token context and Terminus-2 never summarizes before the server rejects the request
+    max_input_tokens: 262144
+    max_output_tokens: 81920
+    input_cost_per_token: 0.0
+    output_cost_per_token: 0.0
+    cache_creation_input_token_cost: 0.0
+    cache_read_input_token_cost: 0.0
+    litellm_provider: openai
+    mode: chat
+  litellm_model: "openai/<served-name>"   # provider prefix used by the runner (src/apex_eval/terminal_bench.py)
+  preserve_thinking: "not replayed: Terminus-2 interleaved_thinking=false (default), so earlier turns are sent without reasoning_content and the chat template renders them without think blocks; identical for all three versions"
+  tools: "terminal only"
+protocol:
+  runs: 1                     # one seed to fit the compute budget (decision_2026-10-12_seeds); was 5
+  seeds: [1]                  # the same seed for every model version; passed per request (llm_call_kwargs.seed) to vLLM
+  per_run_metric: "task success rate (%) = mean verifier reward over the 89 tasks; failed/errored trials count as 0 and are listed separately"
+  reported: "task success rate (%) of the single run, plus per-task outcomes; versions are compared on the same 89 tasks with exact McNemar (scripts/summarize.py); no run-to-run standard deviation with one seed"
+inference:   # identical for Base, LoRA SFT and stage 2; Qwen's thinking-mode sampling preset, 80K output tokens per turn and 256K context as on the Qwen3.6-35B-A3B model card
+  server: "configs/eval/model.yaml serving (pinned image and flags, identical for all versions)"
+  thinking: enabled
+  sampling: {temperature: 1.0, top_p: 0.95, top_k: 20, min_p: 0.0}
+  max_tokens_per_turn: 81920  # "80K" in the model card
+  context_window: 262144
+official_vs_this_experiment:
+  reference_model_card: "the reference setting (Harbor/Terminus-2; 3h timeout, 32 CPU/48 GB RAM; temp=1.0, top_p=0.95, top_k=20, max_tokens=80K, 256K ctx; avg of 5 runs) is the model-card setting of Qwen3.6-35B-A3B, a larger model of the same family; the Qwen3.5-9B model card used here reports no Terminal-Bench result and so specifies no Terminal-Bench setting"
+  leaderboard_rules: "Terminal-Bench 2.0 leaderboard (huggingface.co/datasets/harborframework/terminal-bench-2-leaderboard, read 2026-10-12): at least five trials per task; timeout_multiplier 1.0; no agent or verifier timeout overrides; no resource overrides"
+  here: "leaderboard timeout and resource rules: same Harbor/Terminus-2 harness, task.toml timeouts and resources, no overrides; one seed (the leaderboard requires five trials, so the score is not leaderboard-comparable); Qwen's thinking-mode sampling (temp 1.0, top_p 0.95, top_k 20), 80K max tokens per turn, 256K context; tasks run concurrently on one shared host, with host load and timeout rate recorded per run"
+harness_check_2026-10-12:   # under the leaderboard setting (no timeout or resource override), the setting of every evaluation run
+  command: "scripts/validate_harness.sh terminal_bench 40 89 (task.toml timeouts and resources; full empty-agent pass), then the two unexpected failures re-run with the oracle at n_concurrent 2"
+  result: "oracle 78/89 resolved at n_concurrent 40 (9 expected failures + crack-7z-hash and torch-pipeline-parallelism); empty agent 0/89. Re-run at n_concurrent 2: crack-7z-hash resolved (its reference solution needs ~12 of the task's 15 minutes on 1 CPU, so it is load-sensitive but intact: scored normally); torch-pipeline-parallelism's verifier timed out again at its 15-min limit on the task's 1 CPU / 4 GB (it passed on 2026-10-11 with 32 CPUs / 48 GB)"
+  evidence: logs/harness_checks/terminal_bench_20261012T051536Z/summary.json and recheck_2tasks/
+  verifier_failures:   # same handling rule as harness_check_2026-10-10: environment failure for every model version, kept in the denominator
+    - {task: torch-pipeline-parallelism, cause: "the verifier does not finish within the task's own 15-min verifier timeout on its declared 1 CPU / 4 GB, even for the reference solution (twice, at n_concurrent 40 and 2)"}
+harness_check_2026-10-11:   # ran under the previous lock setting (3 h agent timeout, 32 CPU / 48 GB per container), superseded by decision_2026-10-12
+  command: "scripts/validate_harness.sh terminal_bench 40 89 (the lock's agent_timeout_sec, cpus and memory passed through a Harbor job config; full empty-agent pass)"
+  result: "oracle 81/89 resolved (the 8 unresolved are exactly the lists under harness_check_2026-10-10 after the caffe-cifar-10 removal), 0 infrastructure exceptions; empty agent 0/89"
+  evidence: logs/harness_checks/terminal_bench_20261011T194050Z/summary.json
+harness_check_2026-10-10:
+  command: "scripts/validate_harness.sh terminal_bench 30 5, alone on the host, model-card overrides 32 cpus / 48 GB per container"
+  result: "oracle 80/89 resolved, 0 infrastructure exceptions; empty agent 0/5 (no spurious passes)"
+  evidence: logs/harness_checks/terminal_bench_20261010T034552Z/summary.json   # how each failure below was verified: NOTES.md next to it
+  reference_solution_failures:   # task and verifier intact; only the authors' canned solution (or its unpinned run-time dependencies) is stale -> the tasks stay in the set, equally hard for all three models
+    - {task: build-pmars, cause: "solution pins dpkg-dev 1.22.21; the image's apt index now offers only 1.22.22"}
+    - {task: make-doom-for-mips, cause: "solution installs from a stale package index (404s)"}
+    - {task: mcmc-sampling-stan, cause: "CRAN RcppParallel now requires cmake, absent from the image"}
+    - {task: rstan-to-pystan, cause: "solution pins curl 8.5.0-2ubuntu10.6 (gone) and calls add-apt-repository (absent)"}
+    - {task: protein-assembly, cause: "reference solution fails deterministically (dnachisel NoSolutionError, 10/10 attempts); it installs unpinned numpy and python_codon_tables at run time"}
+    - {task: caffe-cifar-10, cause: "under task.toml timeouts the solution exceeds the task's own 20-min agent cap: it downloads CIFAR-10 from cs.toronto.edu at ~140 KB/s (this run, NOTES.md); restored 2026-10-12 when the lock dropped the 3 h override"}
+  verifier_failures:   # the verifier itself cannot run on this date -> environment failure for every model version
+    - {task: qemu-alpine-ssh, cause: "tests/test.sh installs curl from Debian 11 bullseye-security, whose packages moved to archive.debian.org"}
+    - {task: qemu-startup, cause: "same as qemu-alpine-ssh"}
+    - {task: build-cython-ext, cause: "the verifier runs pyknotid's own test suite; one test fails because the unpinned dependency planarity resolves to 1.0.0 (API change) instead of 0.6; an agent can still solve the task by pinning planarity"}
+  removed_entries: "caffe-cifar-10 was removed on 2026-10-11 because the 3 h override let its reference solution finish (harness_check_2026-10-11); it was restored on 2026-10-12 because the lock now uses the task's own 20-min timeout, under which the 2026-10-10 run timed out"
+  handling_rule: "all 89 tasks stay in every model's denominator; tasks whose verifier cannot execute are listed separately as environment failures and count as unresolved for all versions; reference-solution drift needs no special handling because the task is unchanged and solvable; nothing is dropped; no local repair of tasks, verifiers or images"
+decision_2026-10-12_lock: "After the Base smoke tests: locked as tested; the separate 10-task pilot was not run (the smoke ran 2 tasks end to end at the lock settings except n_concurrent); the drift lists were updated from the leaderboard-setting re-validation (harness_check_2026-10-12)"
+decision_2026-10-12: "Terminal-Bench follows the leaderboard rules instead of the Qwen3.6-35B-A3B model-card setting, because that setting belongs to a different model and the Qwen3.5-9B card has no Terminal-Bench setting. No agent or verifier timeout override and no resource override; five seeds (leaderboard minimum: five trials per task) and the mean and sample std over the five runs; sampling, max tokens and context unchanged. The harness is re-validated under this setting before Base's first run (open_items)."
+decision_2026-10-12_seeds: "To fit the compute budget, Terminal-Bench runs one seed instead of five; the README states the configuration. One seed (seed 1) for Base, SFT and stage 2; supersedes the five seeds named in decision_2026-10-12. Uncertainty comes from per-task paired comparisons across versions."
+decision_2026-10-12_concurrency: "n_concurrent 16 instead of 32 for every version. With one seed the wall-clock cost is small (roughly 2 to 4 h per version), and fewer concurrent trials per GPU make each model turn faster, so fewer trials hit their task timeouts (the leaderboard default timeouts are kept). Container resources and timeouts are unchanged."
+decision_2026-10-12_timeout: "The agent timeout follows the Qwen3.6-35B-A3B model-card setting (Terminal-Bench 2.0: 3-hour timeout): agent_timeout_sec 10800 for every task of every version (Base, SFT, stage 2), passed to Harbor as the agent's override_timeout_sec. Timeout only: each task's task.toml cpus, memory, storage and verifier timeout still apply, and seeds, concurrency, sampling, max tokens and context are unchanged. Supersedes the agent-timeout part of decision_2026-10-12. The 3 h agent timeout was validated by harness_check_2026-10-11 (oracle 81/89, the 8 unresolved are the drift lists, 0 infrastructure exceptions); the per-task resources and verifier timeouts by harness_check_2026-10-12. Base's run under the per-task timeouts (terminal_bench_base_20261012_073939) stays in results/ and is marked superseded once Base is re-run under this lock, after the stage-2 evaluations."
+decision_2026-10-13_timeout: "Back to each task's own task.toml agent timeout (agent_timeout_sec null, no override) for every version; supersedes decision_2026-10-12_timeout. Seeds, concurrency, sampling, max tokens, context and resources are unchanged. terminal_bench_base_20261012_073939 stays the reportable Base run, with no re-run."

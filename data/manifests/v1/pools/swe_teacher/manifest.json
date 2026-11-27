@@ -1,0 +1,2390 @@
+{
+  "pool": "swe_teacher",
+  "source": "oswt",
+  "run_id": "data_swe_teacher_turncap8k_20261012_141738",
+  "built": "2026-10-12T14:20:48Z",
+  "seed": 42,
+  "code_commit": "c304234f5678672f98eaa5f64df2dea4dbbb07b7",
+  "dataset": {
+    "repo": "nvidia/Open-SWE-Traces",
+    "revision": "e192b26a43b8d09f156eeee781aef8e6bd5108ba",
+    "folders": [
+      "data/minisweagent/qwen38_27b/swe-rebench-v2",
+      "data/minisweagent/qwen38_27b/scale-swe"
+    ],
+    "licence": "CC-BY-4.0 (per-row repository SPDX in `repo_license`)",
+    "shards": {
+      "n": 44,
+      "limited": false
+    }
+  },
+  "side_inputs": {
+    "swe_rebench_v2": {
+      "repo": "nebius/SWE-rebench-V2",
+      "revision": "10483de0f50fe5da545942705a76c6150171af7f",
+      "dest": "/mnt/apex-shared/apex_data/raw/swe_rebench_v2",
+      "n_files": 3,
+      "bytes": 428863404,
+      "fetch_run": "data_fetch_20261012_061642"
+    },
+    "scale_swe_verified": {
+      "repo": "PrimeIntellect/Scale-SWE-Verified",
+      "revision": "2c29b67e0ea4d7819f60d8a10d7475a7ad89ccd6",
+      "dest": "/mnt/apex-shared/apex_data/raw/scale_swe_verified",
+      "n_files": 5,
+      "bytes": 218072223,
+      "fetch_run": "data_fetch_20261012_061642"
+    },
+    "scale_swe_verified_ids": 17202,
+    "reference_patch_agreement": {
+      "upstream_equal": 46117
+    }
+  },
+  "generator": {
+    "name": "Qwen3.8-27B",
+    "thinking": true,
+    "reasoning_effort": [
+      "xhigh"
+    ],
+    "label_provenance": "verifier (upstream resolved == 1, NVIDIA's execution label)"
+  },
+  "templates": {
+    "version": "2.4.6",
+    "config_path": "/home/dean/qwen3.5-9b-sft/.venv/harbor/lib/python3.12/site-packages/minisweagent/config/mini.yaml",
+    "config_sha256": "b539a8965f5bf41dd0f32daafa5d2db22581923d13812fa378fd09569b9d6b0c",
+    "bash_tool": {
+      "type": "function",
+      "function": {
+        "name": "bash",
+        "description": "Execute a bash command",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "The bash command to execute"
+            }
+          },
+          "required": [
+            "command"
+          ]
+        }
+      }
+    },
+    "teacher_prefix": "<pr_description>\nConsider the following PR description:\n",
+    "teacher_close": "</pr_description>",
+    "teacher_config_path": "/home/dean/qwen3.5-9b-sft/.venv/harbor/lib/python3.12/site-packages/minisweagent/config/benchmarks/swebench.yaml",
+    "template_vars": {
+      "system": "Linux",
+      "node": "apex-cpu",
+      "release": "6.11.0-1016-nvidia",
+      "version": "#16-Ubuntu SMP PREEMPT_DYNAMIC Sun Sep 21 17:06:33 UTC 2025",
+      "machine": "x86_64"
+    },
+    "lock_reference": {
+      "path": "/home/dean/qwen3.5-9b-sft/logs/train_stack_check/harness_request_shapes/captures/mini_swe_agent_config.generated.yaml",
+      "sha256": "f889fbce66d7d2402562e197170c02bc308d5524111d71fa12fa0c1f81553f15",
+      "matched": [
+        "agent.system_template",
+        "agent.instance_template",
+        "model.observation_template"
+      ]
+    },
+    "bash_tool_sha256": "e7d0cb824728a0e677d5d6521845f5b87f5907091a0538310ae964dfdaee437c"
+  },
+  "tokenizer": {
+    "path": "/mnt/apex-shared/models/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715"
+  },
+  "render": {
+    "row_kind": "swe_episode",
+    "mode": "episode",
+    "enable_thinking": true,
+    "cap_target": 65536,
+    "cap_fallback": 49152,
+    "truncation": "none at render time; observations carry the harness's own >= 10,000-character elision",
+    "submit_command": "the teacher's final `echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT && cat patch.txt` is rewritten to the lone `echo COMPLETE_TASK_AND_SUBMIT_FINAL_OUTPUT` our harness prompt asks for; every other turn is verbatim",
+    "reference_patch_rule": "a trajectory is dropped when its prompt (system + user text) contains any non-test added lines of >= 12 non-blank characters of the reference patch",
+    "reference_patch_drops_by_stratum": {
+      "big": {
+        "reached": 4100,
+        "dropped": 607,
+        "share": 0.148
+      },
+      "feature": {
+        "reached": 4063,
+        "dropped": 292,
+        "share": 0.072
+      },
+      "random": {
+        "reached": 1126,
+        "dropped": 42,
+        "share": 0.037
+      }
+    }
+  },
+  "repo_root": {
+    "repo_root": "/app",
+    "teacher_root": "/testbed",
+    "paths_rewritten_per_row": {
+      "mean": 88.3,
+      "max": 440,
+      "total": 140131
+    },
+    "cd_prefixes_deleted_per_row": {
+      "mean": 20.5,
+      "max": 86,
+      "total": 32511
+    },
+    "counts": {
+      "cd_prefixes_deleted": 32511,
+      "cd_sub_made_relative": 651,
+      "paths_rewritten": 140131,
+      "skipped_other_left_character": 6,
+      "skipped_path_segment": 95,
+      "skipped_relative_path": 42
+    },
+    "ambiguous_drops": {
+      "trajectories": 1574,
+      "by_reason": {
+        "non_root_testbed_path": 1162,
+        "bare_word_testbed": 1563
+      }
+    },
+    "root_tokens_left": 0,
+    "testbed_substrings_left": 190,
+    "kept_rows_tokens_delta_vs_source": {
+      "mean": 0.0,
+      "max": 0,
+      "total": 0,
+      "min": 0
+    },
+    "kept_rows_fits_48k_changed": 0,
+    "rule": "commands lose a leading `cd /testbed && ` (or ; or newline) and a leading `cd /testbed/<sub> &&` becomes `cd <sub> &&`; then /testbed at a path start (start, whitespace, quote, =, :, (, `, [, {, comma, <, >) and a name end becomes the repository root in every message (observations on the parsed output); episodes with a command the rewrite could change (bare word testbed, a skipped /testbed path, cd /testbed && cd ..) are dropped as repo_root_ambiguous"
+  },
+  "quotas": {
+    "go": {
+      "subsource": "swe-rebench-v2",
+      "language": "go",
+      "quota": 470,
+      "mode": "stratified"
+    },
+    "ts": {
+      "subsource": "swe-rebench-v2",
+      "language": "ts",
+      "quota": 260,
+      "mode": "stratified"
+    },
+    "js": {
+      "subsource": "swe-rebench-v2",
+      "language": "js",
+      "quota": 120,
+      "mode": "stratified"
+    },
+    "py_scale": {
+      "subsource": "scale-swe",
+      "language": "py",
+      "quota": 200,
+      "mode": "ranked"
+    },
+    "py_rebench": {
+      "subsource": "swe-rebench-v2",
+      "language": "py",
+      "quota": 120,
+      "mode": "stratified"
+    }
+  },
+  "draw": {
+    "big_share": 0.65,
+    "max_rows_per_repository": 5,
+    "strata": "big = >= 3 non-test files and >= 100 added lines; feature = >= 3 files or >= 50 added lines; random = the rest (reference patch without test files, apex_data.grade.tamper.classify_path)",
+    "trajectory_choice": "fewest_turns_verified",
+    "trajectory_choice_rule": "among the instance's trajectories that pass every gate and fit the cap, the one with the fewest assistant turns among those that ran a test command after their last file edit (apex_data.teacher.verify); ties by rendered tokens, then trajectory id; when none of them did, random_not_shortest. A pinned instance keeps its slot and gets its trajectory by this rule",
+    "trajectory_features": {
+      "rule_id": "test_after_edit:232156bd47aa",
+      "test_pattern": "\\b(pytest|py\\.test|go test|npm (run )?test|yarn (run )?test|pnpm (run )?test|jest|vitest|mocha|unittest|tox\\b|nox\\b|make test|npx (jest|vitest|mocha|tsc))",
+      "edit_pattern": "(sed -i|cat\\s*>|cat <<|tee |>\\s*\\S+\\.(py|go|ts|js|tsx|jsx)|python3? - <<|apply_patch|patch -p)",
+      "source": "assistant tool-call arguments of the raw Open-SWE-Traces messages, in order",
+      "cache": "/tmp/scratch/turncap/features_cap.jsonl",
+      "n_trajectories": 3427,
+      "verified_share": 0.811
+    },
+    "lineage": "one row per (repository, PR) across both subsources"
+  },
+  "draw_source": {
+    "mode": "kept selections, vacated slots drawn",
+    "kept_from": "logs/data_swe_teacher_app_20261012_073404",
+    "source_run_id": "data_swe_teacher_app_20261012_073404",
+    "source_selection_sha256": {
+      "64k": "86c74b3aca662f25bc4ce5e46cec395987b8433651276f1a0fe672d4747db2e2",
+      "48k": "ee675f8ec7cccf70d52187e5a1e085f154095986bffba199288dd785a1ebd07c"
+    },
+    "kept": {
+      "64k": 943,
+      "48k": 1010
+    },
+    "replaced": {
+      "64k": {
+        "n": 227,
+        "by_reason": {
+          "turn_too_long": 91,
+          "repo_root_ambiguous": 136
+        },
+        "by_part": {
+          "go": 59,
+          "ts": 40,
+          "js": 16,
+          "py_scale": 62,
+          "py_rebench": 50
+        }
+      },
+      "48k": {
+        "n": 160,
+        "by_reason": {
+          "repo_root_ambiguous": 127,
+          "turn_too_long": 33
+        },
+        "by_part": {
+          "go": 29,
+          "ts": 29,
+          "js": 12,
+          "py_scale": 48,
+          "py_rebench": 42
+        }
+      }
+    }
+  },
+  "max_turn_completion_tokens": {
+    "cap": 8192,
+    "rule": "a gate-passing trajectory whose rendered row has an assistant turn of more than the cap in trained tokens (its contiguous assistant_masks span) fails at stage turn_length (turn_too_long); kept selections whose trajectory fails are replaced like any other failing kept row",
+    "measured_trajectories": 3691,
+    "failed_trajectories": 264
+  },
+  "funnel": {
+    "row_filters": [
+      {
+        "filter": "0_rows_in_shards",
+        "n_in": 107267,
+        "n_dropped": 0,
+        "n_out": 107267,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 53553,
+            "n_dropped": 0,
+            "n_out": 53553
+          },
+          "swe-rebench-v2/c": {
+            "n_in": 220,
+            "n_dropped": 0,
+            "n_out": 220
+          },
+          "swe-rebench-v2/cpp": {
+            "n_in": 86,
+            "n_dropped": 0,
+            "n_out": 86
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 13206,
+            "n_dropped": 0,
+            "n_out": 13206
+          },
+          "swe-rebench-v2/java": {
+            "n_in": 3149,
+            "n_dropped": 0,
+            "n_out": 3149
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 7371,
+            "n_dropped": 0,
+            "n_out": 7371
+          },
+          "swe-rebench-v2/php": {
+            "n_in": 2674,
+            "n_dropped": 0,
+            "n_out": 2674
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 12044,
+            "n_dropped": 0,
+            "n_out": 12044
+          },
+          "swe-rebench-v2/rust": {
+            "n_in": 5804,
+            "n_dropped": 0,
+            "n_out": 5804
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 9160,
+            "n_dropped": 0,
+            "n_out": 9160
+          }
+        },
+        "note": "teacher identity, thinking mode and upstream dataset asserted per row"
+      },
+      {
+        "filter": "1_resolved",
+        "n_in": 107267,
+        "n_dropped": 57342,
+        "n_out": 49925,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 53553,
+            "n_dropped": 26335,
+            "n_out": 27218
+          },
+          "swe-rebench-v2/c": {
+            "n_in": 220,
+            "n_dropped": 158,
+            "n_out": 62
+          },
+          "swe-rebench-v2/cpp": {
+            "n_in": 86,
+            "n_dropped": 73,
+            "n_out": 13
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 13206,
+            "n_dropped": 6924,
+            "n_out": 6282
+          },
+          "swe-rebench-v2/java": {
+            "n_in": 3149,
+            "n_dropped": 2018,
+            "n_out": 1131
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 7371,
+            "n_dropped": 3827,
+            "n_out": 3544
+          },
+          "swe-rebench-v2/php": {
+            "n_in": 2674,
+            "n_dropped": 1588,
+            "n_out": 1086
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 12044,
+            "n_dropped": 4995,
+            "n_out": 7049
+          },
+          "swe-rebench-v2/rust": {
+            "n_in": 5804,
+            "n_dropped": 5152,
+            "n_out": 652
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 9160,
+            "n_dropped": 6272,
+            "n_out": 2888
+          }
+        }
+      },
+      {
+        "filter": "1_language",
+        "n_in": 49925,
+        "n_dropped": 2944,
+        "n_out": 46981,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 27218,
+            "n_dropped": 0,
+            "n_out": 27218
+          },
+          "swe-rebench-v2/c": {
+            "n_in": 62,
+            "n_dropped": 62,
+            "n_out": 0
+          },
+          "swe-rebench-v2/cpp": {
+            "n_in": 13,
+            "n_dropped": 13,
+            "n_out": 0
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6282,
+            "n_dropped": 0,
+            "n_out": 6282
+          },
+          "swe-rebench-v2/java": {
+            "n_in": 1131,
+            "n_dropped": 1131,
+            "n_out": 0
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3544,
+            "n_dropped": 0,
+            "n_out": 3544
+          },
+          "swe-rebench-v2/php": {
+            "n_in": 1086,
+            "n_dropped": 1086,
+            "n_out": 0
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7049,
+            "n_dropped": 0,
+            "n_out": 7049
+          },
+          "swe-rebench-v2/rust": {
+            "n_in": 652,
+            "n_dropped": 652,
+            "n_out": 0
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2888,
+            "n_dropped": 0,
+            "n_out": 2888
+          }
+        }
+      },
+      {
+        "filter": "1_licence",
+        "n_in": 46981,
+        "n_dropped": 0,
+        "n_out": 46981,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 27218,
+            "n_dropped": 0,
+            "n_out": 27218
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6282,
+            "n_dropped": 0,
+            "n_out": 6282
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3544,
+            "n_dropped": 0,
+            "n_out": 3544
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7049,
+            "n_dropped": 0,
+            "n_out": 7049
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2888,
+            "n_dropped": 0,
+            "n_out": 2888
+          }
+        }
+      },
+      {
+        "filter": "1_scale_swe_verified",
+        "n_in": 46981,
+        "n_dropped": 0,
+        "n_out": 46981,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 27218,
+            "n_dropped": 0,
+            "n_out": 27218
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6282,
+            "n_dropped": 0,
+            "n_out": 6282
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3544,
+            "n_dropped": 0,
+            "n_out": 3544
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7049,
+            "n_dropped": 0,
+            "n_out": 7049
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2888,
+            "n_dropped": 0,
+            "n_out": 2888
+          }
+        }
+      },
+      {
+        "filter": "2_d2_and_decontam_exclusions",
+        "n_in": 46981,
+        "n_dropped": 37,
+        "n_out": 46944,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 27218,
+            "n_dropped": 16,
+            "n_out": 27202
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6282,
+            "n_dropped": 0,
+            "n_out": 6282
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3544,
+            "n_dropped": 0,
+            "n_out": 3544
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7049,
+            "n_dropped": 6,
+            "n_out": 7043
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2888,
+            "n_dropped": 15,
+            "n_out": 2873
+          }
+        }
+      },
+      {
+        "filter": "3_tool_schema",
+        "n_in": 46944,
+        "n_dropped": 0,
+        "n_out": 46944,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 27202,
+            "n_dropped": 0,
+            "n_out": 27202
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6282,
+            "n_dropped": 0,
+            "n_out": 6282
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3544,
+            "n_dropped": 0,
+            "n_out": 3544
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7043,
+            "n_dropped": 0,
+            "n_out": 7043
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2873,
+            "n_dropped": 0,
+            "n_out": 2873
+          }
+        }
+      },
+      {
+        "filter": "3_model_patch_clean",
+        "n_in": 46944,
+        "n_dropped": 808,
+        "n_out": 46136,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 27202,
+            "n_dropped": 655,
+            "n_out": 26547
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6282,
+            "n_dropped": 37,
+            "n_out": 6245
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3544,
+            "n_dropped": 54,
+            "n_out": 3490
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7043,
+            "n_dropped": 25,
+            "n_out": 7018
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2873,
+            "n_dropped": 37,
+            "n_out": 2836
+          }
+        }
+      },
+      {
+        "filter": "4_reasoning_every_turn",
+        "n_in": 46136,
+        "n_dropped": 6,
+        "n_out": 46130,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 26547,
+            "n_dropped": 6,
+            "n_out": 26541
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6245,
+            "n_dropped": 0,
+            "n_out": 6245
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3490,
+            "n_dropped": 0,
+            "n_out": 3490
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7018,
+            "n_dropped": 0,
+            "n_out": 7018
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2836,
+            "n_dropped": 0,
+            "n_out": 2836
+          }
+        }
+      },
+      {
+        "filter": "6_dev_exclusions",
+        "n_in": 46130,
+        "n_dropped": 13,
+        "n_out": 46117,
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 26541,
+            "n_dropped": 0,
+            "n_out": 26541
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 6245,
+            "n_dropped": 13,
+            "n_out": 6232
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 3490,
+            "n_dropped": 0,
+            "n_out": 3490
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 7018,
+            "n_dropped": 0,
+            "n_out": 7018
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 2836,
+            "n_dropped": 0,
+            "n_out": 2836
+          }
+        }
+      }
+    ],
+    "row_filter_reasons": {
+      "d2_locked_repository": 21,
+      "decontam_excluded_repository": 16,
+      "dev_excluded_repository": 13,
+      "language_out_of_quota": 2944,
+      "model_patch_tamper": 808,
+      "not_resolved": 57342,
+      "reasoning_missing": 6
+    },
+    "rendered_filters": [
+      {
+        "filter": "rebuild",
+        "n_in": 9313,
+        "n_dropped": 24,
+        "n_out": 9289,
+        "reasons": {
+          "format_error_turn": 22,
+          "no_submit": 2
+        },
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 2914,
+            "n_dropped": 10,
+            "n_out": 2904
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 2808,
+            "n_dropped": 7,
+            "n_out": 2801
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 806,
+            "n_dropped": 2,
+            "n_out": 804
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 1349,
+            "n_dropped": 2,
+            "n_out": 1347
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 1436,
+            "n_dropped": 3,
+            "n_out": 1433
+          }
+        }
+      },
+      {
+        "filter": "repo_root_ambiguous",
+        "n_in": 9289,
+        "n_dropped": 1574,
+        "n_out": 7715,
+        "reasons": {
+          "repo_root_ambiguous": 1574
+        },
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 2904,
+            "n_dropped": 708,
+            "n_out": 2196
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 2801,
+            "n_dropped": 112,
+            "n_out": 2689
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 804,
+            "n_dropped": 74,
+            "n_out": 730
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 1347,
+            "n_dropped": 488,
+            "n_out": 859
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 1433,
+            "n_dropped": 192,
+            "n_out": 1241
+          }
+        }
+      },
+      {
+        "filter": "reference_patch_leak",
+        "n_in": 7715,
+        "n_dropped": 941,
+        "n_out": 6774,
+        "reasons": {
+          "reference_patch_line_in_prompt": 941
+        },
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 2196,
+            "n_dropped": 408,
+            "n_out": 1788
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 2689,
+            "n_dropped": 194,
+            "n_out": 2495
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 730,
+            "n_dropped": 76,
+            "n_out": 654
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 859,
+            "n_dropped": 156,
+            "n_out": 703
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 1241,
+            "n_dropped": 107,
+            "n_out": 1134
+          }
+        }
+      },
+      {
+        "filter": "d2_text",
+        "n_in": 6774,
+        "n_dropped": 2,
+        "n_out": 6772,
+        "reasons": {
+          "d2_locked_repository": 2
+        },
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 1788,
+            "n_dropped": 1,
+            "n_out": 1787
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 2495,
+            "n_dropped": 1,
+            "n_out": 2494
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 654,
+            "n_dropped": 0,
+            "n_out": 654
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 703,
+            "n_dropped": 0,
+            "n_out": 703
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 1134,
+            "n_dropped": 0,
+            "n_out": 1134
+          }
+        }
+      },
+      {
+        "filter": "length_precheck",
+        "n_in": 6772,
+        "n_dropped": 3048,
+        "n_out": 3724,
+        "reasons": {
+          "too_long": 3048
+        },
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 1787,
+            "n_dropped": 1128,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 2494,
+            "n_dropped": 854,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 654,
+            "n_dropped": 249,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 703,
+            "n_dropped": 361,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 1134,
+            "n_dropped": 456,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_verdict",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_tamper",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_adapt",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_exit",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_format_error_turn",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_steps",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_finish_length",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_reasoning",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_think_length",
+        "n_in": 3724,
+        "n_dropped": 0,
+        "n_out": 3724,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 0,
+            "n_out": 659
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 0,
+            "n_out": 1640
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 0,
+            "n_out": 405
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 0,
+            "n_out": 342
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 0,
+            "n_out": 678
+          }
+        }
+      },
+      {
+        "filter": "gate_language",
+        "n_in": 3724,
+        "n_dropped": 33,
+        "n_out": 3691,
+        "reasons": {
+          "cjk_in_reasoning": 33
+        },
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 659,
+            "n_dropped": 6,
+            "n_out": 653
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1640,
+            "n_dropped": 17,
+            "n_out": 1623
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 405,
+            "n_dropped": 4,
+            "n_out": 401
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 342,
+            "n_dropped": 1,
+            "n_out": 341
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 678,
+            "n_dropped": 5,
+            "n_out": 673
+          }
+        }
+      },
+      {
+        "filter": "gate_parse",
+        "n_in": 3691,
+        "n_dropped": 0,
+        "n_out": 3691,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 653,
+            "n_dropped": 0,
+            "n_out": 653
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1623,
+            "n_dropped": 0,
+            "n_out": 1623
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 401,
+            "n_dropped": 0,
+            "n_out": 401
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 341,
+            "n_dropped": 0,
+            "n_out": 341
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 673,
+            "n_dropped": 0,
+            "n_out": 673
+          }
+        }
+      },
+      {
+        "filter": "gate_thrashing",
+        "n_in": 3691,
+        "n_dropped": 0,
+        "n_out": 3691,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 653,
+            "n_dropped": 0,
+            "n_out": 653
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1623,
+            "n_dropped": 0,
+            "n_out": 1623
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 401,
+            "n_dropped": 0,
+            "n_out": 401
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 341,
+            "n_dropped": 0,
+            "n_out": 341
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 673,
+            "n_dropped": 0,
+            "n_out": 673
+          }
+        }
+      },
+      {
+        "filter": "gate_repetition",
+        "n_in": 3691,
+        "n_dropped": 0,
+        "n_out": 3691,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 653,
+            "n_dropped": 0,
+            "n_out": 653
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1623,
+            "n_dropped": 0,
+            "n_out": 1623
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 401,
+            "n_dropped": 0,
+            "n_out": 401
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 341,
+            "n_dropped": 0,
+            "n_out": 341
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 673,
+            "n_dropped": 0,
+            "n_out": 673
+          }
+        }
+      },
+      {
+        "filter": "gate_constraints",
+        "n_in": 3691,
+        "n_dropped": 0,
+        "n_out": 3691,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 653,
+            "n_dropped": 0,
+            "n_out": 653
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1623,
+            "n_dropped": 0,
+            "n_out": 1623
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 401,
+            "n_dropped": 0,
+            "n_out": 401
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 341,
+            "n_dropped": 0,
+            "n_out": 341
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 673,
+            "n_dropped": 0,
+            "n_out": 673
+          }
+        }
+      },
+      {
+        "filter": "gate_render",
+        "n_in": 3691,
+        "n_dropped": 0,
+        "n_out": 3691,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 653,
+            "n_dropped": 0,
+            "n_out": 653
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1623,
+            "n_dropped": 0,
+            "n_out": 1623
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 401,
+            "n_dropped": 0,
+            "n_out": 401
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 341,
+            "n_dropped": 0,
+            "n_out": 341
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 673,
+            "n_dropped": 0,
+            "n_out": 673
+          }
+        }
+      },
+      {
+        "filter": "gate_row_length",
+        "n_in": 3691,
+        "n_dropped": 0,
+        "n_out": 3691,
+        "reasons": {},
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 653,
+            "n_dropped": 0,
+            "n_out": 653
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1623,
+            "n_dropped": 0,
+            "n_out": 1623
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 401,
+            "n_dropped": 0,
+            "n_out": 401
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 341,
+            "n_dropped": 0,
+            "n_out": 341
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 673,
+            "n_dropped": 0,
+            "n_out": 673
+          }
+        }
+      },
+      {
+        "filter": "turn_length",
+        "n_in": 3691,
+        "n_dropped": 264,
+        "n_out": 3427,
+        "reasons": {
+          "turn_too_long": 264
+        },
+        "by_cell": {
+          "scale-swe/py": {
+            "n_in": 653,
+            "n_dropped": 53,
+            "n_out": 600
+          },
+          "swe-rebench-v2/go": {
+            "n_in": 1623,
+            "n_dropped": 130,
+            "n_out": 1493
+          },
+          "swe-rebench-v2/js": {
+            "n_in": 401,
+            "n_dropped": 25,
+            "n_out": 376
+          },
+          "swe-rebench-v2/py": {
+            "n_in": 341,
+            "n_dropped": 28,
+            "n_out": 313
+          },
+          "swe-rebench-v2/ts": {
+            "n_in": 673,
+            "n_dropped": 28,
+            "n_out": 645
+          }
+        }
+      }
+    ],
+    "not_reached_by_the_draw": 36804,
+    "instances": {
+      "after_row_filters": 18677,
+      "by_cell": {
+        "scale-swe/py/random": 5797,
+        "scale-swe/py/feature": 3326,
+        "scale-swe/py/big": 969,
+        "swe-rebench-v2/ts/big": 160,
+        "swe-rebench-v2/ts/feature": 528,
+        "swe-rebench-v2/ts/random": 795,
+        "swe-rebench-v2/go/big": 311,
+        "swe-rebench-v2/py/random": 1558,
+        "swe-rebench-v2/py/feature": 1137,
+        "swe-rebench-v2/go/random": 1296,
+        "swe-rebench-v2/go/feature": 998,
+        "swe-rebench-v2/js/feature": 502,
+        "swe-rebench-v2/js/big": 158,
+        "swe-rebench-v2/js/random": 848,
+        "swe-rebench-v2/py/big": 294
+      }
+    },
+    "per_cap": {
+      "64k": {
+        "instances_fully_evaluated": 4162,
+        "admitted_at_cap": 1798,
+        "admitted_by_cell": {
+          "scale-swe/py/big": 239,
+          "scale-swe/py/feature": 96,
+          "swe-rebench-v2/ts/feature": 237,
+          "swe-rebench-v2/go/big": 103,
+          "swe-rebench-v2/go/feature": 433,
+          "swe-rebench-v2/py/feature": 96,
+          "swe-rebench-v2/py/random": 39,
+          "swe-rebench-v2/go/random": 164,
+          "swe-rebench-v2/js/big": 47,
+          "swe-rebench-v2/py/big": 51,
+          "swe-rebench-v2/js/feature": 98,
+          "swe-rebench-v2/ts/random": 105,
+          "swe-rebench-v2/js/random": 48,
+          "swe-rebench-v2/ts/big": 42
+        }
+      },
+      "48k": {
+        "instances_fully_evaluated": 4162,
+        "admitted_at_cap": 1263,
+        "admitted_by_cell": {
+          "scale-swe/py/big": 149,
+          "scale-swe/py/feature": 61,
+          "swe-rebench-v2/go/feature": 314,
+          "swe-rebench-v2/py/random": 32,
+          "swe-rebench-v2/go/random": 148,
+          "swe-rebench-v2/ts/feature": 163,
+          "swe-rebench-v2/js/big": 22,
+          "swe-rebench-v2/py/feature": 68,
+          "swe-rebench-v2/go/big": 67,
+          "swe-rebench-v2/ts/random": 85,
+          "swe-rebench-v2/js/random": 40,
+          "swe-rebench-v2/js/feature": 66,
+          "swe-rebench-v2/py/big": 23,
+          "swe-rebench-v2/ts/big": 25
+        }
+      }
+    }
+  },
+  "evaluated_length_histogram": {
+    "<=512": 0,
+    "<=1024": 0,
+    "<=2048": 0,
+    "<=4096": 0,
+    "<=8192": 4,
+    "<=16384": 153,
+    "<=32768": 1012,
+    "<=65536": 2522,
+    "<=131072": 2432,
+    ">131072": 616
+  },
+  "selections": {
+    "64k": {
+      "cap": 65536,
+      "run_id": "data_swe_teacher_turncap8k_20261012_141738",
+      "seed": 42,
+      "complete": true,
+      "draw": {
+        "trajectory_choice": "fewest_turns_verified",
+        "choice_counts": {
+          "verified": 1039,
+          "fallback_one_fitting": 93,
+          "fallback_several_fitting": 38
+        }
+      },
+      "quotas": {
+        "go": {
+          "quota": 470,
+          "filled": 470,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 440,
+            "repo_cap": 123,
+            "admitted": 59,
+            "large_first_short": 0
+          }
+        },
+        "ts": {
+          "quota": 260,
+          "filled": 260,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 300,
+            "admitted": 40,
+            "repo_cap": 23,
+            "large_first_short": 0
+          }
+        },
+        "js": {
+          "quota": 120,
+          "filled": 120,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 145,
+            "repo_cap": 9,
+            "admitted": 16,
+            "large_first_short": 0
+          }
+        },
+        "py_scale": {
+          "quota": 200,
+          "filled": 200,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 631,
+            "admitted": 62,
+            "repo_cap": 60
+          }
+        },
+        "py_rebench": {
+          "quota": 120,
+          "filled": 120,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 319,
+            "admitted": 50,
+            "repo_cap": 2,
+            "large_first_short": 0
+          }
+        }
+      },
+      "summary": {
+        "all": {
+          "n": 1170,
+          "median_added_lines": 53.0,
+          "share_added_ge100": 0.391,
+          "share_files_ge3": 0.74,
+          "strata": {
+            "big": 0.378,
+            "feature": 0.409,
+            "random": 0.214
+          },
+          "phases": {
+            "large_first": 631,
+            "random": 339,
+            "ranked": 200
+          },
+          "sequence_tokens": 48496606,
+          "loss_tokens": 21571045,
+          "mean_tokens": 41450,
+          "repositories": 737,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 3,
+            "<=10": 234,
+            "<=25": 189,
+            "<=50": 149,
+            "<=100": 141,
+            "<=200": 295,
+            "<=500": 123,
+            "<=1000": 27,
+            ">1000": 9
+          },
+          "files_histogram": {
+            "<=1": 188,
+            "<=2": 116,
+            "<=3": 247,
+            "<=5": 261,
+            "<=10": 237,
+            "<=20": 91,
+            ">20": 30
+          }
+        },
+        "go": {
+          "n": 470,
+          "median_added_lines": 35.5,
+          "share_added_ge100": 0.243,
+          "share_files_ge3": 0.662,
+          "strata": {
+            "big": 0.219,
+            "feature": 0.521,
+            "random": 0.26
+          },
+          "phases": {
+            "large_first": 306,
+            "random": 164
+          },
+          "sequence_tokens": 18804035,
+          "loss_tokens": 8365963,
+          "mean_tokens": 40009,
+          "repositories": 273,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 0,
+            "<=10": 105,
+            "<=25": 100,
+            "<=50": 71,
+            "<=100": 82,
+            "<=200": 82,
+            "<=500": 29,
+            "<=1000": 1,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 92,
+            "<=2": 67,
+            "<=3": 92,
+            "<=5": 89,
+            "<=10": 98,
+            "<=20": 29,
+            ">20": 3
+          }
+        },
+        "js": {
+          "n": 120,
+          "median_added_lines": 62.0,
+          "share_added_ge100": 0.4,
+          "share_files_ge3": 0.717,
+          "strata": {
+            "big": 0.392,
+            "feature": 0.35,
+            "random": 0.258
+          },
+          "phases": {
+            "large_first": 78,
+            "random": 42
+          },
+          "sequence_tokens": 5189913,
+          "loss_tokens": 2350595,
+          "mean_tokens": 43249,
+          "repositories": 81,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 0,
+            "<=10": 27,
+            "<=25": 14,
+            "<=50": 15,
+            "<=100": 17,
+            "<=200": 41,
+            "<=500": 6,
+            "<=1000": 0,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 29,
+            "<=2": 5,
+            "<=3": 27,
+            "<=5": 30,
+            "<=10": 23,
+            "<=20": 5,
+            ">20": 1
+          }
+        },
+        "py": {
+          "n": 320,
+          "median_added_lines": 148.0,
+          "share_added_ge100": 0.781,
+          "share_files_ge3": 0.887,
+          "strata": {
+            "big": 0.781,
+            "feature": 0.122,
+            "random": 0.097
+          },
+          "phases": {
+            "ranked": 200,
+            "large_first": 78,
+            "random": 42
+          },
+          "sequence_tokens": 13566660,
+          "loss_tokens": 6255479,
+          "mean_tokens": 42396,
+          "repositories": 235,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 1,
+            "<=10": 28,
+            "<=25": 21,
+            "<=50": 8,
+            "<=100": 13,
+            "<=200": 141,
+            "<=500": 74,
+            "<=1000": 25,
+            ">1000": 9
+          },
+          "files_histogram": {
+            "<=1": 21,
+            "<=2": 15,
+            "<=3": 61,
+            "<=5": 80,
+            "<=10": 78,
+            "<=20": 42,
+            ">20": 23
+          }
+        },
+        "ts": {
+          "n": 260,
+          "median_added_lines": 25.5,
+          "share_added_ge100": 0.177,
+          "share_files_ge3": 0.712,
+          "strata": {
+            "big": 0.162,
+            "feature": 0.585,
+            "random": 0.254
+          },
+          "phases": {
+            "large_first": 169,
+            "random": 91
+          },
+          "sequence_tokens": 10935998,
+          "loss_tokens": 4599008,
+          "mean_tokens": 42062,
+          "repositories": 148,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 2,
+            "<=10": 74,
+            "<=25": 54,
+            "<=50": 55,
+            "<=100": 29,
+            "<=200": 31,
+            "<=500": 14,
+            "<=1000": 1,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 46,
+            "<=2": 29,
+            "<=3": 67,
+            "<=5": 62,
+            "<=10": 38,
+            "<=20": 15,
+            ">20": 3
+          }
+        },
+        "py_scale": {
+          "n": 200,
+          "median_added_lines": 197.5,
+          "share_added_ge100": 1.0,
+          "share_files_ge3": 1.0,
+          "strata": {
+            "big": 1.0,
+            "feature": 0.0,
+            "random": 0.0
+          },
+          "phases": {
+            "ranked": 200
+          },
+          "sequence_tokens": 8527377,
+          "loss_tokens": 3870408,
+          "mean_tokens": 42637,
+          "repositories": 141,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 0,
+            "<=10": 0,
+            "<=25": 0,
+            "<=50": 0,
+            "<=100": 0,
+            "<=200": 102,
+            "<=500": 64,
+            "<=1000": 25,
+            ">1000": 9
+          },
+          "files_histogram": {
+            "<=1": 0,
+            "<=2": 0,
+            "<=3": 37,
+            "<=5": 55,
+            "<=10": 60,
+            "<=20": 28,
+            ">20": 20
+          }
+        },
+        "py_rebench": {
+          "n": 120,
+          "median_added_lines": 55.0,
+          "share_added_ge100": 0.417,
+          "share_files_ge3": 0.7,
+          "strata": {
+            "big": 0.417,
+            "feature": 0.325,
+            "random": 0.258
+          },
+          "phases": {
+            "large_first": 78,
+            "random": 42
+          },
+          "sequence_tokens": 5039283,
+          "loss_tokens": 2385071,
+          "mean_tokens": 41994,
+          "repositories": 94,
+          "max_rows_per_repository": 4,
+          "added_lines_histogram": {
+            "<=0": 1,
+            "<=10": 28,
+            "<=25": 21,
+            "<=50": 8,
+            "<=100": 13,
+            "<=200": 39,
+            "<=500": 10,
+            "<=1000": 0,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 21,
+            "<=2": 15,
+            "<=3": 24,
+            "<=5": 25,
+            "<=10": 18,
+            "<=20": 14,
+            ">20": 3
+          }
+        }
+      },
+      "teacher_success": {
+        "all_pass": 942,
+        "mixed": 174,
+        "single": 54
+      }
+    },
+    "48k": {
+      "cap": 49152,
+      "run_id": "data_swe_teacher_turncap8k_20261012_141738",
+      "seed": 42,
+      "complete": true,
+      "draw": {
+        "trajectory_choice": "fewest_turns_verified",
+        "choice_counts": {
+          "verified": 1047,
+          "fallback_one_fitting": 87,
+          "fallback_several_fitting": 36
+        }
+      },
+      "quotas": {
+        "go": {
+          "quota": 470,
+          "filled": 470,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 731,
+            "repo_cap": 190,
+            "admitted": 29,
+            "large_first_short": 0
+          }
+        },
+        "ts": {
+          "quota": 260,
+          "filled": 260,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 523,
+            "repo_cap": 34,
+            "admitted": 29,
+            "large_first_short": 0
+          }
+        },
+        "js": {
+          "quota": 120,
+          "filled": 120,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 242,
+            "repo_cap": 13,
+            "admitted": 12,
+            "large_first_short": 0
+          }
+        },
+        "py_scale": {
+          "quota": 200,
+          "filled": 200,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 988,
+            "admitted": 48,
+            "repo_cap": 57,
+            "lineage_duplicate": 2
+          }
+        },
+        "py_rebench": {
+          "quota": 120,
+          "filled": 120,
+          "shortfall": 0,
+          "met": true,
+          "walk": {
+            "not_admitted": 486,
+            "admitted": 42,
+            "repo_cap": 2,
+            "large_first_short": 0
+          }
+        }
+      },
+      "summary": {
+        "all": {
+          "n": 1170,
+          "median_added_lines": 35.5,
+          "share_added_ge100": 0.279,
+          "share_files_ge3": 0.679,
+          "strata": {
+            "big": 0.241,
+            "feature": 0.515,
+            "random": 0.244
+          },
+          "phases": {
+            "large_first": 631,
+            "random": 339,
+            "ranked": 200
+          },
+          "sequence_tokens": 39334629,
+          "loss_tokens": 16887069,
+          "mean_tokens": 33619,
+          "repositories": 727,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 5,
+            "<=10": 280,
+            "<=25": 216,
+            "<=50": 170,
+            "<=100": 177,
+            "<=200": 218,
+            "<=500": 78,
+            "<=1000": 19,
+            ">1000": 7
+          },
+          "files_histogram": {
+            "<=1": 229,
+            "<=2": 147,
+            "<=3": 293,
+            "<=5": 239,
+            "<=10": 179,
+            "<=20": 60,
+            ">20": 23
+          }
+        },
+        "go": {
+          "n": 470,
+          "median_added_lines": 25.0,
+          "share_added_ge100": 0.17,
+          "share_files_ge3": 0.619,
+          "strata": {
+            "big": 0.143,
+            "feature": 0.557,
+            "random": 0.3
+          },
+          "phases": {
+            "large_first": 306,
+            "random": 164
+          },
+          "sequence_tokens": 15547568,
+          "loss_tokens": 6644411,
+          "mean_tokens": 33080,
+          "repositories": 274,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 1,
+            "<=10": 125,
+            "<=25": 110,
+            "<=50": 77,
+            "<=100": 78,
+            "<=200": 59,
+            "<=500": 20,
+            "<=1000": 0,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 110,
+            "<=2": 69,
+            "<=3": 100,
+            "<=5": 82,
+            "<=10": 83,
+            "<=20": 24,
+            ">20": 2
+          }
+        },
+        "js": {
+          "n": 120,
+          "median_added_lines": 26.5,
+          "share_added_ge100": 0.183,
+          "share_files_ge3": 0.667,
+          "strata": {
+            "big": 0.183,
+            "feature": 0.517,
+            "random": 0.3
+          },
+          "phases": {
+            "large_first": 78,
+            "random": 42
+          },
+          "sequence_tokens": 4113806,
+          "loss_tokens": 1779503,
+          "mean_tokens": 34282,
+          "repositories": 75,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 0,
+            "<=10": 39,
+            "<=25": 19,
+            "<=50": 20,
+            "<=100": 21,
+            "<=200": 19,
+            "<=500": 2,
+            "<=1000": 0,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 31,
+            "<=2": 9,
+            "<=3": 37,
+            "<=5": 28,
+            "<=10": 12,
+            "<=20": 3,
+            ">20": 0
+          }
+        },
+        "py": {
+          "n": 320,
+          "median_added_lines": 116.0,
+          "share_added_ge100": 0.616,
+          "share_files_ge3": 0.778,
+          "strata": {
+            "big": 0.525,
+            "feature": 0.378,
+            "random": 0.097
+          },
+          "phases": {
+            "ranked": 200,
+            "large_first": 78,
+            "random": 42
+          },
+          "sequence_tokens": 10662090,
+          "loss_tokens": 4815280,
+          "mean_tokens": 33319,
+          "repositories": 231,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 0,
+            "<=10": 38,
+            "<=25": 25,
+            "<=50": 13,
+            "<=100": 50,
+            "<=200": 121,
+            "<=500": 48,
+            "<=1000": 18,
+            ">1000": 7
+          },
+          "files_histogram": {
+            "<=1": 35,
+            "<=2": 36,
+            "<=3": 76,
+            "<=5": 74,
+            "<=10": 57,
+            "<=20": 25,
+            ">20": 17
+          }
+        },
+        "ts": {
+          "n": 260,
+          "median_added_lines": 21.5,
+          "share_added_ge100": 0.108,
+          "share_files_ge3": 0.669,
+          "strata": {
+            "big": 0.096,
+            "feature": 0.608,
+            "random": 0.296
+          },
+          "phases": {
+            "large_first": 169,
+            "random": 91
+          },
+          "sequence_tokens": 9011165,
+          "loss_tokens": 3647875,
+          "mean_tokens": 34658,
+          "repositories": 147,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 4,
+            "<=10": 78,
+            "<=25": 62,
+            "<=50": 60,
+            "<=100": 28,
+            "<=200": 19,
+            "<=500": 8,
+            "<=1000": 1,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 53,
+            "<=2": 33,
+            "<=3": 80,
+            "<=5": 55,
+            "<=10": 27,
+            "<=20": 8,
+            ">20": 4
+          }
+        },
+        "py_scale": {
+          "n": 200,
+          "median_added_lines": 147.0,
+          "share_added_ge100": 0.87,
+          "share_files_ge3": 0.84,
+          "strata": {
+            "big": 0.73,
+            "feature": 0.27,
+            "random": 0.0
+          },
+          "phases": {
+            "ranked": 200
+          },
+          "sequence_tokens": 6659556,
+          "loss_tokens": 2934275,
+          "mean_tokens": 33298,
+          "repositories": 142,
+          "max_rows_per_repository": 5,
+          "added_lines_histogram": {
+            "<=0": 0,
+            "<=10": 0,
+            "<=25": 0,
+            "<=50": 0,
+            "<=100": 28,
+            "<=200": 106,
+            "<=500": 41,
+            "<=1000": 18,
+            ">1000": 7
+          },
+          "files_histogram": {
+            "<=1": 12,
+            "<=2": 20,
+            "<=3": 38,
+            "<=5": 48,
+            "<=10": 47,
+            "<=20": 19,
+            ">20": 16
+          }
+        },
+        "py_rebench": {
+          "n": 120,
+          "median_added_lines": 22.5,
+          "share_added_ge100": 0.192,
+          "share_files_ge3": 0.675,
+          "strata": {
+            "big": 0.183,
+            "feature": 0.558,
+            "random": 0.258
+          },
+          "phases": {
+            "large_first": 78,
+            "random": 42
+          },
+          "sequence_tokens": 4002534,
+          "loss_tokens": 1881005,
+          "mean_tokens": 33354,
+          "repositories": 92,
+          "max_rows_per_repository": 4,
+          "added_lines_histogram": {
+            "<=0": 0,
+            "<=10": 38,
+            "<=25": 25,
+            "<=50": 13,
+            "<=100": 22,
+            "<=200": 15,
+            "<=500": 7,
+            "<=1000": 0,
+            ">1000": 0
+          },
+          "files_histogram": {
+            "<=1": 23,
+            "<=2": 16,
+            "<=3": 38,
+            "<=5": 26,
+            "<=10": 10,
+            "<=20": 6,
+            ">20": 1
+          }
+        }
+      },
+      "teacher_success": {
+        "mixed": 144,
+        "all_pass": 985,
+        "single": 41
+      }
+    }
+  },
+  "d2": {
+    "n_records": 19031,
+    "n_locked_hit": 12,
+    "n_excluded_hit": 6,
+    "n_dropped": 18,
+    "records_by_mechanism": {
+      "excluded_identifier": 6,
+      "excluded_repo": 6,
+      "identifier": 12
+    },
+    "fork_graph": {
+      "clear": 19013,
+      "not_found": 18
+    },
+    "trajectories_dropped_locked": 21,
+    "trajectories_dropped_excluded": 16,
+    "excluded_repositories": {
+      "bottlepy/bottle": {
+        "trajectories": 16,
+        "instances": 6
+      }
+    },
+    "fork_graph_lookup": {
+      "requested": 2630,
+      "from_cache": 2630,
+      "fetched": 0,
+      "found": 0,
+      "not_found": 0,
+      "errors": 0,
+      "rate_limited": 0,
+      "unresolved": 0,
+      "token_present": true,
+      "api_enabled": true,
+      "cache_dir": "/mnt/apex-shared/apex_data/work/licence_cache"
+    },
+    "text_signature_drops": 2,
+    "selected_rows_rescreened": {
+      "locked_hit": 0,
+      "excluded_hit": 0
+    },
+    "locked_list_sha256": "09eb7572d4d6e2188765f820fc0838361c3644f12b60e0d51b84690583af920f",
+    "fork_graph_source": "GitHub API, cache WORK/licence_cache"
+  },
+  "dev_exclusions": {
+    "status": "applied",
+    "source": "data/manifests/dev_exclusions.json",
+    "sha256": "43df9a7714673766b2c293b4a71063f68dfd3f9606b99083657581875be81ea7",
+    "repositories": [
+      "allegro/bigcache",
+      "bits-and-blooms/bitset",
+      "caarlos0/env",
+      "hips/autograd",
+      "hjson/hjson-go",
+      "john-kurkowski/tldextract",
+      "life4/textdistance",
+      "sunpy/sunpy"
+    ],
+    "task_ids": 100,
+    "rows_in_dev_repositories_all": {
+      "allegro/bigcache": 9,
+      "caarlos0/env": 15
+    },
+    "trajectories_dropped_at_filter_6": {
+      "dev_excluded_repository": 13
+    }
+  },
+  "checks_m2_1": {
+    "roundtrip_20_rows": {
+      "rows_checked": 20,
+      "assistant_turns_checked": 516,
+      "failures": [],
+      "pass": true
+    },
+    "quotas_met": {
+      "64k": true,
+      "48k": true
+    },
+    "scale_swe_rows": {
+      "64k": 200,
+      "48k": 200
+    },
+    "max_rows_per_repository": {
+      "64k": 5,
+      "48k": 5
+    },
+    "one_row_per_instance": {
+      "64k": true,
+      "48k": true
+    },
+    "d2_hits_selected_rows": 0,
+    "decontam_excluded_repository_rows": 0,
+    "excluded_repository_rows_by_cap": {
+      "64k": 0,
+      "48k": 0
+    },
+    "provenance_valid": true,
+    "repo_root_tokens_left": 0,
+    "repo_root_ambiguous_rows": 0,
+    "kept_selections": {
+      "64k": {
+        "kept": 943,
+        "replaced": 227,
+        "replaced_by_reason": {
+          "turn_too_long": 91,
+          "repo_root_ambiguous": 136
+        }
+      },
+      "48k": {
+        "kept": 1010,
+        "replaced": 160,
+        "replaced_by_reason": {
+          "repo_root_ambiguous": 127,
+          "turn_too_long": 33
+        }
+      }
+    },
+    "max_trained_turn_tokens": {
+      "cap": 8192,
+      "rows_max": 8175,
+      "pass": true
+    },
+    "pass": true
+  },
+  "outputs": {
+    "rows_parquet": "/tmp/scratch/turncap/swe_teacher/rows.parquet",
+    "rows_sha256": "f7f875851a38846b7f5ef9bf618d1899766f3c816bd7bcc5373d2f508bbc4c48",
+    "n_rows": 1587,
+    "rows_64k": 1170,
+    "rows_48k": 1170,
+    "rows_in_both": 753,
+    "selection_files": [
+      "selection_64k.json",
+      "selection_48k.json"
+    ],
+    "dropped": "dropped.jsonl.gz",
+    "dropped_sha256": "1e422f24314b5a94fced8c294a63df5804d036c8c863c4940bfc33003bd08cf7",
+    "work_dir": "/mnt/apex-shared/apex_data/work/data_swe_teacher_turncap8k_20261012_141738",
+    "base_work_dir": "/mnt/apex-shared/apex_data/work/data_swe_teacher_app_refill_20261012_074847"
+  }
+}

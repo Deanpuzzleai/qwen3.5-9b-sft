@@ -1,0 +1,660 @@
+{
+  "slice": "terminal",
+  "source": "tgr_env",
+  "frozen": true,
+  "seed": 42,
+  "plan": "docs/DATA_PLAN.md section 10: 40 TermGrade tasks x 3 samples (Harbor Terminus-2 under the Terminal-Bench lock's settings); reduced set = 40 x 2 (sample indices 0 and 1)",
+  "inputs": {
+    "tasks.jsonl": {
+      "repo": "ai-and/termgrade-environments",
+      "revision": "3a34ba29ddcd4cbbcbf8840c64f67e853f9b8b0d",
+      "sha256": "8ce380b05663a923f14da88ba8f33db3f2c3ae21263b2e10a3cab0cc6e40c572"
+    },
+    "labels.jsonl": {
+      "repo": "ai-and/termgrade-environments",
+      "revision": "3a34ba29ddcd4cbbcbf8840c64f67e853f9b8b0d",
+      "sha256": "bbbd9c529f723e6dec866d4a61d672b5d8e35e6682d6ce2e858ae3d25c82512b"
+    },
+    "data/trials.parquet": {
+      "repo": "ai-and/termgrade-trajectories",
+      "revision": "7d584d63dd598d7e76d444ca23e1527fb5ebd6d9",
+      "sha256": "79829719196b3736cfd3ff5c0514d77f76936ad5550a90a119ab9bd9fb6a74fb"
+    }
+  },
+  "split_used": {
+    "value": "unseen",
+    "meaning": "card of ai-and/termgrade-environments: the 802 tasks the authors never used to train or validate their own model (train151 and heldout120 were)"
+  },
+  "difficulty": {
+    "measure": "unweighted mean of the six models' pass_rate in labels.jsonl",
+    "models": ["gemma", "gemma_think", "glm", "kimi", "qwen", "deepseek"],
+    "bands": {"easy": ">= 2/3", "medium": ">= 1/3 and < 2/3", "hard": "> 0 and < 1/3", "unsolved": "== 0 (no counted trial of any model passed)"},
+    "why_not_the_band_field": "labels.jsonl's per-model band measures distance from a 50 percent pass rate, not difficulty"
+  },
+  "draw": {
+    "rule": "40 tasks; >= 2 per band, rest proportional to the band's share of eligible tasks (largest remainder); seeded shuffle of sorted names per band, first n taken; manifest order is a seeded permutation",
+    "rng_labels": "'42:tgr_env:dev:<band>' and '42:tgr_env:dev:order'",
+    "eligible_by_band": {"easy": 428, "medium": 185, "hard": 179, "unsolved": 10},
+    "quota": {"easy": 20, "medium": 9, "hard": 9, "unsolved": 2},
+    "realised": {"easy": 20, "medium": 9, "hard": 9, "unsolved": 2}
+  },
+  "survival": [
+    {"rule": "split_unseen", "n_in": 1004, "n_dropped": 202, "n_out": 802},
+    {"rule": "gradable_and_oracle_verified", "n_in": 802, "n_dropped": 0, "n_out": 802},
+    {"rule": "labelled_by_all_six_models_complete", "n_in": 802, "n_dropped": 0, "n_out": 802}
+  ],
+  "pending_task_checks": "the task-level checks of plan section 6 (base image, task image builds in <= 10 min, nop fails, oracle passes, agent-visible image scan) run in the TermGrade task pipeline (WP8) before the first dev evaluation; a task that fails them stays in the set and its samples are recorded as environment failures",
+  "training_impact": {
+    "teacher_model": "deepseek",
+    "rule": "trials.parquet rows with model == 'deepseek' and reward == 1",
+    "teacher_passes_total": 1376,
+    "teacher_pass_tasks_total": 781,
+    "teacher_passes_on_dev_tasks": 56,
+    "dev_tasks_with_teacher_passes": 30,
+    "teacher_passes_on_dev_tasks_already_skipped_all_six_solve": 10,
+    "note": "WP4 drops these episodes (dev exclusion); the all-six-solve ones would be skipped by WP4 anyway"
+  },
+  "counts": {"items": 40, "full_samples": 120, "reduced_items": 40, "reduced_samples": 80},
+  "items": [
+    {
+      "task_id": "tgr_env:task_08180_addbb2",
+      "upstream_id": "task_08180_addbb2",
+      "task_dir": "environments/task_08180_addbb2",
+      "checksum": "b1f904dace46175870447f0c1d3cf1e1b04dbd48a406ef7c8e739c7874c0de44",
+      "band": "easy",
+      "mean_pass_rate": 0.9792,
+      "pass_rates": {"gemma": 0.875, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1050448391, "reduced": true},
+        {"index": 1, "seed": 1882431583, "reduced": true},
+        {"index": 2, "seed": 355389675, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_01277_c56285",
+      "upstream_id": "task_01277_c56285",
+      "task_dir": "environments/task_01277_c56285",
+      "checksum": "a4b3e614af5500ce047e8b2b73f89c986590576734ca44437bd3b1f5dc33fff0",
+      "band": "medium",
+      "mean_pass_rate": 0.3958,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.25, "glm": 0.5, "kimi": 0.75, "qwen": 0.375, "deepseek": 0.5},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 985180645, "reduced": true},
+        {"index": 1, "seed": 1983100583, "reduced": true},
+        {"index": 2, "seed": 1104109205, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02636_bbad12",
+      "upstream_id": "task_02636_bbad12",
+      "task_dir": "environments/task_02636_bbad12",
+      "checksum": "330aef791d3da1bcc6811af365b210f74ef08171ee86827035d4f0ebbf4c8503",
+      "band": "easy",
+      "mean_pass_rate": 0.9792,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 1.0, "kimi": 0.875, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 14739035, "reduced": true},
+        {"index": 1, "seed": 777115261, "reduced": true},
+        {"index": 2, "seed": 469656084, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02651_8cc2df",
+      "upstream_id": "task_02651_8cc2df",
+      "task_dir": "environments/task_02651_8cc2df",
+      "checksum": "c32dd859dfe8639b426e7693608ec35a2e765870c9bcaf3d1734c65098538c05",
+      "band": "easy",
+      "mean_pass_rate": 0.8125,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 0.0, "kimi": 0.875, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 116708446, "reduced": true},
+        {"index": 1, "seed": 379157900, "reduced": true},
+        {"index": 2, "seed": 115795486, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_00353_4e176d",
+      "upstream_id": "task_00353_4e176d",
+      "task_dir": "environments/task_00353_4e176d",
+      "checksum": "10fe0353835c8920d242bc96913c9ca208e16ead377413b7c4870a925a55f5b4",
+      "band": "hard",
+      "mean_pass_rate": 0.1667,
+      "pass_rates": {"gemma": 0.25, "gemma_think": 0.75, "glm": 0.0, "kimi": 0.0, "qwen": 0.0, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 744375756, "reduced": true},
+        {"index": 1, "seed": 1446347852, "reduced": true},
+        {"index": 2, "seed": 214982120, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_09803_347846",
+      "upstream_id": "task_09803_347846",
+      "task_dir": "environments/task_09803_347846",
+      "checksum": "64641e68571fd8b72cc4c7f6f114af3a7a8d5d8a53c4b184b93049681843d7c7",
+      "band": "easy",
+      "mean_pass_rate": 0.9375,
+      "pass_rates": {"gemma": 0.625, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 617757686, "reduced": true},
+        {"index": 1, "seed": 558174258, "reduced": true},
+        {"index": 2, "seed": 1195235589, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_01183_496e0c",
+      "upstream_id": "task_01183_496e0c",
+      "task_dir": "environments/task_01183_496e0c",
+      "checksum": "43aba94c45be0b41e96ae495f629c1ad6b5cf5acf22b9c8d91ef45ce08dffe08",
+      "band": "easy",
+      "mean_pass_rate": 0.9792,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 0.875, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 2076740889, "reduced": true},
+        {"index": 1, "seed": 274084419, "reduced": true},
+        {"index": 2, "seed": 1341180114, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_11697_967b18",
+      "upstream_id": "task_11697_967b18",
+      "task_dir": "environments/task_11697_967b18",
+      "checksum": "09ad56c3c39b9fcd5130abe387b1b6d6bfeece9f56468ae78da6d641aa9865ef",
+      "band": "easy",
+      "mean_pass_rate": 0.6875,
+      "pass_rates": {"gemma": 0.125, "gemma_think": 0.5, "glm": 1.0, "kimi": 1.0, "qwen": 0.5, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 652858365, "reduced": true},
+        {"index": 1, "seed": 1473010162, "reduced": true},
+        {"index": 2, "seed": 1287179816, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02904_ece596",
+      "upstream_id": "task_02904_ece596",
+      "task_dir": "environments/task_02904_ece596",
+      "checksum": "2b4dba9d328f7dc99a07c577438517468c52f166bc4687f7ce8da780046aa374",
+      "band": "hard",
+      "mean_pass_rate": 0.0417,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.0, "qwen": 0.25, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1275556280, "reduced": true},
+        {"index": 1, "seed": 360155472, "reduced": true},
+        {"index": 2, "seed": 2086786342, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_08067_8dc5e6",
+      "upstream_id": "task_08067_8dc5e6",
+      "task_dir": "environments/task_08067_8dc5e6",
+      "checksum": "73c19622b3e3a9458efa445db1b8c2dd59d9ecfd6437f30bf3e84608d6b387ef",
+      "band": "hard",
+      "mean_pass_rate": 0.0208,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.125, "glm": 0.0, "kimi": 0.0, "qwen": 0.0, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1312362753, "reduced": true},
+        {"index": 1, "seed": 1790594127, "reduced": true},
+        {"index": 2, "seed": 1958739167, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_11324_1db352",
+      "upstream_id": "task_11324_1db352",
+      "task_dir": "environments/task_11324_1db352",
+      "checksum": "b65ce5286561e456b6071e3874fdf1403494d128b9386c6547c2880ee565f844",
+      "band": "easy",
+      "mean_pass_rate": 1.0,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": true,
+      "samples": [
+        {"index": 0, "seed": 1029944389, "reduced": true},
+        {"index": 1, "seed": 537246681, "reduced": true},
+        {"index": 2, "seed": 1201885450, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_01381_c2b2de",
+      "upstream_id": "task_01381_c2b2de",
+      "task_dir": "environments/task_01381_c2b2de",
+      "checksum": "5e8663a685063b09e429b8bf298527ce09a2ed213c88fcaf8ecc6c11f68f224a",
+      "band": "unsolved",
+      "mean_pass_rate": 0.0,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.0, "qwen": 0.0, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1455643937, "reduced": true},
+        {"index": 1, "seed": 920807763, "reduced": true},
+        {"index": 2, "seed": 298657346, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_06964_fa8be2",
+      "upstream_id": "task_06964_fa8be2",
+      "task_dir": "environments/task_06964_fa8be2",
+      "checksum": "3899e5114cc1a0d849f1c24ef2dcd5a04d1a4a4cdda3f2f2576cc43b91dd27b5",
+      "band": "medium",
+      "mean_pass_rate": 0.4375,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 1.0, "kimi": 0.5, "qwen": 0.125, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 171649801, "reduced": true},
+        {"index": 1, "seed": 619759862, "reduced": true},
+        {"index": 2, "seed": 1336063050, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_01116_e2b890",
+      "upstream_id": "task_01116_e2b890",
+      "task_dir": "environments/task_01116_e2b890",
+      "checksum": "89d9042af381fbb53153fbc38e78cbb819b7c40f86b603a0d1ccbf33f8016449",
+      "band": "easy",
+      "mean_pass_rate": 1.0,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": true,
+      "samples": [
+        {"index": 0, "seed": 1545031755, "reduced": true},
+        {"index": 1, "seed": 502974261, "reduced": true},
+        {"index": 2, "seed": 283724963, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02613_2e0cec",
+      "upstream_id": "task_02613_2e0cec",
+      "task_dir": "environments/task_02613_2e0cec",
+      "checksum": "a48a71b2634b0a7819a0441685b3da2f82ec52c4a1eaf770ecddcd0556fc64c5",
+      "band": "easy",
+      "mean_pass_rate": 0.9375,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 0.625, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 529952306, "reduced": true},
+        {"index": 1, "seed": 1445701520, "reduced": true},
+        {"index": 2, "seed": 2043888099, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_00946_ed07b0",
+      "upstream_id": "task_00946_ed07b0",
+      "task_dir": "environments/task_00946_ed07b0",
+      "checksum": "9bf8d6702cf594643dd196bff298f227d675d38edee72622db752bce2be61228",
+      "band": "medium",
+      "mean_pass_rate": 0.5625,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.125, "glm": 1.0, "kimi": 0.5, "qwen": 0.75, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 2135979436, "reduced": true},
+        {"index": 1, "seed": 2025810845, "reduced": true},
+        {"index": 2, "seed": 1055201154, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_04866_60340c",
+      "upstream_id": "task_04866_60340c",
+      "task_dir": "environments/task_04866_60340c",
+      "checksum": "c018831c4f8df8b852f1b1daf95adf7123018b856057f741b8f2bd7202a783fc",
+      "band": "easy",
+      "mean_pass_rate": 0.875,
+      "pass_rates": {"gemma": 0.625, "gemma_think": 0.75, "glm": 1.0, "kimi": 1.0, "qwen": 0.875, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1330242309, "reduced": true},
+        {"index": 1, "seed": 1731315394, "reduced": true},
+        {"index": 2, "seed": 2086904040, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_09010_2e29ab",
+      "upstream_id": "task_09010_2e29ab",
+      "task_dir": "environments/task_09010_2e29ab",
+      "checksum": "54d05dc5e4d24d300ce3a0bc76c354ab8f624e315aca03190dd4a5fb82f2423d",
+      "band": "medium",
+      "mean_pass_rate": 0.4583,
+      "pass_rates": {"gemma": 0.125, "gemma_think": 0.625, "glm": 1.0, "kimi": 0.625, "qwen": 0.375, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1434488556, "reduced": true},
+        {"index": 1, "seed": 1835313789, "reduced": true},
+        {"index": 2, "seed": 257854630, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_07962_15b46a",
+      "upstream_id": "task_07962_15b46a",
+      "task_dir": "environments/task_07962_15b46a",
+      "checksum": "3218ea116d116c4e358d437707c7495ec4b5a8207ab47320a899bda78b43ec37",
+      "band": "easy",
+      "mean_pass_rate": 0.7708,
+      "pass_rates": {"gemma": 0.125, "gemma_think": 0.5, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1236839314, "reduced": true},
+        {"index": 1, "seed": 1627665650, "reduced": true},
+        {"index": 2, "seed": 1321598204, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_04860_7cf60f",
+      "upstream_id": "task_04860_7cf60f",
+      "task_dir": "environments/task_04860_7cf60f",
+      "checksum": "1c29e7136db45e7fd60424c68ec96adfe3bd784c1ee033a2817cb6f8dc772c3d",
+      "band": "hard",
+      "mean_pass_rate": 0.1667,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.0, "qwen": 0.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1403476278, "reduced": true},
+        {"index": 1, "seed": 563072012, "reduced": true},
+        {"index": 2, "seed": 2074411080, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02831_7c5c59",
+      "upstream_id": "task_02831_7c5c59",
+      "task_dir": "environments/task_02831_7c5c59",
+      "checksum": "d2a79482c1d8931df046a536d7a673e98d322c1728392d07ca6026df1ae264fc",
+      "band": "easy",
+      "mean_pass_rate": 0.6667,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 0.875, "glm": 0.5, "kimi": 0.75, "qwen": 0.875, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 834398227, "reduced": true},
+        {"index": 1, "seed": 187793930, "reduced": true},
+        {"index": 2, "seed": 6530180, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_12158_6629f4",
+      "upstream_id": "task_12158_6629f4",
+      "task_dir": "environments/task_12158_6629f4",
+      "checksum": "3ba9964d96e0c82625793a17c0d2622fdf9421686b1d971568a4cf21a70fc6c2",
+      "band": "easy",
+      "mean_pass_rate": 0.7083,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.625, "glm": 1.0, "kimi": 0.75, "qwen": 0.875, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 659720232, "reduced": true},
+        {"index": 1, "seed": 1214730807, "reduced": true},
+        {"index": 2, "seed": 482067264, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_00376_dc3706",
+      "upstream_id": "task_00376_dc3706",
+      "task_dir": "environments/task_00376_dc3706",
+      "checksum": "b3734d778fa4b5f396c05e54b25ffb39d9caf7661fc1db083dc84221939de8f3",
+      "band": "easy",
+      "mean_pass_rate": 1.0,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": true,
+      "samples": [
+        {"index": 0, "seed": 1210851480, "reduced": true},
+        {"index": 1, "seed": 1549744555, "reduced": true},
+        {"index": 2, "seed": 453794862, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_06379_1c416b",
+      "upstream_id": "task_06379_1c416b",
+      "task_dir": "environments/task_06379_1c416b",
+      "checksum": "89ac6d4083d3c7bca2e379d07b8b9231d77a02005db28411eb41b91f56dcffac",
+      "band": "easy",
+      "mean_pass_rate": 1.0,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": true,
+      "samples": [
+        {"index": 0, "seed": 750081777, "reduced": true},
+        {"index": 1, "seed": 1473941413, "reduced": true},
+        {"index": 2, "seed": 1197091749, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_06727_5f0784",
+      "upstream_id": "task_06727_5f0784",
+      "task_dir": "environments/task_06727_5f0784",
+      "checksum": "3beaef7f433a4795418963d626f5b8c8aeb2ea0a9531234739301edb6a73ab72",
+      "band": "medium",
+      "mean_pass_rate": 0.6458,
+      "pass_rates": {"gemma": 0.125, "gemma_think": 0.875, "glm": 0.5, "kimi": 1.0, "qwen": 0.875, "deepseek": 0.5},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 621253294, "reduced": true},
+        {"index": 1, "seed": 1939985393, "reduced": true},
+        {"index": 2, "seed": 164808369, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_01399_e45a05",
+      "upstream_id": "task_01399_e45a05",
+      "task_dir": "environments/task_01399_e45a05",
+      "checksum": "6ac6eb6d54779c66876a7671dbf9c07343d554083ca0c596cddea263bf93f5a6",
+      "band": "unsolved",
+      "mean_pass_rate": 0.0,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.0, "qwen": 0.0, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1988022618, "reduced": true},
+        {"index": 1, "seed": 1269022253, "reduced": true},
+        {"index": 2, "seed": 19972298, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_12315_34ec9d",
+      "upstream_id": "task_12315_34ec9d",
+      "task_dir": "environments/task_12315_34ec9d",
+      "checksum": "fc3b5d92eb28e41748469bfdd0727746525e307b2e48b108dee33f007fbb860a",
+      "band": "easy",
+      "mean_pass_rate": 0.9375,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 0.625, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 777937420, "reduced": true},
+        {"index": 1, "seed": 1393283230, "reduced": true},
+        {"index": 2, "seed": 1465659871, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_07001_917aa5",
+      "upstream_id": "task_07001_917aa5",
+      "task_dir": "environments/task_07001_917aa5",
+      "checksum": "db8213c9081e6cf3b318399f12505c773c386c0f2afda4af094546a53677d399",
+      "band": "hard",
+      "mean_pass_rate": 0.2917,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.375, "qwen": 0.375, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1964937941, "reduced": true},
+        {"index": 1, "seed": 2140098731, "reduced": true},
+        {"index": 2, "seed": 1467910790, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02419_0c971a",
+      "upstream_id": "task_02419_0c971a",
+      "task_dir": "environments/task_02419_0c971a",
+      "checksum": "849fa6a282b9fbda976e477c330159ebb44fa6df151150c9d3068f80e0ce8cda",
+      "band": "easy",
+      "mean_pass_rate": 1.0,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 1.0, "deepseek": 1.0},
+      "all_six_solve": true,
+      "samples": [
+        {"index": 0, "seed": 12302697, "reduced": true},
+        {"index": 1, "seed": 1520266977, "reduced": true},
+        {"index": 2, "seed": 645016039, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_06462_9023e6",
+      "upstream_id": "task_06462_9023e6",
+      "task_dir": "environments/task_06462_9023e6",
+      "checksum": "208002fbc890873e4caf0413439a7da28e4ba51f466c100b957e17ae5128207d",
+      "band": "easy",
+      "mean_pass_rate": 0.9583,
+      "pass_rates": {"gemma": 0.875, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 0.875, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 297380497, "reduced": true},
+        {"index": 1, "seed": 1831603982, "reduced": true},
+        {"index": 2, "seed": 520215318, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02424_4c52ee",
+      "upstream_id": "task_02424_4c52ee",
+      "task_dir": "environments/task_02424_4c52ee",
+      "checksum": "d80133a905c0a8f67683084396723f7e97e38d630019fe90bfaf4a8268e37300",
+      "band": "easy",
+      "mean_pass_rate": 0.9375,
+      "pass_rates": {"gemma": 0.875, "gemma_think": 1.0, "glm": 1.0, "kimi": 1.0, "qwen": 0.75, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 349084278, "reduced": true},
+        {"index": 1, "seed": 1431294228, "reduced": true},
+        {"index": 2, "seed": 1114060646, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_04935_39ebbd",
+      "upstream_id": "task_04935_39ebbd",
+      "task_dir": "environments/task_04935_39ebbd",
+      "checksum": "16eec56acf18f8e716987527a1d21ed1086c10be97be1e731cd8c48fa442ee7b",
+      "band": "easy",
+      "mean_pass_rate": 0.8333,
+      "pass_rates": {"gemma": 1.0, "gemma_think": 1.0, "glm": 0.5, "kimi": 1.0, "qwen": 1.0, "deepseek": 0.5},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1718692773, "reduced": true},
+        {"index": 1, "seed": 364816296, "reduced": true},
+        {"index": 2, "seed": 1721810026, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_00912_17fe8a",
+      "upstream_id": "task_00912_17fe8a",
+      "task_dir": "environments/task_00912_17fe8a",
+      "checksum": "27230203f04772e482825e6b46939aab0aaa6a16881ef1c9062ff1fa055a7958",
+      "band": "hard",
+      "mean_pass_rate": 0.1042,
+      "pass_rates": {"gemma": 0.25, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.25, "qwen": 0.125, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1038808222, "reduced": true},
+        {"index": 1, "seed": 511277700, "reduced": true},
+        {"index": 2, "seed": 1928298411, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_05496_0f70c5",
+      "upstream_id": "task_05496_0f70c5",
+      "task_dir": "environments/task_05496_0f70c5",
+      "checksum": "a4af9c961bd10d31e7f39d11eb1b288ede8ff42988dce2fb9b2915b09fc7dfe6",
+      "band": "medium",
+      "mean_pass_rate": 0.5208,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.125, "glm": 1.0, "kimi": 0.5, "qwen": 0.5, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 160962224, "reduced": true},
+        {"index": 1, "seed": 212510370, "reduced": true},
+        {"index": 2, "seed": 1893721705, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_02581_1ce959",
+      "upstream_id": "task_02581_1ce959",
+      "task_dir": "environments/task_02581_1ce959",
+      "checksum": "97c274005b729e0a4ca2ca82b78cb5d001df990b65f765f3978aa4f195a3f4ec",
+      "band": "medium",
+      "mean_pass_rate": 0.5833,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.375, "glm": 1.0, "kimi": 1.0, "qwen": 0.125, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1686110003, "reduced": true},
+        {"index": 1, "seed": 445885173, "reduced": true},
+        {"index": 2, "seed": 1174982734, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_14244_3f4886",
+      "upstream_id": "task_14244_3f4886",
+      "task_dir": "environments/task_14244_3f4886",
+      "checksum": "a3735d1f6583c237336e040f3b91be6ccdd26be697bbe80d197fde370672363e",
+      "band": "hard",
+      "mean_pass_rate": 0.1458,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.0, "qwen": 0.375, "deepseek": 0.5},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 64807397, "reduced": true},
+        {"index": 1, "seed": 668878957, "reduced": true},
+        {"index": 2, "seed": 2050857674, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_07785_ed4ee3",
+      "upstream_id": "task_07785_ed4ee3",
+      "task_dir": "environments/task_07785_ed4ee3",
+      "checksum": "f7f82c7d96a54bdebb11a83cfaf2166879bf857f7919dcdeb7ef23d6af1a25a3",
+      "band": "medium",
+      "mean_pass_rate": 0.375,
+      "pass_rates": {"gemma": 0.625, "gemma_think": 1.0, "glm": 0.0, "kimi": 0.125, "qwen": 0.5, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 321653739, "reduced": true},
+        {"index": 1, "seed": 571620100, "reduced": true},
+        {"index": 2, "seed": 165565088, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_00988_683983",
+      "upstream_id": "task_00988_683983",
+      "task_dir": "environments/task_00988_683983",
+      "checksum": "50c88b82cb188f86400eb91f8d49ee024fceb40582490c75480385831fd7a104",
+      "band": "hard",
+      "mean_pass_rate": 0.1667,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.0, "qwen": 0.0, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 689214145, "reduced": true},
+        {"index": 1, "seed": 649215174, "reduced": true},
+        {"index": 2, "seed": 1562685219, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_04879_ed0071",
+      "upstream_id": "task_04879_ed0071",
+      "task_dir": "environments/task_04879_ed0071",
+      "checksum": "a4153a8ed9e76e01c73841b94d378fd9cbe3cb8b0efc30996e614c32ec00a54c",
+      "band": "medium",
+      "mean_pass_rate": 0.4583,
+      "pass_rates": {"gemma": 0.0, "gemma_think": 0.0, "glm": 1.0, "kimi": 0.5, "qwen": 0.25, "deepseek": 1.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1001104609, "reduced": true},
+        {"index": 1, "seed": 817186546, "reduced": true},
+        {"index": 2, "seed": 1072130961, "reduced": false}
+      ]
+    },
+    {
+      "task_id": "tgr_env:task_00762_c8d1e1",
+      "upstream_id": "task_00762_c8d1e1",
+      "task_dir": "environments/task_00762_c8d1e1",
+      "checksum": "6ef1deec902c367f7127ab2b4a0177c3b675972e9bfebf06fa83b728e83dc445",
+      "band": "hard",
+      "mean_pass_rate": 0.0208,
+      "pass_rates": {"gemma": 0.125, "gemma_think": 0.0, "glm": 0.0, "kimi": 0.0, "qwen": 0.0, "deepseek": 0.0},
+      "all_six_solve": false,
+      "samples": [
+        {"index": 0, "seed": 1299909888, "reduced": true},
+        {"index": 1, "seed": 1500055840, "reduced": true},
+        {"index": 2, "seed": 53524089, "reduced": false}
+      ]
+    }
+  ]
+}

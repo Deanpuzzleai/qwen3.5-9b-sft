@@ -1,0 +1,208 @@
+{
+  "run_id": "data_screens_20261013_221310",
+  "pass_name": "v7_p2_rows",
+  "written_at": "2026-10-13T22:14:29Z",
+  "work_dir": "/mnt/apex-shared/apex_data/work/data_screens_20261013_221310/screens",
+  "params": {
+    "lsh_bands": 25,
+    "lsh_rows": 10,
+    "dev_frozen": true,
+    "num_perm": 250,
+    "d1_drop_rules": [
+      "canary_guid",
+      "canary_guid_template",
+      "guid",
+      "sentence"
+    ],
+    "scan": [],
+    "rows": [
+      "data/processed/v7/sft/train_rows.parquet",
+      "data/processed/v7/sft/dev_rows.parquet"
+    ]
+  },
+  "inputs": {
+    "rows:data/processed/v7/sft/dev_rows.parquet": {
+      "files": [
+        {
+          "path": "data/processed/v7/sft/dev_rows.parquet",
+          "sha256": "50bbeb64c62050961428d30edff396dec84eed9a2f22ff4b5219a41fa92a9d2e",
+          "n_records": 200
+        }
+      ]
+    },
+    "rows:data/processed/v7/sft/train_rows.parquet": {
+      "files": [
+        {
+          "path": "data/processed/v7/sft/train_rows.parquet",
+          "sha256": "15e731d3de1cee94d0abe833fad70400b753caea619962645558b449512d71ae",
+          "n_records": 3566
+        }
+      ]
+    }
+  },
+  "survival": {
+    "rows": {
+      "n_in": 3766,
+      "n_dropped": 0,
+      "n_out": 3766,
+      "by_rule": {}
+    }
+  },
+  "counts": {
+    "dev_frozen": true,
+    "n_dev_manifest_ids": 140,
+    "n_items": 0,
+    "n_rows": 3766,
+    "d1": {
+      "drop_rules": [
+        "canary_guid",
+        "canary_guid_template",
+        "guid",
+        "sentence"
+      ],
+      "n_items_dropped": 0,
+      "rows": {
+        "files_scanned": 0,
+        "records_scanned": 3766,
+        "bytes_scanned": 186318111,
+        "n_hits": 0,
+        "files_or_records_with_hits": 0,
+        "by_rule": {},
+        "by_level": {}
+      }
+    },
+    "d2": {
+      "n_records": 3766,
+      "n_locked_hit": 0,
+      "n_excluded_hit": 0,
+      "n_dropped": 0,
+      "records_by_mechanism": {},
+      "fork_graph": {
+        "not_run": 3766
+      },
+      "locked_sha256": "09eb7572d4d6e2188765f820fc0838361c3644f12b60e0d51b84690583af920f",
+      "lists": {
+        "ids_file": [
+          "ansible/ansible",
+          "element-hq/element-web",
+          "flipt-io/flipt",
+          "future-architect/vuls",
+          "gravitational/teleport",
+          "internetarchive/openlibrary",
+          "navidrome/navidrome",
+          "nodebb/nodebb",
+          "protonmail/webclients",
+          "qutebrowser/qutebrowser",
+          "tutao/tutanota"
+        ],
+        "lock_yaml": [
+          "ansible/ansible",
+          "element-hq/element-web",
+          "flipt-io/flipt",
+          "future-architect/vuls",
+          "gravitational/teleport",
+          "internetarchive/openlibrary",
+          "navidrome/navidrome",
+          "nodebb/nodebb",
+          "protonmail/webclients",
+          "qutebrowser/qutebrowser",
+          "tutao/tutanota"
+        ],
+        "plan_basenames": [
+          "ansible",
+          "openlibrary",
+          "flipt",
+          "teleport",
+          "webclients",
+          "element-web",
+          "vuls",
+          "qutebrowser",
+          "navidrome",
+          "nodebb",
+          "tutanota"
+        ],
+        "predecessors": [
+          "matrix-org/matrix-react-sdk",
+          "vector-im/element-web"
+        ],
+        "predecessor_prefixes": [
+          "ansible-collections/",
+          "nodebb/nodebb-plugin-"
+        ],
+        "decontam_exclusions": [
+          "bottlepy/bottle"
+        ]
+      },
+      "union_sources": {
+        "checked_on": "2026-10-11",
+        "method": "repository names only, from public dataset cards, repository metadata and the paper",
+        "sources": [
+          {
+            "source": "ScaleAI/SWE-bench_Pro dataset card",
+            "public_tasks": 642,
+            "repositories": 11,
+            "repositories_beyond_locked": 0
+          },
+          {
+            "source": "scaleapi/SWE-bench_Pro-os README",
+            "repositories": 11,
+            "repositories_beyond_locked": 0
+          },
+          {
+            "source": "paper arXiv:2509.16941",
+            "public_tasks": 731,
+            "public_repositories": 11,
+            "commercial_tasks": 276,
+            "commercial_repositories": 18,
+            "held_out_tasks": 858,
+            "held_out_repositories": 12,
+            "note": "commercial and held-out repositories are unnamed and private",
+            "repositories_beyond_locked": 0
+          }
+        ],
+        "union": "11 locked HARD-51 repositories + 2 predecessors (matrix-org/matrix-react-sdk, vector-im/element-web) = 13"
+      },
+      "repo_lookup": {
+        "requested": 0
+      },
+      "fork_step": "run"
+    },
+    "d3": {
+      "items_screened": 3766,
+      "items_hit": 0,
+      "n_decisions": 0,
+      "hits": {},
+      "by_rule": {},
+      "n_task_items": 0,
+      "n_row_items": 3766,
+      "benchmarks": [
+        "asibench",
+        "hle",
+        "swebench_pro",
+        "terminal_bench"
+      ],
+      "sealed_manifest_sha256": "53e8cde2fd72484c6f2efd3b61940a0fe30bafc1360f3cafeedd1dc7bcd3dbb2",
+      "sealed_fixture": false,
+      "embeddings": true,
+      "embedding_model": {
+        "name": "BAAI/bge-small-en-v1.5",
+        "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "path": "/mnt/apex-shared/models/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "weights_sha256": "3c9f31665447c8911517620762200d2245a2518d6e7208acc78cd9db317e21ad",
+        "pooling": "mean",
+        "normalised": true,
+        "max_length": 512,
+        "dim": 384
+      },
+      "seconds": 35.5,
+      "rules": {
+        "ngram13": "any shared 13-gram",
+        "ngram8_50pct": ">= 50% of >= 10 8-grams in one item",
+        "cosine085": "cosine >= 0.85 (task and prompt items only)"
+      }
+    }
+  },
+  "dropped": {},
+  "audit_samples": {},
+  "audit_sample_size": 50
+}

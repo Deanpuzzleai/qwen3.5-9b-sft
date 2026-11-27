@@ -1,0 +1,43 @@
+{
+  "updated": "2026-10-13T07:21:12Z",
+  "task_ids": [
+    "oswt:bambinos_formulae_pr60",
+    "oswt:compas-dev_compas_pr376",
+    "oswt:cookiecutter_cookiecutter_pr1923",
+    "oswt:fonttools_fonttools_pr3110",
+    "oswt:gcanti__fp-ts-794",
+    "oswt:hhatto_autopep8_pr493",
+    "oswt:kubernetes-sigs__cloud-provider-azure-5244",
+    "oswt:ludeeus_awesomeversion_pr107",
+    "oswt:sql-formatter-org__sql-formatter-603"
+  ],
+  "by_task": {
+    "oswt:kubernetes-sigs__cloud-provider-azure-5244": [
+      "exact_patch"
+    ],
+    "oswt:cookiecutter_cookiecutter_pr1923": [
+      "exact_patch"
+    ],
+    "oswt:fonttools_fonttools_pr3110": [
+      "v5_p2_rows:d3_ngram13"
+    ],
+    "oswt:ludeeus_awesomeversion_pr107": [
+      "v5_p2_rows:d3_ngram13"
+    ],
+    "oswt:hhatto_autopep8_pr493": [
+      "v5_p2_rows:d3_ngram13"
+    ],
+    "oswt:sql-formatter-org__sql-formatter-603": [
+      "v5_p2_rows:d3_ngram13"
+    ],
+    "oswt:bambinos_formulae_pr60": [
+      "v5_p2_rows:d3_ngram13"
+    ],
+    "oswt:compas-dev_compas_pr376": [
+      "v5_p1_pools:d3_ngram13"
+    ],
+    "oswt:gcanti__fp-ts-794": [
+      "v5_p2_rows:d3_ngram13"
+    ]
+  }
+}

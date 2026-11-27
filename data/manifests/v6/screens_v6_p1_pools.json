@@ -1,0 +1,472 @@
+{
+  "run_id": "data_screens_20261013_153938",
+  "pass_name": "v6_p1_pools",
+  "written_at": "2026-10-13T15:43:09Z",
+  "work_dir": "/mnt/apex-shared/apex_data/work/data_screens_20261013_153938/screens",
+  "params": {
+    "lsh_bands": 25,
+    "lsh_rows": 10,
+    "dev_frozen": true,
+    "num_perm": 250,
+    "d1_drop_rules": [
+      "canary_guid",
+      "canary_guid_template",
+      "guid",
+      "sentence"
+    ],
+    "scan": [],
+    "rows": []
+  },
+  "inputs": {
+    "swe_v6": {
+      "files": [
+        {
+          "path": "/mnt/apex-shared/apex_data/work/data_mixture_v6_items_20261013_153924/screen_items/swe_v6.jsonl",
+          "sha256": "a911d70ab02ed231a9512849e699076c18667fa6319c71e9f744f016a3355008",
+          "n_records": 820
+        }
+      ],
+      "n_records": 820,
+      "n_items": 793,
+      "by_kind": {
+        "swe": 793
+      }
+    },
+    "terminal_v6": {
+      "files": [
+        {
+          "path": "/mnt/apex-shared/apex_data/work/data_mixture_v6_items_20261013_153924/screen_items/terminal_v6.jsonl",
+          "sha256": "402d654949c20268576fb5871b0921374d89525bcba1f46a6898794713f4473a",
+          "n_records": 890
+        }
+      ],
+      "n_records": 890,
+      "n_items": 890,
+      "by_kind": {
+        "terminal": 890
+      }
+    },
+    "retention_v6": {
+      "files": [
+        {
+          "path": "/mnt/apex-shared/apex_data/work/data_mixture_v6_items_20261013_153924/screen_items/retention_v6.jsonl",
+          "sha256": "59e5294f9957eff96ad21ded1b3029516bdd092c4a0aa304a64d706f43cebe03",
+          "n_records": 1680
+        }
+      ],
+      "n_records": 1680,
+      "n_items": 1680,
+      "by_kind": {
+        "prompt": 1680
+      }
+    },
+    "dev": {
+      "files": [
+        {
+          "path": "/mnt/apex-shared/apex_data/work/data_mixture_v6_items_20261013_153924/screen_items/dev.jsonl",
+          "sha256": "fe8c5b3bca78c10e570adb29058d27f35fc5e5fffbf73e38ffa95aa6c0f7c880",
+          "n_records": 398
+        }
+      ],
+      "n_records": 398,
+      "n_items": 398,
+      "by_kind": {
+        "terminal": 40,
+        "swe": 100,
+        "prompt": 258
+      }
+    }
+  },
+  "survival": {
+    "swe_v6": {
+      "n_in": 793,
+      "n_dropped": 0,
+      "n_out": 793,
+      "by_rule": {}
+    },
+    "terminal_v6": {
+      "n_in": 890,
+      "n_dropped": 0,
+      "n_out": 890,
+      "by_rule": {}
+    },
+    "retention_v6": {
+      "n_in": 1680,
+      "n_dropped": 1,
+      "n_out": 1679,
+      "by_rule": {
+        "d3_cosine085": 1
+      }
+    },
+    "dev": {
+      "n_in": 398,
+      "n_dropped": 0,
+      "n_out": 398,
+      "by_rule": {}
+    }
+  },
+  "counts": {
+    "dev_frozen": true,
+    "n_dev_manifest_ids": 140,
+    "n_items": 3761,
+    "n_rows": 0,
+    "d1": {
+      "drop_rules": [
+        "canary_guid",
+        "canary_guid_template",
+        "guid",
+        "sentence"
+      ],
+      "n_items_dropped": 0,
+      "pool:swe_v6": {
+        "files_scanned": 0,
+        "records_scanned": 820,
+        "bytes_scanned": 5175968,
+        "n_hits": 0,
+        "files_or_records_with_hits": 0,
+        "by_rule": {},
+        "by_level": {}
+      },
+      "pool:terminal_v6": {
+        "files_scanned": 0,
+        "records_scanned": 890,
+        "bytes_scanned": 2600510,
+        "n_hits": 0,
+        "files_or_records_with_hits": 0,
+        "by_rule": {},
+        "by_level": {}
+      },
+      "pool:retention_v6": {
+        "files_scanned": 0,
+        "records_scanned": 1680,
+        "bytes_scanned": 1290301,
+        "n_hits": 0,
+        "files_or_records_with_hits": 0,
+        "by_rule": {},
+        "by_level": {}
+      },
+      "pool:dev": {
+        "files_scanned": 0,
+        "records_scanned": 398,
+        "bytes_scanned": 677858,
+        "n_hits": 0,
+        "files_or_records_with_hits": 0,
+        "by_rule": {},
+        "by_level": {}
+      }
+    },
+    "d2": {
+      "n_records": 3761,
+      "n_locked_hit": 0,
+      "n_excluded_hit": 0,
+      "n_dropped": 0,
+      "records_by_mechanism": {},
+      "fork_graph": {
+        "clear": 893,
+        "not_run": 2868
+      },
+      "locked_sha256": "09eb7572d4d6e2188765f820fc0838361c3644f12b60e0d51b84690583af920f",
+      "lists": {
+        "ids_file": [
+          "ansible/ansible",
+          "element-hq/element-web",
+          "flipt-io/flipt",
+          "future-architect/vuls",
+          "gravitational/teleport",
+          "internetarchive/openlibrary",
+          "navidrome/navidrome",
+          "nodebb/nodebb",
+          "protonmail/webclients",
+          "qutebrowser/qutebrowser",
+          "tutao/tutanota"
+        ],
+        "lock_yaml": [
+          "ansible/ansible",
+          "element-hq/element-web",
+          "flipt-io/flipt",
+          "future-architect/vuls",
+          "gravitational/teleport",
+          "internetarchive/openlibrary",
+          "navidrome/navidrome",
+          "nodebb/nodebb",
+          "protonmail/webclients",
+          "qutebrowser/qutebrowser",
+          "tutao/tutanota"
+        ],
+        "plan_basenames": [
+          "ansible",
+          "openlibrary",
+          "flipt",
+          "teleport",
+          "webclients",
+          "element-web",
+          "vuls",
+          "qutebrowser",
+          "navidrome",
+          "nodebb",
+          "tutanota"
+        ],
+        "predecessors": [
+          "matrix-org/matrix-react-sdk",
+          "vector-im/element-web"
+        ],
+        "predecessor_prefixes": [
+          "ansible-collections/",
+          "nodebb/nodebb-plugin-"
+        ],
+        "decontam_exclusions": [
+          "bottlepy/bottle"
+        ]
+      },
+      "union_sources": {
+        "checked_on": "2026-10-11",
+        "method": "repository names only, from public dataset cards, repository metadata and the paper",
+        "sources": [
+          {
+            "source": "ScaleAI/SWE-bench_Pro dataset card",
+            "public_tasks": 642,
+            "repositories": 11,
+            "repositories_beyond_locked": 0
+          },
+          {
+            "source": "scaleapi/SWE-bench_Pro-os README",
+            "repositories": 11,
+            "repositories_beyond_locked": 0
+          },
+          {
+            "source": "paper arXiv:2509.16941",
+            "public_tasks": 731,
+            "public_repositories": 11,
+            "commercial_tasks": 276,
+            "commercial_repositories": 18,
+            "held_out_tasks": 858,
+            "held_out_repositories": 12,
+            "note": "commercial and held-out repositories are unnamed and private",
+            "repositories_beyond_locked": 0
+          }
+        ],
+        "union": "11 locked HARD-51 repositories + 2 predecessors (matrix-org/matrix-react-sdk, vector-im/element-web) = 13"
+      },
+      "repo_lookup": {
+        "requested": 561,
+        "from_cache": 561,
+        "fetched": 0,
+        "found": 0,
+        "not_found": 0,
+        "errors": 0,
+        "rate_limited": 0,
+        "unresolved": 0,
+        "token_present": true,
+        "api_enabled": true,
+        "cache_dir": "/mnt/apex-shared/apex_data/work/licence_cache"
+      },
+      "fork_step": "run"
+    },
+    "d4": {
+      "n_terminal_items": 930,
+      "n_hit": 0,
+      "by_reason": {},
+      "recorded_flags": {
+        "boilerplate_lines": 0,
+        "tb_name_mention": 0
+      }
+    },
+    "dedup": {
+      "params": {
+        "bands": 25,
+        "rows": 10,
+        "num_perm": 250,
+        "near": {
+          "swe": {
+            "ngram": 5,
+            "threshold": 0.7,
+            "exact_only_under": 0,
+            "boilerplate_stripped": true
+          },
+          "terminal": {
+            "ngram": 5,
+            "threshold": 0.8,
+            "exact_only_under": 0,
+            "boilerplate_stripped": false
+          },
+          "prompt": {
+            "ngram": 5,
+            "threshold": 0.8,
+            "exact_only_under": 20,
+            "boilerplate_stripped": true
+          }
+        }
+      },
+      "exact_text": {
+        "n_keyed": 3761,
+        "n_groups": 0,
+        "n_train_drops": 0,
+        "n_dev_drops": 0,
+        "n_cross_split_drops": 0
+      },
+      "exact_patch": {
+        "n_keyed": 893,
+        "n_groups": 0,
+        "n_train_drops": 0,
+        "n_dev_drops": 0,
+        "n_cross_split_drops": 0
+      },
+      "exact_repo_commit_files": {
+        "n_keyed": 793,
+        "n_groups": 0,
+        "n_train_drops": 0,
+        "n_dev_drops": 0,
+        "n_cross_split_drops": 0,
+        "sources": [
+          "oswt"
+        ],
+        "outside_scope_reported_only": {
+          "n_keyed": 0,
+          "n_groups": 0,
+          "n_items_in_groups": 0
+        }
+      },
+      "near_dup_swe": {
+        "n_items": 893,
+        "n_hashed": 893,
+        "n_candidates": 0,
+        "n_verified_pairs": 0,
+        "n_groups": 0,
+        "n_dropped": 0,
+        "n_oversized_buckets": 0,
+        "ngram": 5,
+        "threshold": 0.7,
+        "boilerplate": {
+          "n_rows": 893,
+          "window": 50,
+          "min_rows": 10,
+          "n_shared_windows": 0,
+          "n_items_gt50_reported": 0
+        },
+        "n_train_drops": 0,
+        "n_dev_drops": 0,
+        "n_cross_split_drops": 0,
+        "seconds": 0.4
+      },
+      "near_dup_terminal": {
+        "n_items": 930,
+        "n_hashed": 930,
+        "n_candidates": 0,
+        "n_verified_pairs": 0,
+        "n_groups": 0,
+        "n_dropped": 0,
+        "n_oversized_buckets": 0,
+        "ngram": 5,
+        "threshold": 0.8,
+        "boilerplate": null,
+        "n_train_drops": 0,
+        "n_dev_drops": 0,
+        "n_cross_split_drops": 0,
+        "seconds": 0.5
+      },
+      "near_dup_prompt": {
+        "n_items": 1938,
+        "n_hashed": 1734,
+        "n_candidates": 14,
+        "n_verified_pairs": 11,
+        "n_groups": 2,
+        "n_dropped": 5,
+        "n_oversized_buckets": 0,
+        "ngram": 5,
+        "threshold": 0.8,
+        "boilerplate": {
+          "n_rows": 1938,
+          "window": 50,
+          "min_rows": 10,
+          "n_shared_windows": 0,
+          "n_items_gt50_reported": 0
+        },
+        "n_train_drops": 0,
+        "n_dev_drops": 0,
+        "n_cross_split_drops": 0,
+        "seconds": 0.4
+      },
+      "fix_family_reported_only": {
+        "n_families": 1,
+        "n_in_families": 2,
+        "n_over_cap": 0,
+        "n_pairs": 1,
+        "n_patches": 893,
+        "threshold": 0.5
+      }
+    },
+    "lineage": {
+      "n_records": 3761,
+      "by_source": {
+        "oswt": 793,
+        "tgr": 890,
+        "nm_ifchat": 877,
+        "nm_sci": 432,
+        "nm_math": 371,
+        "tgr_env": 40,
+        "swesmith": 100,
+        "devqa": 258
+      },
+      "n_with_repo_pr": 805,
+      "n_with_repo_commit": 793,
+      "n_groups": 0,
+      "groups_by_rule": {},
+      "groups_by_source_set": {},
+      "n_dev_internal_groups": 0,
+      "n_drops": 0,
+      "drops_by_reason": {},
+      "drops_by_split": {}
+    },
+    "d3": {
+      "items_screened": 3761,
+      "items_hit": 1,
+      "n_decisions": 1,
+      "hits": {
+        "hle": {
+          "cosine085": 1
+        }
+      },
+      "by_rule": {
+        "cosine085": 1
+      },
+      "n_task_items": 3761,
+      "n_row_items": 0,
+      "benchmarks": [
+        "asibench",
+        "hle",
+        "swebench_pro",
+        "terminal_bench"
+      ],
+      "sealed_manifest_sha256": "53e8cde2fd72484c6f2efd3b61940a0fe30bafc1360f3cafeedd1dc7bcd3dbb2",
+      "sealed_fixture": false,
+      "embeddings": true,
+      "embedding_model": {
+        "name": "BAAI/bge-small-en-v1.5",
+        "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "path": "/mnt/apex-shared/models/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+        "weights_sha256": "3c9f31665447c8911517620762200d2245a2518d6e7208acc78cd9db317e21ad",
+        "pooling": "mean",
+        "normalised": true,
+        "max_length": 512,
+        "dim": 384
+      },
+      "seconds": 200.1,
+      "rules": {
+        "ngram13": "any shared 13-gram",
+        "ngram8_50pct": ">= 50% of >= 10 8-grams in one item",
+        "cosine085": "cosine >= 0.85 (task and prompt items only)"
+      }
+    }
+  },
+  "dropped": {
+    "nm_sci:MCQ/4ad49aad-7954-4fd3-a872-d1c785db453d": [
+      "d3_cosine085"
+    ]
+  },
+  "audit_samples": {
+    "d3_cosine085": [
+      "nm_sci:MCQ/4ad49aad-7954-4fd3-a872-d1c785db453d"
+    ]
+  },
+  "audit_sample_size": 50
+}

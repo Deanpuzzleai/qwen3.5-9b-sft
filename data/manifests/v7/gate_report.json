@@ -1,0 +1,312 @@
+{
+  "created": "2026-10-13T22:17:00Z",
+  "plan": "logs/coordination/v7/PLAN_v7.md sections 3-4 (on docs/DATA_PLAN_v5.md)",
+  "mixture_run_id": "data_mixture_v7_20261013_221306",
+  "mixture_sha256": "67c6457b4e2b149ad9026e9c7372fe081581d449d25b1ed27c03fa63aa999b70",
+  "pass": true,
+  "gates": {
+    "thinking_rule": {
+      "pass": true,
+      "rule": "v7: every trained turn has closed reasoning and ends in a parsed action; SWE <= 8K, routine turns (not a decision point) <= 1,000; terminal <= 4,000 (Dean, 21:45 UTC); thinking = the position of </think> in each trained span of the rows; no band-mean windows",
+      "swe_trained_turns": 8176,
+      "terminal_trained_turns": 2584,
+      "violations": {},
+      "thinking_per_trained_turn": {
+        "swe": {
+          "mean": 224.8,
+          "p50": 99.0,
+          "p90": 515.0,
+          "max": 7452
+        },
+        "swe_routine": {
+          "mean": 169.2,
+          "p50": 90.0,
+          "p90": 437.0,
+          "max": 999
+        },
+        "terminal": {
+          "mean": 611.6,
+          "p50": 235.0,
+          "p90": 1862.0,
+          "max": 3944
+        }
+      }
+    },
+    "tail_cap": {
+      "pass": true,
+      "rule": "SWE trained turns above 2K thinking: at most 10 % of the SWE loss tokens (terminal: the per-turn 4,000 guard instead, Dean 21:45 UTC; its share is reported)",
+      "swe_share": 0.0995,
+      "terminal_share_reported": 0.2602
+    },
+    "verified_outcomes": {
+      "pass": true,
+      "rule": "SWE resolved == 1, terminal reward == 1"
+    },
+    "builder_checks": {
+      "pass": true,
+      "rule": "each slice builder's own checks pass (SWE: the v7 rule on every row, the tail cap; terminal and retention: theirs)",
+      "swe": true,
+      "terminal": true,
+      "retention": true
+    },
+    "contamination_duplicates_dev": {
+      "pass": true,
+      "p1_current": true,
+      "p2_screened_no_drops": true,
+      "d3_applied": true,
+      "dev_overlap": [],
+      "p2_counts": {
+        "d1": {
+          "drop_rules": [
+            "canary_guid",
+            "canary_guid_template",
+            "guid",
+            "sentence"
+          ],
+          "n_items_dropped": 0,
+          "rows": {
+            "files_scanned": 0,
+            "records_scanned": 3766,
+            "bytes_scanned": 186318111,
+            "n_hits": 0,
+            "files_or_records_with_hits": 0,
+            "by_rule": {},
+            "by_level": {}
+          }
+        },
+        "d2": {
+          "n_records": 3766,
+          "n_locked_hit": 0,
+          "n_excluded_hit": 0,
+          "n_dropped": 0,
+          "records_by_mechanism": {},
+          "fork_graph": {
+            "not_run": 3766
+          },
+          "locked_sha256": "09eb7572d4d6e2188765f820fc0838361c3644f12b60e0d51b84690583af920f",
+          "lists": {
+            "ids_file": [
+              "ansible/ansible",
+              "element-hq/element-web",
+              "flipt-io/flipt",
+              "future-architect/vuls",
+              "gravitational/teleport",
+              "internetarchive/openlibrary",
+              "navidrome/navidrome",
+              "nodebb/nodebb",
+              "protonmail/webclients",
+              "qutebrowser/qutebrowser",
+              "tutao/tutanota"
+            ],
+            "lock_yaml": [
+              "ansible/ansible",
+              "element-hq/element-web",
+              "flipt-io/flipt",
+              "future-architect/vuls",
+              "gravitational/teleport",
+              "internetarchive/openlibrary",
+              "navidrome/navidrome",
+              "nodebb/nodebb",
+              "protonmail/webclients",
+              "qutebrowser/qutebrowser",
+              "tutao/tutanota"
+            ],
+            "plan_basenames": [
+              "ansible",
+              "openlibrary",
+              "flipt",
+              "teleport",
+              "webclients",
+              "element-web",
+              "vuls",
+              "qutebrowser",
+              "navidrome",
+              "nodebb",
+              "tutanota"
+            ],
+            "predecessors": [
+              "matrix-org/matrix-react-sdk",
+              "vector-im/element-web"
+            ],
+            "predecessor_prefixes": [
+              "ansible-collections/",
+              "nodebb/nodebb-plugin-"
+            ],
+            "decontam_exclusions": [
+              "bottlepy/bottle"
+            ]
+          },
+          "union_sources": {
+            "checked_on": "2026-10-11",
+            "method": "repository names only, from public dataset cards, repository metadata and the paper",
+            "sources": [
+              {
+                "source": "ScaleAI/SWE-bench_Pro dataset card",
+                "public_tasks": 642,
+                "repositories": 11,
+                "repositories_beyond_locked": 0
+              },
+              {
+                "source": "scaleapi/SWE-bench_Pro-os README",
+                "repositories": 11,
+                "repositories_beyond_locked": 0
+              },
+              {
+                "source": "paper arXiv:2509.16941",
+                "public_tasks": 731,
+                "public_repositories": 11,
+                "commercial_tasks": 276,
+                "commercial_repositories": 18,
+                "held_out_tasks": 858,
+                "held_out_repositories": 12,
+                "note": "commercial and held-out repositories are unnamed and private",
+                "repositories_beyond_locked": 0
+              }
+            ],
+            "union": "11 locked HARD-51 repositories + 2 predecessors (matrix-org/matrix-react-sdk, vector-im/element-web) = 13"
+          },
+          "repo_lookup": {
+            "requested": 0
+          },
+          "fork_step": "run"
+        },
+        "d3": {
+          "items_screened": 3766,
+          "items_hit": 0,
+          "n_decisions": 0,
+          "hits": {},
+          "by_rule": {},
+          "n_task_items": 0,
+          "n_row_items": 3766,
+          "benchmarks": [
+            "asibench",
+            "hle",
+            "swebench_pro",
+            "terminal_bench"
+          ],
+          "sealed_manifest_sha256": "53e8cde2fd72484c6f2efd3b61940a0fe30bafc1360f3cafeedd1dc7bcd3dbb2",
+          "sealed_fixture": false,
+          "embeddings": true,
+          "embedding_model": {
+            "name": "BAAI/bge-small-en-v1.5",
+            "revision": "5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+            "path": "/mnt/apex-shared/models/bge-small-en-v1.5@5c38ec7c405ec4b44b94cc5a9bb96e735b38267a",
+            "weights_sha256": "3c9f31665447c8911517620762200d2245a2518d6e7208acc78cd9db317e21ad",
+            "pooling": "mean",
+            "normalised": true,
+            "max_length": 512,
+            "dim": 384
+          },
+          "seconds": 35.5,
+          "rules": {
+            "ngram13": "any shared 13-gram",
+            "ngram8_50pct": ">= 50% of >= 10 8-grams in one item",
+            "cosine085": "cosine >= 0.85 (task and prompt items only)"
+          }
+        }
+      }
+    },
+    "mix_within_5_points": {
+      "pass": true,
+      "swe_language_shares": {
+        "go": 29.6,
+        "py": 45.48,
+        "ts": 15.89,
+        "js": 4.98,
+        "other": 4.05
+      },
+      "language_deviation_pp": {
+        "go": 1.3,
+        "py": -0.62,
+        "ts": -0.31,
+        "js": -0.02,
+        "other": -0.35
+      },
+      "exhausted_groups": {
+        "hard": [
+          "other"
+        ],
+        "medium": [],
+        "easy": []
+      },
+      "swe_band_loss_shares": {
+        "hard": 27.42,
+        "medium": 28.72,
+        "easy": 43.86
+      },
+      "swe_band_targets": {
+        "hard": 26.8,
+        "medium": 27.7,
+        "easy": 45.5
+      },
+      "band_deviation_pp": {
+        "hard": 0.62,
+        "medium": 1.02,
+        "easy": -1.64
+      },
+      "band_supply_exhausted": {
+        "hard": false,
+        "medium": false,
+        "easy": false
+      },
+      "draw_settings": {
+        "band_shares": {
+          "hard": 0.268,
+          "medium": 0.277,
+          "easy": 0.455
+        },
+        "language_shares": {
+          "go": 0.283,
+          "py": 0.461,
+          "ts": 0.162,
+          "js": 0.05,
+          "other": 0.044
+        },
+        "repo_caps": {
+          "go": 5,
+          "ts": 5
+        },
+        "max_per_repository": 3,
+        "target_loss_tokens": 3700000,
+        "recovery_share": 0.35,
+        "attempt": "one random passing attempt per task (a random recovery attempt for the recovery-first tasks)",
+        "lower_half": false
+      },
+      "swe_cap": null,
+      "swe_recovery_share": 38.63,
+      "recovery_supply_short_picks": 3,
+      "terminal_bands": {
+        "hard": 171,
+        "medium": 194,
+        "easy": 219
+      }
+    }
+  },
+  "informational": {
+    "slice_loss_shares_pct": {
+      "swe": 37.43,
+      "terminal": 33.44,
+      "retention": 29.13
+    },
+    "slice_targets_pct": {
+      "swe": 38.0,
+      "terminal": 34.0,
+      "retention": 28.0
+    },
+    "deviation_pp": {
+      "swe": -0.57,
+      "terminal": -0.56,
+      "retention": 1.13
+    }
+  },
+  "decisions": [
+    "Dean, 2026-10-13 ~21:05 UTC: v7 approved, option 'same dose' (logs/coordination/v7/PLAN_v7.md): teacher-only stage-1 data at v6's size; SWE one random passing attempt per task, recovery trials first, the adaptive thinking masks (routine turns <= 1,000 thinking tokens; decision-point turns up to 8K when not repetitive and ending in a tool call; > 8K never); retention 28 % with v6's rows.",
+    "Orchestrator's quality read, 2026-10-13 ~21:30 UTC: a SWE decision point needs a real failure before it (non-zero returncode or a strong failure marker) or is the turn before the first edit; long turns kept first when below 1 % of trained turns; the SWE slice (revision 2) approved after a second read.",
+    "Dean, 2026-10-13 ~21:45 UTC: terminal slice half DeepSeek-V4-Pro / half Kimi-K3 passing trials with per-turn guards (thinking <= 4K, parsed command, not repetitive, no confirmation turn); this replaces the terminal 2 % / 10 % long-turn cap."
+  ],
+  "dropped_nice_to_haves": {
+    "swe": [
+      "lower_half"
+    ]
+  }
+}

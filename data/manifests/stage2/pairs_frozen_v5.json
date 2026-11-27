@@ -1,0 +1,119 @@
+{
+ "producer": "N-STAGE2 (v5 stage 2: retention and pairs)",
+ "utc": "2026-10-13T13:32:54Z",
+ "artifacts": {
+  "data/processed/v5/stage2/pairs.jsonl": "0ba77a762ba3585b58c84e9472a76c9c0b5e2a7aa3438875c62688fcb4884fcd",
+  "logs/data_stage2_pairs_v5_final_20261013_133002/report.json": "be8771e8001ff7a3d36169c891ecdcb942a42dfd3029653f13b461d8704c310c",
+  "logs/data_stage2_pairs_v5_final_20261013_133002/examples.md": "0128e28e59bdf32560807ebff1f874215745a1ae9292a052bb25656751e1b8b2"
+ },
+ "pairs": 1379,
+ "by_rule": {
+  "V": 451,
+  "R": 928
+ },
+ "by_family": {
+  "terminal": 1138,
+  "swe": 241
+ },
+ "by_family_rule": {
+  "swe/R": 230,
+  "swe/V": 11,
+  "terminal/R": 698,
+  "terminal/V": 440
+ },
+ "R_by_family_and_chosen": {
+  "swe/clear_runaway": 220,
+  "swe/same_action": 10,
+  "terminal/clear_runaway": 692,
+  "terminal/same_action": 5,
+  "terminal/same_action_teacher": 1
+ },
+ "loops_in_V_R": {
+  "V": {
+   "pairs": 451,
+   "rejected_unclosed": 18,
+   "rejected_loop": 4
+  },
+  "R": {
+   "pairs": 928,
+   "rejected_unclosed": 210,
+   "rejected_loop": 209
+  }
+ },
+ "tokens_by_family_rule": {
+  "swe/R": {
+   "pairs": 230,
+   "mean_prompt": 16988.4,
+   "mean_chosen": 1022.3,
+   "mean_rejected": 11985.3,
+   "mean_row": 28973.7,
+   "mean_two_sequences": 46984.3
+  },
+  "swe/V": {
+   "pairs": 11,
+   "mean_prompt": 14623.5,
+   "mean_chosen": 495.3,
+   "mean_rejected": 2249.4,
+   "mean_row": 17009.7,
+   "mean_two_sequences": 31991.7
+  },
+  "terminal/R": {
+   "pairs": 698,
+   "mean_prompt": 2210.1,
+   "mean_chosen": 2804.4,
+   "mean_rejected": 11645.3,
+   "mean_row": 13870.3,
+   "mean_two_sequences": 18869.9
+  },
+  "terminal/V": {
+   "pairs": 440,
+   "mean_prompt": 3966.9,
+   "mean_chosen": 2105.6,
+   "mean_rejected": 4349.4,
+   "mean_row": 8456.1,
+   "mean_two_sequences": 14388.7
+  }
+ },
+ "validator_drops": {
+  "V:invalid_sample": 2
+ },
+ "audit": {
+  "rule_basis": "docs/DATA_PLAN_v5.md 4.4: 30 pairs per rule read before freezing (all pairs when a rule has fewer than 30); a rule with more than 10 percent wrong labels is dropped",
+  "sample": "pairs of the preview label run data_stage2_pairs_v5_preview_20261013_120950 (first ~588 states of the P4a sampling run, seeded 30 per rule), read by one auditor per rule",
+  "V": {
+   "audited": 30,
+   "wrong": 0,
+   "decision": "kept",
+   "notes": "every rejected terminal JSON fails Harbor's parser (bad escaping in keystrokes)"
+  },
+  "R": {
+   "audited": 30,
+   "wrong": 1,
+   "decision": "kept",
+   "notes": "9/30 rejected are degenerate loops (SWE cut at the cap); terminal rejects are long meaningful reasoning; risk: turn-0 terminal script writes where the shorter chosen script is buggier"
+  },
+  "D": {
+   "audited": 11,
+   "wrong": 11,
+   "decision": "dropped",
+   "notes": "efficiency.verification (terminal) counts test cleanup or setup after a tested solution as an unverified change and misses bare PATH executables"
+  },
+  "E": {
+   "audited": 28,
+   "wrong": 3,
+   "decision": "dropped (10.7 percent)",
+   "notes": "27/28 terminal sign-off turns; the 3 wrong chosen sides state false checks"
+  },
+  "P": {
+   "audited": 4,
+   "wrong": 2,
+   "decision": "dropped (all 4 P pairs of the final label run read; 50 percent wrong)",
+   "notes": "bleve@38: the chosen command is itself near-identical to turn 37's; interval_store@3: the rejected empty wait and the chosen Enter press are both waits; the other two are correct"
+  },
+  "final": "rules V and R (R up to 3 pairs per state); D, E, P dropped"
+ },
+ "label_run": "data_stage2_pairs_v5_final_20261013_133002",
+ "sampling_run": "data_stage2_pairs_v5_20261013_073053",
+ "for_dpo": "python -m apex_train.stage2 --method dpo --pairs data/processed/v5/stage2/pairs.jsonl (or --override dpo.data.pairs=data/processed/v5/stage2/pairs.jsonl); arm B = the same pairs with loss [\"sft\"]",
+ "notes": "SFT pick epoch 1 (sft_v5_20261013_072959 step 239); rules V and R (R up to 3 pairs per state); D and E dropped after their audits; states never dev or stage-1 (data_frozen.json ids), p1 screens incl. D3."
+}
